@@ -13,9 +13,10 @@
   "license": "Unlicense",
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "jsdom": "latest",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "jsdom": "latest"
+    "react-dom": "latest"
   }
 }
