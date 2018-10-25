@@ -1,0 +1,21 @@
+{
+  "name": "mcbbs-client",
+  "version": "0.1.0",
+  "description": "A BBS client for MCBBS.",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "author": "langyo",
+  "license": "Unlicense",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "jsdom": "latest"
+  }
+}
