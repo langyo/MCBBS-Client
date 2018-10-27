@@ -6,8 +6,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
-
 import Avatar from "@material-ui/core/Avatar";
+import Paper from "@material-ui/core/Paper";
 
 import { res } from "../../lib/resources";
 
@@ -20,30 +20,33 @@ const styles = theme => ({
   }
 });
 
-class MainPageForumList extends React.Component {
-  render() {
-    return (
-      <React.Component>
+function MainPageForumList(props) {
+  const { classes } = props;
+  return (
+    <React.Fragment>
+      <Paper square className={classes.paper}>
         <List className={classes.list}>
-          {res.mainPage.map(({ forumGroupName, forums }) => (
-            <Fragment key={forumGroupName}>
+          {res.MainPageForumList.map(({ forumGroupName, forums }) => (
+            <Fragment>
               <ListSubheader className={classes.subHeader}>
                 {forumGroupName}
               </ListSubheader>
-              {forums.map(({ name, info, avatar }) => (
+              {forums.map(({ name, info, avatar }) => {
                 <ListItem button onClick={null}>
                   <Avatar src={avatar} />
                   <ListItemText primary={name} secondary={info} />
-                </ListItem>
-              ))}
+                </ListItem>;
+              })}
             </Fragment>
           ))}
         </List>
-      </React.Component>
-    );
-  }
+      </Paper>
+    </React.Fragment>
+  );
 }
 
 MainPageForumList.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+export default withStyles(styles)(MainPageForumList);
