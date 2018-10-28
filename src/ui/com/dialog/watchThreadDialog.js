@@ -15,14 +15,12 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-import { res } from "../../../lib/resources";
+import { res } from "../src/lib/resources";
+import TextViewer from "../src/ui/com/textEditor/fullTextViewer";
 
 const style = theme => {
   root: {
     width: "100%";
-  },
-  littleText: {
-
   }
 };
 
@@ -56,12 +54,14 @@ class Floor extends React.Component {
           subHeader={res.users.getGroupName(this.props.userId)}
         />
         <CardContent>
-          <Typography className={classes.littleText}>
-            {"最后编辑于 " + res.floor[floorId].latestEditTime}
+          {/* 日期部分 */}
+          <Typography variant="caption" gutterBottom align="center">
+            {"最后编辑于 " + res.floor[this.props.floorId].latestEditTime}
           </Typography>
-          <Typography paragraph>
-            {res.floor[floorId].content}
-          </Typography>
+          {/* 内容部分 */}
+          <TextViewer content={res.floor[this.props.floorId].content} />
+          {/* 评分部分 */}
+          <Typography variant="" />
         </CardContent>
       </Card>
     );
@@ -76,7 +76,7 @@ Floor.propTypes = {
 // Prop 参数：
 //   threadId - 帖子编号
 class FloorHead extends React.Component {
-  handleMoreClick = () => { };
+  handleMoreClick = () => {};
 
   render() {
     const { classes } = this.props;
@@ -92,9 +92,7 @@ class FloorHead extends React.Component {
           }
           title={res.thread[this.props.threadId].title}
         />
-        <CardContent>
-          {" "}
-        </CardContent>
+        <CardContent> </CardContent>
       </Card>
     );
   }
@@ -103,4 +101,3 @@ class FloorHead extends React.Component {
 FloorHead.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
