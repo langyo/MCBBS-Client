@@ -14,6 +14,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
+    "classnames": "2.2.6",
     "jsdom": "latest",
     "prop-types": "15.6.2",
     "react": "latest",
