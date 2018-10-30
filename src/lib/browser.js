@@ -1,7 +1,11 @@
+/**
+ *@author langyo
+ *@file 提供虚拟浏览器支持，并提供了元素查询、提取内容、模拟事件与映射页面等功能
+ *@todo 此部分将要重写
+ */
+
 import { Jsdom } from "jsdom";
 import { browserConfig, userCookies } from "./localStorage";
-
-// 此部分将要重写
 
 let browsers = [];
 

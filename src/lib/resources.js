@@ -1,3 +1,9 @@
+/**
+ *@author langyo
+ *@file 资源控制支持，为前端界面的数据源
+ *@todo 此部分将要重写
+ */
+
 import { getBrowser, initBrowser } from "./browser";
 
 let globalData = {
