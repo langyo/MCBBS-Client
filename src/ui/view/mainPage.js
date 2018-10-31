@@ -6,16 +6,16 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 
-import SearchIcon from "@material-ui/icons/Search"
+import SearchIcon from "@material-ui/icons/Search";
 
 import { res } from "../../lib/resources";
 
 import { MainBar } from "../com/appBar/menuBar";
-import { MainDrawer } from "../com/drawer/mainDrawer";
 
 const styles = theme => ({
   list: {
@@ -26,24 +26,58 @@ const styles = theme => ({
   }
 });
 
+class MainDrawer extends React.component {
+  render() {
+    const { classes } = this.props;
+    return <SwipeableDrawer />;
+  }
+}
+
 class Root extends React.component {
   state = {
-    opening: null
+    opening: "mainPage"
   };
 
   render() {
     const { classes } = this.props;
     return (
-      <MainBar
-        title="MainPage"
-        onclick={this.setState({ opening: "drawer" })}
-      >
-        <IconButton onclick={this.setState({opening:'searchDialog'})} >
-          <SearchIcon />
-        </IconButton>
-      </MainBar>
-      <MainDrawer open={this.state==='drawer'} onclick={open=>this.setState({opening:'drawer'})} />
-      
+      <div className={classes.root}>
+        <MainBar
+          title="MainPage"
+          onclick={this.setState({ opening: "drawer" })}
+        >
+          <IconButton onclick={this.setState({ opening: "searchDialog" })}>
+            <SearchIcon />
+          </IconButton>
+        </MainBar>
+        <MainDrawer
+          open={this.state.opening === "drawer"}
+          onclick={open => this.setState({ opening: "drawer" })}
+        />
+        {this.state.opening === "mainPage"
+          ? res.MainPage.forumGroups.map(({ forumGroupName, forums }) => (
+              <div>
+                <ListSubheader className={classes.subHeader}>
+                  {forumGroupName}
+                </ListSubheader>
+                <div>
+                  {this.props.forums.map(({ name, info, avatar }) => (
+                    <ListItem
+                      button
+                      onclick={this.setState({
+                        opening: "forums",
+                        arg: res.forums.get(name)
+                      })}
+                    >
+                      <Avatar src={avatar} />
+                      <ListItemText primary={name} secondary={info} />
+                    </ListItem>
+                  ))}
+                </div>
+              </div>
+            ))
+          : ""}
+      </div>
     );
   }
 }
