@@ -8,6 +8,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+
+import SearchIcon from "@material-ui/icons/Search"
 
 import { res } from "../../lib/resources";
 
@@ -34,7 +37,13 @@ class Root extends React.component {
       <MainBar
         title="MainPage"
         onclick={this.setState({ opening: "drawer" })}
-      />
+      >
+        <IconButton onclick={this.setState({opening:'searchDialog'})} >
+          <SearchIcon />
+        </IconButton>
+      </MainBar>
+      <MainDrawer open={this.state==='drawer'} onclick={open=>this.setState({opening:'drawer'})} />
+      
     );
   }
 }
