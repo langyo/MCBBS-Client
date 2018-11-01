@@ -7,15 +7,23 @@ let localStorage = {};
 
 function init() {
   // DFS 搜索
-  function DFS(node) {
+  function DFS(node, path) {
     let ret = node.data;
-    for (let i in node.dataToNode)
-      if (node.dataToNode.hasOwnProperty(i))
-        ret[i] = DFS(
-          JSON.parse(localStorage.getItem("node" + node.dataToNode[i]))
-        );
-    let temp = DFS(JSON.parse(localStorage.getItem("node" + node.more)));
-    for (let i in temp) if (temp.hasOwnProperty(i)) ret[i] = temp[i];
+    Object.keys(node.dataToNode).forEach(
+      i =>
+        (ret[i] = DFS(
+          JSON.parse(localStorage.getItem("node" + node.dataToNode[i])),
+          path.push(i)
+        ))
+    );
+    if (node.more != undefined) {
+      let temp = DFS(
+        JSON.parse(localStorage.getItem("node" + node.more)),
+        path
+      );
+      Object.keys(temp).forEach(i => (ret[i] = temp[i]));
+    }
+    // 未完成
     return ret;
   }
 
