@@ -4,18 +4,20 @@
  */
 
 let localStorage = {};
+let syncLog = [];
 
 function init() {
   // DFS 搜索
   function DFS(node, path) {
     let ret = node.data;
-    Object.keys(node.dataToNode).forEach(
-      i =>
-        (ret[i] = DFS(
-          JSON.parse(localStorage.getItem("node" + node.dataToNode[i])),
-          path.push(i)
-        ))
-    );
+
+    Object.keys(node.dataToNode).forEach(i => {
+      let tempPath = path;
+      ret[i] = DFS(
+        JSON.parse(localStorage.getItem("node" + node.dataToNode[i])),
+        tempPath.push(i)
+      );
+    });
     if (node.more != undefined) {
       let temp = DFS(
         JSON.parse(localStorage.getItem("node" + node.more)),
@@ -23,7 +25,19 @@ function init() {
       );
       Object.keys(temp).forEach(i => (ret[i] = temp[i]));
     }
-    // 未完成
+
+    ret.prototype.__defineSetter__(
+      "set",
+      (name, value) => {
+        let log = this.path;
+        log.push(name);
+        syncLog.push(log); // 待修改
+        this[name] = value;
+      }
+    );
+
+    // setter:'delete'
+
     return ret;
   }
 
