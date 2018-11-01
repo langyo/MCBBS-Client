@@ -5,6 +5,8 @@
  */
 import firebase from "firebase";
 
+// ----------------
+// 此部分不得修改
 let config = {
   apiKey: "AIzaSyCwXhqMDOcU1AjDQo1uS46jjSf85TeY_Ho",
   authDomain: "mcbbs-client.firebaseapp.com",
@@ -14,3 +16,4 @@ let config = {
   messagingSenderId: "576964331812"
 };
 firebase.initializeApp(config);
+// ----------------
