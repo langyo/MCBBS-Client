@@ -6,10 +6,18 @@
 let localStorage = {};
 
 function init() {
-  let queue = [1];
-  // BFS 搜索
-  while (queue.length > 0) {
-    let node = JSON.parse(localStorage.getItem("node" + queue.shift()));
-    // 未完成
+  // DFS 搜索
+  function DFS(node) {
+    let ret = node.data;
+    for (let i in node.dataToNode)
+      if (node.dataToNode.hasOwnProperty(i))
+        ret[i] = DFS(
+          JSON.parse(localStorage.getItem("node" + node.dataToNode[i]))
+        );
+    let temp = DFS(JSON.parse(localStorage.getItem("node" + node.more)));
+    for (let i in temp) if (temp.hasOwnProperty(i)) ret[i] = temp[i];
+    return ret;
   }
+
+  localStorage = DFS(localStorage.getItem("node1"));
 }
