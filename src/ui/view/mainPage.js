@@ -40,6 +40,13 @@ class Root extends React.component {
 
   render() {
     const { classes } = this.props;
+
+    const drawer = (
+      <div>
+        <List>{[""]}</List>
+      </div>
+    );
+
     return (
       <div className={classes.root}>
         <MainBar
