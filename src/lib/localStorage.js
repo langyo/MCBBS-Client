@@ -1,6 +1,6 @@
 /**
  *@author langyo
- *@file 本地存储支持
+ *@file 本地存储支持，使得原本的扁平的值对存储可以类似 json 的复杂结构存储
  */
 
 import ls from "local-storage";
@@ -15,10 +15,12 @@ const once = fn => {
 let data = [];
 let dataRecycle = {};
 let nodeCount = 0;
+let dataCount = 0;
 
 let init = once(() => {
-  let nodeCount = 0 + ls("nodeCount");
+  nodeCount = 0 + ls("nodeCount");
   for (let i = 0; i < nodeCount; ++i) data.push(JSON.parse(ls("node" + i)));
+  dataCount = 0 + ls("dataCount");
 });
 init();
 
@@ -50,7 +52,11 @@ function Node(type, value) {
   ls("nodeCount", nodeCount);
 }
 
-function Data(value) {}
+function Data(value) {
+  this.id = dataCount++;
+  this.value = value;
+  ls("data" + this.id, value);
+}
 
 function slicePath(str) {
   let n,
@@ -88,7 +94,10 @@ function get(path) {
   }
 }
 
-function load(data) {}
+function load(id) {
+  dataRecycle[id] = ls("data" + id);
+  return dataRecycle[id];
+}
 
 function set(path, value) {
   path = slicePath(path);
@@ -140,4 +149,6 @@ function insert(path, name, value, isBigData) {
   return ls("node" + nowAt, JSON.stringify(data[nowAt]));
 }
 
-function del(path) {}
+function remove(path) {
+  let nowAt = parsePath(slicePath(path));
+}

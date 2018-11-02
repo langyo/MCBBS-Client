@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -26,14 +26,7 @@ const styles = theme => ({
   }
 });
 
-class MainDrawer extends React.component {
-  render() {
-    const { classes } = this.props;
-    return <SwipeableDrawer />;
-  }
-}
-
-class Root extends React.component {
+class Root extends React.Component {
   state = {
     opening: "mainPage"
   };
@@ -57,10 +50,12 @@ class Root extends React.component {
             <SearchIcon />
           </IconButton>
         </MainBar>
-        <MainDrawer
+        <SwipeableDrawer
           open={this.state.opening === "drawer"}
           onclick={open => this.setState({ opening: "drawer" })}
-        />
+        >
+          {drawer}
+        </SwipeableDrawer>
         {this.state.opening === "mainPage"
           ? res.MainPage.forumGroups.map(({ forumGroupName, forums }) => (
               <div>
