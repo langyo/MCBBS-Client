@@ -80,7 +80,7 @@ function get(path) {
 
   switch (data[nowAt].type) {
     case "bigData":
-      return load(data[owAt].value[path.shift()]);
+      return load(data[nowAt].value[path.shift()]);
     case "data":
       return data[nowAt].value[path.shift()];
     default:
@@ -94,10 +94,50 @@ function set(path, value) {
   path = slicePath(path);
   let name = path[path.length - 1];
   let nowAt = parsePath(path.pop());
+  if (nowAt === -1) return false;
 
   switch (data[nowAt].type) {
     case "bigData":
       ls("data" + data[nowAt].value[name], value);
-      load();
+      load(data[nowAt].value[name]);
+      break;
+    case "data":
+      data[nowAt].value[name] = value;
+      ls("node" + nowAt, JSON.stringify(data[nowAt]));
+      break;
+    default:
+      return false;
   }
+  return true;
 }
+
+function addNode(path, name) {
+  let nowAt = parsePath(slicePath(path));
+  if (nowAt === -1) return -1;
+  let n = new Node("node");
+  data[n.id] = n;
+  ls("node" + n.id, JSON.stringify(data[nowAt]));
+  data[nowAt].value[name] = n.id;
+  ls("node" + nowAt, JSON.stringify(data[nowAt]));
+
+  return n.id;
+}
+
+function push(path, value) {
+  let nowAt = parsePath(slicePath(path));
+  if (nowAt === -1) return false;
+  if (data[nowAt].type !== "list") return false;
+  data[nowAt].value.push(value);
+  return ls("node" + nowAt, JSON.stringify(data[nowAt]));
+}
+
+function insert(path, name, value, isBigData) {
+  isBigData = isBigData === undefined ? false : isBigData;
+  let nowAt = parsePath(slicePath(path));
+  if (nowAt === -1) return false;
+  if (data[nowAt].type !== "node") return false;
+  data[nowAt].value[name] = value;
+  return ls("node" + nowAt, JSON.stringify(data[nowAt]));
+}
+
+function del(path) {}
