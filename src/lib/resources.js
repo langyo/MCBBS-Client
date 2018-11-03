@@ -173,6 +173,7 @@ let res = {
         friendCount - 好友总量
         knownFriendRelationShip[] - 已知的好友列表；此列表仅仅作为在同客户端多账户的环境下是否能够加为好友/解除好友的判据
         medal[] - 勋章列表
+        online - 是否在线；默认为不在线
     */
   },
 
