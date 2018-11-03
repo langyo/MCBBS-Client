@@ -351,7 +351,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - messages{} - 私信列表：
 
-```\[map:聊天对象 ID]```
+    \[map:聊天对象 ID]
 
     - type - 消息来源类型，只有 'send' | 'receive' 两种类型
 
@@ -363,7 +363,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - shortMessages{} - 打招呼列表：
 
-```\[map:聊天对象 ID]```
+    \[map:聊天对象 ID]
 
     - content - 打招呼内容
 
@@ -391,7 +391,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - imtegralHisTory{} - 积分操作记录
 
-```\[map:积分类型]```
+    \[map:积分类型]
 
     - type - 操作理由的分类类型
 
@@ -407,7 +407,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
     - tools{} - 具体明细
 
-        ```\[map:道具标识名]```
+        \[map:道具标识名]
 
         - count - 数量
 
