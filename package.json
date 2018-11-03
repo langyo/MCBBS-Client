@@ -21,5 +21,6 @@
     "prop-types": "15.6.2",
     "react": "latest",
     "react-dom": "latest"
-  }
+  },
+  "keywords": []
 }

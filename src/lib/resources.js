@@ -65,7 +65,7 @@ let res = {
     /*
       元素列表：
       info - 版头，这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
-      threads - 帖子列表
+      threads[] - 帖子 ID 列表
     */
   },
 
