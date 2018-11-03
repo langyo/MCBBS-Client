@@ -14,12 +14,21 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 你可以通过 ``` res.mainPage ``` 获取有关主页部分的信息。这些信息应当来自以下页面：
 
 > [论坛门户](http://www.mcbbs.net/portal.php)
+>
 > [论坛主页](http://www.mcbbs.net/forum.php)
+>
 > [论坛小组主页](http://www.mcbbs.net/group.php)
+>
 > [最新热门帖子](http://www.mcbbs.net/forum.php?mod=guide&view=hot)
+>
 > [最新精华帖子](http://www.mcbbs.net/forum.php?mod=guide&view=digest)
+>
 > [最新回复帖子](http://www.mcbbs.net/forum.php?mod=guide&view=new)
+>
 > [最新发表帖子](http://www.mcbbs.net/forum.php?mod=guide&view=newthread)
+>
 > [可抢沙发帖子](http://www.mcbbs.net/forum.php?mod=guide&view=sofa)
+
+
 
 
