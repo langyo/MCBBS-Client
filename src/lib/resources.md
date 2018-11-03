@@ -16,19 +16,12 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 你可以通过 ``` res.mainPage ``` 获取有关主页部分的信息。这些信息应当来自以下页面：
 
 > [论坛门户](http://www.mcbbs.net/portal.php)
->
 > [论坛主页](http://www.mcbbs.net/forum.php)
->
 > [论坛小组主页](http://www.mcbbs.net/group.php)
->
 > [最新热门帖子](http://www.mcbbs.net/forum.php?mod=guide&view=hot)
->
 > [最新精华帖子](http://www.mcbbs.net/forum.php?mod=guide&view=digest)
->
 > [最新回复帖子](http://www.mcbbs.net/forum.php?mod=guide&view=new)
->
 > [最新发表帖子](http://www.mcbbs.net/forum.php?mod=guide&view=newthread)
->
 > [可抢沙发帖子](http://www.mcbbs.net/forum.php?mod=guide&view=sofa)
 
 ### forumGroups
@@ -358,7 +351,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - messages{} - 私信列表：
 
-> \[map:聊天对象 ID]
+```\[map:聊天对象 ID]```
 
     - type - 消息来源类型，只有 'send' | 'receive' 两种类型
 
@@ -370,7 +363,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - shortMessages{} - 打招呼列表：
 
-> \[map:聊天对象 ID]
+```\[map:聊天对象 ID]```
 
     - content - 打招呼内容
 
@@ -398,7 +391,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - imtegralHisTory{} - 积分操作记录
 
-> \[map:积分类型]
+```\[map:积分类型]```
 
     - type - 操作理由的分类类型
 
@@ -414,7 +407,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
     - tools{} - 具体明细
 
-        > \[map:道具标识名]
+        ```\[map:道具标识名]```
 
         - count - 数量
 
