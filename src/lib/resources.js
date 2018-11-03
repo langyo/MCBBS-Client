@@ -6,11 +6,11 @@
 
 import { getBrowser, initBrowser } from "./browser";
 
-let globalData = {
+let res = {
   // 主页中的数据
   mainPage: {
     // 版块
-    forum: [
+    forumGroups: [
       /*
         元素列表：
         forumGroupName - 大版版块名称
@@ -21,38 +21,44 @@ let globalData = {
       */
     ],
     // 头图
-    slidebox: [
+    headImages: [
       /*
         元素列表：
         img - 图片链接地址
         href - 要跳转的帖子链接地址
       */
     ],
-    // 主页上的最新发布帖子
-    latestThread: [
-      /*
-        元素列表：
-        title - 标题
-        href - 跳转地址
-      */
-    ],
-    // 主页上的最新被回复的帖子
-    latestReply: [
-      /*
-        元素列表：
-        title - 标题
-        href - 跳转地址
-      */
-    ],
-    // 主页上的最新精华帖
-    latestStarThread: [
-      /*
-        元素列表：
-        title - 标题
-        href - 跳转地址
-      */
-    ]
+    // 主页上轮播的帖子
+    headThreads: {
+      latestThread: [
+        /*
+          元素列表：
+          title - 标题
+          author - 作者
+          href - 跳转地址
+        */
+      ],
+      // 主页上的最新被回复的帖子
+      latestReply: [
+        /*
+          元素列表：
+          title - 标题
+          author - 作者
+          href - 跳转地址
+        */
+      ],
+      // 主页上的最新精华帖
+      latestStarThread: [
+        /*
+          元素列表：
+          title - 标题
+          author - 作者
+          href - 跳转地址
+        */
+      ]
+    }
   },
+
   // 版块
   forums: {
     /*
@@ -61,8 +67,57 @@ let globalData = {
       threads - 帖子列表
     */
   },
+
   // 用户数据
-  user: {},
-  // 已登入的账户数据
-  account: {}
+  user: {}
 };
+
+res.mainPage.forumGroups.__defineSetter__(
+  "refresh",
+  () => {}
+);
+
+res.mainPage.forumGroups.__defineSetter__(
+  "init",
+  () => {}
+);
+
+res.mainPage.forumGroups.__defineSetter__(
+  "newForums",
+  () => {}
+);
+
+res.mainPage.headImages.__defineSetter__(
+  "refresh",
+  () => {}
+);
+
+res.mainPage.headImages.__defineSetter__(
+  "init",
+  () => {}
+);
+
+res.mainPage.headImages.__defineSetter__(
+  "pushNew",
+  (image, href) => {}
+);
+
+res.mainPage.headThreads.__defineSetter__(
+  "refresh",
+  () => {}
+);
+
+res.mainPage.headThreads.__defineSetter__(
+  "init",
+  () => {}
+);
+
+res.mainPage.headThreads.__defineSetter__(
+  "more",
+  () => {}
+);
+
+res.mainPage.headThreads.__defineSetter__(
+  "unshiftNew",
+  () => {}
+);
