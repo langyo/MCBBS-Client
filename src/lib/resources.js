@@ -394,3 +394,9 @@ let res = {
     ]
   }
 };
+
+function refreshPage(url) {}
+
+function initLocalStorage() {}
+
+function getBinaryDataBase64(url, wantToRefresh) {}

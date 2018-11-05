@@ -588,3 +588,11 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 ### reportReasions
 
 此节点存储了用户自定义的举报理由。它是一个字符串数组。
+
+# 函数说明
+
+### refreshPage(url)
+
+### initLocalStorage()
+
+### getBinaryDataBase64(url, wantToRefresh)
