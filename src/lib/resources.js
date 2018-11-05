@@ -502,3 +502,12 @@ res.mainPage.headThreads.latestThread.__defineSetter__(
   "pushNew",
   (title, author, href) => {}
 );
+
+/**
+ *@description 凭给出的版块名称返回对应的版块对象实体
+ *@param {string} name 版块名称
+ */
+res.forums.__defineSetter__(
+  "get",
+  name => {}
+);
