@@ -1,4 +1,4 @@
-# resources 模块说明
+# resources 模块
 
 resources 模块对外提供了一个名为 res 的复合数据，其中定义了许多的可供访问的数据节点。要访问它们是很容易的事情，例如：
 
@@ -10,6 +10,8 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 你还可以执行其中的一些方法，以对数据进行诸如刷新等操作。
 
 ``` res ``` 的数据来源有两个模块，一个是 *pageParse.js *，另一个是 *localStorage.js *。
+
+# 数据结构说明
 
 ## mainPage
 
@@ -35,24 +37,6 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 存储了一系列大区（版块集合）的具体子版块信息。
 
-##### 方法列表
-
-- refresh()
-
-从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
-
-成功返回 true，否则返回 false。
-
-- init()
-
-从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
-
-成功返回 true，否则返回 false。
-
-- pushNew(name)
-
-令 forumGroups 初始化一个新的版块大区。此方法仅供后端调用。
-
 ##### 元素列表
 
 - forumGroupName - 大版版块名称
@@ -69,24 +53,6 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 存储了论坛主页左上角的头图信息。
 
-##### 方法列表
-
-- refresh()
-
-从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
-
-成功返回 true，否则返回 false。
-
-- init()
-
-从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
-
-成功返回 true，否则返回 false。
-
-- pushNew(image, href)
-
-向 headImages 加入新的图片。此方法仅供后端调用。
-
 ##### 元素列表
 
 - img - 图片链接地址
@@ -97,39 +63,9 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 存储了论坛右上角的最新帖子信息。最新帖子还分为最新发布（latestThread）、最新回复（latestReply）与最新精华（latestStarThread）三类。
 
-headThreads 有统一管理其三个子数据结构的方法，其三个子数据结构也有独自属于它们的方法。
-
-##### 方法列表
-
-- refresh()
-
-从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
-
-注意，一旦调用此方法，more() 方法将会被重置。
-
-成功返回 true，否则返回 false。
-
-- init()
-
-从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
-
-成功返回 true，否则返回 false。
-
 #### latestThread
 
 最新发布的帖子列表。
-
-##### 方法列表
-
-- more()
-
-从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，并且每次被调用时其会改写自身以适应新的数据流头。
-
-有新的数据返回 true，无新数据、联网失败或原本状态被破坏（例如有人新发布帖子，头部被改变）则返回 false。
-
-- pushNew(title, author, href)
-
-向列表末尾添加新的元素。此方法仅供后端调用。
 
 ##### 元素列表
 
@@ -143,18 +79,6 @@ headThreads 有统一管理其三个子数据结构的方法，其三个子数�
 
 最新回复的帖子列表。
 
-##### 方法列表
-
-- more()
-
-从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，并且每次被调用时其会改写自身以适应新的数据流头。
-
-有新的数据返回 true，无新数据、联网失败或原本状态被破坏（例如有人新发布帖子，头部被改变）则返回 false。
-
-- pushNew(title, author, href)
-
-向列表末尾添加新的元素。此方法仅供后端调用。
-
 ##### 元素列表
 
 - title - 标题
@@ -166,18 +90,6 @@ headThreads 有统一管理其三个子数据结构的方法，其三个子数�
 #### latestStarThread
 
 最新被设置为精华的帖子列表。这里的最新比较特殊，它会将这一个月的精华帖都计算在内，然后再从这些精华帖中取出最后发布的十个精华帖进行展览。
-
-##### 方法列表
-
-- more()
-
-从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，并且每次被调用时其会改写自身以适应新的数据流头。
-
-有新的数据返回 true，无新数据、联网失败或原本状态被破坏（例如有人新发布帖子，头部被改变）则返回 false。
-
-- pushNew(title, author, href)
-
-向列表末尾添加新的元素。此方法仅供后端调用。
 
 ##### 元素列表
 
