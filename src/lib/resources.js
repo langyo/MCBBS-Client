@@ -395,11 +395,19 @@ let res = {
   }
 };
 
+/**
+ *@description 从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
+ *@return {Boolean}
+ */
 res.mainPage.forumGroups.__defineSetter__(
   "refresh",
   () => {}
 );
 
+/**
+ *@description 从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
+ *@return {Boolean}
+ */
 res.mainPage.forumGroups.__defineSetter__(
   "init",
   () => {}

@@ -35,6 +35,21 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 存储了一系列大区（版块集合）的具体子版块信息。
 
+##### 方法列表
+
+- refresh()
+
+从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
+
+成功返回 true，否则返回 false。
+
+- init()
+
+从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
+
+成功返回 true，否则返回 false。
+
+
 ##### 元素列表
 
 - forumGroupName - 大版版块名称
