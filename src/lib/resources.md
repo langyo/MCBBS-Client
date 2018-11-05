@@ -49,6 +49,9 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 成功返回 true，否则返回 false。
 
+- pushNewForums(name)
+
+令 forumGroups 初始化一个新的版块大区。此方法仅供后端调用。
 
 ##### 元素列表
 
@@ -65,6 +68,24 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 ### headImages
 
 存储了论坛主页左上角的头图信息。
+
+##### 方法列表
+
+- refresh()
+
+从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
+
+成功返回 true，否则返回 false。
+
+- init()
+
+从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
+
+成功返回 true，否则返回 false。
+
+- pushNew(image, href)
+
+向 headImages 加入新的图片。此方法仅供后端调用。
 
 ##### 元素列表
 
