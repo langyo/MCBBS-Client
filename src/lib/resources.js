@@ -465,12 +465,40 @@ res.mainPage.headThreads.__defineSetter__(
   () => {}
 );
 
-res.mainPage.headThreads.__defineSetter__(
+/**
+ *@description 从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，并且每次被调用时其会改写自身以适应新的数据流头。
+ *@returns {Boolean}
+ */
+res.mainPage.headThreads.latestThread.__defineSetter__(
   "more",
   () => {}
 );
 
-res.mainPage.headThreads.__defineSetter__(
-  "unshiftNew",
+/**
+ *@description 从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，并且每次被调用时其会改写自身以适应新的数据流头。
+ *@returns {Boolean}
+ */
+res.mainPage.headThreads.latestReply.__defineSetter__(
+  "more",
   () => {}
+);
+
+/**
+ *@description 从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，并且每次被调用时其会改写自身以适应新的数据流头。
+ *@returns {Boolean}
+ */
+res.mainPage.headThreads.latestStarThread.__defineSetter__(
+  "more",
+  () => {}
+);
+
+/**
+ *@description 向列表末尾添加新的元素。此方法仅供后端调用。
+ *@param {string} title 帖子标题
+ *@param {string} author 帖子作者
+ *@param {string} href 帖子链接；此链接应当为原始链接
+ */
+res.mainPage.headThreads.latestThread.__defineSetter__(
+  "pushNew",
+  (title, author, href) => {}
 );
