@@ -49,7 +49,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 成功返回 true，否则返回 false。
 
-- pushNewForums(name)
+- pushNew(name)
 
 令 forumGroups 初始化一个新的版块大区。此方法仅供后端调用。
 
@@ -97,9 +97,33 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 存储了论坛右上角的最新帖子信息。最新帖子还分为最新发布（latestThread）、最新回复（latestReply）与最新精华（latestStarThread）三类。
 
+headThreads 有统一管理其三个子数据结构的方法，其三个子数据结构也有独自属于它们的方法。
+
+##### 方法列表
+
+- refresh()
+
+从 browsers 获取最新信息，并存储到 localStorage；如果因断网等获取失败，也不会覆盖原来的数据。
+
+注意，一旦调用此方法，more() 方法将会被重置。
+
+成功返回 true，否则返回 false。
+
+- init()
+
+从 localStorage 读取信息；如果没有可用信息，则会自动调用 refresh() 以重试；如果调用 refresh() 后仍然无可用信息，会返回 false 以提示 UI 层显示错误信息。
+
+成功返回 true，否则返回 false。
+
 #### latestThread
 
 最新发布的帖子列表。
+
+##### 方法列表
+
+- more()
+
+从数据流中获取更多的信息。此方法应当由 ```headThreads.refresh()``` 方法初始化，每次被调用时其会改写自身以适应新的数据流头。
 
 ##### 元素列表
 
