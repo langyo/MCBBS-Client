@@ -34,7 +34,7 @@ pageParser 提供了页面解析支持，对不同的页面进行解析，并向
 
 ### createReg(regStr)
 
-### <VirtualBrowser> (JSX 组件)
+### \<VirtualBrowser\> (JSX 组件)
 
-### <VirtualBrowserDocumentDebugger> (JSX 组件)
+### \<VirtualBrowserDocumentDebugger\> (JSX 组件)
 
