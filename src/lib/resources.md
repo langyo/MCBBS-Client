@@ -464,7 +464,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - time - 浏览时间
 
-#### accountHistor
+#### accountHistory
 
 此节点记录着用户在使用客户端时登录过的账户记录。用户在选择退出某个账号后，此账号的登陆信息将仍然留在客户端内，并使得用户能够在登录新用户界面中方便地选取之前退出的账号重新登录。
 
@@ -545,7 +545,6 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 ##### 元素列表
 
 - time - 保存时间
-
 
 - title - 标题
 

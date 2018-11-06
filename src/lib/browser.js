@@ -5,7 +5,7 @@
  */
 
 import { Jsdom } from "jsdom";
-import { browserConfig, userCookies } from "./localStorage";
+import { res } from "./localStorage";
 
 let browsers = [];
 
@@ -16,8 +16,9 @@ let browsers = [];
  * @param {number} userID 当前登入的用户 ID；如果存储的 cookie 中没有此用户的登入信息，则以匿名用户模式访问
  */
 function Browser(url, userID) {
-  let config = browserConfig;
-  if (userCookies[userID] !== undefined) config.cookieJar = userCookies[userID];
+  let config = res.accounts.nowUsing;
+  if (res.local.accountCookieStorage[userID] !== undefined)
+    config.cookieJar = res.local.accountCookieStorage[userID];
 
   this.url = url;
   this.browser = new Jsdom(url, config);
