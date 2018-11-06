@@ -34,6 +34,8 @@ MCBBS 客户端
 
 > [resources 模块](https://github.com/langyo/MCBBS-Client/blob/master/src/lib/resources.md)
 >
+> [pageParser 模块](https://github.com/langyo/MCBBS-Client/blob/master/src/lib/pageParser.md)
+>
 > 待编辑
 
 ### 前端库部分
