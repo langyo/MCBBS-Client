@@ -5,10 +5,12 @@
 
 function querySelection(doc, str) {}
 
-function DOMElements(elements) {}
+function DOMElements(doc, elements) {}
 
 DOMElements.prototype = {
   getIds: function() {},
   getClasses: function() {},
-  getListeners: function(listenerType) {}
+  getListeners: function(listenerType) {},
+  getInnerText: function() {},
+  at: function(pos) {}
 };
