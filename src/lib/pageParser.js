@@ -46,24 +46,15 @@ function querySelection(doc, str) {
   return new DOMElements(doc, parse(elements, tasks));
 }
 
-function DOMElements(doc, elements) {}
+function getIds(elements) {}
 
-DOMElements.prototype = {
-  getIds: function() {},
-  getClasses: function() {},
-  getListeners: function(listenerType) {},
-  getInnerText: function() {},
-  at: function(pos) {}
-};
+function getClasses(elements) {}
 
-function DOMElement(element) {}
+function getListeners(elements, listenerType) {}
 
-DOMElement.prototype = {
-  getIds: function() {},
-  getClasses: function() {},
-  getListeners: function(listenerType) {},
-  getInnerText: function() {}
-};
+function getInnerText(elements) {}
+
+function getAttributes(elements, attribute) {}
 
 function createReg(regStr) {
   return function(str) {

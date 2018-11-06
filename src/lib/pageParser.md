@@ -6,31 +6,15 @@ pageParser 提供了页面解析支持，对不同的页面进行解析，并向
 
 ### querySelection(doc, str)
 
-### DOMElements(doc, elements) (构造函数)
+### getIds(elements)
 
-#### 方法列表
+### getClasses(elements)
 
-##### getIds()
+### getListeners(elements, listenerType)
 
-##### getClasses()
+### getInnerText(elements)
 
-##### getListeners(listenerType)
-
-##### getInnerText()
-
-##### at(pos)
-
-### DOMElement(element) (构造函数)
-
-#### 方法列表
-
-##### getIds()
-
-##### getClasses()
-
-##### getListeners(listenerType)
-
-##### getInnerText()
+### getAttributes(elements)
 
 ### createReg(regStr)
 
