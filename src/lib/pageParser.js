@@ -43,7 +43,7 @@ function querySelection(doc, str) {
     str = str.substr(pos).trim();
   }
 
-  return new DOMElements(doc, parse(elements, tasks));
+  return doc, parse(elements, tasks);
 }
 
 function getIds(elements) {}
