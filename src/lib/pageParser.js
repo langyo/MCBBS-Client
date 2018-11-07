@@ -11,7 +11,7 @@ function querySelection(doc, str) {
   let elements = doc.body.childNodes;
 
   function parse(element, tasks) {
-    let temp = element.getElementByClassName(tasks[0]);
+    let temp = element.getElementsByClassName(tasks[0]);
     let results = [];
     for (let i = 0; i < temp.length; ++i) {
       let n = parse(temp[i], tasks.shift());
@@ -31,7 +31,7 @@ function querySelection(doc, str) {
     // 进行第一轮解析
     let temp = [];
     for (let i = 0; i < elements.length; ++i) {
-      temp.push(elements[i].getElementByTagName(task));
+      temp.push(elements[i].getElementsByTagName(task));
     }
     elements = temp;
   }
