@@ -3,19 +3,21 @@
 resources 模块对外提供了一个名为 res 的复合数据，其中定义了许多的可供访问的数据节点。要访问它们是很容易的事情，例如：
 
 ```javascript
-import { res } from '(到代码部分根目录)/lib/resources';
-res.mainPage.forumGroups.forEach(e => { /*......*/ });
+import { res } from "(到代码部分根目录)/lib/resources";
+res.mainPage.forumGroups.forEach(e => {
+  /*......*/
+});
 ```
 
 你还可以执行其中的一些方法，以对数据进行诸如刷新等操作。
 
-``` res ``` 的数据来源有两个模块，一个是 *pageParse.js *，另一个是 *localStorage.js *。
+`res` 的数据来源有两个模块，一个是 _pageParse.js _，另一个是 _localStorage.js _。
 
 # 数据结构说明
 
 ## mainPage
 
-你可以通过 ``` res.mainPage ``` 获取有关主页部分的信息。这些信息应当来自以下页面：
+你可以通过 `res.mainPage` 获取有关主页部分的信息。这些信息应当来自以下页面：
 
 > [论坛门户](http://www.mcbbs.net/portal.php)
 >
@@ -43,11 +45,11 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - forums[\] - 子版块列表：
 
-    - name - 版块特征码
+  - name - 版块特征码
 
-    - info - 版块说明
+  - info - 版块说明
 
-    - avatar - 版块图标
+  - avatar - 版块图标
 
 ### headImages
 
@@ -121,31 +123,33 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - tags{} - 帖子属性：
 
-    - deleted - 是否被删除；默认未被删除
+  - deleted - 是否被删除；默认未被删除
 
-    - closed - 是否被关闭；默认未被关闭
+  - closed - 是否被关闭；默认未被关闭
 
-    - awardInfo{} - 帖子回复奖励信息：
+  - awardInfo{} - 帖子回复奖励信息：
 
-        - integralType - 奖励积分类型
+    - integralType - 奖励积分类型
 
-        - integralCount - 当前帖子剩余的可用奖励积分总量
+    - integralCount - 当前帖子剩余的可用奖励积分总量
 
-        - everyoneAllocateIntegralCount - 每个人能分配的积分量
+    - everyoneAllocateIntegralCount - 每个人能分配的积分量
 
-        - everyoneAllocateIntegralTimes - 每个人最多能被分配积分的次数（也就是最大的能获得奖励的回复次数）
+    - everyoneAllocateIntegralTimes - 每个人最多能被分配积分的次数（也就是最大的能获得奖励的回复次数）
 
-        - everyoneAllocateIntegralChance - 每个人能够中奖的概率
+    - everyoneAllocateIntegralChance - 每个人能够中奖的概率
 
-- titleColor - 帖子标题高亮颜色；默认无额外加色
+  - titleColor - 帖子标题高亮颜色；默认无额外加色
 
-- titleBold - 帖子标题是否被加粗；则默认不加粗
+  - titleBold - 帖子标题是否被加粗；则默认不加粗
 
-- starLevel - 帖子精华等级；默认无精华等级
+  - starLevel - 帖子精华等级；默认无精华等级
 
-- hotLevel - 帖子火热等级；默认无火热等级
+  - hotLevel - 帖子火热等级；默认无火热等级
 
-- topLevel - 帖子置顶等级；默认不置顶
+  - topLevel - 帖子置顶等级；默认不置顶
+
+  - hasBeenDeleted - 是否被删除；默认没被删除；被标记为删除的帖子不会显示
 
 - tags[\] - 帖子被加上的分类标签（这种标签是论坛自带的分类标签，由发帖者自行决定）；默认无分类标签
 
@@ -153,11 +157,11 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - history[\] - 帖子状态修改记录（这种记录是论坛自己整理的）
 
-    - handler - 操作者 ID
+  - handler - 操作者 ID
 
-    - act - 操作说明文字
+  - act - 操作说明文字
 
-    - opereateTime - 截至有效时间
+  - opereateTime - 截至有效时间
 
 - watchCount - 帖子查看量
 
@@ -171,13 +175,13 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - history[\] - 帖子统计信息的历史记录
 
-    - title - 帖子标题
+  - title - 帖子标题
 
-    - watchCount - 帖子查看量
+  - watchCount - 帖子查看量
 
-    - replyCount - 帖子回复量
+  - replyCount - 帖子回复量
 
-    - editTime - 更新时间
+  - editTime - 更新时间
 
 ## posts
 
@@ -203,23 +207,25 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - tags{} - 帖子属性：
 
-    - topFloor - 是否被置顶；默认未被设置为置顶楼层
+  - topFloor - 是否被置顶；默认未被设置为置顶楼层
 
-    - hasBeenWarned - 是否被警告；默认没被警告；警告数据并不是由此楼层提供的，而是由专用的小黑屋页面提供的
+  - hasBeenWarned - 是否被警告；默认没被警告；警告数据并不是由此楼层提供的，而是由专用的小黑屋页面提供的
 
-    - awardInfo{} - 奖励信息，当楼主设置了回复奖励时回复者拿到的奖励积分的相关信息：
+  - hasBeenDeleted - 是否被删除；默认没被删除；被标记为删除的帖子不会显示
 
-        - integralType - 积分类型
+  - awardInfo{} - 奖励信息，当楼主设置了回复奖励时回复者拿到的奖励积分的相关信息：
 
-        - integralCount - 积分数量
+    - integralType - 积分类型
 
-    - showSignature - 是否显示签名档；默认不显示
+    - integralCount - 积分数量
+
+  - showSignature - 是否显示签名档；默认不显示
 
 - history[\] - 帖子内容的历史记录
 
-    - content - 内容
+  - content - 内容
 
-    - editTime - 该内容最后一次被检索到的时间
+  - editTime - 该内容最后一次被检索到的时间
 
 ## rate
 
@@ -231,14 +237,13 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - reason - 理由
 
+* operateTime - 操作时间
 
-- operateTime - 操作时间
+* awardInfo[\] - 评分积分奖励信息：
 
-- awardInfo[\] - 评分积分奖励信息：
+  - integralType - 积分类型
 
-    - integralType - 积分类型
-
-    - integralCount - 积分数量
+  - integralCount - 积分数量
 
 ## user
 
@@ -256,19 +261,19 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - stats{} - 数据统计：
 
-    - goldNuggets - 金粒
+  - goldNuggets - 金粒
 
-    - goldIngots - 金锭
+  - goldIngots - 金锭
 
-    - emeralds - 绿宝石
+  - emeralds - 绿宝石
 
-    - netherStars - 下界之星
+  - netherStars - 下界之星
 
-    - devotions - 贡献
+  - devotions - 贡献
 
-    - benevolences - 爱心
+  - benevolences - 爱心
 
-    - diamonds - 钻石
+  - diamonds - 钻石
 
 - signature - 签名档信息，这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
 
@@ -296,9 +301,9 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - integralInfo - 积分上下限信息（有些用户组没有此项）：
 
-    - min - 最低积分
+  - min - 最低积分
 
-    - max - 最高积分
+  - max - 最高积分
 
 - info{} - 权限信息，此部分不再使用特定变量，而是将其当成 json 使用，键名可以是汉语
 
@@ -350,29 +355,37 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - notifications[\] - 提醒列表：
 
-    - noticer - 提醒者 ID；如果为 0 则为系统通知
+  - noticer - 提醒者 ID；如果为 0 则为系统通知
 
-    - content - 提醒内容
+  - content - 提醒内容
 
-    - href - 指向的链接
+  - href - 指向的链接
 
-    - time - 提醒时间
+  - time - 提醒时间
 
 - messages{} - 私信列表：
 
-    \[map:聊天对象 ID]
+  \[map:聊天对象 ID]
 
-    - type - 消息来源类型，只有 'send' | 'receive' 两种类型
+  - type - 消息来源类型，只有 'send' | 'receive' 两种类型
 
-    - content - 消息内容，这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
+  - content - 消息内容，这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
 
-    - time - 消息创建时间
+  - time - 消息创建时间
 
 - friends[\] - 朋友 ID 列表
 
 - shortMessages{} - 打招呼列表：
 
-    \[map:聊天对象 ID]
+  \[map:聊天对象 ID]
+
+  - content - 打招呼内容
+
+  - emoji - 打招呼表情
+
+  - time - 打招呼时间
+
+  - history[\] - 历史记录
 
     - content - 打招呼内容
 
@@ -380,53 +393,45 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
     - time - 打招呼时间
 
-    - history[\] - 历史记录
-
-        - content - 打招呼内容
-
-        - emoji - 打招呼表情
-
-        - time - 打招呼时间
-
 - forumManageMessages[\] - 论坛管理消息列表：
 
-    - handler - 操作者
+  - handler - 操作者
 
-    - integralMessage - 操作信息，这部分信息是没过滤过的积分提示信息
+  - integralMessage - 操作信息，这部分信息是没过滤过的积分提示信息
 
-    - reason - 理由
+  - reason - 理由
 
-    - time - 操作时间
+  - time - 操作时间
 
 - imtegralHisTory{} - 积分操作记录
 
-    \[map:积分类型]
+  \[map:积分类型]
 
-    - type - 操作理由的分类类型
+  - type - 操作理由的分类类型
 
-    - count - 变更积分数量
+  - count - 变更积分数量
 
-    - time - 操作时间
+  - time - 操作时间
 
 - packbag - 背包信息
 
-    - topWeight - 最大的背包可容纳质量大小
+  - topWeight - 最大的背包可容纳质量大小
 
-    - nowWeight - 当前的背包已容纳质量大小
+  - nowWeight - 当前的背包已容纳质量大小
 
-    - tools{} - 具体明细
+  - tools{} - 具体明细
 
-        \[map:道具标识名]
+    \[map:道具标识名]
 
-        - count - 数量
+    - count - 数量
 
 - favoriteThreads[\] - 收藏帖子列表
 
-    - href - 帖子 ID
+  - href - 帖子 ID
 
-    - time - 收藏时间
+  - time - 收藏时间
 
-    - reason - 收藏理由
+  - reason - 收藏理由
 
 ## local
 
@@ -478,7 +483,7 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 #### accountCookieStorage
 
-账户登入使用的 Cookie 凭据，存储的是 CookieJar 对象的 json 文本表达。此节点为一个关联容器（map），键名为用户 ID，键值为被转换为字符串的 JSON。
+账户登入使用的 Cookie 凭据，存储的是 CookieJar 对象的 json 文本表达。此节点为一个关联容器（map），键名为用户 ID，键值为被 Cookie 字符串。
 
 #### extensionLaunchHistory
 
@@ -552,17 +557,17 @@ res.mainPage.forumGroups.forEach(e => { /*......*/ });
 
 - tags{} - 帖子属性：
 
-     - awardInfo{} - 帖子回复奖励信息：
+  - awardInfo{} - 帖子回复奖励信息：
 
-     - integralType - 奖励积分类型
+    - integralType - 奖励积分类型
 
-     - integralCount - 当前帖子剩余的可用奖励积分总量
+    - integralCount - 当前帖子剩余的可用奖励积分总量
 
-     - everyoneAllocateIntegralCount - 每个人能分配的积分量
+    - everyoneAllocateIntegralCount - 每个人能分配的积分量
 
-     - everyoneAllocateIntegralTimes - 每个人最多能被分配积分的次数（也就是最大的能获得奖励的回复次数）
+    - everyoneAllocateIntegralTimes - 每个人最多能被分配积分的次数（也就是最大的能获得奖励的回复次数）
 
-     - everyoneAllocateIntegralChance - 每个人能够中奖的概率
+    - everyoneAllocateIntegralChance - 每个人能够中奖的概率
 
 - tags[\] - 帖子被加上的分类标签（这种标签是论坛自带的分类标签，由发帖者自行决定）；默认无分类标签
 
