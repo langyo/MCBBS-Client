@@ -14,7 +14,7 @@ MCBBS 客户端
 
 ## 版本说明
 
-此分支的版本为 **0.1** 。
+此分支的版本为 **0.1** （非常不稳定的版本，随时可能出现架构上的改变） 。
 
 此分支的开发代号为 **原木** 。
 
@@ -22,13 +22,7 @@ MCBBS 客户端
 
 ### 后端库部分
 
-#### 后端部分使用的库
-
-> [JSDOM](https://github.com/jsdom/jsdom) (暂时停用)
->
-> [local-storage](https://github.com/bevacqua/local-storage)
->
-> [Google Firebase SDK](https://github.com/firebase/firebase-js-sdk) (暂时停用)
+后端不再依赖 Node.js 库，转而直接写可供浏览器运行的 JavaScript 代码。
 
 #### 后端部分各个模块的具体文档
 

@@ -14,14 +14,14 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
-    "cheerio": "1.0.0-rc.2",
     "classnames": "2.2.6",
     "firebase": "5.5.6",
     "jsdom": "latest",
     "local-storage": "1.4.2",
     "prop-types": "15.6.2",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router": "4.3.1"
   },
   "keywords": []
 }
