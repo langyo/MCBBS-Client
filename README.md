@@ -24,7 +24,7 @@ MCBBS 客户端
 
 #### 后端部分使用的库
 
-> [JSDOM](https://github.com/jsdom/jsdom)
+> [JSDOM](https://github.com/jsdom/jsdom) (暂时停用)
 >
 > [local-storage](https://github.com/bevacqua/local-storage)
 >
