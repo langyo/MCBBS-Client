@@ -26,9 +26,9 @@ MCBBS 客户端
 
 #### 后端部分各个模块的具体文档
 
-> [resources 模块](https://github.com/langyo/MCBBS-Client/blob/master/src/lib/resources.md)
+> [resources 模块](https://github.com/langyo/MCBBS-Client/blob/master/corePlugins/resourceManager/resources.md)
 >
-> [pageParser 模块](https://github.com/langyo/MCBBS-Client/blob/master/src/lib/pageParser.md)
+> [pageParser 模块](https://github.com/langyo/MCBBS-Client/blob/master/corePlugins/pageParser/pageParser.md)
 >
 > 待编辑
 
