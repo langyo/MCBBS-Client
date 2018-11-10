@@ -493,30 +493,6 @@ res.mainPage.forumGroups.forEach(e => {
 
 - time - 启动时间
 
-### extensions
-
-此节点保存了此客户端已安装的插件的数据。此节点为一个关联容器（map），键名为插件的 UUID。
-
-##### 元素列表
-
-- name - 插件名称，可以是中文
-
-- use - 是否使用，只有 'true' | 'false' 这两个类型
-
-- sha1 - 插件代码的数字签名
-
-- version - 当前存贮在本地的插件版本
-
-- codes - 插件代码的字符串，在启用时客户端会将其作为 JavaScript 代码隔离在沙箱中执行
-
-- author - 作者 ID
-
-- localStorage - 插件在本地存贮的数据
-
-- permissions - 插件权限列表，为 \[ 权限名 - 是否允许的布尔值 ]的值对
-
-- sourceLibrary[\] - 依赖的其它插件 UUID 列表
-
 ### sources
 
 此节点保存了较大的数据文件的信息，例如下载好的图片的 Base 64 转码字符串。
