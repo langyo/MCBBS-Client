@@ -2,7 +2,7 @@
   "name": "mcbbs-client",
   "version": "0.1.0",
   "description": "A BBS client for MCBBS.",
-  "main": "index.js",
+  "main": "web/initializer/index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
