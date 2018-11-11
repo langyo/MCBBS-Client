@@ -12,7 +12,7 @@ MCBBS 客户端
 
 前端部分依赖 React 与 Material-UI 库进行构造，这需要 Node.js 对页面进行转译。
 
-后端部分依赖 Electron 与　 Ionic。
+后端部分的桌面端依赖 Electron，移动端待定（因为跨域访问问题）。
 
 ## 版本说明
 

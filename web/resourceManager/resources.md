@@ -149,8 +149,6 @@ res.mainPage.forumGroups.forEach(e => {
 
   - topLevel - 帖子置顶等级；默认不置顶
 
-  - hasBeenDeleted - 是否被删除；默认没被删除；被标记为删除的帖子不会显示
-
 - tags[\] - 帖子被加上的分类标签（这种标签是论坛自带的分类标签，由发帖者自行决定）；默认无分类标签
 
 - stamp - 帖子被加上的图章名称；默认无图章
