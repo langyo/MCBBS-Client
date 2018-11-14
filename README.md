@@ -24,15 +24,13 @@ MCBBS 客户端
 
 ### 后端库部分
 
-后端不再依赖 Node.js 库，转而直接写可供浏览器运行的 JavaScript 代码。
+#### 后端库文档
 
-#### 后端部分各个模块的具体文档
-
-> [resources 模块](https://github.com/langyo/MCBBS-Client/blob/master/corePlugins/resourceManager/resources.md)
+> [本地核心 API（只能由客户端钦定的一部分 JavaScript 插件执行）](https://github.com/langyo/MCBBS-Client/blob/master/native/api.md)
 >
-> [pageParser 模块](https://github.com/langyo/MCBBS-Client/blob/master/corePlugins/pageParser/pageParser.md)
+> 插件 API（待编辑）
 >
-> 待编辑
+> 插件配置文件说明（待编辑）
 
 ### 前端库部分
 
