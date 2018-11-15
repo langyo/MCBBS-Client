@@ -22,15 +22,18 @@ MCBBS 客户端
 
 ## 源码结构说明
 
-- /native
-  依赖于对应平台的核心源代码。
-  - /electron
-    以 electron 为核心开发的客户端部分。
-  - /reactNative
-    以 reactNative 为核心开发的客户端部分。
-- /web
-
-- /plugin
+- /native - 依赖于对应平台的核心源代码，为平台无关代码部分提供控制设备以及浏览器的各个接口。
+  - /electron - 以 electron 为核心开发的客户端部分。
+  - /reactNative - 以 reactNative 为核心开发的客户端部分。
+- /web - 无需依赖于对应平台的平台无关核心源代码，全部由 JavaScript 编写。
+  - /kernel - 用于与平台核心代码进行对接并初始化以 JavaScript 编写的接口，供其它模块与插件调用。
+  - /resourceManager - 资源管理器。
+  - /pageParser - 页面解析器。
+  - /viewManager - 界面管理器。
+  - /pluginCenter - 插件管理中心。
+- /plugin - 可以自由选择是否装载的插件部分。
+  插件文件夹下的各个子文件夹名称应为插件作者的昵称，在对应作者的文件夹下的各个子文件夹才是插件文件夹。
+  任何人都可以向插件文件夹提交自己的插件，但必须遵循以上原则，只能向以自己昵称作为文件夹名的文件夹下上传新插件，否则拒绝合并。
 
 ## 具体的操作文档
 
