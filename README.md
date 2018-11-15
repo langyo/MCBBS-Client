@@ -41,11 +41,13 @@ MCBBS 客户端
 
 ### 后端库文档
 
-> [本地核心 API（只能由客户端钦定的一部分 JavaScript 插件执行）](https://github.com/langyo/MCBBS-Client/blob/master/native/api.md)
+> [本地核心 API](https://github.com/langyo/MCBBS-Client/blob/master/native/api.md)
 >
 > 插件 API（待编辑）
 >
-> 插件配置文件说明（config.json）（待编辑）
+> [插件配置文件说明（config.json）](https://github.com/langyo/MCBBS-Client/blob/master/plugin/config.md)（待编辑）
+>
+> MonkeyScript 说明（待编辑）
 
 ### 前端部分使用的库
 
