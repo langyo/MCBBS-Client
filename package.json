@@ -21,6 +21,7 @@
     "prop-types": "15.6.2",
     "react": "latest",
     "react-dom": "latest",
+    "react-native": "0.57.5",
     "react-router": "4.3.1"
   },
   "keywords": []
