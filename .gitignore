@@ -1,3 +1,4 @@
+# --- 旧有的 gitignore 文件 ---
 # Logs
 logs
 *.log
@@ -59,3 +60,63 @@ typings/
 
 # next.js build output
 .next
+
+# --- 针对 native/reactNative 的部分 ---
+
+# OSX
+#
+native/reactNative/.DS_Store
+
+# Xcode
+#
+native/reactNative/build/
+native/reactNative/*.pbxuser
+native/reactNative/!default.pbxuser
+native/reactNative/*.mode1v3
+native/reactNative/!default.mode1v3
+native/reactNative/*.mode2v3
+native/reactNative/!default.mode2v3
+native/reactNative/*.perspectivev3
+native/reactNative/!default.perspectivev3
+native/reactNative/xcuserdata
+native/reactNative/*.xccheckout
+native/reactNative/*.moved-aside
+native/reactNative/DerivedData
+native/reactNative/*.hmap
+native/reactNative/*.ipa
+native/reactNative/*.xcuserstate
+native/reactNative/project.xcworkspace
+
+# Android/IntelliJ
+#
+native/reactNative/build/
+native/reactNative/.idea
+native/reactNative/.gradle
+native/reactNative/local.properties
+native/reactNative/*.iml
+
+# node.js
+#
+native/reactNative/node_modules/
+native/reactNative/npm-debug.log
+native/reactNative/yarn-error.log
+
+# BUCK
+native/reactNative/buck-out/
+native/reactNative/\.buckd/
+native/reactNative/*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+native/reactNative/*/fastlane/report.xml
+native/reactNative/*/fastlane/Preview.html
+native/reactNative/*/fastlane/screenshots
+
+# Bundle artifact
+native/reactNative/*.jsbundle
+
