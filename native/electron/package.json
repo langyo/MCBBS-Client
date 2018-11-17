@@ -17,8 +17,10 @@
     "react": "latest",
     "react-dom": "latest",
     "react-native": "0.57.5",
-    "react-router": "4.3.1",
-    "electron":"latest"
+    "react-router": "4.3.1"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "electron": "^3.0.9"
+  }
 }
