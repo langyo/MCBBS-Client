@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+const { app, BrowserWindow } = require('electron');
 
 // 创建全局变量，保证浏览器对象不会被垃圾回收器回收掉
 let win;
