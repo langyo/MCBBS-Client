@@ -120,3 +120,8 @@ native/reactNative/*/fastlane/screenshots
 # Bundle artifact
 native/reactNative/*.jsbundle
 
+# --- 针对 native/electron 的部分 ---
+
+# Node.js
+
+native/electron/node_modules/
