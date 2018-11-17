@@ -1,13 +1,19 @@
 /**
- *@author langyo
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
  */
 
-import React, { Component } from "react";
-import { Platform, StyleSheet, WebView, View } from "react-native";
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 
 const instructions = Platform.select({
-  ios: "按 ctrl + R 刷新\n" + "按 ctrl + D 打开调试菜单",
-  android: "双击 R 刷新,\n" + "摇晃手机或点击菜单按钮以打开调试菜单"
+  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  android:
+    'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
 });
 
 type Props = {};
@@ -15,8 +21,9 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <WebView style={styles.container} />
-        <WebView style={styles.displayWebView} />
+        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
   }
@@ -25,11 +32,18 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  displayWebView: {
-    display: true
-  }
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
 });

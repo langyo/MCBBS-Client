@@ -1,0 +1,3 @@
+rootProject.name = 'MCBBSClient'
+
+include ':app'
