@@ -20,6 +20,16 @@ MCBBS 客户端
 
 此分支的开发代号为 **原木** 。
 
+## 调试方式
+
+### 桌面端（electron）
+    // 进入 electron 文件夹
+    cd native/electron
+    // 运行
+    npm start
+### 移动端（react native）
+React native 的工程文件夹（native/reactNative）下分别有对应于 Android Studio 与 XCode 的工程说明文件，直接使用对应开发环境打开此类文件即可进行测试，测试时 react native 会自动调用 react native packager 对源代码进行打包。
+
 ## 源码结构说明
 
 - /native - 依赖于对应平台的核心源代码，为平台无关代码部分提供控制设备以及浏览器的统一 API。
