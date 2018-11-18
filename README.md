@@ -25,6 +25,10 @@ MCBBS 客户端
 ### 桌面端（electron）
     // 进入 electron 文件夹
     cd native/electron
+    // 安装依赖
+    npm i
+    // 安装单独的 electron 编译好的二进制文件
+    npm i electron --save-dev
     // 运行
     npm start
 ### 移动端（react native）
