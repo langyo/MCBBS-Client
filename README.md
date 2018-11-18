@@ -46,11 +46,7 @@ React native 的工程文件夹（native/reactNative）下分别有对应于 And
   任何人都可以向插件文件夹提交自己的插件，但必须遵循以上原则，只能向以自己在 Github 的昵称作为文件夹名的文件夹下上传新插件，并提供自己在 MCBBS 的身份（用于清查可能的恶意代码来源），否则拒绝合并。
 
 - /plugin/langyo - 包含了所有平台无关的核心源代码，全部由 JavaScript 编写，以插件形式装载。
-  - /monkeyScript - 一种网页操纵脚本语言的解释引擎，用于自动化模拟操作浏览器。
-  - /resourceManager - 资源管理器，提供对本地数据库与网络访问的支持。
-  - /pageParser - 页面解析器，提供对 MonkeyScript 脚本的解析与执行，以模拟用户对浏览器的操纵。
-  - /viewManager - 界面管理器，提供一系列方便的界面管理接口，将 Material-UI 库的界面进行了重构。
-  - /pluginCenter - 插件管理中心，用于启用/禁用插件、安装/卸载插件、控制插件权限与为插件提供可供使用的 API。
+
 
 ## 具体的操作文档
 
