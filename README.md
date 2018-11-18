@@ -23,6 +23,7 @@ MCBBS 客户端
 ## 调试方式
 
 ### 桌面端（electron）
+
     // 进入 electron 文件夹
     cd native/electron
     // 安装依赖
@@ -31,7 +32,9 @@ MCBBS 客户端
     npm i electron --save-dev
     // 运行
     npm start
+
 ### 移动端（react native）
+
 React native 的工程文件夹（native/reactNative）下分别有对应于 Android Studio 与 XCode 的工程说明文件，直接使用对应开发环境打开此类文件即可进行测试，测试时 react native 会自动调用 react native packager 对源代码进行打包。
 
 ## 源码结构说明
@@ -43,9 +46,7 @@ React native 的工程文件夹（native/reactNative）下分别有对应于 And
 
   插件文件夹下的各个子文件夹名称应为插件作者的昵称，在对应作者的文件夹下的各个子文件夹才是插件文件夹。
 
-  任何人都可以向插件文件夹提交自己的插件，但必须遵循以上原则，只能向以自己在 Github 的昵称作为文件夹名的文件夹下上传新插件，并提供自己在 MCBBS 的身份（用于清查可能的恶意代码来源），否则拒绝合并。
-
-- /plugin/langyo - 包含了所有平台无关的核心源代码，全部由 JavaScript 编写，以插件形式装载。
+  任何人都可以向插件文件夹提交自己的插件，但必须遵循以上原则，只能向以自己在 Github 的昵称作为文件夹名的文件夹下上传新插件，并提供自己在 MCBBS 的身份（用于清查可能的恶意代码来源），否则拒绝合并。更具体的提交说明请参阅[插件计划](https://github.com/langyo/MCBBS-Client/blob/master/plan-plugin.md)。
 
 
 ## 具体的操作文档
