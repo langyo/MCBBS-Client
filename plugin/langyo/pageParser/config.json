@@ -1,0 +1,14 @@
+{
+    "name":"pageParser",
+    "description":"页面解析器，将一批预先定义好的 monkey script 脚本交给 monkeyScript 插件解析，进而模拟用户对浏览器的操纵，从而获取与操纵数据，并开放给其它插件使用。",
+    "version":"0.1.0",
+    "author":"langyo",
+    "librariesNative":[],
+    "libraries":[],
+    "index":{
+        "electron":"main.js",
+        "reactNative":"main.js"
+    },
+    "permissions":[],
+    "settings":[]
+}

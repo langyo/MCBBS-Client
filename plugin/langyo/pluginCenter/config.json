@@ -1,0 +1,14 @@
+{
+    "name":"pluginCenter",
+    "description":"插件管理中心，用于管理插件、更新插件、控制插件权限与选择提供插件所需要的对应权限的 API。",
+    "version":"0.1.0",
+    "author":"langyo",
+    "librariesNative":[],
+    "libraries":[],
+    "index":{
+        "electron":"main.js",
+        "reactNative":"main.js"
+    },
+    "permissions":[],
+    "settings":[]
+}

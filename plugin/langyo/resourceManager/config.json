@@ -1,0 +1,14 @@
+{
+    "name":"resourceManager",
+    "description":"资源管理器，提供对本地数据库与网络访问的支持。",
+    "version":"0.1.0",
+    "author":"langyo",
+    "librariesNative":[],
+    "libraries":[],
+    "index":{
+        "electron":"main.js",
+        "reactNative":"main.js"
+    },
+    "permissions":[],
+    "settings":[]
+}
