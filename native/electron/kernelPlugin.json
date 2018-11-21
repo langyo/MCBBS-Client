@@ -1,0 +1,24 @@
+{
+    "plugins":[
+        {
+            "author":"langyo",
+            "name":"forumWorker"
+        },
+        {
+            "author":"langyo",
+            "name":"monkeyScript"
+        },
+        {
+            "author":"langyo",
+            "name":"pluginCenter"
+        },
+        {
+            "author":"langyo",
+            "name":"resourceManager"
+        },
+        {
+            "author":"langyo",
+            "name":"viewManager"
+        }
+    ]
+}

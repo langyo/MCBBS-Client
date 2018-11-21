@@ -47,7 +47,7 @@
 
 ### viewManager
 
-界面管理器，与 native 部分的界面进行对接，并向其它插件提供简单易用的界面元素构造接口。
+界面管理器，与 native 部分的界面进行对接，并向其它插件提供简单易用的界面元素构造接口，同时也提供了对描述界面的 XML 进行解析与加载的功能。
 
     /langyo/viewManager
 - (langyo, UID:1287472)
@@ -65,4 +65,3 @@
 
     /langyo/pluginCenter
 - (langyo, UID:1287472)
-
