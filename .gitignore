@@ -100,6 +100,7 @@ native/reactNative/*.iml
 native/reactNative/node_modules/
 native/reactNative/npm-debug.log
 native/reactNative/yarn-error.log
+native/reactNative/package-lock.log
 
 # BUCK
 native/reactNative/buck-out/
@@ -125,3 +126,4 @@ native/reactNative/*.jsbundle
 # Node.js
 
 native/electron/node_modules/
+native/electron/package-lock.json
