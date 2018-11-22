@@ -2,9 +2,9 @@
   "name": "mcbbs-client",
   "version": "0.1.0",
   "description": "A BBS client for MCBBS.",
-  "main": "cli/main.js",
+  "main": "cli/help.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "plugin": "cli/plugin.js"
   },
   "repository": {
     "type": "git",
