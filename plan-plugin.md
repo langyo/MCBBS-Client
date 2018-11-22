@@ -24,11 +24,11 @@
 
 核心类插件是客户端最基础的插件，用于维持客户端的基本运作，也用于控制其它插件的活动与对其它插件提供大量可供调用的接口。
 
-### monkeyScript
+### monkey
 
-一种网页操纵脚本语言的解释引擎，用于自动化模拟操作浏览器。
+对网页进行自动化操作的工具库。
 
-    /langyo/monkeyScript
+    /langyo/monkey
 - (langyo, UID:1287472)
 
 ### resourceManager
@@ -40,7 +40,7 @@
 
 ### pageParser
 
-页面解析器，将一批预先定义好的 monkey script 脚本交给 monkeyScript 插件解析，进而模拟用户对浏览器的操纵，从而获取与操纵数据，并开放给其它插件使用。
+页面解析器，利用 monkey 模块对页面进行元素绑定，进而模拟用户对浏览器的操纵，从而获取与操纵数据，开放给其它插件使用。
 
     /langyo/pageParser
 - (langyo, UID:1287472)
@@ -56,7 +56,7 @@
 
 ### forumWorker
 
-对论坛的各种页面进行解析、模拟操作，是界面与数据之间的中间层。
+对论坛的各种页面进行解析、模拟操作，是具体界面与数据之间的中间层。
 
     /langyo/forumWorker
 - (langyo, UID:1287472)

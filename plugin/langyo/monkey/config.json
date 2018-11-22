@@ -1,6 +1,6 @@
 {
-    "name":"monkeyScript",
-    "description":"一种网页操纵脚本语言的解释引擎，用于自动化模拟操作浏览器。",
+    "name":"monkey",
+    "description":"对网页进行自动化操作的工具库。",
     "version":"0.1.0",
     "author":"langyo",
     "librariesNative":[],

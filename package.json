@@ -1,0 +1,19 @@
+{
+  "name": "mcbbs-client",
+  "version": "0.1.0",
+  "description": "A BBS client for MCBBS.",
+  "main": "cli/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langyo/MCBBS-Client.git"
+  },
+  "author": "langyo",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/langyo/MCBBS-Client/issues"
+  },
+  "homepage": "https://github.com/langyo/MCBBS-Client#readme"
+}
