@@ -5,10 +5,7 @@
     "author":"langyo",
     "librariesNative":[],
     "libraries":[],
-    "index":{
-        "electron":"main.js",
-        "reactNative":"main.js"
-    },
+    "index":"export.js",
     "permissions":[],
     "settings":[]
 }
