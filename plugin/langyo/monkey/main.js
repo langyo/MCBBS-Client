@@ -1,39 +1,49 @@
-function Monkey(document){
-    this.document = document.body;
-    this.actions = {};
-}
-
-Monkey.prototype.send = function(selector, event){
-    eval(document.querySelectorAll(selector).getAttribute(event));
-};
-
-Monkey.prototype.filterNode = function(selectorList){
-    let ret = {};
-    for(let i of selectorList){
-        ret[i] = this.document.querySelectorAll(i);
+class Monkey {
+    constructor(document) {
+        this.document = document.body;
+        this.actions = {};
     }
-    return ret;
-};
-
-Monkey.prototype.defineActions = function(name, actions){
-    // 无效动作检查
-    for(let i of actions){
-        switch(i.type){
-            case 'send':
-            
-            case 'filterNode':
-
-            case 'runActions':
-
-            default:
-                throw new Error('未知动作');
+    send(selector, event) {
+        eval(document.querySelectorAll(selector).getAttribute(event));
+    }
+    filter(selector) {
+        let ret = {};
+        for (let i of selectorList) {
+            ret[i] = this.document.querySelectorAll(i);
         }
+        return ret;
     }
-
-    this.actions[name] = actions;
+    select(selector) {
+        return this.document.querySelectorAll(selector);
+    }
+    defineActions(name, actions) {
+        // 无效动作检查
+        for (let i of actions) {
+            switch (i.type) {
+                case 'send':
+                case 'filter':
+                case 'run':
+                case 'reduce':
+                case 'select':
+                    break;
+                default:
+                    throw new Error('未知动作');
+            }
+        }
+        this.actions[name] = actions;
+    }
+    run(actions) {
+        let nextInput, tempData;
+        for (let i of actions) {
+            let n = this[this.actions[i].type](nextInput, tempData);
+            nextInput = n.nextInput ? n.nextInput : [];
+            tempData = n.tempData ? n.tempData : {};
+        }
+        return tempData;
+    }
 }
 
-Monkey.prototype.runActions = function(actions){
-    let nextInput;
-    for(let i of actions) nextInput = this[this.actions[i].type].apply(this.actions[i].data.push(nextInput));
-}
+
+
+
+
