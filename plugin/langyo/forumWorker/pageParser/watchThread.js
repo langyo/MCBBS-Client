@@ -1,6 +1,5 @@
 export default (document) =>{
     let thread = {};
-    let url = location.href;
     // 主题头部解析
     if(document.querySelectorAll('#tath > a:nth-child(2)') > 0){
         // 其它页时为一楼作者
@@ -11,5 +10,15 @@ export default (document) =>{
         thread.watchCount = document.querySelectorAll('#postlist > table:nth-child(1) > tbody > tr > td.pls.ptn.pbn > div > span:nth-child(2)')[0].innerHTML;
         // 回复量
         thread.replyCount = document.querySelectorAll('#postlist > table:nth-child(1) > tbody > tr > td.pls.ptn.pbn > div > span:nth-child(5)')[0].innerHTML;
+    }
+
+    // 帖子回复列表解析
+    let postList = document.querySelectorAll('#postlist > div');
+    if(!Array.isArray(thread.posts)) thread.posts = [];
+    for(let i = 0; i < postList.length; ++i){
+        let match;
+        if(match = /^post_([0-9]+)$/.exec(postList[i].id) ){
+            thread.posts.push(match[1]);
+        }
     }
 };
