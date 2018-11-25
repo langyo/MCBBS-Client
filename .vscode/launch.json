@@ -1,0 +1,33 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "React Native iOS 移动版调试启动",
+            "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "ios",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/.vscode/.react"
+        },
+        {
+            "name": "React Native Android 移动版调试启动",
+            "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "android",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/.vscode/.react"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Electron 桌面版启动",
+            "runtimeExecutable": "${workspaceFolder}/native/electron/node_modules/.bin/electron",
+            "program": "${workspaceFolder}/native/electron/main.js"
+        }
+    ]
+}

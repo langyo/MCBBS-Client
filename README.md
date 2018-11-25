@@ -50,7 +50,6 @@ React native 的工程文件夹（native/reactNative）下分别有对应于 And
 
   任何人都可以向插件文件夹提交自己的插件，但必须遵循以上原则，只能向以自己在 Github 的昵称作为文件夹名的文件夹下上传新插件，并提供自己在 MCBBS 的身份（用于清查可能的恶意代码来源），否则拒绝合并。更具体的提交说明请参阅[计划插件列表](https://github.com/langyo/MCBBS-Client/blob/master/plugin/plugin-doc.md)。
 
-
 ## 具体的操作文档
 
 ### 后端库文档

@@ -2,7 +2,7 @@ export default (document) =>{
     let thread = {};
     let url = location.href;
     // 主题头部解析
-    if(document.querySelectorAll('#tath > a:nth-child(2)')[0].innerHTML){
+    if(document.querySelectorAll('#tath > a:nth-child(2)') > 0){
         // 其它页时为一楼作者
         thread.author = document.querySelectorAll('#tath > a:nth-child(2)')[0].innerHTML
     }else{
