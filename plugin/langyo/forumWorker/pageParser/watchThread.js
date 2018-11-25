@@ -21,7 +21,7 @@ export default (document) =>{
         // 回复量
         thread.replyCount = document.querySelectorAll('#postlist > table:nth-child(1) > tbody > tr > td.pls.ptn.pbn > div > span:nth-child(5)')[0].innerHTML;
         // 楼主检测
-        thread.author = document.querySelectorAll('#postlist > div')[0]; // 待修改
+        thread.author = document.querySelectorAll('#postlist > div')[0].querySelectorAll('table > tbody > tr:nth-child(1) > td.pls > div > div.pi > div > a')[0].innerHTML; // 待修改
     }
 
 };
