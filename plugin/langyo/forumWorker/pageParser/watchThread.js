@@ -1,5 +1,6 @@
 export default (document) =>{
     let thread = {};
+
     // 帖子回复列表解析
     let postList = document.querySelectorAll('#postlist > div');
     if(!Array.isArray(thread.posts)) thread.posts = [];
@@ -9,6 +10,12 @@ export default (document) =>{
             thread.posts.push(match[1]);
         }
     }
+
+    // 标题解析
+    thread.title = document.querySelectorAll('#thread_subject')[0].innerHTML;
+
+    // 帖子类型解析
+    thread.type = /typeid=([0-9]+)/.exec(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > h1 > a')[0].getAttribute('href'))[1];
 
     // 主题头部解析
     if(document.querySelectorAll('#tath > a:nth-child(2)') > 0){

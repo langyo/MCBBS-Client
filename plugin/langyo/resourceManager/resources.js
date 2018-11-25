@@ -39,12 +39,12 @@ let res = {
   },
 
   // 评分
-  rate: {
+  rates: {
     // [map:评分 ID]
   },
 
   // 用户
-  user: {
+  users: {
     // [map:用户 ID]
   },
 

@@ -121,6 +121,8 @@ res.mainPage.forumGroups.forEach(e => {
 
 - title - 标题
 
+- type - 帖子分类，为一个帖子类型编号
+
 - tags{} - 帖子属性：
 
   - deleted - 是否被删除；默认未被删除
@@ -225,7 +227,7 @@ res.mainPage.forumGroups.forEach(e => {
 
   - editTime - 该内容最后一次被检索到的时间
 
-## rate
+## rates
 
 此节点存储了有关评分的具体信息。此节点为一个关联容器（map），键名为评分数据 ID。
 
@@ -243,7 +245,7 @@ res.mainPage.forumGroups.forEach(e => {
 
   - integralCount - 积分数量
 
-## user
+## users
 
 此节点存储了有关各个用户的具体信息。此节点为一个关联容器（map），键名为用户 ID。
 
