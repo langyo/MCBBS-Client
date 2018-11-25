@@ -4,8 +4,6 @@
  *@todo 此部分将要重写
  */
 
-import { getBrowser, initBrowser } from "./browser";
-
 let res = {
   // 主页中的数据
   mainPage: {
@@ -130,9 +128,3 @@ let res = {
     ]
   }
 };
-
-function refreshPage(url) {}
-
-function initLocalStorage() {}
-
-function getBinaryDataBase64(url, wantToRefresh) {}

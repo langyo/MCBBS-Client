@@ -123,7 +123,7 @@ res.mainPage.forumGroups.forEach(e => {
 
 - type - 帖子分类，为一个帖子类型编号
 
-- tags{} - 帖子属性：
+- states{} - 帖子状态：
 
   - deleted - 是否被删除；默认未被删除
 
@@ -155,7 +155,7 @@ res.mainPage.forumGroups.forEach(e => {
 
 - stamp - 帖子被加上的图章名称；默认无图章
 
-- history[\] - 帖子状态修改记录（这种记录是论坛自己整理的）
+- stateHistory[\] - 帖子状态修改记录（这种记录是论坛自己整理的）
 
   - handler - 操作者 ID
 
@@ -173,13 +173,9 @@ res.mainPage.forumGroups.forEach(e => {
 
 - posts[\] - 包含的楼层 ID
 
-- history[\] - 帖子统计信息的历史记录
+- history[\] - 历史记录
 
-  - title - 帖子标题
-
-  - watchCount - 帖子查看量
-
-  - replyCount - 帖子回复量
+  - ... - 增量更新被修改的内容
 
   - editTime - 更新时间
 
@@ -205,7 +201,7 @@ res.mainPage.forumGroups.forEach(e => {
 
 - createTime - 发布时间
 
-- tags{} - 帖子属性：
+- states{} - 帖子状态：
 
   - topFloor - 是否被置顶；默认未被设置为置顶楼层
 
@@ -221,9 +217,9 @@ res.mainPage.forumGroups.forEach(e => {
 
   - showSignature - 是否显示签名档；默认不显示
 
-- history[\] - 帖子内容的历史记录
+- history[\] - 历史记录
 
-  - content - 内容
+  - ... - 增量更新被修改的内容
 
   - editTime - 该内容最后一次被检索到的时间
 
@@ -237,9 +233,9 @@ res.mainPage.forumGroups.forEach(e => {
 
 - reason - 理由
 
-* operateTime - 操作时间
+- operateTime - 操作时间
 
-* awardInfo[\] - 评分积分奖励信息：
+- awardInfo[\] - 评分积分奖励信息：
 
   - integralType - 积分类型
 
@@ -290,6 +286,12 @@ res.mainPage.forumGroups.forEach(e => {
 - medal[\] - 勋章列表
 
 - online - 是否在线；默认为不在线
+
+- history[\] - 历史记录
+
+  - ... - 增量更新被修改的内容
+
+  - editTime - 更新时间
 
 ## userGroups
 
@@ -579,8 +581,4 @@ res.mainPage.forumGroups.forEach(e => {
 
 # 函数说明
 
-### refreshPage(url)
-
-### initLocalStorage()
-
-### getBinaryDataBase64(url, wantToRefresh)
+- merge(changedDatabaseJSON)
