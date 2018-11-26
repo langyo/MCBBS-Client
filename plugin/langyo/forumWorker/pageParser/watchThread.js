@@ -10,7 +10,10 @@ export default (document) =>{
         if(match = /^post_([0-9]+)$/.exec(postList[i].id) ){
             thread.posts.push(match[1]);
             posts[postList[i].id] = {};
+            // 内容
             posts[postList[i].id].content = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.plc > div.pct > div.pcb > div.t_fsz')[0].innerHTML;
+            // 作者
+            posts[postList[i].id].author = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].innerHTML
         }
     }
 
