@@ -23,6 +23,11 @@ export default (document) =>{
     // 帖子类型解析
     thread.type = /typeid=([0-9]+)/.exec(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > h1 > a')[0].getAttribute('href'));
 
+    // 帖子状态解析
+    if(typeof thread.states !== 'object') thread.states = {};
+    // 是否被关闭
+    if(/image\/locked\.gif/.test(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img')[1].getAttribute('src'))) thread.states.closed = true;
+
     // 主题头部解析
     if(document.querySelectorAll('#tath > a')[1] > 0){
         // 其它页时为一楼作者
