@@ -26,22 +26,31 @@ export default (document) =>{
     // 帖子状态解析
     if(typeof thread.states !== 'object') thread.states = {};
     if(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img').length > 0){
-        // 是否被关闭
-        // if(/image\/locked\.gif/.test(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img'))) thread.states.closed = true;
+        let n = document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img')
+        for(let i of n){
+            n[i] = n[i].getAttribute('src');
+        }
+        for(let i of n){
+            // 是否被关闭
+            if(/image\/locked\.gif/.test(n[i])) thread.states.closed = true;
+        }
     }
 
     // 主题头部解析
-    if(document.querySelectorAll('#tath > a').length > 0){
-        // 其它页时为一楼作者
-        thread.author = document.querySelectorAll('#tath > a')[1].innerHTML
-    }else{
-        // 第一页时为查看量与回复量信息
-        // 查看量
-        thread.watchCount = document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.pls.ptn.pbn > div > span.xi1')[0].innerHTML;
-        // 回复量
-        thread.replyCount = document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.pls.ptn.pbn > div > span.xi1')[1].innerHTML;
-        // 楼主检测
-        thread.author = document.querySelectorAll('#postlist > div')[0].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].innerHTML;
+    try{
+        if(document.querySelectorAll('#tath > a').length > 0){
+            // 其它页时为一楼作者
+            document.querySelectorAll('#tath > a')[1].innerHTML ? thread.author = document.querySelectorAll('#tath > a')[1].innerHTML : undefined;
+        }else{
+            // 第一页时为查看量与回复量信息
+            // 查看量
+            thread.watchCount = document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.pls.ptn.pbn > div > span.xi1')[0].innerHTML;
+            // 回复量
+            thread.replyCount = document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.pls.ptn.pbn > div > span.xi1')[1].innerHTML;
+            // 楼主检测
+            thread.author = document.querySelectorAll('#postlist > div')[0].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].innerHTML;
+        }
+    }catch(e){
+        console.log(e);
     }
-
 };
