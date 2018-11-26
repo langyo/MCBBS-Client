@@ -17,10 +17,18 @@ function merge(baseDatabase, formDatabase){
                     baseDatabase[i][j] = formDatabase[i][j];
                 }
             }
+            baseDatabase[i].history.push(changed);
         }
     }
+    return baseDatabase;
 }
 
-function subMerge(baseDatabase, formDatabase){
-    
+function subMerge(baseObject, formObject){
+    for(let i of Object.keys(formObject)){
+        if(typeof formObject === 'object'){
+            baseObject[i] = subMerge(baseObject[i] === undefined ? {} : baseObject[i], formObject[i]);
+        }else{
+            baseObject[i] = formObject[i];
+        }
+    }
 }

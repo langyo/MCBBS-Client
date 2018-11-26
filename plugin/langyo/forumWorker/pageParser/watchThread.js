@@ -21,15 +21,17 @@ export default (document) =>{
     thread.title = document.querySelectorAll('#thread_subject')[0].innerHTML;
 
     // 帖子类型解析
-    thread.type = /typeid=([0-9]+)/.exec(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > h1 > a')[0].getAttribute('href'));
+    thread.type = /typeid=([0-9]+)/.exec(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > h1 > a')[0].getAttribute('href'))[1];
 
     // 帖子状态解析
     if(typeof thread.states !== 'object') thread.states = {};
-    // 是否被关闭
-    if(/image\/locked\.gif/.test(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img')[1].getAttribute('src'))) thread.states.closed = true;
+    if(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img').length > 0){
+        // 是否被关闭
+        // if(/image\/locked\.gif/.test(document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.plc.ptm.pbn.vwthd > span > img'))) thread.states.closed = true;
+    }
 
     // 主题头部解析
-    if(document.querySelectorAll('#tath > a')[1] > 0){
+    if(document.querySelectorAll('#tath > a').length > 0){
         // 其它页时为一楼作者
         thread.author = document.querySelectorAll('#tath > a')[1].innerHTML
     }else{
@@ -39,7 +41,7 @@ export default (document) =>{
         // 回复量
         thread.replyCount = document.querySelectorAll('#postlist > table')[0].querySelectorAll('tbody > tr > td.pls.ptn.pbn > div > span.xi1')[1].innerHTML;
         // 楼主检测
-        thread.author = document.querySelectorAll('#postlist > div')[0].querySelectorAll('table > tbody > tr:nth-child(1) > td.pls > div > div.pi > div > a')[0].innerHTML; // 待修改
+        thread.author = document.querySelectorAll('#postlist > div')[0].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].innerHTML;
     }
 
 };
