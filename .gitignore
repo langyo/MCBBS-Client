@@ -127,3 +127,19 @@ native/reactNative/*.jsbundle
 
 native/electron/node_modules/
 native/electron/package-lock.json
+
+# 其它部分
+native/electron/.idea
+native/electron/dist
+native/electron/dist/*
+native/electron/*/.DS_Store
+native/electron/.DS_Store
+native/electron/npm-debug.log
+native/electron/*.swp
+native/electron/local.json
+native/electron/mock/data_origin
+native/electron/mock/data1
+native/electron/mock/data2
+native/electron/mock/dist
+native/electron/mock/test_less
+native/electron/mock/release

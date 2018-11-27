@@ -1,26 +1,40 @@
-let global = {};
+let database = {};
 
-function get(key) {
-    return localStorage.getItem(key);
+async function get(key) {
+    return await localStorage.getItem(key);
 }
 
-function set(key, value){
-    return localStorage.setItem(key, value);
+async function set(key, value){
+    return await localStorage.setItem(key, value);
 }
 
-function init(path) {
-    if (path === undefined) {
-        path = '.';
-
-        let ret = JSON.parse(get(path));
-        global = ret.data === undefined ? {} : ret.data;
-        for(let i of ret.node){
-            // 待编辑
-        }
+function load(path) {
+    try{
+        if(path === undefined) path = 'database';
+        let data = JSON.parse(get(path));
+        eval(path) = data.data;
+        for(let i of data.node) eval(path)[i] = load(path + '["' + i + '"]');
+    }catch(e){
+        console.log(e);
     }
-
 }
 
 function writeBack(path){
-    if(path === undefined) path = '.';
+    try{
+        if(path === undefined) path = 'database';
+        let data = {};
+        let node = [];
+        let allData = eval(path);
+        for(let i of Object.keys(allData)){
+            if(typeof allData[i] === 'object' || Array.isArray(allData[i])) node.push(i);
+            else data[i] = allData[i];
+        }
+        set(path, JSON.stringify({
+            data:data,
+            node:node
+        }));
+        for(let i of node) writeBack(path + '["' + i + '"]');
+    }catch(e){
+        console.log(e);
+    }
 }
