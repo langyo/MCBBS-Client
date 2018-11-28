@@ -1,0 +1,11 @@
+{
+    "name":"viewManager",
+    "description":"界面管理器，与 native 部分的界面进行对接，并向其它插件提供简单易用的界面元素构造接口。",
+    "version":"0.1.0",
+    "author":"langyo",
+    "librariesNative":[],
+    "libraries":[],
+    "index":"export.js",
+    "permissions":[],
+    "settings":[]
+}
