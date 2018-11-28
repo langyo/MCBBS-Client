@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -93,11 +92,11 @@ class MainWindow extends React.Component {
         };
     }
 
-    handleDrawerOpen(){
+    handleDrawerOpen() {
         this.setState({ open: true });
     }
 
-    handleDrawerClose(){
+    handleDrawerClose() {
         this.setState({ open: false });
     }
 
@@ -125,8 +124,8 @@ class MainWindow extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
-                            -
-        </Typography>
+                            MCBBS - Client
+                        </Typography>
                     </Toolbar>
                 </AppBar>
                 <Drawer
