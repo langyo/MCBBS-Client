@@ -9,6 +9,8 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -22,11 +24,36 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/Close';
 
+const events = window.require('events');
+const path = window.require('path');
+const fs = window.require('fs');
+
+const electron = window.require('electron');
+const { ipcRenderer, shell } = electron;
+const { dialog } = electron.remote;
+
 const drawerWidth = 240;
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#0097a7',
+        },
+        secondary: {
+            main: '#039be5',
+        },
+    },
+});
 
 const styles = theme => ({
     root: {
         display: 'flex',
+        primary: {
+            main: '#0097a7'
+        },
+        secondary: {
+            main: '#039be5'
+        },
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -106,11 +133,15 @@ class MainWindow extends React.Component {
         this.setState({ open: false });
     }
 
+    handleDialogClose() {
+
+    }
+
     render() {
         const { classes, theme } = this.props;
 
         return (
-            <div className={classes.root}>
+            <MuiThemeProvider className={classes.root} theme={theme}>
                 <CssBaseline />
                 <AppBar
                     position="fixed"
@@ -118,9 +149,10 @@ class MainWindow extends React.Component {
                         [classes.appBarShift]: this.state.open,
                     })}
                 >
-                    <Toolbar disableGutters={!this.state.open} variant='dense'>
+                    <Toolbar disableGutters={!this.state.open}>
+                        <IconButton />
                         <Typography variant="h6" color="inherit">
-                                MCBBS - Client
+                            Client
                         </Typography>
                         <div className={classes.grow} />
                         <div>
@@ -172,7 +204,7 @@ class MainWindow extends React.Component {
                     <div className={classes.toolbar} />
                     {/* 实体内容 */}
                 </main>
-            </div>
+            </MuiThemeProvider>
         );
     }
 }
