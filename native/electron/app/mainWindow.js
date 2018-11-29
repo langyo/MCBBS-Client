@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, withTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -36,13 +36,9 @@ const drawerWidth = 240;
 
 const theme = createMuiTheme({
     palette: {
-        primary: {
-            main: '#0097a7',
-        },
-        secondary: {
-            main: '#039be5',
-        },
-    },
+        primary: '#0097a7',
+        secondary: '#039be5',
+    }
 });
 
 const styles = theme => ({
@@ -141,7 +137,7 @@ class MainWindow extends React.Component {
         const { classes, theme } = this.props;
 
         return (
-            <MuiThemeProvider className={classes.root} theme={theme}>
+            <div className={classes.root}>
                 <CssBaseline />
                 <AppBar
                     position="fixed"
@@ -204,7 +200,7 @@ class MainWindow extends React.Component {
                     <div className={classes.toolbar} />
                     {/* 实体内容 */}
                 </main>
-            </MuiThemeProvider>
+            </div>
         );
     }
 }
@@ -214,4 +210,4 @@ MainWindow.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(MainWindow);
+export default withStyles(styles, { withTheme: true })(withTheme(theme)(MainWindow));
