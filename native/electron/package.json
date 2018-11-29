@@ -24,7 +24,6 @@
   },
   "keywords": [],
   "devDependencies": {
-    "electron": "^3.0.10",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-es2015-spread": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -32,6 +31,7 @@
     "babel-preset-react": "^6.24.1",
     "babelify": "^8.0.0",
     "browserify": "^14.5.0",
+    "electron": "^3.0.10",
     "electron-packager": "^9.1.0",
     "electron-prebuilt": "^1.4.13",
     "electron-reload": "^1.2.2",

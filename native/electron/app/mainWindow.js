@@ -18,6 +18,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import InfoIcon from '@material-ui/icons/Info';
+import CloseIcon from '@material-ui/icons/Close';
 
 const drawerWidth = 240;
 
@@ -81,6 +84,9 @@ const styles = theme => ({
         flexGrow: 1,
         padding: theme.spacing.unit * 3,
     },
+    grow: {
+        flexGrow: 1,
+    },
 });
 
 class MainWindow extends React.Component {
@@ -112,20 +118,16 @@ class MainWindow extends React.Component {
                         [classes.appBarShift]: this.state.open,
                     })}
                 >
-                    <Toolbar disableGutters={!this.state.open}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={classNames(classes.menuButton, {
-                                [classes.hide]: this.state.open,
-                            })}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" color="inherit" noWrap>
-                            MCBBS - Client
+                    <Toolbar disableGutters={!this.state.open} variant='dense'>
+                        <Typography variant="h6" color="inherit">
+                                MCBBS - Client
                         </Typography>
+                        <div className={classes.grow} />
+                        <div>
+                            <IconButton color="inherit">
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
                     </Toolbar>
                 </AppBar>
                 <Drawer
