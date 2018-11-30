@@ -9,8 +9,11 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import { createMuiTheme, withTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExtensionIcon from '@material-ui/icons/Extension';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -34,12 +37,25 @@ const { dialog } = electron.remote;
 
 const drawerWidth = 240;
 
-const theme = createMuiTheme({
-    palette: {
-        primary: '#0097a7',
-        secondary: '#039be5',
-    }
-});
+// const theme = createMuiTheme({
+//     palette: {
+//         primary: '#0097a7',
+//         secondary: '#039be5',
+//     }
+// });
+
+// function withRoot(Component) {
+//     function WithRoot(props) {
+//       return (
+//         <MuiThemeProvider theme={theme}>
+//           <CssBaseline />
+//           <Component {...props} />
+//         </MuiThemeProvider>
+//       );
+//     }
+  
+//     return WithRoot;
+//   }
 
 const styles = theme => ({
     root: {
@@ -117,24 +133,27 @@ class MainWindow extends React.Component {
         super(props);
 
         this.state = {
-            open: false
+            // open: false
         };
     }
 
-    handleDrawerOpen() {
-        this.setState({ open: true });
-    }
+    // handleDrawerOpen() {
+    //     this.setState({ open: true });
+    // }
 
-    handleDrawerClose() {
-        this.setState({ open: false });
-    }
+    // handleDrawerClose() {
+    //     this.setState({ open: false });
+    // }
 
-    handleDialogClose() {
+    // handleDialogClose() {
 
-    }
+    // }
 
     render() {
         const { classes, theme } = this.props;
+
+        // theme.palette.augmentColor(primary);
+        // theme.palette.augmentColor(secondary);
 
         return (
             <div className={classes.root}>
@@ -170,7 +189,7 @@ class MainWindow extends React.Component {
                             [classes.drawerClose]: !this.state.open,
                         }),
                     }}
-                    open={this.state.open}
+                    open={ /*this.state.open*/ true }
                 >
                     <div className={classes.toolbar}>
                         <IconButton onClick={this.handleDrawerClose}>
@@ -179,22 +198,17 @@ class MainWindow extends React.Component {
                     </div>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
+                        <ListItem button>
+                            <ListItemIcon> <InsertDriveFileIcon /></ListItemIcon>
+                        </ListItem>
+                        <ListItem button>
+                            <ListItemIcon> <AccountCircleIcon /></ListItemIcon>
+                        </ListItem>
+                        <ListItem button>
+                            <ListItemIcon> <ExtensionIcon /></ListItemIcon>
+                        </ListItem>
                     </List>
                     <Divider />
-                    <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
-                    </List>
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
@@ -210,4 +224,6 @@ MainWindow.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(withTheme(theme)(MainWindow));
+// export default withRoot(withStyles(styles, { withTheme: true })(MainWindow));
+
+export default withStyles(styles, { withTheme: true })(MainWindow)
