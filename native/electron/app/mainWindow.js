@@ -19,27 +19,25 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
 
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExtensionIcon from '@material-ui/icons/Extension';
+import CloseIcon from '@material-ui/icons/Close';
 
-const drawerWidth = 240;
+const drawerWidth = 60;
 
 const styles = theme => ({
     root: {
         display: 'flex',
     },
     appBar: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
+        zIndex: theme.zIndex.drawer + 1,
     },
     drawer: {
-        width: drawerWidth,
+        width: theme.spacing.unit * 7 + 1,
         flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
     },
     toolbar: theme.mixins.toolbar,
     content: {
@@ -57,16 +55,22 @@ function MainWindow(props) {
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Client Test UI
-          </Typography>
+                    <Typography variant="h6" color="inherit">
+                        Client
+                    </Typography>
+                    <div className={classes.grow} />
+                    <div>
+                        <IconButton color="inherit">
+                            <CloseIcon />
+                        </IconButton>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
                 classes={{
-                    paper: classes.drawerPaper,
+                    paper: classes.drawer,
                 }}
                 anchor="left"
             >
@@ -90,7 +94,7 @@ function MainWindow(props) {
                     test
                 </Typography>
             </main>
-        </div>
+        </div >
     );
 }
 
