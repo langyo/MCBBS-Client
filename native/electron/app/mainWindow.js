@@ -78,13 +78,13 @@ function MainWindow(props) {
                 <Divider />
                 <List>
                     <ListItem button>
-                        <ListItemIcon> <InsertDriveFileIcon /></ListItemIcon>
+                        <ListItemIcon> <InsertDriveFileIcon /> </ListItemIcon>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon> <AccountCircleIcon /></ListItemIcon>
+                        <ListItemIcon> <AccountCircleIcon /> </ListItemIcon>
                     </ListItem>
                     <ListItem button>
-                        <ListItemIcon> <ExtensionIcon /></ListItemIcon>
+                        <ListItemIcon> <ExtensionIcon /> </ListItemIcon>
                     </ListItem>
                 </List>
             </Drawer>
