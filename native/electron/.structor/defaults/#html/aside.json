@@ -1,0 +1,18 @@
+[
+  {
+    "type": "aside",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "p",
+        "children": [
+          {
+            "type": "span",
+            "text": "Aside"
+          }
+        ]
+      }
+    ]
+  }
+]

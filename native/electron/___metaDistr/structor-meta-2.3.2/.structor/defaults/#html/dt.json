@@ -1,0 +1,13 @@
+[
+  {
+    "type": "dt",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "Main text"
+      }
+    ]
+  }
+]

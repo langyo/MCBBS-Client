@@ -1,0 +1,13 @@
+[
+  {
+    "type": "td",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "Text in td"
+      }
+    ]
+  }
+]

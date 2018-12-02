@@ -1,0 +1,393 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+
+.structor_unselectable {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.structor_mouse-overlay-label {
+    font-family: 'Open Sans', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    background-color: #35b3ee;
+    color: #ffffff;
+    padding: 1px 3px;
+    font-size: 10px;
+    border-radius: 2px;
+    line-height: 1.4;
+}
+.structor_selected-overlay-highlighted {
+    outline: 2px solid #f0ad4e;
+    background-color: rgba(240, 173, 78, 0.25);
+}
+
+.structor_rotate-clockwise {
+    /* Safari */
+    -webkit-transform: rotate(90deg);
+    /* Firefox */
+    -moz-transform: rotate(90deg);
+    /* IE */
+    -ms-transform: rotate(90deg);
+    /* Opera */
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.structor_selection-border-center-point {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    z-index: 1035;
+}
+
+.structor_selection-border-top-line {
+    position: absolute;
+    border-top: 1px solid #2185D0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-left: 1px solid #2185D0;
+    border-right: 1px solid #2185D0;
+}
+
+.structor_selection-border-right-line {
+    position: absolute;
+    border-right: 1px solid #2185D0;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid #2185D0;
+    border-bottom: 1px solid #2185D0;
+}
+
+.structor_selection-border-bottom-line {
+    position: absolute;
+    border-bottom: 1px solid #2185D0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-right: 1px solid #2185D0;
+    border-left: 1px solid #2185D0;
+}
+
+.structor_selection-border-left-line {
+    position: absolute;
+    border-left: 1px solid #2185D0;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid #2185D0;
+    border-bottom: 1px solid #2185D0;
+}
+
+.structor_mouse-center-point {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.structor_mouse-top-left-btn {
+    position: absolute;
+    top: -32px;
+    left: -32px;
+}
+
+.structor_mouse-top-left-second-btn {
+    position: absolute;
+    top: -32px;
+    left: -56px;
+}
+
+.structor_mouse-title {
+    font-family: 'Open Sans', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    position: absolute;
+    top: -50px;
+    left: -56px;
+    background-color: #35b3ee;
+    color: #ffffff;
+    padding: 1px 3px;
+    font-size: 10px;
+    border-radius: 2px;
+    opacity: 0.4;
+    min-width: 90px;
+    line-height: 1.4;
+}
+
+.structor_mouse-top-center-btn {
+    position: absolute;
+    top: -32px;
+    left: -8px;
+}
+
+.structor_mouse-top-right-btn {
+    position: absolute;
+    top: -32px;
+    left: 16px;
+}
+
+.structor_mouse-right-center-btn {
+    position: absolute;
+    top: -8px;
+    left: 16px;
+}
+
+.structor_mouse-bottom-right-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+
+.structor_mouse-bottom-center-btn {
+    position: absolute;
+    top: 16px;
+    left: -8px;
+}
+
+.structor_mouse-bottom-left-btn {
+    position: absolute;
+    top: 16px;
+    left: -32px;
+}
+
+.structor_mouse-bottom-left-second-btn {
+    position: absolute;
+    top: 16px;
+    left: -56px;
+}
+
+.structor_mouse-left-center-btn {
+    position: absolute;
+    top: -8px;
+    left: -32px;
+}
+
+.structor_mouse-left-center-second-btn {
+    position: absolute;
+    top: -8px;
+    left: -56px;
+}
+
+.structor_mouse-circle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 22px;
+    height: 22px;
+    /*padding: 5px 5px;*/
+    opacity: .4;
+    cursor: pointer;
+    background-color: #35b3ee;
+    color: #ffffff;
+}
+
+.structor_mouse-circle-btn:hover {
+    background-color: #2185D0;
+    opacity: 1;
+}
+
+.structor_mouse-rectangle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 22px;
+    height: 22px;
+    /*padding: 5px 5px;*/
+    opacity: .4;
+    cursor: pointer;
+    background-color: #35b3ee;
+    color: #ffffff;
+}
+
+.structor_mouse-rectangle-btn:hover {
+    background-color: #2185D0;
+    opacity: 1;
+}
+
+.structor_mouse-button-warning {
+    background-color: #f0ad4e;
+}
+.structor_mouse-button-success {
+    background-color: #78CB5B;
+}
+.structor_context-menu-box {
+    font-family: 'Open Sans', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 13px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #35b3ee;
+    border-left: 0;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    height: 15em;
+}
+.structor_context-menu-tab {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-left: 1px solid #35b3ee;
+    border-radius: 4px;
+    box-shadow: -2px 0 3px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+.structor_context-menu-tab.parent {
+    width: 3em;
+    cursor: pointer;
+}
+.structor_context-menu-tab.child {
+    right: 0;
+}
+.structor_context-menu-tab.parent:hover {
+    background-color: #35b3ee;
+    color: #ffffff;
+}
+.structor_context-menu-vertical-container {
+    display: flex;
+    flex-direction: column;
+}
+.structor_context-menu-horizontal-container {
+    display: flex;
+    flex-direction: row;
+}
+.structor_context-menu-container-gutter {
+    flex-grow: 2;
+}
+.structor_context-menu-container-item {
+    flex-grow: 1;
+}
+.structor_context-menu-item-icon {
+    flex-grow: 0;
+}
+.structor_context-menu-title {
+    position: relative;
+    padding: 0.2em 0.5em;
+    width: 100%;
+}
+.structor_context-menu-title-wrapper.rotate {
+    position: absolute;
+    top: 6.3em;
+    left: -6.7em;
+    width: 15em;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+.structor_context-menu-divider {
+    height: 0;
+    border-top: 1px solid #9a9a9a;
+}
+.structor_context-menu-item {
+    font-family: 'Open Sans', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 12px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #043A71;
+    padding: 0.5em;
+    border-radius: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+    margin: 0.5em;
+}
+.structor_context-menu-item:hover {
+    background-color: #35b3ee;
+    color: #ffffff;
+}
+.structor_context-menu-paste-box {
+    padding: 0.5em;
+}
+.structor_context-menu-paste-component {
+    border: 1px solid #35b3ee;
+    border-radius: 4px;
+    padding: 0.5em 0.5em;
+    margin: 0.5em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #9a9a9a;
+}
+.structor_context-menu-add-placeholder {
+    border: 1px dotted #9a9a9a;
+    /*background-color: rgba(240, 173, 78, 0.25);*/
+    color: #9a9a9a;
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 0.7em;
+    cursor: pointer;
+}
+.structor_context-menu-add-placeholder.narrow {
+    width: 70%;
+}
+.structor_context-menu-replace-placeholder {
+    border: 1px dotted #9a9a9a;
+    background-color: rgba(240, 173, 78, 0.25);
+    color: #9a9a9a;
+    border-radius: 4px;
+    width: 100%;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.2em 0;
+    cursor: pointer;
+}
+.structor_context-menu-add-placeholder:hover {
+    background-color: #35b3ee;
+    color: #ffffff;
+}
+.structor_context-menu-replace-placeholder:hover {
+    background-color: #35b3ee;
+    color: #ffffff;
+}
+.structor_context-menu-close-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 1em;
+    width: 1.5em;
+    height: 1.5em;
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 50%;
+    color: #cccccc;
+    cursor: pointer;
+}
+.structor_context-menu-close-button:hover {
+    color: #35b3ee;
+}
+

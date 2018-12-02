@@ -1,0 +1,13 @@
+[
+  {
+    "type": "fieldset",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "Empty fieldset"
+      }
+    ]
+  }
+]

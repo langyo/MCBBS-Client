@@ -1,0 +1,45 @@
+[
+  {
+    "type": "dl",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "dt",
+        "children": [
+          {
+            "type": "span",
+            "text": "Main text"
+          }
+        ]
+      },
+      {
+        "type": "dd",
+        "children": [
+          {
+            "type": "span",
+            "text": "Description text line"
+          }
+        ]
+      },
+      {
+        "type": "dt",
+        "children": [
+          {
+            "type": "span",
+            "text": "Main text"
+          }
+        ]
+      },
+      {
+        "type": "dd",
+        "children": [
+          {
+            "type": "span",
+            "text": "Description text line"
+          }
+        ]
+      }
+    ]
+  }
+]

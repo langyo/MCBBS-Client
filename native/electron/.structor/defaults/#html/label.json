@@ -1,0 +1,9 @@
+[
+  {
+    "type": "label",
+    "variant": "default",
+    "props": {},
+    "children": [],
+    "text": "Label Text"
+  }
+]

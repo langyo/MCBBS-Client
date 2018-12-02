@@ -1,0 +1,29 @@
+[
+  {
+    "type": "select",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "option",
+        "text": "option #1"
+      },
+      {
+        "type": "option",
+        "text": "option #2"
+      },
+      {
+        "type": "option",
+        "text": "option #3"
+      },
+      {
+        "type": "option",
+        "text": "option #4"
+      },
+      {
+        "type": "option",
+        "text": "option #5"
+      }
+    ]
+  }
+]

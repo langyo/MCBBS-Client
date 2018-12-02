@@ -1,0 +1,36 @@
+[
+  {
+    "type": "ol",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "li",
+        "children": [
+          {
+            "type": "span",
+            "text": "First Item"
+          }
+        ]
+      },
+      {
+        "type": "li",
+        "children": [
+          {
+            "type": "span",
+            "text": "Second Item"
+          }
+        ]
+      },
+      {
+        "type": "li",
+        "children": [
+          {
+            "type": "span",
+            "text": "Third Item"
+          }
+        ]
+      }
+    ]
+  }
+]

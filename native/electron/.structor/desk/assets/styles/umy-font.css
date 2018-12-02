@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'umy-font';
+  src:  url('fonts/umy-font.eot?281cu');
+  src:  url('fonts/umy-font.eot?281cu#iefix') format('embedded-opentype'),
+    url('fonts/umy-font.ttf?281cu') format('truetype'),
+    url('fonts/umy-font.woff?281cu') format('woff'),
+    url('fonts/umy-font.svg?281cu#umy-font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="umy-icon-"], [class*=" umy-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'umy-font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.umy-icon-arrow-plus-down:before {
+  content: "\e900";
+}
+.umy-icon-arrow-plus-up:before {
+  content: "\e901";
+}
+.umy-icon-replace:before {
+  content: "\e908";
+}
+.umy-icon-edit:before {
+  content: "\e905";
+}
+.umy-icon-copy:before {
+  content: "\e906";
+}
+.umy-icon-duplicate:before {
+  content: "\e907";
+}
+.umy-icon-delete:before {
+  content: "\e909";
+}
+.umy-icon-cut:before {
+  content: "\e902";
+}
+.umy-icon-cancel-circle:before {
+  content: "\ea0d";
+}
+.umy-icon-play-back:before {
+  content: "\ea1c";
+}
+.umy-icon-arrow-up-left:before {
+  content: "\ea31";
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "type": "h4",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "Empty h4"
+      }
+    ]
+  }
+]

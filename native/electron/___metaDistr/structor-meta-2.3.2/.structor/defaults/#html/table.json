@@ -1,0 +1,142 @@
+[
+  {
+    "type": "table",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "thead",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in th"
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in th"
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in th"
+                  }
+                ]
+              },
+              {
+                "type": "th",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in th"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tbody",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

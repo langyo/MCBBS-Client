@@ -1,0 +1,1864 @@
+{
+  "pagesModel": [
+    {
+      "pageName": "Page109",
+      "pagePath": "/new-page-3",
+      "children": [
+        {
+          "type": "TestComponent1",
+          "props": {},
+          "children": [],
+          "namespace": "testing"
+        },
+        {
+          "type": "div",
+          "props": {
+            "style": {
+              "display": "flex",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "padding": "1em"
+            }
+          },
+          "children": [
+            {
+              "type": "TestContainer2",
+              "children": [],
+              "props": {},
+              "namespace": "testing"
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "props": {
+            "style": {
+              "display": "flex",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "padding": "1em"
+            }
+          },
+          "children": [
+            {
+              "type": "TestContainer1",
+              "children": [],
+              "props": {}
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "props": {
+            "style": {
+              "display": "flex",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "padding": "1em"
+            }
+          },
+          "children": [
+            {
+              "type": "div",
+              "children": [
+                {
+                  "type": "h3",
+                  "props": {
+                    "style": {
+                      "padding": "1em",
+                      "textAlign": "center"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "span",
+                      "text": "Click on me and start creating a new cool component."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "HomePage",
+      "pagePath": "/home",
+      "children": [
+        {
+          "type": "h3",
+          "props": {
+            "style": {
+              "textAlign": "center"
+            }
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "Test",
+              "props": {
+                "style": {
+                  "textTransform": "uppercase"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "h3",
+          "variant": "aligned center",
+          "props": {
+            "style": {
+              "textAlign": "center"
+            }
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "Test",
+              "props": {
+                "style": {
+                  "textTransform": "uppercase"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "h3",
+          "variant": "aligned center",
+          "props": {
+            "style": {
+              "textAlign": "center"
+            }
+          },
+          "children": []
+        },
+        {
+          "type": "ProbeComponent",
+          "namespace": "TestGroup",
+          "variant": "test 1",
+          "props": {
+            "className": "test"
+          },
+          "children": []
+        },
+        {
+          "type": "ProbeComponent",
+          "variant": "default",
+          "children": [],
+          "namespace": "TestGroup"
+        },
+        {
+          "type": "div",
+          "variant": "default",
+          "props": {
+            "style": {
+              "padding": "2em"
+            }
+          },
+          "children": [
+            {
+              "type": "ProbeComponent",
+              "variant": "default",
+              "props": {},
+              "children": [],
+              "namespace": "TestGroup"
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "variant": "default",
+          "props": {
+            "style": {
+              "padding": "2em"
+            }
+          },
+          "children": [
+            {
+              "type": "ProbeComponent",
+              "variant": "default",
+              "props": {},
+              "children": [],
+              "namespace": "TestGroup"
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "variant": "default",
+          "props": {
+            "style": {
+              "padding": "2em"
+            }
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "pageName": "Page8",
+      "pagePath": "/new-page",
+      "children": [
+        {
+          "type": "div",
+          "props": {
+            "style": {
+              "display": "flex",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "padding": "1em"
+            }
+          },
+          "children": [
+            {
+              "type": "div",
+              "children": [
+                {
+                  "type": "h3",
+                  "props": {
+                    "style": {
+                      "padding": "1em",
+                      "textAlign": "center"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "span",
+                      "text": "Click on me and start creating a new cool component."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "variant": "default",
+          "props": {
+            "style": {
+              "display": "flex",
+              "flexDirection": "row"
+            }
+          },
+          "children": [
+            {
+              "type": "div",
+              "variant": "default",
+              "props": {
+                "style": {
+                  "width": "100%"
+                }
+              },
+              "children": [
+                {
+                  "type": "h3",
+                  "props": {
+                    "style": {
+                      "padding": "1em",
+                      "textAlign": "center"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "span",
+                      "text": "Click on me and start creating a new cool component."
+                    }
+                  ]
+                },
+                {
+                  "type": "ul",
+                  "variant": "default",
+                  "props": {},
+                  "children": [
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "First Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "div",
+              "variant": "default",
+              "props": {
+                "style": {
+                  "width": "50%"
+                }
+              },
+              "children": [
+                {
+                  "type": "ul",
+                  "variant": "default",
+                  "props": {},
+                  "children": [
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "First Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Second Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "variant": "default",
+                      "props": {},
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "List Item"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "li",
+                      "children": [
+                        {
+                          "type": "span",
+                          "text": "Third Item"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "div",
+              "variant": "default",
+              "props": {},
+              "children": [
+                {
+                  "type": "h3",
+                  "props": {
+                    "style": {
+                      "padding": "1em",
+                      "textAlign": "center"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "span",
+                      "text": "Click on me and start creating a new cool component."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "div",
+          "variant": "default",
+          "props": {},
+          "children": [
+            {
+              "type": "span",
+              "text": "Empty div"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "hasApplicationFiles": true,
+  "project": {
+    "paths": {
+      "dir": "/Users/ipselon/Development/projects/structor/test",
+      "configFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/config.js",
+      "webpackConfigFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/webpack.app.js",
+      "deskIndexFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/app/components.js",
+      "deskReducersFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/app/reducers.js",
+      "deskSagasFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/app/sagas.js",
+      "componentDefaultsDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/defaults",
+      "docsComponentsDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/docs",
+      "gengineDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/gengine",
+      "scaffoldsDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/gengine/scaffolds",
+      "applicationGeneratorDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/gengine/application",
+      "deskSourceDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/src",
+      "deskPageFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/src/PageForDesk.js",
+      "deskEntryPointFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/src/default.js",
+      "docsDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/docs",
+      "docsReadmeFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/docs/Readme.md",
+      "nodeModulesDirPath": "/Users/ipselon/Development/projects/structor/test/node_modules",
+      "deskModelFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/desk/model.json",
+      "deskDirPath": "/Users/ipselon/Development/projects/structor/test/.structor/desk",
+      "appDirPath": "/Users/ipselon/Development/projects/structor/test/app",
+      "appAssetsDirPath": "/Users/ipselon/Development/projects/structor/test/app/assets"
+    },
+    "conf": {
+      "projectId": 179,
+      "assetsRegexpPath": {},
+      "srcPath": "app"
+    }
+  },
+  "index": {
+    "reducersFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/app/reducers.js",
+    "reducersSourceCode": "import ProbeReducer from 'modules/Probe/reducer.js';\nimport testContainer1Reducer from 'containers/TestContainer1/reducer.js';\nimport testingReducer from 'modules/testing/reducer.js';\nexport default {\n    Probe: ProbeReducer,\n    testContainer1: testContainer1Reducer,\n    testing: testingReducer\n};",
+    "sagasFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/app/sagas.js",
+    "sagasSourceCode": "import ProbeSagas from 'modules/Probe/sagas.js';\nimport TestContainer1Sagas from 'containers/TestContainer1/sagas.js';\nimport testingSagas from 'modules/testing/sagas.js';\nexport default [\n    ...ProbeSagas,\n    ...TestContainer1Sagas,\n    ...testingSagas\n];",
+    "components": {
+      "Link": {
+        "importPath": "react-router",
+        "name": "Link",
+        "isLibMember": true,
+        "defaults": [
+          {
+            "type": "Link",
+            "variant": "default",
+            "children": []
+          }
+        ]
+      },
+      "IndexLink": {
+        "importPath": "react-router",
+        "name": "IndexLink",
+        "isLibMember": true,
+        "defaults": [
+          {
+            "type": "IndexLink",
+            "variant": "default",
+            "children": []
+          }
+        ]
+      },
+      "FirstTestComponent": {
+        "importPath": "components/FirstTestComponent",
+        "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/components/FirstTestComponent",
+        "name": "FirstTestComponent",
+        "defaults": [
+          {
+            "type": "FirstTestComponent",
+            "variant": "default",
+            "children": []
+          }
+        ],
+        "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/components/FirstTestComponent/index.js"
+      },
+      "ProbeComponent": {
+        "importPath": "components/ProbeComponent",
+        "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/components/ProbeComponent",
+        "name": "ProbeComponent",
+        "defaults": [
+          {
+            "type": "ProbeComponent",
+            "variant": "default",
+            "children": []
+          }
+        ],
+        "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/components/ProbeComponent/index.js"
+      },
+      "TestContainer1": {
+        "importPath": "containers/TestContainer1",
+        "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/containers/TestContainer1",
+        "name": "TestContainer1",
+        "isContainer": true,
+        "defaults": [
+          {
+            "type": "TestContainer1",
+            "children": [],
+            "props": {}
+          }
+        ],
+        "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/containers/TestContainer1/index.js"
+      }
+    },
+    "modules": {
+      "TestGroup": {
+        "importPath": "modules/TestGroup",
+        "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup",
+        "name": "TestGroup",
+        "components": {
+          "FirstTestComponent": {
+            "importPath": "modules/TestGroup/components/FirstTestComponent",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/components/FirstTestComponent",
+            "name": "FirstTestComponent",
+            "defaults": [
+              {
+                "type": "FirstTestComponent",
+                "variant": "default",
+                "children": [],
+                "namespace": "TestGroup"
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/components/FirstTestComponent/index.js"
+          },
+          "ThirdTestContainer": {
+            "importPath": "modules/TestGroup/containers/ThirdTestContainer",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/containers/ThirdTestContainer",
+            "name": "ThirdTestContainer",
+            "isContainer": true,
+            "defaults": [
+              {
+                "type": "ThirdTestContainer",
+                "children": [
+                  {
+                    "type": "h3",
+                    "props": {
+                      "style": {
+                        "padding": "1em",
+                        "textAlign": "center"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "span",
+                        "text": "Click on me and start creating a new cool component."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/containers/ThirdTestContainer/index.js"
+          },
+          "ProbeComponent": {
+            "importPath": "modules/TestGroup/components/ProbeComponent",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/components/ProbeComponent",
+            "name": "ProbeComponent",
+            "defaults": [
+              {
+                "type": "ProbeComponent",
+                "variant": "default",
+                "props": {},
+                "children": [],
+                "namespace": "TestGroup"
+              },
+              {
+                "type": "ProbeComponent",
+                "namespace": "TestGroup",
+                "variant": "test 1",
+                "props": {
+                  "className": "test"
+                },
+                "children": []
+              },
+              {
+                "type": "ProbeComponent",
+                "namespace": "TestGroup",
+                "variant": "test 2",
+                "props": {},
+                "children": []
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/components/ProbeComponent/index.js"
+          }
+        },
+        "indexSourceCode": "import FirstTestComponent from './components/FirstTestComponent';\nimport ThirdTestContainer from './containers/ThirdTestContainer';\nimport ProbeComponent from './components/ProbeComponent';\nexport {\n    FirstTestComponent,\n    ThirdTestContainer,\n    ProbeComponent\n};",
+        "indexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/TestGroup/index.js"
+      },
+      "Probe": {
+        "importPath": "modules/Probe",
+        "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe",
+        "name": "Probe",
+        "components": {
+          "BigContainer": {
+            "importPath": "modules/Probe/components/BigContainer",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/components/BigContainer",
+            "name": "BigContainer",
+            "defaults": [
+              {
+                "type": "BigContainer",
+                "props": {},
+                "children": [],
+                "namespace": "Probe"
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/components/BigContainer/index.js"
+          },
+          "ProbeComponent": {
+            "importPath": "modules/Probe/components/ProbeComponent",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/components/ProbeComponent",
+            "name": "ProbeComponent",
+            "defaults": [
+              {
+                "type": "ProbeComponent",
+                "variant": "default",
+                "props": {},
+                "children": [
+                  {
+                    "type": "FirstTestComponent",
+                    "variant": "default",
+                    "children": [],
+                    "namespace": "TestGroup"
+                  },
+                  {
+                    "type": "h3",
+                    "variant": "default",
+                    "props": {
+                      "style": {
+                        "textAlign": "center"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "span",
+                        "text": "Empty h3"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "h3",
+                    "variant": "default",
+                    "props": {
+                      "style": {
+                        "textAlign": "center"
+                      }
+                    },
+                    "children": [
+                      {
+                        "type": "span",
+                        "text": "Empty h3"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "FirstTestComponent",
+                    "variant": "default",
+                    "children": []
+                  }
+                ],
+                "namespace": "Probe"
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/components/ProbeComponent/index.js"
+          },
+          "BigProbeContainer": {
+            "importPath": "modules/Probe/containers/BigProbeContainer",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/containers/BigProbeContainer",
+            "name": "BigProbeContainer",
+            "isContainer": true,
+            "defaults": [
+              {
+                "type": "BigProbeContainer",
+                "props": {},
+                "children": [],
+                "namespace": "Probe"
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/containers/BigProbeContainer/index.js"
+          }
+        },
+        "indexSourceCode": "import BigContainer from './components/BigContainer';\nimport ProbeComponent from './components/ProbeComponent';\nimport BigProbeContainer from './containers/BigProbeContainer';\nexport {\n\tBigContainer,\n\tProbeComponent,\n    BigProbeContainer\n};",
+        "indexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/index.js",
+        "reducerFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/reducer.js",
+        "reducerSourceCode": "import { combineReducers } from 'redux';\nimport bigProbeContainerReducer from './containers/BigProbeContainer/reducer.js';\n                \nexport default combineReducers({\n    bigProbeContainer: bigProbeContainerReducer\n});\n",
+        "sagasFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/Probe/sagas.js",
+        "sagasSourceCode": "import BigProbeContainerSagas from './containers/BigProbeContainer/sagas.js';\n                \nexport default [\n    ...BigProbeContainerSagas\n];\n"
+      },
+      "testing": {
+        "importPath": "modules/testing",
+        "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing",
+        "name": "testing",
+        "components": {
+          "TestContainer2": {
+            "importPath": "modules/testing/containers/TestContainer2",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/containers/TestContainer2",
+            "name": "TestContainer2",
+            "isContainer": true,
+            "defaults": [
+              {
+                "type": "TestContainer2",
+                "children": [],
+                "props": {},
+                "namespace": "testing"
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/containers/TestContainer2/index.js"
+          },
+          "TestComponent1": {
+            "importPath": "modules/testing/components/TestComponent1",
+            "absolutePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/components/TestComponent1",
+            "name": "TestComponent1",
+            "defaults": [
+              {
+                "type": "TestComponent1",
+                "props": {},
+                "children": [],
+                "namespace": "testing"
+              }
+            ],
+            "absoluteIndexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/components/TestComponent1/index.js"
+          }
+        },
+        "indexSourceCode": "import TestContainer2 from './containers/TestContainer2';\nimport TestComponent1 from './components/TestComponent1';\nexport {\n    TestContainer2,\n    TestComponent1\n};",
+        "indexFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/index.js",
+        "reducerFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/reducer.js",
+        "reducerSourceCode": "import { combineReducers } from 'redux';\nimport testContainer2Reducer from './containers/TestContainer2/reducer.js';\n                \nexport default combineReducers({\n    testContainer2: testContainer2Reducer\n});\n",
+        "sagasFilePath": "/Users/ipselon/Development/projects/structor/test/app/modules/testing/sagas.js",
+        "sagasSourceCode": "import TestContainer2Sagas from './containers/TestContainer2/sagas.js';\n                \nexport default [\n    ...TestContainer2Sagas\n];\n"
+      }
+    },
+    "indexFilePath": "/Users/ipselon/Development/projects/structor/test/.structor/app/components.js",
+    "indexSourceCode": "import {\n    Link,\n    IndexLink\n} from 'react-router';\nimport FirstTestComponent from 'components/FirstTestComponent';\nimport ProbeComponent from 'components/ProbeComponent';\nimport * as TestGroup from 'modules/TestGroup';\nimport * as Probe from 'modules/Probe';\nimport TestContainer1 from 'containers/TestContainer1';\nimport * as testing from 'modules/testing';\nexport {\n    Link,\n    IndexLink,\n    FirstTestComponent,\n    ProbeComponent,\n    TestGroup,\n    Probe,\n    TestContainer1,\n    testing\n};",
+    "htmlComponents": {
+      "a": {
+        "name": "a",
+        "defaults": [
+          {
+            "type": "a",
+            "variant": "default",
+            "props": {
+              "href": "#"
+            },
+            "children": [
+              {
+                "type": "span",
+                "text": "Link text"
+              }
+            ]
+          }
+        ]
+      },
+      "article": {
+        "name": "article",
+        "defaults": [
+          {
+            "type": "article",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Article"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "aside": {
+        "name": "aside",
+        "defaults": [
+          {
+            "type": "aside",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Aside"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "blockquote": {
+        "name": "blockquote",
+        "defaults": [
+          {
+            "type": "blockquote",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "This is a quotation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "button": {
+        "name": "button",
+        "defaults": [
+          {
+            "type": "button",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Button"
+              }
+            ]
+          }
+        ]
+      },
+      "code": {
+        "name": "code",
+        "defaults": [
+          {
+            "type": "code",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Code text line"
+              }
+            ]
+          }
+        ]
+      },
+      "dd": {
+        "name": "dd",
+        "defaults": [
+          {
+            "type": "dd",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Description text line"
+              }
+            ]
+          }
+        ]
+      },
+      "div": {
+        "name": "div",
+        "defaults": [
+          {
+            "type": "div",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty div"
+              }
+            ]
+          }
+        ]
+      },
+      "dl": {
+        "name": "dl",
+        "defaults": [
+          {
+            "type": "dl",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "dt",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Main text"
+                  }
+                ]
+              },
+              {
+                "type": "dd",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Description text line"
+                  }
+                ]
+              },
+              {
+                "type": "dt",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Main text"
+                  }
+                ]
+              },
+              {
+                "type": "dd",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Description text line"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "dt": {
+        "name": "dt",
+        "defaults": [
+          {
+            "type": "dt",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Main text"
+              }
+            ]
+          }
+        ]
+      },
+      "em": {
+        "name": "em",
+        "defaults": [
+          {
+            "type": "em",
+            "variant": "default",
+            "props": {},
+            "children": [],
+            "text": "Text with emphasis"
+          }
+        ]
+      },
+      "fieldset": {
+        "name": "fieldset",
+        "defaults": [
+          {
+            "type": "fieldset",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty fieldset"
+              }
+            ]
+          }
+        ]
+      },
+      "footer": {
+        "name": "footer",
+        "defaults": [
+          {
+            "type": "footer",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Footer"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "form": {
+        "name": "form",
+        "defaults": [
+          {
+            "type": "form",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty form"
+              }
+            ]
+          }
+        ]
+      },
+      "h1": {
+        "name": "h1",
+        "defaults": [
+          {
+            "type": "h1",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty h1"
+              }
+            ]
+          }
+        ]
+      },
+      "h2": {
+        "name": "h2",
+        "defaults": [
+          {
+            "type": "h2",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty h2"
+              }
+            ]
+          }
+        ]
+      },
+      "h3": {
+        "name": "h3",
+        "defaults": [
+          {
+            "type": "h3",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty h3"
+              }
+            ]
+          }
+        ]
+      },
+      "h4": {
+        "name": "h4",
+        "defaults": [
+          {
+            "type": "h4",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty h4"
+              }
+            ]
+          }
+        ]
+      },
+      "h5": {
+        "name": "h5",
+        "defaults": [
+          {
+            "type": "h5",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty h5"
+              }
+            ]
+          }
+        ]
+      },
+      "header": {
+        "name": "header",
+        "defaults": [
+          {
+            "type": "header",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Header"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "hr": {
+        "name": "hr",
+        "defaults": [
+          {
+            "type": "hr",
+            "variant": "default",
+            "props": {},
+            "children": []
+          }
+        ]
+      },
+      "i": {
+        "name": "i",
+        "defaults": [
+          {
+            "type": "i",
+            "variant": "default",
+            "props": {
+              "className": "fa fa-star"
+            },
+            "children": []
+          }
+        ]
+      },
+      "img": {
+        "name": "img",
+        "defaults": [
+          {
+            "type": "img",
+            "variant": "default",
+            "props": {
+              "src": "http://lorempixel.com/600/337/nature/"
+            },
+            "children": []
+          }
+        ]
+      },
+      "input": {
+        "name": "input",
+        "defaults": [
+          {
+            "type": "input",
+            "variant": "default",
+            "props": {
+              "type": "text",
+              "placeholder": "Enter value"
+            },
+            "children": []
+          }
+        ]
+      },
+      "label": {
+        "name": "label",
+        "defaults": [
+          {
+            "type": "label",
+            "variant": "default",
+            "props": {},
+            "children": [],
+            "text": "Label Text"
+          }
+        ]
+      },
+      "li": {
+        "name": "li",
+        "defaults": [
+          {
+            "type": "li",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "List Item"
+              }
+            ]
+          }
+        ]
+      },
+      "main": {
+        "name": "main",
+        "defaults": [
+          {
+            "type": "main",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Main"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "nav": {
+        "name": "nav",
+        "defaults": [
+          {
+            "type": "nav",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Navigation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "ol": {
+        "name": "ol",
+        "defaults": [
+          {
+            "type": "ol",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "First Item"
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Second Item"
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Third Item"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "option": {
+        "name": "option",
+        "defaults": [
+          {
+            "type": "option",
+            "variant": "default",
+            "props": {},
+            "children": [],
+            "text": "select option"
+          }
+        ]
+      },
+      "p": {
+        "name": "p",
+        "defaults": [
+          {
+            "type": "p",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Empty p"
+              }
+            ]
+          }
+        ]
+      },
+      "path": {
+        "name": "path",
+        "defaults": [
+          {
+            "type": "path",
+            "variant": "default",
+            "props": {
+              "d": "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+            },
+            "children": []
+          }
+        ]
+      },
+      "pre": {
+        "name": "pre",
+        "defaults": [
+          {
+            "type": "pre",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Preformatted text line"
+              }
+            ]
+          }
+        ]
+      },
+      "select": {
+        "name": "select",
+        "defaults": [
+          {
+            "type": "select",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "option",
+                "text": "option #1"
+              },
+              {
+                "type": "option",
+                "text": "option #2"
+              },
+              {
+                "type": "option",
+                "text": "option #3"
+              },
+              {
+                "type": "option",
+                "text": "option #4"
+              },
+              {
+                "type": "option",
+                "text": "option #5"
+              }
+            ]
+          }
+        ]
+      },
+      "small": {
+        "name": "small",
+        "defaults": [
+          {
+            "type": "small",
+            "variant": "default",
+            "props": {},
+            "children": [],
+            "text": "Small text"
+          }
+        ]
+      },
+      "span": {
+        "name": "span",
+        "defaults": [
+          {
+            "type": "span",
+            "variant": "default",
+            "props": {},
+            "children": [],
+            "text": "Text"
+          }
+        ]
+      },
+      "strong": {
+        "name": "strong",
+        "defaults": [
+          {
+            "type": "strong",
+            "variant": "default",
+            "props": {},
+            "children": [],
+            "text": "Strong text"
+          }
+        ]
+      },
+      "table": {
+        "name": "table",
+        "defaults": [
+          {
+            "type": "table",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "thead",
+                "children": [
+                  {
+                    "type": "tr",
+                    "children": [
+                      {
+                        "type": "th",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in th"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "th",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in th"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "th",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in th"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "th",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in th"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "tbody",
+                "children": [
+                  {
+                    "type": "tr",
+                    "children": [
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tr",
+                    "children": [
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "td",
+                        "children": [
+                          {
+                            "type": "span",
+                            "text": "Text in td"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tbody": {
+        "name": "tbody",
+        "defaults": [
+          {
+            "type": "tbody",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "tr",
+                "children": [
+                  {
+                    "type": "td",
+                    "children": [
+                      {
+                        "type": "span",
+                        "text": "Text in td"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "td": {
+        "name": "td",
+        "defaults": [
+          {
+            "type": "td",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Text in td"
+              }
+            ]
+          }
+        ]
+      },
+      "th": {
+        "name": "th",
+        "defaults": [
+          {
+            "type": "th",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "span",
+                "text": "Text in th"
+              }
+            ]
+          }
+        ]
+      },
+      "thead": {
+        "name": "thead",
+        "defaults": [
+          {
+            "type": "thead",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "tr",
+                "children": [
+                  {
+                    "type": "th",
+                    "children": [
+                      {
+                        "type": "span",
+                        "text": "Text in th"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tr": {
+        "name": "tr",
+        "defaults": [
+          {
+            "type": "tr",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Text in td"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "ul": {
+        "name": "ul",
+        "defaults": [
+          {
+            "type": "ul",
+            "variant": "default",
+            "props": {},
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "First Item"
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Second Item"
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Third Item"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

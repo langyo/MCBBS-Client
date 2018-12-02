@@ -1,0 +1,11 @@
+[
+  {
+    "type": "input",
+    "variant": "default",
+    "props": {
+      "type": "text",
+      "placeholder": "Enter value"
+    },
+    "children": []
+  }
+]

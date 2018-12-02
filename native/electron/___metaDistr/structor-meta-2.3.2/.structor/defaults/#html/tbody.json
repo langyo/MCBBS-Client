@@ -1,0 +1,23 @@
+[
+  {
+    "type": "tbody",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "type": "span",
+                "text": "Text in td"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

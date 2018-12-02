@@ -1,0 +1,13 @@
+[
+  {
+    "type": "img",
+    "variant": "default",
+    "props": {
+      "src": "http://lorempixel.com/600/337/nature/",
+      "style": {
+        "width": "100%"
+      }
+    },
+    "children": []
+  }
+]

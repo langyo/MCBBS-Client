@@ -1,0 +1,13 @@
+[
+  {
+    "type": "code",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "Code text line"
+      }
+    ]
+  }
+]

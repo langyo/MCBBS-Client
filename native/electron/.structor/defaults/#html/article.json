@@ -1,0 +1,18 @@
+[
+  {
+    "type": "article",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "p",
+        "children": [
+          {
+            "type": "span",
+            "text": "Article"
+          }
+        ]
+      }
+    ]
+  }
+]

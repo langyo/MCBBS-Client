@@ -1,0 +1,13 @@
+[
+  {
+    "type": "dd",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "Description text line"
+      }
+    ]
+  }
+]

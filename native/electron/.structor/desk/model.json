@@ -1,0 +1,43 @@
+{
+  "pages": [
+    {
+      "pageName": "HomePage",
+      "pagePath": "/home",
+      "children": [
+        {
+          "type": "div",
+          "props": {
+            "style": {
+              "display": "flex",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "padding": "1em"
+            }
+          },
+          "children": [
+            {
+              "type": "div",
+              "children": [
+                {
+                  "type": "h3",
+                  "props": {
+                    "style": {
+                      "padding": "1em",
+                      "textAlign": "center"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "span",
+                      "text": "Click on me and start creating a new cool component."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

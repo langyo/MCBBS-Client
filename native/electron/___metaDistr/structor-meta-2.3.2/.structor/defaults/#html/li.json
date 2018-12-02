@@ -1,0 +1,13 @@
+[
+  {
+    "type": "li",
+    "variant": "default",
+    "props": {},
+    "children": [
+      {
+        "type": "span",
+        "text": "List Item"
+      }
+    ]
+  }
+]
