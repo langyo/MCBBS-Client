@@ -37,7 +37,7 @@ MCBBS 客户端
 
 ### 移动端（react native）
 
-React native 的工程文件夹（native/reactNative）下分别有对应于 Android Studio 与 XCode 的工程说明文件，直接使用对应开发环境打开此类文件即可进行测试，测试时 react native 会自动调用 react native packager 对源代码进行打包。
+React native 的工程文件夹（native/reactNative）下分别有对应于 Android Studio 与 XCode 的工程文件（分别是 android/build.gradle 与 ios/MCBBSClient.xcodeproj/project.pbxproj），直接使用对应开发环境打开此类文件即可进行测试，测试时 react native 会自动调用 react native packager 对源代码进行打包。
 
 在开始调试前，你应当执行以下命令：
     npm start
