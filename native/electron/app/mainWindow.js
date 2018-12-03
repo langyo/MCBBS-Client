@@ -23,89 +23,107 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
+import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ExtensionIcon from "@material-ui/icons/Extension";
 
 const styles = {
-    root: {
-        flexGrow: 1
-    },
-    grow: {
-        flexGrow: 1
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20
-    },
-    list: {
-        width: 250
-    }
+  root: {
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  },
+  list: {
+    width: 250
+  }
 };
 
 class MainWindow extends React.Component {
-    state = {
-        drawerOpen: false
+  constructor() {
+    super();
+    this.state = {
+      drawerOpen: false
     };
+  }
 
-    toggleDrawer = open => () => {
-        this.setState({
-            drawerOpen: open
-        });
+  toggleDrawer(open) {
+    let thisObject = this;
+    return function() {
+      thisObject.setState({
+        drawerOpen: open
+      });
     };
+  }
 
-    render() {
-        const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
-        const sideList = (
-            <div className={classes.list}>
-                <List>
-                    <ListItem button>
-                        <ListItemIcon> <InsertDriveFileIcon /> </ListItemIcon>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon> <AccountCircleIcon /> </ListItemIcon>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon> <ExtensionIcon /> </ListItemIcon>
-                    </ListItem>
-                </List>
-            </div>
-        );
-        return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="Menu"
-                            onClick={this.toggleDrawer(true)}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" color="inherit" className={classes.grow}>
-                            Client
+    const sideList = (
+      <div className={classes.list}>
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              {" "}
+              <InsertDriveFileIcon />{" "}
+            </ListItemIcon>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              {" "}
+              <AccountCircleIcon />{" "}
+            </ListItemIcon>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              {" "}
+              <ExtensionIcon />{" "}
+            </ListItemIcon>
+          </ListItem>
+        </List>
+      </div>
+    );
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+              onClick={this.toggleDrawer(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              Client
             </Typography>
-                        <IconButton color="inherit">
-                            <CloseIcon />
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
-                <Drawer open={this.state.drawerOpen} onClose={this.toggleDrawer(false)}>
-                    <div
-                        tabIndex={0}
-                        role="button"
-                        onClick={this.toggleDrawer(false)}
-                        onKeyDown={this.toggleDrawer(false)}
-                    >
-                        {sideList}
-                    </div>
-                </Drawer>
-            </div>
-        );
-    }
+            <IconButton color="inherit">
+              <CloseIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer open={this.state.drawerOpen} onClose={this.toggleDrawer(false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer(false)}
+            onKeyDown={this.toggleDrawer(false)}
+          >
+            {sideList}
+          </div>
+        </Drawer>
+      </div>
+    );
+  }
 }
 
 MainWindow.propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(MainWindow);

@@ -14,6 +14,8 @@ function createMainWnd() {
 
     mainWnd.loadURL(`file://${__dirname}/index.html`);
 
+    mainWnd.webContents.openDevTools()
+
     mainWnd.on('closed', () => {
        mainWnd = null;
        console.log('closed');
