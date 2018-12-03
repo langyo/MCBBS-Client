@@ -1,0 +1,79 @@
+[
+  {
+    "type": "List",
+    "variant": "default",
+    "children": [
+      {
+        "type": "ListItemWithLeftIcon",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {}
+      },
+      {
+        "type": "ListItemWithLeftIcon",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {}
+      },
+      {
+        "type": "ListItemWithLeftIcon",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {}
+      },
+      {
+        "type": "ListItemWithRightIcon",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {}
+      },
+      {
+        "type": "ListItemWithRightIcon",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {}
+      },
+      {
+        "type": "ListItemWithRightIcon",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {}
+      },
+      {
+        "type": "ListItem",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {
+          "primaryText": "List Item"
+        }
+      },
+      {
+        "type": "ListItem",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {
+          "primaryText": "List Item"
+        }
+      },
+      {
+        "type": "ListItem",
+        "variant": "default",
+        "children": [],
+        "namespace": "MaterialUI",
+        "props": {
+          "primaryText": "List Item"
+        }
+      }
+    ],
+    "namespace": "MaterialUI",
+    "props": {}
+  }
+]

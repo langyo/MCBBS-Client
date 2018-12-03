@@ -1,0 +1,33 @@
+[
+  {
+    "type": "AutoComplete",
+    "variant": "default",
+    "children": [],
+    "namespace": "MaterialUI",
+    "props": {
+      "dataSource": [
+        "Argentina",
+        "Denmark",
+        "USA",
+        "Ukraine"
+      ],
+      "id": "uniqueId"
+    }
+  },
+  {
+    "type": "AutoComplete",
+    "namespace": "MaterialUI",
+    "variant": "full width",
+    "props": {
+      "dataSource": [
+        "Argentina",
+        "Denmark",
+        "USA",
+        "Ukraine"
+      ],
+      "id": "uniqueId",
+      "fullWidth": true
+    },
+    "children": []
+  }
+]

@@ -6,8 +6,7 @@
   "scripts": {
     "start": "electron .",
     "watch": "watchify app/appEntry.js -t babelify -o public/js/bundle.js --debug --verbose",
-    "package": "electron-packager ./ DemoApps --overwrite --app-version=1.0.0 --platform=win32 --arch=all --out=../DemoApps --version=1.2.1 --icon=./public/img/app-icon.icns",
-    "structor": "structor"
+    "package": "electron-packager ./ DemoApps --overwrite --app-version=1.0.0 --platform=win32 --arch=all --out=../DemoApps --version=1.2.1 --icon=./public/img/app-icon.icns"
   },
   "author": "langyo",
   "license": "Unlicense",
@@ -17,11 +16,12 @@
     "babel": "^6.23.0",
     "classnames": "2.2.6",
     "firebase": "5.5.6",
+    "material-ui": "0.17.4",
     "prop-types": "15.6.2",
-    "react": "latest",
+    "react": "15.5.4",
     "react-dom": "latest",
-    "react-tap-event-plugin": "^3.0.2",
-    "material-ui": "^0.19.4"
+    "react-flexbox-grid": "1.0.2",
+    "react-tap-event-plugin": "2.0.1"
   },
   "keywords": [],
   "devDependencies": {

@@ -1,0 +1,41 @@
+[
+  {
+    "type": "RaisedButton",
+    "variant": "default",
+    "children": [],
+    "namespace": "MaterialUI",
+    "props": {
+      "label": "Button"
+    }
+  },
+  {
+    "type": "RaisedButton",
+    "namespace": "MaterialUI",
+    "variant": "primary",
+    "props": {
+      "label": "Button",
+      "primary": true
+    },
+    "children": []
+  },
+  {
+    "type": "RaisedButton",
+    "namespace": "MaterialUI",
+    "variant": "secondary",
+    "props": {
+      "label": "Button",
+      "secondary": true
+    },
+    "children": []
+  },
+  {
+    "type": "RaisedButton",
+    "namespace": "MaterialUI",
+    "variant": "fullWidth",
+    "props": {
+      "label": "Button",
+      "fullWidth": true
+    },
+    "children": []
+  }
+]

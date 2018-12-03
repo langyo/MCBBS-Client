@@ -1,2 +1,0 @@
-# structor-meta
-Structor Metadata
