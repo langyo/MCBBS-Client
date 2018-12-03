@@ -6,76 +6,56 @@ const electron = window.require('electron');
 const { ipcRenderer, shell } = electron;
 const { dialog } = electron.remote;
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
-import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExtensionIcon from '@material-ui/icons/Extension';
-import CloseIcon from '@material-ui/icons/Close';
+import MenuIcon from "@material-ui/icons/Menu";
+import CloseIcon from "@material-ui/icons/Close";
 
-const drawerWidth = 60;
-
-const styles = theme => ({
+const styles = {
     root: {
-        display: 'flex',
+        flexGrow: 1
     },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
+    grow: {
+        flexGrow: 1
     },
-    drawer: {
-        width: theme.spacing.unit * 7 + 1,
-        flexShrink: 0,
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20
     },
-    toolbar: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
-    },
-});
+    list: {
+        width: 250
+    }
+};
 
-function MainWindow(props) {
-    const { classes } = props;
+class MainWindow extends React.Component {
+    state = {
+        drawerOpen: false
+    };
 
-    return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" color="inherit">
-                        Client
-                    </Typography>
-                    <div className={classes.grow} />
-                    <div>
-                        <IconButton color="inherit">
-                            <CloseIcon />
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                    paper: classes.drawer,
-                }}
-                anchor="left"
-            >
-                <div className={classes.toolbar} />
-                <Divider />
+    toggleDrawer = open => () => {
+        this.setState({
+            drawerOpen: open
+        });
+    };
+
+    render() {
+        const { classes } = this.props;
+
+        const sideList = (
+            <div className={classes.list}>
                 <List>
                     <ListItem button>
                         <ListItemIcon> <InsertDriveFileIcon /> </ListItemIcon>
@@ -87,19 +67,45 @@ function MainWindow(props) {
                         <ListItemIcon> <ExtensionIcon /> </ListItemIcon>
                     </ListItem>
                 </List>
-            </Drawer>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Typography paragraph>
-                    test
-                </Typography>
-            </main>
-        </div >
-    );
+            </div>
+        );
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="Menu"
+                            onClick={this.toggleDrawer(true)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                            Client
+            </Typography>
+                        <IconButton color="inherit">
+                            <CloseIcon />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <Drawer open={this.state.drawerOpen} onClose={this.toggleDrawer(false)}>
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        onClick={this.toggleDrawer(false)}
+                        onKeyDown={this.toggleDrawer(false)}
+                    >
+                        {sideList}
+                    </div>
+                </Drawer>
+            </div>
+        );
+    }
 }
 
 MainWindow.propTypes = {
-    classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(MainWindow);
+export default withStyles(styles)(MainWindow);
