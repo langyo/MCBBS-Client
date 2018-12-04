@@ -4,7 +4,7 @@ const fs = window.require('fs');
 
 const electron = window.require('electron');
 const { ipcRenderer, shell } = electron;
-const { dialog } = electron.remote;
+const remote = electron.remote;
 
 import React from "react";
 import PropTypes from "prop-types";
@@ -34,6 +34,12 @@ const styles = {
   grow: {
     flexGrow: 1
   },
+  canDrag: {
+    "-webkit-app-region": "drag"
+  },
+  canNootDrag: {
+    "-webkit-app-region": "no-drag"
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20
@@ -46,18 +52,6 @@ const styles = {
 class MainWindow extends React.Component {
   constructor() {
     super();
-    this.state = {
-      drawerOpen: false
-    };
-  }
-
-  toggleDrawer(open) {
-    let thisObject = this;
-    return function() {
-      thisObject.setState({
-        drawerOpen: open
-      });
-    };
   }
 
   render() {
@@ -90,33 +84,27 @@ class MainWindow extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar position="static">
-          <Toolbar >
+          <Toolbar className={classes.canDrag}>
             <IconButton
-              className={classes.menuButton}
+              className={classes.menuButton + " " + classes.canNootDrag}
               color="inherit"
               aria-label="Menu"
-              onClick={this.toggleDrawer(true)}
             >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Client
             </Typography>
-            <IconButton color="inherit">
+            <IconButton 
+              className={classes.canNootDrag}
+              color="inherit" 
+              onClick={ () => remote.process.exit() }
+            >
               <CloseIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer open={this.state.drawerOpen} onClose={this.toggleDrawer(false)}>
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer(false)}
-            onKeyDown={this.toggleDrawer(false)}
-          >
-            {sideList}
-          </div>
-        </Drawer>
+
       </div>
     );
   }
