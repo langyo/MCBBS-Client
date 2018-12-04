@@ -1,3 +1,0 @@
-### Description
-Starter project
-<br/>
