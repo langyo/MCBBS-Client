@@ -95,7 +95,9 @@ class MainWindow extends React.Component {
           chrome
         >
           <TitleBar title="Client" controls
-            onCloseClick={() => remote.process.exit()}
+            onCloseClick={ () => remote.process.exit() }
+            onMinimizeClick={ ()=>remote.getCurrentWindow().minimize() }
+            // onMaximizeClick={ ()=>remote.getCurrentWindow().maximize() }
           />
           <div className={classes.grow}>
             <AppBar position="static">
