@@ -8,13 +8,12 @@ function createMainWnd() {
         backgroundColor:'#dddddd',
         width:800,
         height:600,
-        center:true,
-        frame:false
+        frame:false,
     });
 
     mainWnd.loadURL(`file://${__dirname}/index.html`);
 
-    mainWnd.webContents.openDevTools()
+    mainWnd.webContents.openDevTools();
 
     mainWnd.on('closed', () => {
        mainWnd = null;

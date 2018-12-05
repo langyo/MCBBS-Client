@@ -27,8 +27,12 @@ import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExtensionIcon from "@material-ui/icons/Extension";
 
+import { Window, TitleBar } from 'react-desktop/windows';
+
 const styles = {
   root: {
+    height:'100%',
+    width:'100%',
     flexGrow: 1
   },
   grow: {
@@ -82,7 +86,15 @@ class MainWindow extends React.Component {
       </div>
     );
     return (
-      <div className={classes.root}>
+      <Window
+        color={this.props.color}
+        theme={this.props.theme}
+        className={classes.root}
+        chrome
+      >
+        <TitleBar title="Client" controls 
+          onCloseClick={() => remote.process.exit()}
+        />
         <AppBar position="static">
           <Toolbar className={classes.canDrag}>
             <IconButton
@@ -95,17 +107,9 @@ class MainWindow extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Client
             </Typography>
-            <IconButton 
-              className={classes.canNootDrag}
-              color="inherit" 
-              onClick={ () => remote.process.exit() }
-            >
-              <CloseIcon />
-            </IconButton>
           </Toolbar>
         </AppBar>
-
-      </div>
+      </Window>
     );
   }
 }
