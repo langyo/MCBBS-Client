@@ -31,9 +31,9 @@ import { Window, TitleBar } from 'react-desktop/windows';
 
 const styles = {
   root: {
-    height:'100%',
+    flexGrow: 1,
     width:'100%',
-    flexGrow: 1
+    height:'100%'
   },
   grow: {
     flexGrow: 1
@@ -86,30 +86,35 @@ class MainWindow extends React.Component {
       </div>
     );
     return (
-      <Window
-        color={this.props.color}
-        theme={this.props.theme}
-        className={classes.root}
-        chrome
-      >
-        <TitleBar title="Client" controls 
-          onCloseClick={() => remote.process.exit()}
-        />
-        <AppBar position="static">
-          <Toolbar className={classes.canDrag}>
-            <IconButton
-              className={classes.menuButton + " " + classes.canNootDrag}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              Client
+      <div className={classes.root}>
+        <Window
+          color={this.props.color}
+          theme={this.props.theme}
+          width='800'
+          height='600'
+          chrome
+        >
+          <TitleBar title="Client" controls
+            onCloseClick={() => remote.process.exit()}
+          />
+          <div className={classes.grow}>
+            <AppBar position="static">
+              <Toolbar className={classes.canDrag}>
+                <IconButton
+                  className={classes.menuButton + " " + classes.canNootDrag}
+                  color="inherit"
+                  aria-label="Menu"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" color="inherit" className={classes.grow}>
+                  Client
             </Typography>
-          </Toolbar>
-        </AppBar>
-      </Window>
+              </Toolbar>
+            </AppBar>
+          </div>
+        </Window>
+      </div>
     );
   }
 }

@@ -5,15 +5,15 @@ var mainWnd = null;
 
 function createMainWnd() {
     mainWnd = new BrowserWindow({
-        backgroundColor:'#dddddd',
-        width:800,
-        height:600,
+        width:820,
+        height:620,
         frame:false,
+        transparent: true
     });
 
     mainWnd.loadURL(`file://${__dirname}/index.html`);
 
-    mainWnd.webContents.openDevTools();
+    // mainWnd.webContents.openDevTools();
 
     mainWnd.on('closed', () => {
        mainWnd = null;
