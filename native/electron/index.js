@@ -5,8 +5,8 @@ var mainWnd = null;
 
 function createMainWnd() {
     mainWnd = new BrowserWindow({
-        width:820,
-        height:620,
+        width:810,
+        height:610,
         frame:false,
         transparent: true
     });
@@ -15,9 +15,12 @@ function createMainWnd() {
 
     // mainWnd.webContents.openDevTools();
 
+    mainWnd.on('resize', ()=>{
+
+    });
+
     mainWnd.on('closed', () => {
        mainWnd = null;
-       console.log('closed');
     });
 }
 

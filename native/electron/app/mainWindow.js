@@ -26,17 +26,22 @@ import CloseIcon from "@material-ui/icons/Close";
 import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExtensionIcon from "@material-ui/icons/Extension";
+import ListIcon from "@material-ui/icons/List";
 
 import { Window, TitleBar } from 'react-desktop/windows';
+import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
 
 const styles = {
   root: {
     flexGrow: 1,
-    width:'100%',
-    height:'100%'
+    width: '100%',
+    height: '100%'
   },
   grow: {
     flexGrow: 1
+  },
+  shrink: {
+    flexShrink: 0
   },
   canDrag: {
     "-webkit-app-region": "drag"
@@ -48,43 +53,34 @@ const styles = {
     marginLeft: -12,
     marginRight: 20
   },
-  list: {
-    width: 250
+  bottomButton: {
+    bottom: 0,
+    position: 'fixed',
+    marginBottom: 12
   }
 };
 
 class MainWindow extends React.Component {
   constructor() {
     super();
+    this.state = {
+      isMaximized: false
+    };
+  }
+
+  toggleMaximize() {
+    this.setState((state, porps) => {
+      return {
+        isMaximized: !state.isMaximized
+      };
+    }, () => {
+      remote.getCurrentWindow().maximize()
+    })
   }
 
   render() {
     const { classes } = this.props;
 
-    const sideList = (
-      <div className={classes.list}>
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              {" "}
-              <InsertDriveFileIcon />{" "}
-            </ListItemIcon>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              {" "}
-              <AccountCircleIcon />{" "}
-            </ListItemIcon>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              {" "}
-              <ExtensionIcon />{" "}
-            </ListItemIcon>
-          </ListItem>
-        </List>
-      </div>
-    );
     return (
       <div className={classes.root}>
         <Window
@@ -95,12 +91,12 @@ class MainWindow extends React.Component {
           chrome
         >
           <TitleBar title="Client" controls
-            onCloseClick={ () => remote.process.exit() }
-            onMinimizeClick={ ()=>remote.getCurrentWindow().minimize() }
-            // onMaximizeClick={ ()=>remote.getCurrentWindow().maximize() }
+            onCloseClick={() => remote.process.exit()}
+            onMinimizeClick={() => remote.getCurrentWindow().minimize()}
+            onMaximizeClick={this.toggleMaximize}
           />
-          <div className={classes.grow}>
-            <AppBar position="static">
+          <div className={classes.grow + " " + classes.shrink}>
+            {/* <AppBar position="static">
               <Toolbar className={classes.canDrag}>
                 <IconButton
                   className={classes.menuButton + " " + classes.canNootDrag}
@@ -111,9 +107,23 @@ class MainWindow extends React.Component {
                 </IconButton>
                 <Typography variant="h6" color="inherit" className={classes.grow}>
                   Client
-            </Typography>
+                </Typography>
               </Toolbar>
-            </AppBar>
+            </AppBar> */}
+            <List className={classes.root}>
+              <ListItem>
+                <InsertDriveFileIcon />
+              </ListItem>
+              <ListItem>
+                <ListIcon />
+              </ListItem>
+              <ListItem>
+                <ExtensionIcon />
+              </ListItem>
+              <ListItem className={ classes.bottomButton }>
+                <AccountCircleIcon />
+              </ListItem>
+            </List>
           </div>
         </Window>
       </div>
