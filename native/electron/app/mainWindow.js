@@ -25,9 +25,9 @@ import Grid from '@material-ui/core/Grid';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
+import DescriptionIcon from "@material-ui/icons/Description";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import ExtensionIcon from "@material-ui/icons/Extension";
+import WidgetsIcon from "@material-ui/icons/Widgets";
 import ListIcon from "@material-ui/icons/List";
 import HomeIcon from "@material-ui/icons/Home";
 
@@ -89,22 +89,33 @@ class MainWindow extends React.Component {
             onMaximizeClick={this.toggleMaximize}
           />
           <div className={classes.grow + " " + classes.shrink}>
-            <Grid container spacing={3}>
+            <Grid container>
               <Grid item xs={1}>
-                <List className={classes.list}>
-                  <ListItem>
-                    <AccountCircleIcon />
-                  </ListItem>
-                  <ListItem>
-                    <InsertDriveFileIcon />
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon />
-                  </ListItem>
-                  <ListItem>
-                    <ExtensionIcon />
-                  </ListItem>
-                </List>
+                <Grid container direction='column' justify='center' alignItems='baseline'>
+                  <Grid item xs={1}>
+                    <IconButton color='black'>
+                      <DescriptionIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <IconButton color='gray'>
+                      <ListIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <IconButton color='gray'>
+                      <WidgetsIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={8}>
+                    <Divider />
+                  </Grid>
+                  <Grid item xs={1}>
+                    <IconButton color='gray'>
+                      <AccountCircleIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid item xs={3}>
                 <List className={classes.list}>
