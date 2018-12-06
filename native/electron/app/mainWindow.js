@@ -20,6 +20,8 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -27,6 +29,7 @@ import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExtensionIcon from "@material-ui/icons/Extension";
 import ListIcon from "@material-ui/icons/List";
+import HomeIcon from "@material-ui/icons/Home";
 
 import { Window, TitleBar } from 'react-desktop/windows';
 import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
@@ -37,26 +40,16 @@ const styles = {
     width: '100%',
     height: '100%'
   },
+  list: {
+    flexGrow: 1,
+    width: '100%',
+    height: '100%'
+  },
   grow: {
     flexGrow: 1
   },
   shrink: {
     flexShrink: 0
-  },
-  canDrag: {
-    "-webkit-app-region": "drag"
-  },
-  canNootDrag: {
-    "-webkit-app-region": "no-drag"
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  },
-  bottomButton: {
-    bottom: 0,
-    position: 'fixed',
-    marginBottom: 12
   }
 };
 
@@ -96,34 +89,34 @@ class MainWindow extends React.Component {
             onMaximizeClick={this.toggleMaximize}
           />
           <div className={classes.grow + " " + classes.shrink}>
-            {/* <AppBar position="static">
-              <Toolbar className={classes.canDrag}>
-                <IconButton
-                  className={classes.menuButton + " " + classes.canNootDrag}
-                  color="inherit"
-                  aria-label="Menu"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" color="inherit" className={classes.grow}>
-                  Client
-                </Typography>
-              </Toolbar>
-            </AppBar> */}
-            <List className={classes.root}>
-              <ListItem>
-                <InsertDriveFileIcon />
-              </ListItem>
-              <ListItem>
-                <ListIcon />
-              </ListItem>
-              <ListItem>
-                <ExtensionIcon />
-              </ListItem>
-              <ListItem className={ classes.bottomButton }>
-                <AccountCircleIcon />
-              </ListItem>
-            </List>
+            <Grid container spacing={3}>
+              <Grid item xs={1}>
+                <List className={classes.list}>
+                  <ListItem>
+                    <AccountCircleIcon />
+                  </ListItem>
+                  <ListItem>
+                    <InsertDriveFileIcon />
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon />
+                  </ListItem>
+                  <ListItem>
+                    <ExtensionIcon />
+                  </ListItem>
+                </List>
+              </Grid>
+              <Grid item xs={3}>
+                <List className={classes.list}>
+                  <ListItem>
+                    <HomeIcon />
+                    <ListItemText inset primary="主页" />
+                  </ListItem>
+                </List>
+              </Grid>
+              <Grid item xs={9}>
+              </Grid>
+            </Grid>
           </div>
         </Window>
       </div>
