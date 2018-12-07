@@ -57,12 +57,21 @@ const styles = {
     position: 'absolute',
     width: 36,
     left: 0,
-    backgroundColor: '#666666'
   },
   contentArea: {
     position: 'relative',
     paddingLeft: 36,
     boxSizing: 'border-box'
+  },
+  documentList: {
+    position: 'absolute',
+    width: 200,
+    left: 36,
+  },
+  documentArea: {
+    position: 'relative',
+    paddingLeft: 200,
+    boxSizing: 'border-box',
   }
 };
 
@@ -103,45 +112,41 @@ class MainWindow extends React.Component {
           />
           <div className={classes.grow + " " + classes.shrink}>
             <div className={classes.paddingLeft}>
-              <Grid container>
-                <Grid item xs>
-                  <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
-                    <Grid item xs={1}>
-                      <IconButton>
-                        <DescriptionIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton>
-                        <ListIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton>
-                        <WidgetsIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <IconButton>
-                        <AccountCircleIcon />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
+              <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
+                <Grid item xs={1}>
+                  <IconButton>
+                    <DescriptionIcon />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={1}>
+                  <IconButton>
+                    <ListIcon />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={1}>
+                  <IconButton>
+                    <WidgetsIcon />
+                  </IconButton>
+                </Grid>
+                <Grid item xs={1}>
+                  <IconButton>
+                    <AccountCircleIcon />
+                  </IconButton>
                 </Grid>
               </Grid>
             </div>
             <div className={classes.contentArea}>
-              <Grid item xs>
+              <div className={classes.documentList}>
                 <List className={classes.list}>
                   <ListItem>
                     <HomeIcon />
                     <ListItemText inset primary="主页" />
                   </ListItem>
                 </List>
-              </Grid>
-              <Grid item xs={10}>
+              </div>
+              <div className={classes.documentArea}>
                 <Paper>123123</Paper>
-              </Grid>
+              </div>
             </div>
           </div>
         </Window>
