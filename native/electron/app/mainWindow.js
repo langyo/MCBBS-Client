@@ -32,17 +32,14 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 import ListIcon from "@material-ui/icons/List";
 import HomeIcon from "@material-ui/icons/Home";
+import VoteIcon from "@material-ui/icons/HowToVote";
+import NeedHelpIcon from "@material-ui/icons/LiveHelp"
 
 import { Window, TitleBar } from 'react-desktop/windows';
 import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
 
 const styles = {
   root: {
-    flexGrow: 1,
-    width: '100%',
-    height: '100%'
-  },
-  list: {
     flexGrow: 1,
     width: '100%',
     height: '100%'
@@ -56,22 +53,19 @@ const styles = {
   leftAppBar: {
     position: 'absolute',
     width: 36,
-    left: 0,
-  },
-  contentArea: {
-    position: 'relative',
-    paddingLeft: 36,
-    boxSizing: 'border-box'
+    left: 0
   },
   documentList: {
     position: 'absolute',
     width: 200,
     left: 36,
+    top: 0
   },
   documentArea: {
     position: 'relative',
-    paddingLeft: 200,
+    paddingLeft: 236,
     boxSizing: 'border-box',
+    top: 0
   }
 };
 
@@ -135,18 +129,28 @@ class MainWindow extends React.Component {
                 </Grid>
               </Grid>
             </div>
-            <div className={classes.contentArea}>
-              <div className={classes.documentList}>
-                <List className={classes.list}>
-                  <ListItem>
-                    <HomeIcon />
-                    <ListItemText inset primary="主页" />
-                  </ListItem>
-                </List>
-              </div>
-              <div className={classes.documentArea}>
-                <Paper>123123</Paper>
-              </div>
+            <div className={classes.documentList}>
+              <List>
+                <ListItem>
+                  <HomeIcon />
+                  <ListItemText inset primary="主页" />
+                </ListItem>
+                <ListItem>
+                  <DescriptionIcon />
+                  <ListItemText inset primary="帖子" />
+                </ListItem>
+                <ListItem>
+                  <VoteIcon />
+                  <ListItemText inset primary="投票" />
+                </ListItem>
+                <ListItem>
+                  <NeedHelpIcon />
+                  <ListItemText inset primary="悬赏" />
+                </ListItem>
+              </List>
+            </div>
+            <div className={classes.documentArea}>
+              <Paper>123123</Paper>
             </div>
           </div>
         </Window>
