@@ -22,6 +22,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -50,6 +52,17 @@ const styles = {
   },
   shrink: {
     flexShrink: 0
+  },
+  leftAppBar: {
+    position: 'absolute',
+    width: 36,
+    left: 0,
+    backgroundColor: '#666666'
+  },
+  contentArea: {
+    position: 'relative',
+    paddingLeft: 36,
+    boxSizing: 'border-box'
   }
 };
 
@@ -89,35 +102,36 @@ class MainWindow extends React.Component {
             onMaximizeClick={this.toggleMaximize}
           />
           <div className={classes.grow + " " + classes.shrink}>
-            <Grid container>
-              <Grid item xs={1}>
-                <Grid container direction='column' justify='center' alignItems='baseline'>
-                  <Grid item xs={1}>
-                    <IconButton color='black'>
-                      <DescriptionIcon />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton color='gray'>
-                      <ListIcon />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton color='gray'>
-                      <WidgetsIcon />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton color='gray'>
-                      <AccountCircleIcon />
-                    </IconButton>
+            <div className={classes.paddingLeft}>
+              <Grid container>
+                <Grid item xs>
+                  <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
+                    <Grid item xs={1}>
+                      <IconButton>
+                        <DescriptionIcon />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton>
+                        <ListIcon />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton>
+                        <WidgetsIcon />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <IconButton>
+                        <AccountCircleIcon />
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={3}>
+            </div>
+            <div className={classes.contentArea}>
+              <Grid item xs>
                 <List className={classes.list}>
                   <ListItem>
                     <HomeIcon />
@@ -125,9 +139,10 @@ class MainWindow extends React.Component {
                   </ListItem>
                 </List>
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={10}>
+                <Paper>123123</Paper>
               </Grid>
-            </Grid>
+            </div>
           </div>
         </Window>
       </div>
