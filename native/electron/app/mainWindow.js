@@ -21,6 +21,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
@@ -58,14 +59,12 @@ const styles = {
     position: 'absolute',
     width: 40,
     left: 0,
-    top: 0,
-    height: '100%'
+    top: 0
   },
   documentList: {
     position: 'absolute',
     width: 200,
     left: 40,
-    height: '100%',
     top: 0
   },
   documentArea: {
@@ -73,9 +72,15 @@ const styles = {
     paddingLeft: 240,
     boxSizing: 'border-box',
     top: 0,
-    height: '100%',
   }
 };
+
+let tagList = [];
+
+// 构建新的标签实体
+function Tag(){
+
+}
 
 class MainWindow extends React.Component {
   constructor() {
@@ -142,6 +147,11 @@ class MainWindow extends React.Component {
                 <ListItem>
                   <HomeIcon />
                   <ListItemText inset primary="主页" />
+                  <ListItemSecondaryAction>
+                    <IconButton disabled aria-label="关闭">
+                      <CloseIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
                 </ListItem>
                 <ListItem>
                   <DescriptionIcon />
@@ -158,7 +168,7 @@ class MainWindow extends React.Component {
               </List>
             </div>
             <div className={classes.documentArea}>
-              
+
             </div>
           </div>
         </Window>
