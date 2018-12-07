@@ -8,6 +8,7 @@ const remote = electron.remote;
 
 import React from "react";
 import PropTypes from "prop-types";
+
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -24,6 +25,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import MobileStepper from '@material-ui/core/MobileStepper';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -33,7 +35,9 @@ import WidgetsIcon from "@material-ui/icons/Widgets";
 import ListIcon from "@material-ui/icons/List";
 import HomeIcon from "@material-ui/icons/Home";
 import VoteIcon from "@material-ui/icons/HowToVote";
-import NeedHelpIcon from "@material-ui/icons/LiveHelp"
+import NeedHelpIcon from "@material-ui/icons/LiveHelp";
+import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 import { Window, TitleBar } from 'react-desktop/windows';
 import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
@@ -52,20 +56,24 @@ const styles = {
   },
   leftAppBar: {
     position: 'absolute',
-    width: 36,
-    left: 0
+    width: 40,
+    left: 0,
+    top: 0,
+    height: '100%'
   },
   documentList: {
     position: 'absolute',
     width: 200,
-    left: 36,
+    left: 40,
+    height: '100%',
     top: 0
   },
   documentArea: {
-    position: 'relative',
-    paddingLeft: 236,
+    position: 'absolute',
+    paddingLeft: 240,
     boxSizing: 'border-box',
-    top: 0
+    top: 0,
+    height: '100%',
   }
 };
 
@@ -150,7 +158,7 @@ class MainWindow extends React.Component {
               </List>
             </div>
             <div className={classes.documentArea}>
-              <Paper>123123</Paper>
+              
             </div>
           </div>
         </Window>

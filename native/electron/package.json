@@ -23,6 +23,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-swipeable-views": "^0.13.0",
     "watchify": "^3.11.0",
     "webpack": "^4.26.1"
   },
