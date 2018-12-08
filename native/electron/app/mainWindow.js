@@ -77,21 +77,66 @@ const styles = {
     paddingLeft: 240,
     boxSizing: 'border-box',
     top: 0,
+  },
+  primaryColor: {
+    colorPrimary: '#ecdec1'
   }
 };
 
-let tagList = [];
+let tags = {
+  // 栏一，论坛概览
+  "快速访问":[],
+  "收藏":[],
+  // 栏二，标签列表
+  "正在编辑":[],
+  "正在查看":[],
+  "历史记录":[],
+  // 栏三，个性化
+  "个人中心":[],
+  "设置":[],
+};
 
 // 构建新的标签实体
-function Tag(){
+function Tag(object, where){
+  this.tagId = tags[where].length;
 
+  this.title = object.title == null ? "未知标题" : object.title;
+  this.subTitle = object.subTitle == null ? "" : object.subTitle;
+  this.icon = object.icon == null ? <DescriptionIcon /> : object.icon;
+  this.content = object.content == null ? {} : object.content;
+
+  this.enableClose = object.enableClose == null ? true : object.enableClose;
+  this.enableSelect = object.enableSelect == null ? true : object.enableSelect;
+
+  this.titleBold = object.titleBold == null ? false : object.titleBold;
+  this.titleItalic = object.titleItalic == null ? false : object.titleItalic;
+  this.titleUnderline = object.titleUnderline == null ? false : object.titleUnderline;
+  this.titleDeleteline = object.titleDeleteline == null ? false : object.titleDeleteline;
+  this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
+
+  if(object.render == null) throw Error('未定义标签的渲染器！');
+  this.render = object.render;
+}
+
+function newTag(object, where){
+  tags[where].push(new Tag(object, where));
+}
+
+// 标签图标列表
+const icons = {
+  "主页": <HomeIcon />,
+  "帖子": <DescriptionIcon />,
+  "投票": <VoteIcon />,
+  "悬赏": <NeedHelpIcon />,
 }
 
 class MainWindow extends React.Component {
   constructor() {
     super();
     this.state = {
-      isMaximized: false
+      isMaximized: false,
+      tag: "论坛概览",
+      subTag: 0
     };
   }
 
@@ -101,7 +146,7 @@ class MainWindow extends React.Component {
         isMaximized: !state.isMaximized
       };
     }, () => {
-      remote.getCurrentWindow().maximize()
+      remote.getCurrentWindow().maximize();
     })
   }
 
@@ -118,7 +163,7 @@ class MainWindow extends React.Component {
           chrome
         >
           <TitleBar title="Client" controls
-            color={'#6bbb45'}
+            background={'#6bbb45'}
             onCloseClick={() => remote.process.exit()}
             onMinimizeClick={() => remote.getCurrentWindow().minimize()}
             onMaximizeClick={this.toggleMaximize}
@@ -128,7 +173,7 @@ class MainWindow extends React.Component {
               <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
                 <Grid item xs={1}>
                   <IconButton>
-                    <DescriptionIcon />
+                    <DescriptionIcon color={"primary"} className={classes.primaryColor}/>
                   </IconButton>
                 </Grid>
                 <Grid item xs={1}>
@@ -151,25 +196,13 @@ class MainWindow extends React.Component {
             <div className={classes.documentList}>
               <List>
                 <ListItem>
-                  <HomeIcon />
+                  {icons['主页']}
                   <ListItemText primary="主页" />
                   <ListItemSecondaryAction>
                     <IconButton disabled aria-label="关闭">
                       <CloseIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem>
-                  <DescriptionIcon />
-                  <ListItemText primary="帖子" />
-                </ListItem>
-                <ListItem>
-                  <VoteIcon />
-                  <ListItemText primary="投票" />
-                </ListItem>
-                <ListItem>
-                  <NeedHelpIcon />
-                  <ListItemText primary="悬赏" />
                 </ListItem>
               </List>
             </div>
