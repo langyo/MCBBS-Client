@@ -1,14 +1,15 @@
 let database = {};
 
-async function get(key) {
-    return await localStorage.getItem(key);
+function get(key) {
+    return localStorage.getItem(key);
 }
 
-async function set(key, value){
-    return await localStorage.setItem(key, value);
+function set(key, value){
+    return localStorage.setItem(key, value);
 }
 
 function load(path) {
+    // 出现问题，等待修改
     try{
         if(path === undefined) path = 'database';
         let data = JSON.parse(get(path));

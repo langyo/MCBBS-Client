@@ -60,13 +60,17 @@ const styles = {
     position: 'absolute',
     width: 40,
     left: 0,
-    top: 0
+    top: 0,
+    background: '#999',
+    height: '100%'
   },
   documentList: {
     position: 'absolute',
-    width: 200,
-    left: 40,
-    top: 0
+    width: 190,
+    left: 50,
+    top: 0,
+    background: '#ecdec1',
+    height: '100%'
   },
   documentArea: {
     position: 'absolute',
@@ -107,13 +111,14 @@ class MainWindow extends React.Component {
     return (
       <div className={classes.root}>
         <Window
-          color={this.props.color}
+          color={'#6bbb45'}
           theme={this.props.theme}
           width='800'
           height='600'
           chrome
         >
           <TitleBar title="Client" controls
+            color={'#6bbb45'}
             onCloseClick={() => remote.process.exit()}
             onMinimizeClick={() => remote.getCurrentWindow().minimize()}
             onMaximizeClick={this.toggleMaximize}
@@ -147,7 +152,7 @@ class MainWindow extends React.Component {
               <List>
                 <ListItem>
                   <HomeIcon />
-                  <ListItemText inset primary="主页" />
+                  <ListItemText primary="主页" />
                   <ListItemSecondaryAction>
                     <IconButton disabled aria-label="关闭">
                       <CloseIcon />
@@ -156,15 +161,15 @@ class MainWindow extends React.Component {
                 </ListItem>
                 <ListItem>
                   <DescriptionIcon />
-                  <ListItemText inset primary="帖子" />
+                  <ListItemText primary="帖子" />
                 </ListItem>
                 <ListItem>
                   <VoteIcon />
-                  <ListItemText inset primary="投票" />
+                  <ListItemText primary="投票" />
                 </ListItem>
                 <ListItem>
                   <NeedHelpIcon />
-                  <ListItemText inset primary="悬赏" />
+                  <ListItemText primary="悬赏" />
                 </ListItem>
               </List>
             </div>
