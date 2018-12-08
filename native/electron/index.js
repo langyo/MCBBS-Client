@@ -1,14 +1,15 @@
 const electron = require('electron');
 const {app, BrowserWindow, Menu, ipcMain, ipcRenderer} = electron;
 
-var mainWnd = null;
+let mainWnd = null;
 
 function createMainWnd() {
     mainWnd = new BrowserWindow({
         width:810,
         height:610,
         frame:false,
-        transparent: true
+        transparent: true,
+        backgroundColor:'#fbf2db'
     });
 
     mainWnd.loadURL(`file://${__dirname}/index.html`);

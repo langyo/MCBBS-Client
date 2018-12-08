@@ -83,45 +83,6 @@ const styles = {
   }
 };
 
-let tags = {
-  // 栏一，论坛概览
-  "快速访问":[],
-  "收藏":[],
-  // 栏二，标签列表
-  "正在编辑":[],
-  "正在查看":[],
-  "历史记录":[],
-  // 栏三，个性化
-  "个人中心":[],
-  "设置":[],
-};
-
-// 构建新的标签实体
-function Tag(object, where){
-  this.tagId = tags[where].length;
-
-  this.title = object.title == null ? "未知标题" : object.title;
-  this.subTitle = object.subTitle == null ? "" : object.subTitle;
-  this.icon = object.icon == null ? <DescriptionIcon /> : object.icon;
-  this.content = object.content == null ? {} : object.content;
-
-  this.enableClose = object.enableClose == null ? true : object.enableClose;
-  this.enableSelect = object.enableSelect == null ? true : object.enableSelect;
-
-  this.titleBold = object.titleBold == null ? false : object.titleBold;
-  this.titleItalic = object.titleItalic == null ? false : object.titleItalic;
-  this.titleUnderline = object.titleUnderline == null ? false : object.titleUnderline;
-  this.titleDeleteline = object.titleDeleteline == null ? false : object.titleDeleteline;
-  this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
-
-  if(object.render == null) throw Error('未定义标签的渲染器！');
-  this.render = object.render;
-}
-
-function newTag(object, where){
-  tags[where].push(new Tag(object, where));
-}
-
 // 标签图标列表
 const icons = {
   "主页": <HomeIcon />,
@@ -130,13 +91,62 @@ const icons = {
   "悬赏": <NeedHelpIcon />,
 }
 
+let tags = {
+  // 栏一，论坛概览
+  "快速访问": [
+    {
+      tagId: 0,
+      title: "主页",
+      icon: icons["主页"],
+    }
+  ],
+  "收藏": [],
+  // 栏二，标签列表
+  "正在编辑": [],
+  "正在查看": [],
+  "历史记录": [],
+  // 栏三，个性化
+  "个人中心": [],
+  "设置": [],
+};
+
+// 构建新的标签实体
+class Tag {
+  constructor(object, where) {
+    this.tagId = tags[where].length;
+    
+    this.title = object.title == null ? "未知标题" : object.title;
+    this.subTitle = object.subTitle == null ? "" : object.subTitle;
+    this.icon = object.icon == null ? <DescriptionIcon /> : object.icon;
+    this.content = object.content == null ? {} : object.content;
+    
+    this.enableClose = object.enableClose == null ? true : object.enableClose;
+    this.enableSelect = object.enableSelect == null ? true : object.enableSelect;
+    
+    this.titleBold = object.titleBold == null ? false : object.titleBold;
+    this.titleItalic = object.titleItalic == null ? false : object.titleItalic;
+    this.titleUnderline = object.titleUnderline == null ? false : object.titleUnderline;
+    this.titleDeleteline = object.titleDeleteline == null ? false : object.titleDeleteline;
+    this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
+   
+    if (object.render == null)
+      throw Error('未定义标签的渲染器！');
+    this.render = object.render;
+  }
+}
+
+function newTag(object, where) {
+  tags[where].push(new Tag(object, where));
+}
+
+// 窗口主体
 class MainWindow extends React.Component {
   constructor() {
     super();
     this.state = {
       isMaximized: false,
-      tag: "论坛概览",
-      subTag: 0
+      navigation: "快速访问",
+      tag: 0
     };
   }
 
@@ -173,7 +183,7 @@ class MainWindow extends React.Component {
               <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
                 <Grid item xs={1}>
                   <IconButton>
-                    <DescriptionIcon color={"primary"} className={classes.primaryColor}/>
+                    <DescriptionIcon />
                   </IconButton>
                 </Grid>
                 <Grid item xs={1}>
@@ -195,19 +205,29 @@ class MainWindow extends React.Component {
             </div>
             <div className={classes.documentList}>
               <List>
-                <ListItem>
-                  {icons['主页']}
-                  <ListItemText primary="主页" />
-                  <ListItemSecondaryAction>
-                    <IconButton disabled aria-label="关闭">
-                      <CloseIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
+                {
+                  tags[this.state.navigation].map(n => {
+                    return (
+                      <ListItem>
+                        {n.icon}
+                        <ListItemText primary={n.title} secondary={n.subTitle} />
+                        {
+                          n.enableClose && (
+                            <ListItemSecondaryAction>
+                              <IconButton aria-label="关闭">
+                                <CloseIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          )
+                        }
+                      </ListItem>
+                    )
+                  })
+                }
               </List>
             </div>
             <div className={classes.documentArea}>
-              
+
             </div>
           </div>
         </Window>
