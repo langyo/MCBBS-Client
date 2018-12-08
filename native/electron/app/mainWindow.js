@@ -37,11 +37,12 @@ import ListIcon from "@material-ui/icons/List";
 import HomeIcon from "@material-ui/icons/Home";
 import VoteIcon from "@material-ui/icons/HowToVote";
 import NeedHelpIcon from "@material-ui/icons/LiveHelp";
-import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import RightIcon from '@material-ui/icons/KeyboardArrowRight';
+import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
+import RightIcon from "@material-ui/icons/KeyboardArrowRight";
 
-import { Window, TitleBar } from 'react-desktop/windows';
-import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
+import { Window, TitleBar } from "react-desktop/windows";
+
+import MainPageTag from "./bin/viewManager/mainPage";
 
 const styles = {
   root: {
@@ -168,7 +169,7 @@ class MainWindow extends React.Component {
               </List>
             </div>
             <div className={classes.documentArea}>
-
+              
             </div>
           </div>
         </Window>

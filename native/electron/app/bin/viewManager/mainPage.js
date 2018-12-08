@@ -13,10 +13,6 @@ import IconButton from "@material-ui/core/IconButton";
 
 import SearchIcon from "@material-ui/icons/Search";
 
-import { res } from "../../lib/resources";
-
-import { MainBar } from "../com/appBar/menuBar";
-
 const styles = theme => ({
   list: {
     marginTop: theme.spacing.unit * 2
@@ -27,9 +23,11 @@ const styles = theme => ({
 });
 
 class Root extends React.Component {
-  state = {
-    opening: "mainPage"
-  };
+  constructor(){
+    this.state = {
+      opening: "mainPage"
+    };
+  }
 
   render() {
     const { classes } = this.props;
@@ -42,14 +40,6 @@ class Root extends React.Component {
 
     return (
       <div className={classes.root}>
-        <MainBar
-          title="MainPage"
-          onclick={this.setState({ opening: "drawer" })}
-        >
-          <IconButton onclick={this.setState({ opening: "searchDialog" })}>
-            <SearchIcon />
-          </IconButton>
-        </MainBar>
         <SwipeableDrawer
           open={this.state.opening === "drawer"}
           onclick={open => this.setState({ opening: "drawer" })}
