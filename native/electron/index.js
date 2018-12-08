@@ -5,10 +5,8 @@ let mainWnd = null;
 
 function createMainWnd() {
     mainWnd = new BrowserWindow({
-        width:810,
-        height:610,
-        frame:false,
-        transparent: true,
+        width:800,
+        height:600,
         backgroundColor:'#fbf2db'
     });
 

@@ -40,8 +40,6 @@ import NeedHelpIcon from "@material-ui/icons/LiveHelp";
 import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import RightIcon from "@material-ui/icons/KeyboardArrowRight";
 
-import { Window, TitleBar } from "react-desktop/windows";
-
 import MainPageTag from "./bin/viewManager/mainPage";
 
 const styles = {
@@ -58,7 +56,7 @@ const styles = {
   },
   leftAppBar: {
     position: 'absolute',
-    width: 40,
+    width: 36,
     left: 0,
     top: 0,
     background: '#999',
@@ -66,8 +64,8 @@ const styles = {
   },
   documentList: {
     position: 'absolute',
-    width: 190,
-    left: 50,
+    width: 196,
+    left: 64,
     top: 0,
     background: '#ecdec1',
     height: '100%'
@@ -113,22 +111,20 @@ let tags = {
 // 构建新的标签实体
 class Tag {
   constructor(object, where) {
-    this.tagId = tags[where].length;
-    
     this.title = object.title == null ? "未知标题" : object.title;
     this.subTitle = object.subTitle == null ? "" : object.subTitle;
     this.icon = object.icon == null ? <DescriptionIcon /> : object.icon;
     this.content = object.content == null ? {} : object.content;
-    
+
     this.enableClose = object.enableClose == null ? true : object.enableClose;
     this.enableSelect = object.enableSelect == null ? true : object.enableSelect;
-    
+
     this.titleBold = object.titleBold == null ? false : object.titleBold;
     this.titleItalic = object.titleItalic == null ? false : object.titleItalic;
     this.titleUnderline = object.titleUnderline == null ? false : object.titleUnderline;
     this.titleDeleteline = object.titleDeleteline == null ? false : object.titleDeleteline;
     this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
-   
+
     if (object.render == null)
       throw Error('未定义标签的渲染器！');
     this.render = object.render;
@@ -150,87 +146,61 @@ class MainWindow extends React.Component {
     };
   }
 
-  toggleMaximize() {
-    this.setState((state, porps) => {
-      return {
-        isMaximized: !state.isMaximized
-      };
-    }, () => {
-      remote.getCurrentWindow().maximize();
-    })
-  }
-
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <Window
-          color={'#6bbb45'}
-          theme={this.props.theme}
-          width='800'
-          height='600'
-          chrome
-        >
-          <TitleBar title="Client" controls
-            background={'#6bbb45'}
-            onCloseClick={() => remote.process.exit()}
-            onMinimizeClick={() => remote.getCurrentWindow().minimize()}
-            onMaximizeClick={this.toggleMaximize}
-          />
-          <div className={classes.grow + " " + classes.shrink}>
-            <div className={classes.paddingLeft}>
-              <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
-                <Grid item xs={1}>
-                  <IconButton>
-                    <DescriptionIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item xs={1}>
-                  <IconButton>
-                    <ListIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item xs={1}>
-                  <IconButton>
-                    <WidgetsIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item xs={1}>
-                  <IconButton>
-                    <AccountCircleIcon />
-                  </IconButton>
-                </Grid>
-              </Grid>
-            </div>
-            <div className={classes.documentList}>
-              <List>
-                {
-                  tags[this.state.navigation].map(n => {
-                    return (
-                      <ListItem>
-                        {n.icon}
-                        <ListItemText primary={n.title} secondary={n.subTitle} />
-                        {
-                          n.enableClose && (
-                            <ListItemSecondaryAction>
-                              <IconButton aria-label="关闭">
-                                <CloseIcon />
-                              </IconButton>
-                            </ListItemSecondaryAction>
-                          )
-                        }
-                      </ListItem>
-                    )
-                  })
-                }
-              </List>
-            </div>
-            <div className={classes.documentArea}>
+        <div className={classes.paddingLeft}>
+          <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
+            <Grid item xs={1}>
+              <IconButton>
+                <DescriptionIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton>
+                <ListIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton>
+                <WidgetsIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton>
+                <AccountCircleIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
+        </div>
+        <div className={classes.documentList}>
+          <List>
+            {
+              tags[this.state.navigation].map(n => {
+                return (
+                  <ListItem>
+                    {n.icon}
+                    <ListItemText primary={n.title} secondary={n.subTitle} />
+                    {
+                      n.enableClose && (
+                        <ListItemSecondaryAction>
+                          <IconButton aria-label="关闭">
+                            <CloseIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )
+                    }
+                  </ListItem>
+                )
+              })
+            }
+          </List>
+        </div>
+        <div className={classes.documentArea}>
 
-            </div>
-          </div>
-        </Window>
+        </div>
       </div>
     );
   }
