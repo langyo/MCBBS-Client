@@ -8,6 +8,7 @@ const remote = electron.remote;
 
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from 'classnames';
 
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -27,6 +28,8 @@ import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import MobileStepper from '@material-ui/core/MobileStepper';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -39,10 +42,14 @@ import VoteIcon from "@material-ui/icons/HowToVote";
 import NeedHelpIcon from "@material-ui/icons/LiveHelp";
 import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import RightIcon from "@material-ui/icons/KeyboardArrowRight";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import MainPageTag from "./bin/viewManager/mainPage";
 
-const styles = {
+const drawerWidth = 200;
+
+const styles = theme =>({
   root: {
     flexGrow: 1,
     width: '100%',
@@ -51,35 +58,66 @@ const styles = {
   grow: {
     flexGrow: 1
   },
-  shrink: {
-    flexShrink: 0
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
-  leftAppBar: {
-    position: 'absolute',
-    width: 36,
-    left: 0,
-    top: 0,
-    background: '#999',
-    height: '100%'
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
-  documentList: {
-    position: 'absolute',
-    width: 196,
-    left: 64,
-    top: 0,
-    background: '#ecdec1',
-    height: '100%'
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 36,
   },
-  documentArea: {
-    position: 'absolute',
-    paddingLeft: 240,
-    boxSizing: 'border-box',
-    top: 0,
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing.unit * 7 + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9 + 1,
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
   },
   primaryColor: {
     colorPrimary: '#ecdec1'
   }
-};
+});
 
 // 标签图标列表
 const icons = {
@@ -89,24 +127,7 @@ const icons = {
   "悬赏": <NeedHelpIcon />,
 }
 
-let tags = {
-  // 栏一，论坛概览
-  "快速访问": [
-    {
-      tagId: 0,
-      title: "主页",
-      icon: icons["主页"],
-    }
-  ],
-  "收藏": [],
-  // 栏二，标签列表
-  "正在编辑": [],
-  "正在查看": [],
-  "历史记录": [],
-  // 栏三，个性化
-  "个人中心": [],
-  "设置": [],
-};
+let tags = [];
 
 // 构建新的标签实体
 class Tag {
@@ -131,8 +152,8 @@ class Tag {
   }
 }
 
-function newTag(object, where) {
-  tags[where].push(new Tag(object, where));
+function newTag(object) {
+  tags.push(new Tag(object));
 }
 
 // 窗口主体
@@ -140,67 +161,113 @@ class MainWindow extends React.Component {
   constructor() {
     super();
     this.state = {
-      isMaximized: false,
-      navigation: "快速访问",
-      tag: 0
+      tag: "mainPage",
+      tagOpening: false
     };
   }
 
+  handleDrawerOpen() {
+    this.setState({ tagOpening: true });
+  };
+
+  handleDrawerClose() {
+    this.setState({ tagOpening: false });
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
 
     return (
       <div className={classes.root}>
-        <div className={classes.paddingLeft}>
-          <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
-            <Grid item xs={1}>
-              <IconButton>
-                <DescriptionIcon />
-              </IconButton>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton>
-                <ListIcon />
-              </IconButton>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton>
-                <WidgetsIcon />
-              </IconButton>
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton>
-                <AccountCircleIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.documentList}>
-          <List>
-            {
-              tags[this.state.navigation].map(n => {
-                return (
-                  <ListItem>
-                    {n.icon}
-                    <ListItemText primary={n.title} secondary={n.subTitle} />
-                    {
-                      n.enableClose && (
-                        <ListItemSecondaryAction>
-                          <IconButton aria-label="关闭">
-                            <CloseIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      )
-                    }
-                  </ListItem>
-                )
-              })
-            }
-          </List>
-        </div>
-        <div className={classes.documentArea}>
-
-        </div>
+        <AppBar
+          position="fixed"
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: this.state.tagOpening,
+          })}
+        >
+          <Toolbar disableGutters={!this.state.tagOpening}>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              className={classNames(classes.menuButton, {
+                [classes.hide]: this.state.tagOpening,
+              })}
+            >
+              <AccountCircleIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" noWrap>
+              Unknown Title
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          className={classNames(classes.drawer, {
+            [classes.drawerOpen]: this.state.tagOpening,
+            [classes.drawerClose]: !this.state.tagOpening,
+          })}
+          classes={{
+            paper: classNames({
+              [classes.drawerOpen]: this.state.tagOpening,
+              [classes.drawerClose]: !this.state.tagOpening,
+            }),
+          }}
+          open={this.state.tagOpening}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={this.handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <div>
+            {this.state.tagOpening ? (
+              <List>
+                {
+                  tags.map((n, index) => {
+                    return (
+                      <ListItem key={index}>
+                        {n.icon}
+                        <ListItemText primary={n.title} secondary={n.subTitle} />
+                        {
+                          n.enableClose && (
+                            <ListItemSecondaryAction>
+                              <IconButton aria-label="关闭">
+                                <CloseIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          )
+                        }
+                      </ListItem>
+                    )
+                  })
+                }
+              </List>
+            ) : (
+                <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
+                  <Grid item xs={1}>
+                    <IconButton>
+                      <DescriptionIcon onClick={this.handleDrawerOpen} />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <IconButton>
+                      <ListIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <IconButton>
+                      <WidgetsIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              )}
+          </div>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          // 主体
+        </main>
       </div>
     );
   }
