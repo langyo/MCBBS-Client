@@ -7,12 +7,20 @@ function createMainWnd() {
     mainWnd = new BrowserWindow({
         width:800,
         height:600,
-        backgroundColor:'#fbf2db'
+        backgroundColor:'#fbf2db',
+        useContentSize: true,
+        show: false
     });
 
     mainWnd.loadURL(`file://${__dirname}/index.html`);
 
     // mainWnd.webContents.openDevTools();
+
+    mainWnd.on('ready-to-show', ()=>{
+        // TODO: 未来可能会让菜单重新回归以支持一些新奇功能，不过绝对不是以原生菜单的形式
+        Menu.setApplicationMenu(null);
+        mainWnd.show();
+    })
 
     mainWnd.on('resize', ()=>{
 
