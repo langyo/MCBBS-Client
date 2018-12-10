@@ -81,12 +81,12 @@ const styles = theme =>({
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
+    width: 200,
     flexShrink: 0,
     whiteSpace: 'nowrap',
   },
   drawerOpen: {
-    width: drawerWidth,
+    width: 200,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -98,10 +98,7 @@ const styles = theme =>({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9 + 1,
-    },
+    width: 36,
   },
   toolbar: {
     display: 'flex',
@@ -266,7 +263,9 @@ class MainWindow extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          // 主体
+              <Paper>
+                <p>test</p>
+              </Paper>
         </main>
       </div>
     );
