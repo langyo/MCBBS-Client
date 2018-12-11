@@ -11,7 +11,10 @@ import PropTypes from "prop-types";
 import classNames from 'classnames';
 
 import { withStyles } from "@material-ui/core/styles";
+import Fade from '@material-ui/core/Fade';
+
 import AppBar from "@material-ui/core/AppBar";
+import Avatar from '@material-ui/core/Avatar';
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -22,6 +25,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -76,10 +80,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     overflowX: "hidden",
-    width: theme.spacing.unit * 7 + 1,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing.unit * 9 + 1
-    }
+    width: 48
   },
   toolbar: {
     display: "flex",
@@ -195,9 +196,11 @@ class MainWindow extends React.Component {
                       <ListItemText primary={n.title} secondary={n.subTitle} />
                       {n.enableClose && (
                         <ListItemSecondaryAction>
-                          <IconButton aria-label="关闭">
-                            <CloseIcon />
-                          </IconButton>
+                          <Tooltip title="关闭">
+                            <IconButton>
+                              <CloseIcon />
+                            </IconButton>
+                          </Tooltip>
                         </ListItemSecondaryAction>
                       )}
                     </ListItem>
@@ -207,31 +210,39 @@ class MainWindow extends React.Component {
             </div>
           )}
           <div className={classes.toolbarDrawerClosing}>
-            <Tooltip title="账户设置">
-              <IconButton className={this.state.open ? " " + classes.hide : ""}>
-                <AccountCircleIcon />
-              </IconButton>
-            </Tooltip>
+            <Fade in={!this.state.open} timeout={500}>
+              <Tooltip title="账户设置">
+                <IconButton className={this.state.open ? " " + classes.hide : ""}>
+                  <AccountCircleIcon />
+                </IconButton>
+              </Tooltip>
+            </Fade>
           </div>
           <Divider />
-          <Tooltip title="已打开的标签页">
-            <IconButton
-              onClick={this.handleDrawerOpen}
-              className={this.state.open ? " " + classes.hide : ""}
-            >
-              <DescriptionIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="论坛概览">
-            <IconButton className={this.state.open ? " " + classes.hide : ""}>
-              <ListIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="个性化设置">
-            <IconButton className={this.state.open ? " " + classes.hide : ""}>
-              <WidgetsIcon />
-            </IconButton>
-          </Tooltip>
+          <Fade in={!this.state.open} timeout={500}>
+            <Tooltip title="标签页">
+              <IconButton
+                onClick={this.handleDrawerOpen}
+                className={this.state.open ? " " + classes.hide : ""}
+              >
+                <DescriptionIcon />
+              </IconButton>
+            </Tooltip>
+          </Fade>
+          <Fade in={!this.state.open} timeout={500}>
+            <Tooltip title="论坛概览">
+              <IconButton className={this.state.open ? " " + classes.hide : ""}>
+                <ListIcon />
+              </IconButton>
+            </Tooltip>
+          </Fade>
+          <Fade in={!this.state.open} timeout={500}>
+            <Tooltip title="个性化">
+              <IconButton className={this.state.open ? " " + classes.hide : ""}>
+                <WidgetsIcon />
+              </IconButton>
+            </Tooltip>
+          </Fade>
           <Divider />
         </Drawer>
         <main className={classes.content}>

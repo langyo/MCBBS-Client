@@ -8,6 +8,10 @@ function set(key, value){
     return localStorage.setItem(key, value);
 }
 
+function remove(key){
+    return localStorage.removeItem(key);
+}
+
 function init(){
     if(get('.') === undefined){
         // 第一次初始化 databse
@@ -54,16 +58,13 @@ function writeBack(object, path, location){
     let inDatabase = join(load(get(location)));
     let addNode = [], deleteNode = [], updateNode = [];
 
-    for(let i of Object.keys(object)) if(!inDatabase.hasOwnProperty(i)) addNode.push(i);
-    for(let i of Object.keys(inDatabase)) if(!object.hasOwnProperty(i) && addNode.indexOf(i) === -1) deleteNode.push(i);
-    for(let i of Object.keys(object)) if(addNode.indexOf(i) === -1 && object[i] !== inDatabase[i]) updateNode.push(i);
+    // 创建任务列表
+    for(let i of Object.keys(object)) if(!inDatabase.hasOwnProperty(i)) addNode.push(i),console.log('[数据库] 数据写回 添加任务 ' + location + '.' + i);
+    for(let i of Object.keys(inDatabase)) if(!object.hasOwnProperty(i) && addNode.indexOf(i) === -1) deleteNode.push(i),console.log('[数据库] 数据写回 删除任务 ' + location + '.' + i);
+    for(let i of Object.keys(object)) if(addNode.indexOf(i) === -1 && object[i] !== inDatabase[i]) updateNode.push(i),console.log('[数据库] 数据写回 更新任务 ' + location + '.' + i);
 
-    // 为了保证写入成功进行、不被异常崩溃导致数据错乱，所有的任务列表会首先写入数据库
-    set('writingBack', 'task');
-    set('writingBackLocation', location);
-    set('writingBackAddNode', JSON.stringify({ list:addNode }));
-    set('writingBackDeleteNode', JSON.stringify({ list:DeleteNode }));
-    set('writingBackUpdateNode', JSON.stringify({ list:UpdateNode }));
-    
-    // 待编辑...
+    // 删除部分
+    for(let i of deleteNode){
+
+    }
 }
