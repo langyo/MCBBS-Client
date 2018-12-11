@@ -31,6 +31,7 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Tooltip from '@material-ui/core/Tooltip';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -206,23 +207,31 @@ class MainWindow extends React.Component {
             </div>
           )}
           <div className={classes.toolbarDrawerClosing}>
+            <Tooltip title="账户设置">
               <IconButton className={this.state.open ? " " + classes.hide : ""}>
                 <AccountCircleIcon />
               </IconButton>
+            </Tooltip>
           </div>
           <Divider />
-          <IconButton
-            onClick={this.handleDrawerOpen}
-            className={this.state.open ? " " + classes.hide : ""}
-          >
-            <DescriptionIcon />
-          </IconButton>
-          <IconButton className={this.state.open ? " " + classes.hide : ""}>
-            <ListIcon />
-          </IconButton>
-          <IconButton className={this.state.open ? " " + classes.hide : ""}>
-            <WidgetsIcon />
-          </IconButton>
+          <Tooltip title="已打开的标签页">
+            <IconButton
+              onClick={this.handleDrawerOpen}
+              className={this.state.open ? " " + classes.hide : ""}
+            >
+              <DescriptionIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="论坛概览">
+            <IconButton className={this.state.open ? " " + classes.hide : ""}>
+              <ListIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="个性化设置">
+            <IconButton className={this.state.open ? " " + classes.hide : ""}>
+              <WidgetsIcon />
+            </IconButton>
+          </Tooltip>
           <Divider />
         </Drawer>
         <main className={classes.content}>
