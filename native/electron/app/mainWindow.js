@@ -30,6 +30,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -49,70 +50,53 @@ import MainPageTag from "./bin/viewManager/mainPage";
 
 const drawerWidth = 200;
 
-const styles = theme =>({
+const styles = theme => ({
   root: {
-    flexGrow: 1,
-    width: '100%',
-    height: '100%'
-  },
-  grow: {
-    flexGrow: 1
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
+    display: "flex"
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawer: {
-    width: 200,
+    width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap"
   },
   drawerOpen: {
-    width: 200,
-    transition: theme.transitions.create('width', {
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    overflowX: 'hidden',
-    width: 36,
+    overflowX: "hidden",
+    width: theme.spacing.unit * 7 + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing.unit * 9 + 1
+    }
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
+    ...theme.mixins.toolbar
+  },
+  toolbarDrawerClosing: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "0 8px",
+    ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
-  primaryColor: {
-    colorPrimary: '#ecdec1'
+    padding: theme.spacing.unit * 3
   }
 });
 
@@ -153,22 +137,25 @@ function newTag(object) {
   tags.push(new Tag(object));
 }
 
+// 测试数据
+newTag({
+  title: "主页",
+  icon: icons.主页,
+  render: {}
+});
+
 // 窗口主体
 class MainWindow extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      tag: "mainPage",
-      tagOpening: false
-    };
-  }
-
-  handleDrawerOpen() {
-    this.setState({ tagOpening: true });
+  state = {
+    open: false
   };
 
-  handleDrawerClose() {
-    this.setState({ tagOpening: false });
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleDrawerClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -176,96 +163,72 @@ class MainWindow extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar
-          position="fixed"
-          className={classNames(classes.appBar, {
-            [classes.appBarShift]: this.state.tagOpening,
-          })}
-        >
-          <Toolbar disableGutters={!this.state.tagOpening}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              className={classNames(classes.menuButton, {
-                [classes.hide]: this.state.tagOpening,
-              })}
-            >
-              <AccountCircleIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              Unknown Title
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <CssBaseline />
         <Drawer
           variant="permanent"
           className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.tagOpening,
-            [classes.drawerClose]: !this.state.tagOpening,
+            [classes.drawerOpen]: this.state.open,
+            [classes.drawerClose]: !this.state.open
           })}
           classes={{
             paper: classNames({
-              [classes.drawerOpen]: this.state.tagOpening,
-              [classes.drawerClose]: !this.state.tagOpening,
-            }),
+              [classes.drawerOpen]: this.state.open,
+              [classes.drawerClose]: !this.state.open
+            })
           }}
-          open={this.state.tagOpening}
+          open={this.state.open}
         >
-          <div className={classes.toolbar}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
+          {this.state.open && (
+            <div>
+              <div className={classes.toolbar}>
+                <IconButton onClick={this.handleDrawerClose}>
+                  <ChevronLeftIcon />
+                </IconButton>
+              </div>
+              <Divider />
+              <List>
+                {tags.map((n, index) => {
+                  return (
+                    <ListItem key={index}>
+                      {n.icon}
+                      <ListItemText primary={n.title} secondary={n.subTitle} />
+                      {n.enableClose && (
+                        <ListItemSecondaryAction>
+                          <IconButton aria-label="关闭">
+                            <CloseIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </div>
+          )}
+          <div className={classes.toolbarDrawerClosing}>
+              <IconButton className={this.state.open ? " " + classes.hide : ""}>
+                <AccountCircleIcon />
+              </IconButton>
           </div>
           <Divider />
-          <div>
-            {this.state.tagOpening ? (
-              <List>
-                {
-                  tags.map((n, index) => {
-                    return (
-                      <ListItem key={index}>
-                        {n.icon}
-                        <ListItemText primary={n.title} secondary={n.subTitle} />
-                        {
-                          n.enableClose && (
-                            <ListItemSecondaryAction>
-                              <IconButton aria-label="关闭">
-                                <CloseIcon />
-                              </IconButton>
-                            </ListItemSecondaryAction>
-                          )
-                        }
-                      </ListItem>
-                    )
-                  })
-                }
-              </List>
-            ) : (
-                <Grid container direction='column' justify='flex-start' alignItems='baseline' className={classes.stretch}>
-                  <Grid item xs={1}>
-                    <IconButton>
-                      <DescriptionIcon onClick={this.handleDrawerOpen} />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton>
-                      <ListIcon />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <IconButton>
-                      <WidgetsIcon />
-                    </IconButton>
-                  </Grid>
-                </Grid>
-              )}
-          </div>
+          <IconButton
+            onClick={this.handleDrawerOpen}
+            className={this.state.open ? " " + classes.hide : ""}
+          >
+            <DescriptionIcon />
+          </IconButton>
+          <IconButton className={this.state.open ? " " + classes.hide : ""}>
+            <ListIcon />
+          </IconButton>
+          <IconButton className={this.state.open ? " " + classes.hide : ""}>
+            <WidgetsIcon />
+          </IconButton>
+          <Divider />
         </Drawer>
         <main className={classes.content}>
-          <div className={classes.toolbar} />
-              <Paper>
-                <p>test</p>
-              </Paper>
+          <Typography paragraph>
+            123123
+          </Typography>
         </main>
       </div>
     );
