@@ -20,10 +20,11 @@ function init(){
 }
 
 function read(object, path, location){
-    if(object === undefined) object = { node: Object.keys(database) };
+    assert(object !== undefined);
     if(location === undefined) location = '.';
-
     assert(path.length > 0);
+    assert(/^(\.)|(\.[^\.])+$/.test(location));
+
     if(path.length === 1) return object.data[path[0]];
     let key = path.pop();
     location += '.' + key;
@@ -55,8 +56,8 @@ function load(key){
 function writeBack(object, path, location){
     // 比较差异后写回数据库
     if(location === undefined) location = '.';
-    let inDatabase = join(load(get(location)));
-    let addNode = [], deleteNode = [], updateNode = [];
+    let inDatabase = load(get(location));
+    let addNode = [], deleteNode = [], updateNode = [], objectNode = [];
 
     // 创建任务列表
     for(let i of Object.keys(object)) if(!inDatabase.hasOwnProperty(i)) addNode.push(i),console.log('[数据库] 数据写回 添加任务 ' + location + '.' + i);
@@ -64,7 +65,12 @@ function writeBack(object, path, location){
     for(let i of Object.keys(object)) if(addNode.indexOf(i) === -1 && object[i] !== inDatabase[i]) updateNode.push(i),console.log('[数据库] 数据写回 更新任务 ' + location + '.' + i);
 
     // 删除部分
-    for(let i of deleteNode){
+    for(let i of deleteNode) remove(location + '.' + i);
 
-    }
+    // 新增部分
+    for(let i of addNode) set(location + '.' + i, object[i]);
+
+    // 更新部分
+    for(let i of updateNode) set(location + '.' + i, object[i]);
+
 }
