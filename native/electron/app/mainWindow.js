@@ -56,6 +56,9 @@ import SettingIcon from '@material-ui/icons/Settings';
 import FaceIcon from '@material-ui/icons/Face';
 import TodayIcon from '@material-ui/icons/Today';
 import StarIcon from '@material-ui/icons/Star';
+import PaintIcon from '@material-ui/icons/ColorLens';
+import StoreIcon from '@material-ui/icons/StoreMallDirectory';
+import InfoIcon from '@material-ui/icons/Info';
 
 import MainPageTag from "./bin/viewManager/mainPage";
 import { ListSubheader } from "@material-ui/core";
@@ -72,7 +75,8 @@ const styles = theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
+    // TODO: 隐藏滚动条但可以滚动
   },
   drawerleftBarType: {
     width: drawerWidth,
@@ -264,6 +268,38 @@ class MainWindow extends React.Component {
             )
           }
 
+          {
+            this.state.leftBarType === 'settings' && (
+              <div>
+                <div className={classes.toolbar}>
+                  <IconButton onClick={this.handleDrawerClose}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                </div>
+                <List>
+                  <ListSubheader>个性化</ListSubheader>
+                  <ListItem>
+                    <SettingIcon />
+                    <ListItemText primary="本体设置" />
+                  </ListItem>
+                  <ListItem>
+                    <PaintIcon />
+                    <ListItemText primary="主题" />
+                  </ListItem>
+                  <ListItem>
+                    <InfoIcon />
+                    <ListItemText primary="关于" />
+                  </ListItem>
+                  <ListSubheader>插件控制</ListSubheader>
+                  <ListItem>
+                    <StoreIcon />
+                    <ListItemText primary="插件中心" />
+                  </ListItem>
+                </List>
+              </div>
+            )
+          }
+
           <div className={classes.toolbarDrawerClosing}>
             <Fade in={this.state.leftBarType === 'main'} timeout={500}>
               <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
@@ -289,7 +325,10 @@ class MainWindow extends React.Component {
             </IconButton>
           </Fade>
           <Fade in={this.state.leftBarType === 'main'} timeout={500}>
-            <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
+            <IconButton
+              onClick={this.handleDrawerleftBarTypeSettings}
+              className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
+            >
               <WidgetsIcon />
             </IconButton>
           </Fade>
