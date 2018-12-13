@@ -149,15 +149,23 @@ newTag({
 // 窗口主体
 class MainWindow extends React.Component {
   state = {
-    open: false
+    leftBarType: 'main'
   };
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
+  handleDrawerOpenNavigation = () => {
+    this.setState({ open: 'navigation'});
   };
+
+  handleDrawerOpenDocuments = () => {
+    this.setState({ open: 'documents' });
+  };
+
+  handleDrawerOpenSettings = () =>{
+    this.setState({ open: 'settings'});
+  }
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: 'main' });
   };
 
   render() {
@@ -169,18 +177,18 @@ class MainWindow extends React.Component {
         <Drawer
           variant="permanent"
           className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.open,
-            [classes.drawerClose]: !this.state.open
+            [classes.drawerOpen]: this.state.open !== 'main',
+            [classes.drawerClose]: this.state.open === 'main'
           })}
           classes={{
             paper: classNames({
-              [classes.drawerOpen]: this.state.open,
-              [classes.drawerClose]: !this.state.open
+              [classes.drawerOpen]: this.state.open !== 'main',
+            [classes.drawerClose]: this.state.open === 'main'
             })
           }}
-          open={this.state.open}
+          open={this.state.open !== 'main'}
         >
-          {this.state.open && (
+          {this.state.open === 'documents' && (
             <div>
               <div className={classes.toolbar}>
                 <IconButton onClick={this.handleDrawerClose}>
@@ -196,11 +204,9 @@ class MainWindow extends React.Component {
                       <ListItemText primary={n.title} secondary={n.subTitle} />
                       {n.enableClose && (
                         <ListItemSecondaryAction>
-                          <Tooltip title="关闭">
-                            <IconButton>
-                              <CloseIcon />
-                            </IconButton>
-                          </Tooltip>
+                          <IconButton>
+                            <CloseIcon />
+                          </IconButton>
                         </ListItemSecondaryAction>
                       )}
                     </ListItem>
@@ -210,38 +216,30 @@ class MainWindow extends React.Component {
             </div>
           )}
           <div className={classes.toolbarDrawerClosing}>
-            <Fade in={!this.state.open} timeout={500}>
-              <Tooltip title="账户设置">
-                <IconButton className={this.state.open ? " " + classes.hide : ""}>
-                  <AccountCircleIcon />
-                </IconButton>
-              </Tooltip>
+            <Fade in={this.state.open === 'main'} timeout={500}>
+              <IconButton className={this.state.open !== 'main' ? " " + classes.hide : ""}>
+                <AccountCircleIcon />
+              </IconButton>
             </Fade>
           </div>
           <Divider />
-          <Fade in={!this.state.open} timeout={500}>
-            <Tooltip title="标签页">
-              <IconButton
-                onClick={this.handleDrawerOpen}
-                className={this.state.open ? " " + classes.hide : ""}
-              >
-                <DescriptionIcon />
-              </IconButton>
-            </Tooltip>
+          <Fade in={this.state.open === 'main'} timeout={500}>
+            <IconButton
+              onClick={this.handleDrawerOpenDocuments}
+              className={this.state.open !== 'main' ? " " + classes.hide : ""}
+            >
+              <DescriptionIcon />
+            </IconButton>
           </Fade>
-          <Fade in={!this.state.open} timeout={500}>
-            <Tooltip title="论坛概览">
-              <IconButton className={this.state.open ? " " + classes.hide : ""}>
-                <ListIcon />
-              </IconButton>
-            </Tooltip>
+          <Fade in={this.state.open === 'main'} timeout={500}>
+            <IconButton className={this.state.open !== 'main' ? " " + classes.hide : ""}>
+              <ListIcon />
+            </IconButton>
           </Fade>
-          <Fade in={!this.state.open} timeout={500}>
-            <Tooltip title="个性化">
-              <IconButton className={this.state.open ? " " + classes.hide : ""}>
-                <WidgetsIcon />
-              </IconButton>
-            </Tooltip>
+          <Fade in={this.state.open === 'main'} timeout={500}>
+            <IconButton className={this.state.open !== 'main' ? " " + classes.hide : ""}>
+              <WidgetsIcon />
+            </IconButton>
           </Fade>
           <Divider />
         </Drawer>
