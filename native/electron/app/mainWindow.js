@@ -50,8 +50,15 @@ import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import RightIcon from "@material-ui/icons/KeyboardArrowRight";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import SendIcon from '@material-ui/icons/Send';
+import NoticeIcon from '@material-ui/icons/Notifications';
+import SettingIcon from '@material-ui/icons/Settings';
+import FaceIcon from '@material-ui/icons/Face';
+import TodayIcon from '@material-ui/icons/Today';
+import StarIcon from '@material-ui/icons/Star';
 
 import MainPageTag from "./bin/viewManager/mainPage";
+import { ListSubheader } from "@material-ui/core";
 
 const drawerWidth = 200;
 
@@ -153,15 +160,15 @@ class MainWindow extends React.Component {
   };
 
   handleDrawerleftBarTypeNavigation = () => {
-    this.setState({ leftBarType: 'navigation'});
+    this.setState({ leftBarType: 'navigation' });
   };
 
   handleDrawerleftBarTypeDocuments = () => {
     this.setState({ leftBarType: 'documents' });
   };
 
-  handleDrawerleftBarTypeSettings = () =>{
-    this.setState({ leftBarType: 'settings'});
+  handleDrawerleftBarTypeSettings = () => {
+    this.setState({ leftBarType: 'settings' });
   }
 
   handleDrawerClose = () => {
@@ -183,38 +190,80 @@ class MainWindow extends React.Component {
           classes={{
             paper: classNames({
               [classes.drawerleftBarType]: this.state.leftBarType !== 'main',
-            [classes.drawerClose]: this.state.leftBarType === 'main'
+              [classes.drawerClose]: this.state.leftBarType === 'main'
             })
           }}
           leftBarType={this.state.leftBarType !== 'main'}
         >
-          {this.state.leftBarType === 'documents' && (
-            <div>
-              <div className={classes.toolbar}>
-                <IconButton onClick={this.handleDrawerClose}>
-                  <ChevronLeftIcon />
-                </IconButton>
+          {
+            this.state.leftBarType === 'documents' && (
+              <div>
+                <div className={classes.toolbar}>
+                  <IconButton onClick={this.handleDrawerClose}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                </div>
+                <List>
+                  {tags.map((n, index) => {
+                    return (
+                      <ListItem key={index}>
+                        {n.icon}
+                        <ListItemText primary={n.title} secondary={n.subTitle} />
+                        {n.enableClose && (
+                          <ListItemSecondaryAction>
+                            <IconButton>
+                              <CloseIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        )}
+                      </ListItem>
+                    );
+                  })}
+                </List>
               </div>
-              <Divider />
-              <List>
-                {tags.map((n, index) => {
-                  return (
-                    <ListItem key={index}>
-                      {n.icon}
-                      <ListItemText primary={n.title} secondary={n.subTitle} />
-                      {n.enableClose && (
-                        <ListItemSecondaryAction>
-                          <IconButton>
-                            <CloseIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      )}
-                    </ListItem>
-                  );
-                })}
-              </List>
-            </div>
-          )}
+            )
+          }
+
+          {
+            this.state.leftBarType === 'navigation' && (
+              <div>
+                <div className={classes.toolbar}>
+                  <IconButton onClick={this.handleDrawerClose}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                </div>
+                <List>
+                  <ListSubheader>通知</ListSubheader>
+                  <ListItem>
+                    <SendIcon />
+                    <ListItemText primary="消息" secondary={"没有新消息"} />
+                  </ListItem>
+                  <ListItem>
+                    <NoticeIcon />
+                    <ListItemText primary="我的帖子" secondary={"没有新通知"} />
+                  </ListItem>
+                  <ListItem>
+                    <SettingIcon />
+                    <ListItemText primary="系统提醒" secondary={"没有新通知"} />
+                  </ListItem>
+                  <ListItem>
+                    <FaceIcon />
+                    <ListItemText primary="坛友互动" secondary={"没有新通知"} />
+                  </ListItem>
+                  <ListSubheader>快速通道</ListSubheader>
+                  <ListItem>
+                    <TodayIcon />
+                    <ListItemText primary="签到" secondary={"您今日还未签到！"} />
+                  </ListItem>
+                  <ListItem>
+                    <StarIcon />
+                    <ListItemText primary="收藏" />
+                  </ListItem>
+                </List>
+              </div>
+            )
+          }
+
           <div className={classes.toolbarDrawerClosing}>
             <Fade in={this.state.leftBarType === 'main'} timeout={500}>
               <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
@@ -232,7 +281,10 @@ class MainWindow extends React.Component {
             </IconButton>
           </Fade>
           <Fade in={this.state.leftBarType === 'main'} timeout={500}>
-            <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
+            <IconButton
+              onClick={this.handleDrawerleftBarTypeNavigation}
+              className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
+            >
               <ListIcon />
             </IconButton>
           </Fade>
