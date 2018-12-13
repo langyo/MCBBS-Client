@@ -67,7 +67,7 @@ const styles = theme => ({
     flexShrink: 0,
     whiteSpace: "nowrap"
   },
-  drawerOpen: {
+  drawerleftBarType: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -152,20 +152,20 @@ class MainWindow extends React.Component {
     leftBarType: 'main'
   };
 
-  handleDrawerOpenNavigation = () => {
-    this.setState({ open: 'navigation'});
+  handleDrawerleftBarTypeNavigation = () => {
+    this.setState({ leftBarType: 'navigation'});
   };
 
-  handleDrawerOpenDocuments = () => {
-    this.setState({ open: 'documents' });
+  handleDrawerleftBarTypeDocuments = () => {
+    this.setState({ leftBarType: 'documents' });
   };
 
-  handleDrawerOpenSettings = () =>{
-    this.setState({ open: 'settings'});
+  handleDrawerleftBarTypeSettings = () =>{
+    this.setState({ leftBarType: 'settings'});
   }
 
   handleDrawerClose = () => {
-    this.setState({ open: 'main' });
+    this.setState({ leftBarType: 'main' });
   };
 
   render() {
@@ -177,18 +177,18 @@ class MainWindow extends React.Component {
         <Drawer
           variant="permanent"
           className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.open !== 'main',
-            [classes.drawerClose]: this.state.open === 'main'
+            [classes.drawerleftBarType]: this.state.leftBarType !== 'main',
+            [classes.drawerClose]: this.state.leftBarType === 'main'
           })}
           classes={{
             paper: classNames({
-              [classes.drawerOpen]: this.state.open !== 'main',
-            [classes.drawerClose]: this.state.open === 'main'
+              [classes.drawerleftBarType]: this.state.leftBarType !== 'main',
+            [classes.drawerClose]: this.state.leftBarType === 'main'
             })
           }}
-          open={this.state.open !== 'main'}
+          leftBarType={this.state.leftBarType !== 'main'}
         >
-          {this.state.open === 'documents' && (
+          {this.state.leftBarType === 'documents' && (
             <div>
               <div className={classes.toolbar}>
                 <IconButton onClick={this.handleDrawerClose}>
@@ -216,28 +216,28 @@ class MainWindow extends React.Component {
             </div>
           )}
           <div className={classes.toolbarDrawerClosing}>
-            <Fade in={this.state.open === 'main'} timeout={500}>
-              <IconButton className={this.state.open !== 'main' ? " " + classes.hide : ""}>
+            <Fade in={this.state.leftBarType === 'main'} timeout={500}>
+              <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
                 <AccountCircleIcon />
               </IconButton>
             </Fade>
           </div>
           <Divider />
-          <Fade in={this.state.open === 'main'} timeout={500}>
+          <Fade in={this.state.leftBarType === 'main'} timeout={500}>
             <IconButton
-              onClick={this.handleDrawerOpenDocuments}
-              className={this.state.open !== 'main' ? " " + classes.hide : ""}
+              onClick={this.handleDrawerleftBarTypeDocuments}
+              className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
             >
               <DescriptionIcon />
             </IconButton>
           </Fade>
-          <Fade in={this.state.open === 'main'} timeout={500}>
-            <IconButton className={this.state.open !== 'main' ? " " + classes.hide : ""}>
+          <Fade in={this.state.leftBarType === 'main'} timeout={500}>
+            <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
               <ListIcon />
             </IconButton>
           </Fade>
-          <Fade in={this.state.open === 'main'} timeout={500}>
-            <IconButton className={this.state.open !== 'main' ? " " + classes.hide : ""}>
+          <Fade in={this.state.leftBarType === 'main'} timeout={500}>
+            <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
               <WidgetsIcon />
             </IconButton>
           </Fade>
@@ -245,7 +245,7 @@ class MainWindow extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <Typography paragraph>
-            123123
+            {this.state.leftBarType === 'main' ? 'true' : 'false'}
           </Typography>
         </main>
       </div>
