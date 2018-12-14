@@ -214,7 +214,7 @@ class MainWindow extends React.Component {
                 <List>
                   {tags.map((n, index) => {
                     return (
-                      <ListItem key={index}>
+                      <ListItem key={index} button>
                         {n.icon}
                         <ListItemText primary={n.title} secondary={n.subTitle} />
                         {n.enableClose && (
@@ -243,32 +243,32 @@ class MainWindow extends React.Component {
                 <Divider />
                 <List>
                   <ListSubheader>通知</ListSubheader>
-                  <ListItem>
+                  <ListItem button>
                     <SendIcon />
                     <ListItemText primary="消息" secondary={"没有新消息"} />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <NoticeIcon />
                     <ListItemText primary="我的帖子" secondary={"没有新通知"} />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <SettingIcon />
                     <ListItemText primary="系统提醒" secondary={"没有新通知"} />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <FaceIcon />
                     <ListItemText primary="坛友互动" secondary={"没有新通知"} />
                   </ListItem>
                   <ListSubheader>快速通道</ListSubheader>
-                  <ListItem>
+                  <ListItem button>
                     <TodayIcon />
                     <ListItemText primary="签到" secondary={"您今日还未签到！"} />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <StarIcon />
                     <ListItemText primary="收藏" />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <ListAltIcon />
                     <ListItemText primary="任务" />
                   </ListItem>
@@ -288,20 +288,20 @@ class MainWindow extends React.Component {
                 <Divider />
                 <List>
                   <ListSubheader>个性化</ListSubheader>
-                  <ListItem>
+                  <ListItem button>
                     <SettingIcon />
                     <ListItemText primary="本体设置" />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <PaintIcon />
                     <ListItemText primary="主题" />
                   </ListItem>
-                  <ListItem>
+                  <ListItem button>
                     <InfoIcon />
                     <ListItemText primary="关于" />
                   </ListItem>
                   <ListSubheader>插件控制</ListSubheader>
-                  <ListItem>
+                  <ListItem button>
                     <StoreIcon />
                     <ListItemText primary="插件中心" />
                   </ListItem>
@@ -320,7 +320,7 @@ class MainWindow extends React.Component {
                 </div>
                 <Divider />
                 <List>
-                  <ListItem>
+                  <ListItem button>
                     <AddIcon />
                     <ListItemText primary="新增账户" />
                   </ListItem>
