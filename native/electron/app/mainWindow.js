@@ -202,7 +202,7 @@ class MainWindow extends React.Component {
               [classes.drawerClose]: this.state.leftBarType === 'main'
             })
           }}
-          leftBarType={this.state.leftBarType !== 'main'}
+          open={this.state.leftBarType !== 'main'}
         >
           {
             this.state.leftBarType === 'documents' && (
