@@ -59,6 +59,8 @@ import StarIcon from '@material-ui/icons/Star';
 import PaintIcon from '@material-ui/icons/ColorLens';
 import StoreIcon from '@material-ui/icons/StoreMallDirectory';
 import InfoIcon from '@material-ui/icons/Info';
+import AddIcon from '@material-ui/icons/Add';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 
 import MainPageTag from "./bin/viewManager/mainPage";
 import { ListSubheader } from "@material-ui/core";
@@ -76,9 +78,8 @@ const styles = theme => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
-    // TODO: 隐藏滚动条但可以滚动
   },
-  drawerleftBarType: {
+  drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -163,15 +164,19 @@ class MainWindow extends React.Component {
     leftBarType: 'main'
   };
 
-  handleDrawerleftBarTypeNavigation = () => {
+  handleDrawerOpenUsers = () => {
+    this.setState({ leftBarType: 'users' });
+  }
+
+  handleDrawerOpenNavigation = () => {
     this.setState({ leftBarType: 'navigation' });
   };
 
-  handleDrawerleftBarTypeDocuments = () => {
+  handleDrawerOpenDocuments = () => {
     this.setState({ leftBarType: 'documents' });
   };
 
-  handleDrawerleftBarTypeSettings = () => {
+  handleDrawerOpenSettings = () => {
     this.setState({ leftBarType: 'settings' });
   }
 
@@ -188,12 +193,12 @@ class MainWindow extends React.Component {
         <Drawer
           variant="permanent"
           className={classNames(classes.drawer, {
-            [classes.drawerleftBarType]: this.state.leftBarType !== 'main',
+            [classes.drawerOpen]: this.state.leftBarType !== 'main',
             [classes.drawerClose]: this.state.leftBarType === 'main'
           })}
           classes={{
             paper: classNames({
-              [classes.drawerleftBarType]: this.state.leftBarType !== 'main',
+              [classes.drawerOpen]: this.state.leftBarType !== 'main',
               [classes.drawerClose]: this.state.leftBarType === 'main'
             })
           }}
@@ -263,6 +268,10 @@ class MainWindow extends React.Component {
                     <StarIcon />
                     <ListItemText primary="收藏" />
                   </ListItem>
+                  <ListItem>
+                    <ListAltIcon />
+                    <ListItemText primary="任务" />
+                  </ListItem>
                 </List>
               </div>
             )
@@ -300,9 +309,30 @@ class MainWindow extends React.Component {
             )
           }
 
+          {
+            this.state.leftBarType === 'users' && (
+              <div>
+                <div className={classes.toolbar}>
+                  <IconButton onClick={this.handleDrawerClose}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                </div>
+                <List>
+                  <ListItem>
+                    <AddIcon />
+                    <ListItemText primary="新增账户" />
+                  </ListItem>
+                </List>
+              </div>
+            )
+          }
+
           <div className={classes.toolbarDrawerClosing}>
             <Fade in={this.state.leftBarType === 'main'} timeout={500}>
-              <IconButton className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}>
+              <IconButton
+                onClick={this.handleDrawerOpenUsers}
+                className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
+              >
                 <AccountCircleIcon />
               </IconButton>
             </Fade>
@@ -310,7 +340,7 @@ class MainWindow extends React.Component {
           <Divider />
           <Fade in={this.state.leftBarType === 'main'} timeout={500}>
             <IconButton
-              onClick={this.handleDrawerleftBarTypeDocuments}
+              onClick={this.handleDrawerOpenDocuments}
               className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
             >
               <DescriptionIcon />
@@ -318,7 +348,7 @@ class MainWindow extends React.Component {
           </Fade>
           <Fade in={this.state.leftBarType === 'main'} timeout={500}>
             <IconButton
-              onClick={this.handleDrawerleftBarTypeNavigation}
+              onClick={this.handleDrawerOpenNavigation}
               className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
             >
               <ListIcon />
@@ -326,7 +356,7 @@ class MainWindow extends React.Component {
           </Fade>
           <Fade in={this.state.leftBarType === 'main'} timeout={500}>
             <IconButton
-              onClick={this.handleDrawerleftBarTypeSettings}
+              onClick={this.handleDrawerOpenSettings}
               className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
             >
               <WidgetsIcon />
