@@ -10,6 +10,7 @@
   "author": "langyo",
   "license": "Unlicense",
   "dependencies": {
+    "electron": "^3.0.11",
     "react": "16.6.1",
     "react-native": "0.57.5"
   },
