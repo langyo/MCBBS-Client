@@ -4,8 +4,8 @@
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "watch": "watchify app/index.js -t babelify -o public/js/bundle.js --debug --verbose",
+    "start": "electron ./main.js",
+    "watch": "watchify dialogRender.js -t babelify -o public/js/bundle.js --debug --verbose",
     "package": "electron-packager ./ DemoApps --overwrite --app-version=1.0.0 --platform=win32 --arch=all --out=../DemoApps --version=1.2.1 --icon=./public/img/app-icon.icns",
     "test": "jest"
   },
