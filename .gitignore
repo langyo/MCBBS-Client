@@ -143,3 +143,13 @@ native/electron/mock/data2
 native/electron/mock/dist
 native/electron/mock/test_less
 native/electron/mock/release
+
+# --- 针对 scripts 的部分 ---
+
+# electron
+
+native/electron/scripts/
+
+# reactNative
+
+native/electron/reactNative/
