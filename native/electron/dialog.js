@@ -206,9 +206,11 @@ class MainWindow extends React.Component {
             this.state.leftBarType === 'documents' && (
               <div>
                 <div className={classes.toolbar}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
+                  <Fade in={this.state.leftBarType === 'documents'} timeout={500}>
+                    <IconButton onClick={this.handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </Fade>
                 </div>
                 <Divider />
                 <List>
@@ -236,9 +238,11 @@ class MainWindow extends React.Component {
             this.state.leftBarType === 'navigation' && (
               <div>
                 <div className={classes.toolbar}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
+                  <Fade in={this.state.leftBarType === 'navigation'} timeout={500}>
+                    <IconButton onClick={this.handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </Fade>
                 </div>
                 <Divider />
                 <List>
@@ -281,9 +285,11 @@ class MainWindow extends React.Component {
             this.state.leftBarType === 'settings' && (
               <div>
                 <div className={classes.toolbar}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
+                  <Fade in={this.state.leftBarType === 'settings'} timeout={500}>
+                    <IconButton onClick={this.handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </Fade>
                 </div>
                 <Divider />
                 <List>
@@ -314,9 +320,11 @@ class MainWindow extends React.Component {
             this.state.leftBarType === 'users' && (
               <div>
                 <div className={classes.toolbar}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
+                  <Fade in={this.state.leftBarType === 'users'} timeout={500}>
+                    <IconButton onClick={this.handleDrawerClose}>
+                      <ChevronLeftIcon />
+                    </IconButton>
+                  </Fade>
                 </div>
                 <Divider />
                 <List>
