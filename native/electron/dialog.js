@@ -375,9 +375,7 @@ class MainWindow extends React.Component {
           <Divider />
         </Drawer>
         <main className={classes.content}>
-          <Typography paragraph>
-            {this.state.leftBarType === 'main' ? 'true' : 'false'}
-          </Typography>
+          {/* <MainPageRender /> */}
         </main>
       </div>
     );
