@@ -10,6 +10,10 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const mainPage = {
@@ -17,25 +21,30 @@ const mainPage = {
     {
       href: "thread-829068-1-1.html",
       img:
-        "http://attachment.mcbbs.net/forum/201812/09/235920hi6f9ez6vkixq31i.png"
+        "http://attachment.mcbbs.net/forum/201812/09/235920hi6f9ez6vkixq31i.png",
+      title: "1"
     },
     {
       href: "thread-828658-1-1.html",
       img:
-        "https://raw.githubusercontent.com/Tollainmear/PicRepo/master/%E7%A7%91%E6%8A%80%E7%A9%BA%E5%B2%9B/%E9%A6%96%E9%A1%B5N%E6%A0%BC.jpg"
+        "https://raw.githubusercontent.com/Tollainmear/PicRepo/master/%E7%A7%91%E6%8A%80%E7%A9%BA%E5%B2%9B/%E9%A6%96%E9%A1%B5N%E6%A0%BC.jpg",
+      title: "1444444444444444444444444"
     },
     {
       href: "thread-827490-1-1.html",
-      img: "http://wx2.sinaimg.cn/large/005UHtVDgy1fxi7tl5xbsj32nu0y2npi.jpg"
+      img: "http://wx2.sinaimg.cn/large/005UHtVDgy1fxi7tl5xbsj32nu0y2npi.jpg",
+      title: "1"
     },
     {
       href: "thread-830195-1-1.html",
-      img: "http://wx2.sinaimg.cn/mw690/8d60bc48gy1fx9fw29jchj20hd06mwk8.jpg"
+      img: "http://wx2.sinaimg.cn/mw690/8d60bc48gy1fx9fw29jchj20hd06mwk8.jpg",
+      title: "1"
     },
     {
       href: "thread-823489-1-1.html",
       img:
-        "http://attachment.mcbbs.net/forum/201811/15/075403rzirr25c2szh89tk.png.thumb.jpg"
+        "http://attachment.mcbbs.net/forum/201811/15/075403rzirr25c2szh89tk.png.thumb.jpg",
+      title: "1"
     }
   ],
   forumGroups: {}
@@ -45,19 +54,22 @@ const styles = theme => ({
   root: {
     flexGrow: 1
   },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    height: 50,
-    paddingLeft: theme.spacing.unit * 4,
-    backgroundColor: theme.palette.background.default
-  },
   img: {
     display: "block",
     overflow: "hidden",
-    width: "100%"
+    width: "100%",
+    height: "100%"
   },
-  mobileStepper: {}
+  titleBar: {
+    background:
+      "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    top: 0,
+    padding: 12,
+    position: "absolute",
+    width: "100%",
+    height: 16
+  }
 });
 
 class HeadImages extends React.Component {
@@ -97,7 +109,12 @@ class HeadImages extends React.Component {
           {mainPage.headImages.map((step, index) => (
             <div key={step.label}>
               {Math.abs(activeStep - index) <= 2 ? (
-                <img className={classes.img} src={step.img} alt={step.href} />
+                <div>
+                  <img className={classes.img} src={step.img} alt={step.href} />
+                  <div className={classes.titleBar}>
+                    <Typography variant="subtitle1">{step.title}</Typography>
+                  </div>
+                </div>
               ) : null}
             </div>
           ))}

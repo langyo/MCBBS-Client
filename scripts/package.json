@@ -1,6 +1,6 @@
 {
   "name": "mcbbs-client-script-translator",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Uh.",
   "dependencies": {
     "@babel/core": "^7.2.0",
@@ -19,15 +19,10 @@
     "react-dom": "^16.6.3",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
-    "regenerator-runtime": "^0.13.1",
-    "watchify": "^3.11.0",
-    "webpack": "^4.26.1"
+    "regenerator-runtime": "^0.13.1"
   },
   "devDependencies": {
     "babelify": "^10.0.0"
-  },
-  "scripts": {
-    "sync": "node sync.js"
   },
   "author": "langyo",
   "license": "Unlicense"

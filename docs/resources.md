@@ -47,6 +47,8 @@ res.mainPage.forumGroups.forEach(e => {
 
 - href - 要跳转的帖子链接地址
 
+- title - 图片标题
+
 ### headThreads
 
 存储了论坛右上角的最新帖子信息。最新帖子还分为最新发布（latestThread）、最新回复（latestReply）与最新精华（latestStarThread）三类。
