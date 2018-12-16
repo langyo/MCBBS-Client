@@ -343,15 +343,33 @@ res.mainPage.forumGroups.forEach(e => {
 
 ##### 节点列表
 
-- notifications[\] - 提醒列表：
+    // 待编辑
 
-  - noticer - 提醒者 ID；如果为 0 则为系统通知
+- notifications - 提醒列表：
 
-  - content - 提醒内容
+  - mypost - “我的帖子”提醒列表：
 
-  - href - 指向的链接
+    - post - “帖子”列表：
 
-  - time - 提醒时间
+      - id - 编号
+
+      - noticer - 提醒者用户 ID
+
+      - fromHref - 被引用的回复 ID
+
+      - toHref - 回复者的回复 ID
+
+      - time - 操作时间
+
+  - manage - “管理工作”提醒列表：
+
+    - id - 编号
+
+    - noticer - 处理者用户 ID
+
+    - time - 操作时间
+
+    - content - 处理提示信息
 
 - messages{} - 私信列表：
 
