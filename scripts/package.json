@@ -1,7 +1,7 @@
 {
-  "name": "mcbbs-client-script-translator",
-  "version": "0.1.0",
-  "description": "Uh.",
+  "name": "mcbbs-client-scripts",
+  "version": "0.1.2",
+  "description": "MCBBS 客户端的平台无关程序库支持",
   "dependencies": {
     "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
@@ -25,5 +25,26 @@
     "babelify": "^10.0.0"
   },
   "author": "langyo",
-  "license": "Unlicense"
+  "license": "Unlicense",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": "commonjs",
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      [
+        "@babel/preset-react"
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ]
+  }
 }

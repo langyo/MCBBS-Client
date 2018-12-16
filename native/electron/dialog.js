@@ -63,6 +63,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
+// import HeadImageRender from 'mcbbs-client-scripts/viewManager/utils/headImage';
+
 const drawerWidth = 200;
 
 const styles = theme => ({
@@ -229,6 +231,19 @@ class MainWindow extends React.Component {
                       </ListItem>
                     );
                   })}
+                  <ListSubheader>快速通道</ListSubheader>
+                  <ListItem button>
+                    <TodayIcon />
+                    <ListItemText primary="签到" secondary={"您今日还未签到！"} />
+                  </ListItem>
+                  <ListItem button>
+                    <StarIcon />
+                    <ListItemText primary="收藏" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListAltIcon />
+                    <ListItemText primary="任务" />
+                  </ListItem>
                 </List>
               </div>
             )
@@ -262,19 +277,6 @@ class MainWindow extends React.Component {
                   <ListItem button>
                     <FaceIcon />
                     <ListItemText primary="坛友互动" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListSubheader>快速通道</ListSubheader>
-                  <ListItem button>
-                    <TodayIcon />
-                    <ListItemText primary="签到" secondary={"您今日还未签到！"} />
-                  </ListItem>
-                  <ListItem button>
-                    <StarIcon />
-                    <ListItemText primary="收藏" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListAltIcon />
-                    <ListItemText primary="任务" />
                   </ListItem>
                 </List>
               </div>
@@ -375,7 +377,7 @@ class MainWindow extends React.Component {
           <Divider />
         </Drawer>
         <main className={classes.content}>
-          {/* <MainPageRender /> */}
+          {/* <HeadImageRender /> */}
         </main>
       </div>
     );
