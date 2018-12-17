@@ -7,10 +7,11 @@ function dfs(path){
         if(fs.statSync(path + i).isDirectory()){
             dfs(path + i + '/');
         }else{
-            if(/^.+\.js$/.test(i)){
-                child_process.exec("",{
-                    windowHide: true
-                }, (err, out) => console.log(err || out))
+            if(/^_.+\.js$/.test(i)){
+                console.log(path + i);
+                child_process.exec("watchify " + i + " -t babelify -o " + i.slice(1) + " --debug --verbose",{
+                    windowHide: false
+                })// .stdout.pipe(console.log, { end:false });
             }
         }
     }
