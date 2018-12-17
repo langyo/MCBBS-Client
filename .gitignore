@@ -148,8 +148,8 @@ native/electron/mock/release
 
 # electron
 
-native/electron/scripts/
+# native/electron/scripts/
 
 # reactNative
 
-native/electron/reactNative/
+# native/reactNative/scripts
