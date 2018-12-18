@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ./main.js",
     "watch": "watchify dialogRender.js -t babelify -o public/js/bundle.js --debug --verbose",
-    "watchTest": "watchify ./scripts/viewManager/utils/_headImage.js -t babelify -o ./scripts/viewManager/utils/headImage.js --debug --verbose",
+    "watchTest": "babel src ",
     "package": "electron-packager ./ DemoApps --overwrite --app-version=1.0.0 --platform=win32 --arch=all --out=../DemoApps --version=1.2.1 --icon=./public/img/app-icon.icns",
     "test": "jest"
   },
@@ -19,6 +19,7 @@
     "@babel/preset-react": "^7.0.0",
     "@material-ui/core": "^3.6.1",
     "@material-ui/icons": "^3.0.1",
+    "babel-cli": "^6.26.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0-beta.0",
     "classnames": "^2.2.6",
