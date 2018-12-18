@@ -63,7 +63,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
-// import HeadImageRender from 'mcbbs-client-scripts/viewManager/utils/headImage';
+import HeadImageRender from './scripts/viewManager/utils/_headImage';
 
 const drawerWidth = 200;
 
@@ -377,7 +377,7 @@ class MainWindow extends React.Component {
           <Divider />
         </Drawer>
         <main className={classes.content}>
-          {/* <HeadImageRender /> */}
+          <HeadImageRender />
         </main>
       </div>
     );

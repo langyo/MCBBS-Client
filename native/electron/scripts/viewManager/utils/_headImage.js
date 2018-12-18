@@ -5,6 +5,7 @@ import MobileStepper from "@material-ui/core/MobileStepper";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import ButtonBase from '@material-ui/core/ButtonBase';
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
@@ -22,7 +23,7 @@ const mainPage = {
       href: "thread-829068-1-1.html",
       img:
         "http://attachment.mcbbs.net/forum/201812/09/235920hi6f9ez6vkixq31i.png",
-      title: "1"
+      title: "123"
     },
     {
       href: "thread-828658-1-1.html",
@@ -33,7 +34,7 @@ const mainPage = {
     {
       href: "thread-827490-1-1.html",
       img: "http://wx2.sinaimg.cn/large/005UHtVDgy1fxi7tl5xbsj32nu0y2npi.jpg",
-      title: "1"
+      title: "123"
     },
     {
       href: "thread-830195-1-1.html",
@@ -69,6 +70,9 @@ const styles = theme => ({
     position: "absolute",
     width: "100%",
     height: 16
+  },
+  typography: {
+    colorTextPrimary: '#FFFFFF'
   }
 });
 
@@ -112,7 +116,7 @@ class HeadImages extends React.Component {
                 <div>
                   <img className={classes.img} src={step.img} alt={step.href} />
                   <div className={classes.titleBar}>
-                    <Typography variant="subtitle1">{step.title}</Typography>
+                    <Typography variant="subtitle1" color="textPrimary" className={classes.typography}>{step.title}</Typography>
                   </div>
                 </div>
               ) : null}

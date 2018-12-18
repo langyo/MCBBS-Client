@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron ./main.js",
     "watch": "watchify dialogRender.js -t babelify -o public/js/bundle.js --debug --verbose",
+    "watchTest": "watchify ./scripts/viewManager/utils/_headImage.js -t babelify -o ./scripts/viewManager/utils/headImage.js --debug --verbose",
     "package": "electron-packager ./ DemoApps --overwrite --app-version=1.0.0 --platform=win32 --arch=all --out=../DemoApps --version=1.2.1 --icon=./public/img/app-icon.icns",
     "test": "jest"
   },
