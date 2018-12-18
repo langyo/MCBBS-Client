@@ -1,7 +1,5 @@
-let databaseLinker = (path) =>{
+"use strict";
 
-};
+let databaseLinker = path => {};
 
-let urlLinker = (url) =>{
-
-};
+let urlLinker = url => {};
