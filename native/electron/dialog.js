@@ -63,7 +63,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
-import HeadImageRender from './scripts/viewManager/utils/_headImage';
+import HeadImageRender from './scripts/viewManager/utils/headImage';
 
 const drawerWidth = 200;
 
