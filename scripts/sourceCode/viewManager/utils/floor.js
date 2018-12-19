@@ -11,12 +11,13 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-
 import VoteIcon from "@material-ui/icons/HowToVote";
+import MessageIcon from "@material-ui/icons/Message";
 
 const styles = theme => ({
   actions: {
@@ -63,7 +64,7 @@ class Floor extends React.Component {
             发布于 2018 年 12 月 13 日 13:26
           </Typography>
           <Typography variant="caption" className={classes.floatRight}>
-            # 1
+            # 2
           </Typography>
         </CardContent>
         <CardContent>
@@ -71,9 +72,12 @@ class Floor extends React.Component {
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton>
-            <VoteIcon />
+            <MessageIcon />
           </IconButton>
           <IconButton className={classes.expand}>
+            <VoteIcon />
+          </IconButton>
+          <IconButton>
             <ShareIcon />
           </IconButton>
         </CardActions>
