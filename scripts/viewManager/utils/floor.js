@@ -52,6 +52,12 @@ const styles = theme => ({
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
 
+  },
+  floatLeft: {
+    float: "left"
+  },
+  floatRight: {
+    float: "right"
   }
 });
 
@@ -80,10 +86,13 @@ class Floor extends _react.default.Component {
       subheader: "Lv 8 . \u8003\u53E4\u5BB6"
     }), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
       variant: "caption",
-      gutterBottom: true
-    }, "\u53D1\u5E03\u4E8E 12.13")), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
+      className: classes.floatLeft
+    }, "\u53D1\u5E03\u4E8E 2018 \u5E74 12 \u6708 13 \u65E5 13:26"), _react.default.createElement(_Typography.default, {
+      variant: "caption",
+      className: classes.floatRight
+    }, "# 1")), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
       component: "p"
-    }, "content")), _react.default.createElement(_CardActions.default, {
+    }, "\u8FD9\u662F\u4E00\u6BB5\u6D4B\u8BD5\u6587\u672C\uFF01")), _react.default.createElement(_CardActions.default, {
       className: classes.actions,
       disableActionSpacing: true
     }, _react.default.createElement(_IconButton.default, null, _react.default.createElement(_HowToVote.default, null)), _react.default.createElement(_IconButton.default, {

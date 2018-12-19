@@ -24,6 +24,12 @@ const styles = theme => ({
   },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
+  },
+  floatLeft: {
+    float: "left"
+  },
+  floatRight: {
+    float: "right"
   }
 });
 
@@ -53,12 +59,15 @@ class Floor extends React.Component {
           subheader="Lv 8 . 考古家"
         />
         <CardContent>
-          <Typography variant="caption" gutterBottom>
-            发布于 12.13
+          <Typography variant="caption" className={classes.floatLeft}>
+            发布于 2018 年 12 月 13 日 13:26
+          </Typography>
+          <Typography variant="caption" className={classes.floatRight}>
+            # 1
           </Typography>
         </CardContent>
         <CardContent>
-          <Typography component="p">content</Typography>
+          <Typography component="p">这是一段测试文本！</Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton>
