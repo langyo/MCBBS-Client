@@ -19,6 +19,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 let forumList = [
   {
@@ -76,6 +77,9 @@ const styles = theme => ({
     "&:hover": {
       textDecoration: "underline"
     }
+  },
+  list: {
+    width: "100%"
   }
 });
 
@@ -90,13 +94,18 @@ function forumPanel(props) {
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
-          <List component="nav">
+          <List component="nav" className={classes.list}>
             {forumList.map(n => (
               <ListItem button>
                 <ListItemIcon>
                   <Avatar src={n.avatar} />
                 </ListItemIcon>
                 <ListItemText primary={n.name} secondary={n.info} />
+                <ListItemSecondaryAction>
+                  <IconButton aria-label="Comments">
+                    <MoreIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
               </ListItem>
             ))}
           </List>

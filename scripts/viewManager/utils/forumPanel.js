@@ -41,6 +41,8 @@ var _ListItemIcon = _interopRequireDefault(require("@material-ui/core/ListItemIc
 
 var _ListItemText = _interopRequireDefault(require("@material-ui/core/ListItemText"));
 
+var _ListItemSecondaryAction = _interopRequireDefault(require("@material-ui/core/ListItemSecondaryAction"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let forumList = [{
@@ -93,6 +95,9 @@ const styles = theme => ({
     "&:hover": {
       textDecoration: "underline"
     }
+  },
+  list: {
+    width: "100%"
   }
 });
 
@@ -113,7 +118,8 @@ function forumPanel(props) {
   }, "\u95EE\u7B54\u5927\u7248"))), _react.default.createElement(_ExpansionPanelDetails.default, {
     className: classes.details
   }, _react.default.createElement(_List.default, {
-    component: "nav"
+    component: "nav",
+    className: classes.list
   }, forumList.map(n => _react.default.createElement(_ListItem.default, {
     button: true
   }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_Avatar.default, {
@@ -121,7 +127,9 @@ function forumPanel(props) {
   })), _react.default.createElement(_ListItemText.default, {
     primary: n.name,
     secondary: n.info
-  }))))), _react.default.createElement(_Divider.default, null), _react.default.createElement(_ExpansionPanelActions.default, null, _react.default.createElement(_IconButton.default, {
+  }), _react.default.createElement(_ListItemSecondaryAction.default, null, _react.default.createElement(_IconButton.default, {
+    "aria-label": "Comments"
+  }, _react.default.createElement(_MoreVert.default, null))))))), _react.default.createElement(_Divider.default, null), _react.default.createElement(_ExpansionPanelActions.default, null, _react.default.createElement(_IconButton.default, {
     color: "inherit"
   }, _react.default.createElement(_MoreVert.default, null)))));
 }
