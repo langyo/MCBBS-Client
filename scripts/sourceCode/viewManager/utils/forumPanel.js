@@ -7,10 +7,46 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import Typography from "@material-ui/core/Typography";
+
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Chip from "@material-ui/core/Chip";
-import Button from "@material-ui/core/Button";
+import MoreIcon from "@material-ui/icons/MoreVert";
+
 import Divider from "@material-ui/core/Divider";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+let forumList = [
+  {
+    name: "原版问答",
+    info: "1",
+    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+  },
+  {
+    name: "联机问答",
+    info: "2",
+    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+  },
+  {
+    name: "Mod问答",
+    info: "3",
+    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+  },
+  {
+    name: "周边问答",
+    info: "4",
+    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+  },
+  {
+    name: "PE问答",
+    info: "5",
+    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+  }
+];
 
 const styles = theme => ({
   root: {
@@ -43,7 +79,7 @@ const styles = theme => ({
   }
 });
 
-function DetailedExpansionPanel(props) {
+function forumPanel(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -53,21 +89,31 @@ function DetailedExpansionPanel(props) {
             <Typography className={classes.heading}>问答大版</Typography>
           </div>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details} />
+        <ExpansionPanelDetails className={classes.details}>
+          <List component="nav">
+            {forumList.map(n => (
+              <ListItem button>
+                <ListItemIcon>
+                  <Avatar src={n.avatar} />
+                </ListItemIcon>
+                <ListItemText primary={n.name} secondary={n.info} />
+              </ListItem>
+            ))}
+          </List>
+        </ExpansionPanelDetails>
         <Divider />
         <ExpansionPanelActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
+          <IconButton color="inherit">
+            <MoreIcon />
+          </IconButton>
         </ExpansionPanelActions>
       </ExpansionPanel>
     </div>
   );
 }
 
-DetailedExpansionPanel.propTypes = {
+forumPanel.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DetailedExpansionPanel);
+export default withStyles(styles)(forumPanel);

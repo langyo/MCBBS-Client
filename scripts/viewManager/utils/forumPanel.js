@@ -25,13 +25,45 @@ var _Typography = _interopRequireDefault(require("@material-ui/core/Typography")
 
 var _ExpandMore = _interopRequireDefault(require("@material-ui/icons/ExpandMore"));
 
-var _Chip = _interopRequireDefault(require("@material-ui/core/Chip"));
-
-var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+var _MoreVert = _interopRequireDefault(require("@material-ui/icons/MoreVert"));
 
 var _Divider = _interopRequireDefault(require("@material-ui/core/Divider"));
 
+var _Avatar = _interopRequireDefault(require("@material-ui/core/Avatar"));
+
+var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
+
+var _List = _interopRequireDefault(require("@material-ui/core/List"));
+
+var _ListItem = _interopRequireDefault(require("@material-ui/core/ListItem"));
+
+var _ListItemIcon = _interopRequireDefault(require("@material-ui/core/ListItemIcon"));
+
+var _ListItemText = _interopRequireDefault(require("@material-ui/core/ListItemText"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+let forumList = [{
+  name: "原版问答",
+  info: "1",
+  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+}, {
+  name: "联机问答",
+  info: "2",
+  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+}, {
+  name: "Mod问答",
+  info: "3",
+  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+}, {
+  name: "周边问答",
+  info: "4",
+  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+}, {
+  name: "PE问答",
+  info: "5",
+  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
+}];
 
 const styles = theme => ({
   root: {
@@ -64,7 +96,7 @@ const styles = theme => ({
   }
 });
 
-function DetailedExpansionPanel(props) {
+function forumPanel(props) {
   const {
     classes
   } = props;
@@ -80,18 +112,24 @@ function DetailedExpansionPanel(props) {
     className: classes.heading
   }, "\u95EE\u7B54\u5927\u7248"))), _react.default.createElement(_ExpansionPanelDetails.default, {
     className: classes.details
-  }), _react.default.createElement(_Divider.default, null), _react.default.createElement(_ExpansionPanelActions.default, null, _react.default.createElement(_Button.default, {
-    size: "small"
-  }, "Cancel"), _react.default.createElement(_Button.default, {
-    size: "small",
-    color: "primary"
-  }, "Save"))));
+  }, _react.default.createElement(_List.default, {
+    component: "nav"
+  }, forumList.map(n => _react.default.createElement(_ListItem.default, {
+    button: true
+  }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_Avatar.default, {
+    src: n.avatar
+  })), _react.default.createElement(_ListItemText.default, {
+    primary: n.name,
+    secondary: n.info
+  }))))), _react.default.createElement(_Divider.default, null), _react.default.createElement(_ExpansionPanelActions.default, null, _react.default.createElement(_IconButton.default, {
+    color: "inherit"
+  }, _react.default.createElement(_MoreVert.default, null)))));
 }
 
-DetailedExpansionPanel.propTypes = {
+forumPanel.propTypes = {
   classes: _propTypes.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(styles)(DetailedExpansionPanel);
+var _default = (0, _styles.withStyles)(styles)(forumPanel);
 
 exports.default = _default;
