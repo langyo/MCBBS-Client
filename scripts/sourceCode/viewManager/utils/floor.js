@@ -57,6 +57,7 @@ class Floor extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
+          title={this.props.accountName}
           subheader={this.props.accountInfo}
         />
         <CardContent>

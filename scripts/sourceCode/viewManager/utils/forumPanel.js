@@ -19,10 +19,6 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15)
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  },
   icon: {
     verticalAlign: "bottom",
     height: 20,
@@ -55,11 +51,6 @@ function DetailedExpansionPanel(props) {
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
             <Typography className={classes.heading}>问答大版</Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>
-              mhmmmmmm
-            </Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details} />

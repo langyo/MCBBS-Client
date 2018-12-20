@@ -40,10 +40,6 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15)
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  },
   icon: {
     verticalAlign: "bottom",
     height: 20,
@@ -82,11 +78,7 @@ function DetailedExpansionPanel(props) {
     className: classes.column
   }, _react.default.createElement(_Typography.default, {
     className: classes.heading
-  }, "\u95EE\u7B54\u5927\u7248")), _react.default.createElement("div", {
-    className: classes.column
-  }, _react.default.createElement(_Typography.default, {
-    className: classes.secondaryHeading
-  }, "mhmmmmmm"))), _react.default.createElement(_ExpansionPanelDetails.default, {
+  }, "\u95EE\u7B54\u5927\u7248"))), _react.default.createElement(_ExpansionPanelDetails.default, {
     className: classes.details
   }), _react.default.createElement(_Divider.default, null), _react.default.createElement(_ExpansionPanelActions.default, null, _react.default.createElement(_Button.default, {
     size: "small"
