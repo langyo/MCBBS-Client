@@ -43,6 +43,8 @@ var _HowToVote = _interopRequireDefault(require("@material-ui/icons/HowToVote"))
 
 var _Message = _interopRequireDefault(require("@material-ui/icons/Message"));
 
+var _Edit = _interopRequireDefault(require("@material-ui/icons/Edit"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -84,22 +86,22 @@ class Floor extends _react.default.Component {
         src: "http://www.mcbbs.net/uc_server/data/avatar/001/28/74/72_avatar_middle.jpg"
       }),
       action: _react.default.createElement(_IconButton.default, null, _react.default.createElement(_MoreVert.default, null)),
-      title: "langyo",
-      subheader: "Lv 8 . \u8003\u53E4\u5BB6"
+      title: this.props.accountName,
+      subheader: this.props.accountInfo
     }), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
       variant: "caption",
       className: classes.floatLeft
-    }, "\u53D1\u5E03\u4E8E 2018 \u5E74 12 \u6708 13 \u65E5 13:26"), _react.default.createElement(_Typography.default, {
+    }, this.props.contentTimeInfo), _react.default.createElement(_Typography.default, {
       variant: "caption",
       className: classes.floatRight
-    }, "# 2")), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
+    }, "# " + this.props.contentFloor)), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
       component: "p"
-    }, "\u8FD9\u662F\u4E00\u6BB5\u6D4B\u8BD5\u6587\u672C\uFF01")), _react.default.createElement(_CardActions.default, {
+    }, " ", this.props.content, " ")), _react.default.createElement(_CardActions.default, {
       className: classes.actions,
       disableActionSpacing: true
-    }, _react.default.createElement(_IconButton.default, null, _react.default.createElement(_Message.default, null)), _react.default.createElement(_IconButton.default, {
+    }, _react.default.createElement(_IconButton.default, null, this.props.reply && _react.default.createElement(_Message.default, null)), _react.default.createElement(_IconButton.default, null, this.props.edit && _react.default.createElement(_Edit.default, null)), _react.default.createElement(_IconButton.default, {
       className: classes.expand
-    }, _react.default.createElement(_HowToVote.default, null)), _react.default.createElement(_IconButton.default, null, _react.default.createElement(_Share.default, null))));
+    }, this.props.rate && _react.default.createElement(_HowToVote.default, null)), _react.default.createElement(_IconButton.default, null, _react.default.createElement(_Share.default, null))));
   }
 
 }

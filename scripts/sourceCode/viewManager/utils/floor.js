@@ -18,6 +18,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import VoteIcon from "@material-ui/icons/HowToVote";
 import MessageIcon from "@material-ui/icons/Message";
+import EditIcon from "@material-ui/icons/Edit";
 
 const styles = theme => ({
   actions: {
@@ -56,26 +57,24 @@ class Floor extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="langyo"
-          subheader="Lv 8 . 考古家"
+          subheader={this.props.accountInfo}
         />
         <CardContent>
           <Typography variant="caption" className={classes.floatLeft}>
-            发布于 2018 年 12 月 13 日 13:26
+            {this.props.contentTimeInfo}
           </Typography>
           <Typography variant="caption" className={classes.floatRight}>
-            # 2
+            {"# " + this.props.contentFloor}
           </Typography>
         </CardContent>
         <CardContent>
-          <Typography component="p">这是一段测试文本！</Typography>
+          <Typography component="p"> {this.props.content} </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton>
-            <MessageIcon />
-          </IconButton>
+          <IconButton>{this.props.reply && <MessageIcon />}</IconButton>
+          <IconButton>{this.props.edit && <EditIcon />}</IconButton>
           <IconButton className={classes.expand}>
-            <VoteIcon />
+            {this.props.rate && <VoteIcon />}
           </IconButton>
           <IconButton>
             <ShareIcon />
