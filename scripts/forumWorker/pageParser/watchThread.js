@@ -25,11 +25,10 @@ for (let i = 0; i < postList.length; ++i) {
     } catch (e) {
       console.log(e);
     } // 请求获取用户数据
+    // mposter.send('newParseTask', postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href'))
+    // 请求获取评分数据
+    // poster.send('newParseTask', document.querySelectorAll('.rate')[0].querySelectorAll('dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a')[0].getAttribute('href'));
 
-
-    poster.send('newParseTask', postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href')); // 请求获取评分数据
-
-    poster.send('newParseTask', document.querySelectorAll('.rate')[0].querySelectorAll('dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a')[0].getAttribute('href'));
   }
 } // 标题解析
 
