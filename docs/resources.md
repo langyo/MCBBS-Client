@@ -37,7 +37,7 @@ res.mainPage.forumGroups.forEach(e => {
 
   - id - 版块 ID
 
-  - info - 版块介绍
+  - info - 版块介绍 (这里可能会使用更复杂的数据结构)
 
   - avatar - 版块图标
 

@@ -1,6 +1,18 @@
 "use strict";
 
-let forumGroups = {};
+let mainPage = {
+  headImages: [],
+  forumGroups: {}
+};
+
+for (let i of document.querySelectorAll('#portal_block_800_content > div.slidebox > div.slideshow > li')) {
+  let n = {
+    href: i.querySelector('a').getAttribute('href'),
+    img: i.querySelector('a > img').getAttribute('src'),
+    title: i.querySelector('span.title').innerText
+  };
+  mainPage.headImages.push(n);
+}
 
 for (let i of document.querySelectorAll('#ct > div.mn > div.fl.bm > div.bm.bmw.cl')) {
   let group = i.querySelector('div.bm_h.cl.forum_index_title > h2 > a');
@@ -38,7 +50,7 @@ for (let i of document.querySelectorAll('#ct > div.mn > div.fl.bm > div.bm.bmw.c
     }
   }
 
-  forumGroups[groupName] = {
+  mainPage.forumGroups[groupName] = {
     forumGroupName: groupName,
     forumGroupId: groupId,
     forums: forums
