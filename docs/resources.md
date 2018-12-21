@@ -29,11 +29,15 @@ res.mainPage.forumGroups.forEach(e => {
 
 - forumGroupName - 大版版块名称
 
+- forumGroupId - 大版版块 ID
+
 - forums[\] - 子版块列表：
 
-  - name - 版块特征码
+  - name - 版块名称
 
-  - info - 版块说明
+  - id - 版块 ID
+
+  - info - 版块介绍
 
   - avatar - 版块图标
 
