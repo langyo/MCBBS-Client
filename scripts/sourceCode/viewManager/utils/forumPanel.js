@@ -90,12 +90,14 @@ function forumPanel(props) {
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
-            <Typography className={classes.heading}>问答大版</Typography>
+            <Typography className={classes.heading}>
+              {props.forumGroupName}
+            </Typography>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
           <List component="nav" className={classes.list}>
-            {forumList.map(n => (
+            {props.forums.map(n => (
               <ListItem button>
                 <ListItemIcon>
                   <Avatar src={n.avatar} />
@@ -110,7 +112,6 @@ function forumPanel(props) {
             ))}
           </List>
         </ExpansionPanelDetails>
-        <Divider />
         <ExpansionPanelActions>
           <IconButton color="inherit">
             <MoreIcon />
