@@ -7,15 +7,17 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
+var _styles = require("@material-ui/core/styles");
 
 var _forumPanel = _interopRequireDefault(require("../utils/forumPanel"));
 
-var _testData = _interopRequireDefault(require("../testData"));
-
 var _headImages = _interopRequireDefault(require("../utils/headImages"));
 
+var _testData = _interopRequireDefault(require("../testData"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const styles = theme => ({});
 
 class MainPage extends _react.default.Component {
   render() {
@@ -30,7 +32,7 @@ class MainPage extends _react.default.Component {
 
 }
 
-var _default = withStyles(styles, {
+var _default = (0, _styles.withStyles)(styles, {
   withTheme: true
 })(MainPage);
 
