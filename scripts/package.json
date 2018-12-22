@@ -1,6 +1,6 @@
 {
   "name": "mcbbs-client-scripts",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "MCBBS 客户端的平台无关程序库支持",
   "scripts": {
     "watch": "babel ./sourceCode -d ./ -w"

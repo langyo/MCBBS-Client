@@ -25,7 +25,7 @@
     "classnames": "^2.2.6",
     "firebase": "^5.6.0",
     "lowdb": "^1.0.0",
-    "mcbbs-client-scripts": "^0.1.4",
+    "mcbbs-client-scripts": "^0.1.5",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

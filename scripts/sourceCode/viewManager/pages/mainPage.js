@@ -4,7 +4,7 @@ import ForumPanel from "../utils/forumPanel";
 import TestData from "../testData";
 import HeadImages from "../utils/headImages";
 
-class HeadImages extends React.Component {
+class MainPage extends React.Component {
     render() {
         return (
             <div>
@@ -19,5 +19,6 @@ class HeadImages extends React.Component {
             </div>
         )
     }
-
 }
+
+export default withStyles(styles, { withTheme: true })(MainPage);

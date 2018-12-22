@@ -45,28 +45,6 @@ var _ListItemSecondaryAction = _interopRequireDefault(require("@material-ui/core
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-let forumList = [{
-  name: "原版问答",
-  info: "1",
-  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-}, {
-  name: "联机问答",
-  info: "2",
-  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-}, {
-  name: "Mod问答",
-  info: "3",
-  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-}, {
-  name: "周边问答",
-  info: "4",
-  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-}, {
-  name: "PE问答",
-  info: "5",
-  avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-}];
-
 const styles = theme => ({
   root: {
     width: "100%"
@@ -101,7 +79,7 @@ const styles = theme => ({
   }
 });
 
-function forumPanel(props) {
+function ForumPanel(props) {
   const {
     classes
   } = props;
@@ -135,10 +113,10 @@ function forumPanel(props) {
   }, _react.default.createElement(_MoreVert.default, null)))));
 }
 
-forumPanel.propTypes = {
+ForumPanel.propTypes = {
   classes: _propTypes.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(styles)(forumPanel);
+var _default = (0, _styles.withStyles)(styles)(ForumPanel);
 
 exports.default = _default;
