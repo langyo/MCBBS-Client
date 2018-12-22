@@ -16,40 +16,6 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const mainPage = {
-  headImages: [
-    {
-      href: "thread-829068-1-1.html",
-      img:
-        "http://attachment.mcbbs.net/forum/201812/09/235920hi6f9ez6vkixq31i.png",
-      title: "1"
-    },
-    {
-      href: "thread-828658-1-1.html",
-      img:
-        "https://raw.githubusercontent.com/Tollainmear/PicRepo/master/%E7%A7%91%E6%8A%80%E7%A9%BA%E5%B2%9B/%E9%A6%96%E9%A1%B5N%E6%A0%BC.jpg",
-      title: "1444444444444444444444444"
-    },
-    {
-      href: "thread-827490-1-1.html",
-      img: "http://wx2.sinaimg.cn/large/005UHtVDgy1fxi7tl5xbsj32nu0y2npi.jpg",
-      title: "1"
-    },
-    {
-      href: "thread-830195-1-1.html",
-      img: "http://wx2.sinaimg.cn/mw690/8d60bc48gy1fx9fw29jchj20hd06mwk8.jpg",
-      title: "1"
-    },
-    {
-      href: "thread-823489-1-1.html",
-      img:
-        "http://attachment.mcbbs.net/forum/201811/15/075403rzirr25c2szh89tk.png.thumb.jpg",
-      title: "1"
-    }
-  ],
-  forumGroups: {}
-};
-
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -96,7 +62,7 @@ class HeadImages extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { activeStep } = this.state;
-    const maxSteps = mainPage.headImages.length;
+    const maxSteps = this.props.headImages.length;
 
     return (
       <div className={classes.root}>
@@ -106,7 +72,7 @@ class HeadImages extends React.Component {
           onChangeIndex={this.handleStepChange}
           enableMouseEvents
         >
-          {mainPage.headImages.map((step, index) => (
+          {this.props.headImages.map((step, index) => (
             <div key={step.label}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <div>

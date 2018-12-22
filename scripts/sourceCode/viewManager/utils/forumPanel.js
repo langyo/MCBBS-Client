@@ -21,34 +21,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-let forumList = [
-  {
-    name: "原版问答",
-    info: "1",
-    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-  },
-  {
-    name: "联机问答",
-    info: "2",
-    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-  },
-  {
-    name: "Mod问答",
-    info: "3",
-    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-  },
-  {
-    name: "周边问答",
-    info: "4",
-    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-  },
-  {
-    name: "PE问答",
-    info: "5",
-    avatar: "http://attachment.mcbbs.net/common/5f/common_110_icon.png"
-  }
-];
-
 const styles = theme => ({
   root: {
     width: "100%"
@@ -83,7 +55,7 @@ const styles = theme => ({
   }
 });
 
-function forumPanel(props) {
+function ForumPanel(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -100,7 +72,7 @@ function forumPanel(props) {
             {props.forums.map(n => (
               <ListItem button>
                 <ListItemIcon>
-                  <Avatar src={n.avatar} />
+                  <img alt={n.avatar} src={n.avatar} />
                 </ListItemIcon>
                 <ListItemText primary={n.name} secondary={n.info} />
                 <ListItemSecondaryAction>
@@ -122,8 +94,8 @@ function forumPanel(props) {
   );
 }
 
-forumPanel.propTypes = {
+ForumPanel.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(forumPanel);
+export default withStyles(styles)(ForumPanel);
