@@ -28,6 +28,7 @@
     "mcbbs-client-scripts": "^0.1.7",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
+    "react-custom-scroll": "^4.0.1",
     "react-dom": "^16.6.3",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
