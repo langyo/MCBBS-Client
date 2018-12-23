@@ -69,8 +69,8 @@ function ForumPanel(props) {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
           <List component="nav" className={classes.list}>
-            {props.forums.map(n => (
-              <ListItem button>
+            {props.forums.map((n, id) => (
+              <ListItem button key={id}>
                 <ListItemIcon>
                   <img alt={n.avatar} src={n.avatar} />
                 </ListItemIcon>

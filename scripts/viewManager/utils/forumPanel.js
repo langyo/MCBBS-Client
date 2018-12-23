@@ -98,8 +98,9 @@ function ForumPanel(props) {
   }, _react.default.createElement(_List.default, {
     component: "nav",
     className: classes.list
-  }, props.forums.map(n => _react.default.createElement(_ListItem.default, {
-    button: true
+  }, props.forums.map((n, id) => _react.default.createElement(_ListItem.default, {
+    button: true,
+    key: id
   }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement("img", {
     alt: n.avatar,
     src: n.avatar

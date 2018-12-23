@@ -63,6 +63,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
+import CustomScroll from 'react-custom-scroll';
+
 import MainPageRender from 'mcbbs-client-scripts/viewManager/pages/mainPage';
 
 const drawerWidth = 200;
@@ -110,7 +112,10 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    maxHeight: '600px'
   }
 });
 
@@ -377,7 +382,9 @@ class MainWindow extends React.Component {
           <Divider />
         </Drawer>
         <main className={classes.content}>
-          <MainPageRender />
+          <CustomScroll allowOuterScroll={true}>
+            <MainPageRender />
+          </CustomScroll>
         </main>
       </div>
     );

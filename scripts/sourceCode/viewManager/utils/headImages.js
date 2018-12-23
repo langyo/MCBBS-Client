@@ -45,13 +45,13 @@ class HeadImages extends React.Component {
 
   handleNext = () => {
     this.setState(prevState => ({
-      activeStep: prevState.activeStep + 1
+      activeStep: prevState.activeStep + 1 >= this.props.headImages.length ? 0 : prevState.activeStep + 1
     }));
   };
 
   handleBack = () => {
     this.setState(prevState => ({
-      activeStep: prevState.activeStep - 1
+      activeStep: prevState.activeStep - 1 < 0 ? this.props.headImages.length - 1 : prevState.activeStep - 1
     }));
   };
 
@@ -72,18 +72,22 @@ class HeadImages extends React.Component {
           onChangeIndex={this.handleStepChange}
           enableMouseEvents
         >
-          {this.props.headImages.map((step, index) => (
-            <div key={step.label}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <div>
-                  <img className={classes.img} src={step.img} alt={step.href} />
-                  <div className={classes.titleBar}>
-                    <Typography variant="subtitle1">{step.title}</Typography>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          ))}
+          {
+            this.props.headImages.map((step, index) => (
+              <div key={index}>
+                {
+                  Math.abs(activeStep - index) <= 2 ? (
+                    <div key={index}>
+                      <img className={classes.img} src={step.img} alt={step.href} />
+                      <div className={classes.titleBar}>
+                        <Typography variant="subtitle1">{step.title}</Typography>
+                      </div>
+                    </div>
+                  ) : null
+                }
+              </div>
+            ))
+          }
         </AutoPlaySwipeableViews>
         <MobileStepper
           steps={maxSteps}
@@ -94,7 +98,6 @@ class HeadImages extends React.Component {
             <Button
               size="small"
               onClick={this.handleNext}
-              disabled={activeStep === maxSteps - 1}
             >
               <KeyboardArrowRight />
             </Button>
@@ -103,7 +106,6 @@ class HeadImages extends React.Component {
             <Button
               size="small"
               onClick={this.handleBack}
-              disabled={activeStep === 0}
             >
               <KeyboardArrowLeft />
             </Button>

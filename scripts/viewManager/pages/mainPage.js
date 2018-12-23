@@ -24,8 +24,8 @@ class MainPage extends _react.default.Component {
     return _react.default.createElement("div", null, _react.default.createElement(_headImages.default, {
       headImages: _testData.default.mainPage.headImages
     }), Object.keys(_testData.default.mainPage.forumGroups).map(n => _react.default.createElement(_forumPanel.default, {
-      forumGroupName: _testData.default.mainPage.forumGroups[n].forumGroupName,
       key: _testData.default.mainPage.forumGroups[n].forumGroupId,
+      forumGroupName: _testData.default.mainPage.forumGroups[n].forumGroupName,
       forums: _testData.default.mainPage.forumGroups[n].forums
     })));
   }

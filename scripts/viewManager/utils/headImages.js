@@ -69,13 +69,13 @@ class HeadImages extends _react.default.Component {
 
     _defineProperty(this, "handleNext", () => {
       this.setState(prevState => ({
-        activeStep: prevState.activeStep + 1
+        activeStep: prevState.activeStep + 1 >= this.props.headImages.length ? 0 : prevState.activeStep + 1
       }));
     });
 
     _defineProperty(this, "handleBack", () => {
       this.setState(prevState => ({
-        activeStep: prevState.activeStep - 1
+        activeStep: prevState.activeStep - 1 < 0 ? this.props.headImages.length - 1 : prevState.activeStep - 1
       }));
     });
 
@@ -103,8 +103,10 @@ class HeadImages extends _react.default.Component {
       onChangeIndex: this.handleStepChange,
       enableMouseEvents: true
     }, this.props.headImages.map((step, index) => _react.default.createElement("div", {
-      key: step.label
-    }, Math.abs(activeStep - index) <= 2 ? _react.default.createElement("div", null, _react.default.createElement("img", {
+      key: index
+    }, Math.abs(activeStep - index) <= 2 ? _react.default.createElement("div", {
+      key: index
+    }, _react.default.createElement("img", {
       className: classes.img,
       src: step.img,
       alt: step.href
@@ -119,13 +121,11 @@ class HeadImages extends _react.default.Component {
       className: classes.mobileStepper,
       nextButton: _react.default.createElement(_Button.default, {
         size: "small",
-        onClick: this.handleNext,
-        disabled: activeStep === maxSteps - 1
+        onClick: this.handleNext
       }, _react.default.createElement(_KeyboardArrowRight.default, null)),
       backButton: _react.default.createElement(_Button.default, {
         size: "small",
-        onClick: this.handleBack,
-        disabled: activeStep === 0
+        onClick: this.handleBack
       }, _react.default.createElement(_KeyboardArrowLeft.default, null))
     }));
   }
