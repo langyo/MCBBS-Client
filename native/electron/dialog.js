@@ -156,13 +156,6 @@ function newTag(object) {
   tags.push(new Tag(object));
 }
 
-// 测试数据
-newTag({
-  title: "主页",
-  icon: icons.主页,
-  render: {}
-});
-
 // 窗口主体
 class MainWindow extends React.Component {
   state = {
@@ -237,6 +230,10 @@ class MainWindow extends React.Component {
                     );
                   })}
                   <ListSubheader>快速通道</ListSubheader>
+                  <ListItem button>
+                    <HomeIcon />
+                    <ListItemText primary="主页" />
+                  </ListItem>
                   <ListItem button>
                     <TodayIcon />
                     <ListItemText primary="签到" secondary={"您今日还未签到！"} />
