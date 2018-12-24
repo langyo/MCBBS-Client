@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
+
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -69,7 +70,10 @@ class Floor extends React.Component {
           </Typography>
         </CardContent>
         <CardContent>
-          <Typography component="p"> {this.props.content} </Typography>
+          <Typography
+            component="p"
+            dangerouslySetInnerHTML={{ __html: this.props.content }}
+          />
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton>{this.props.reply && <MessageIcon />}</IconButton>

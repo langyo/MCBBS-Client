@@ -95,8 +95,11 @@ class Floor extends _react.default.Component {
       variant: "caption",
       className: classes.floatRight
     }, "# " + this.props.contentFloor)), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
-      component: "p"
-    }, " ", this.props.content, " ")), _react.default.createElement(_CardActions.default, {
+      component: "p",
+      dangerouslySetInnerHTML: {
+        __html: this.props.content
+      }
+    })), _react.default.createElement(_CardActions.default, {
       className: classes.actions,
       disableActionSpacing: true
     }, _react.default.createElement(_IconButton.default, null, this.props.reply && _react.default.createElement(_Message.default, null)), _react.default.createElement(_IconButton.default, null, this.props.edit && _react.default.createElement(_Edit.default, null)), _react.default.createElement(_IconButton.default, {
