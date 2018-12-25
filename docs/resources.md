@@ -243,6 +243,8 @@ res.mainPage.forumGroups.forEach(e => {
 
 - id - 账户 ID
 
+- avatar - 头像
+
 - mailState - 邮箱状态
 
 - videoProve - 视频认证状态
