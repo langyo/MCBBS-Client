@@ -253,7 +253,7 @@ res.mainPage.forumGroups.forEach(e => {
 
 - signature - 签名档信息，也就是个人签名；这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
 
-- stats{} - 数据统计：
+- states{} - 数据统计：
 
   - goldNuggets - 金粒
 

@@ -1,5 +1,6 @@
 let user = {
-    id: /[0-9]+/.exec(document.querySelectorAll('#ct > div > div.bm.bw0 > div > div.bm_c.u_profile > div:nth-child(1) > h2 > span')[0].innerText.trim())[0]
+    id: /[0-9]+/.exec(document.querySelectorAll('#ct > div > div.bm.bw0 > div > div.bm_c.u_profile > div:nth-child(1) > h2 > span')[0].innerText.trim())[0],
+	states: {}
 };
 
 user.name = document.querySelectorAll('#uhd > div.h.cl > h2')[0].innerText.trim();
@@ -23,7 +24,21 @@ for (let i of document.querySelectorAll('div.pbm.mbm.bbda.cl > ul > li')) {
            i.removeChild(i.querySelector('em'));
            user.signature = i.innerHTML;
            break;
-       // case '统计信息':
+       case '统计信息':
+			for(let j of i.querySelectorAll('a')){
+				let match = /^([^0-9\s]+)\s*([0-9]+)$/.exec(j.innerText);
+				switch(match[1]){
+                    case '好友数':
+						user.states.friendCount = match[2];
+						break;
+                    case '回帖数':
+						user.states.replyCount = match[2];
+						break;
+                    case '主题数':
+						user.states.threadCount = match[2];
+						break;
+                }
+            }
        case '星座':
            i.removeChild(i.querySelector('em'));
            user.starSign = i.innerText.trim();
