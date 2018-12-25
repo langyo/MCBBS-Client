@@ -263,11 +263,17 @@ res.mainPage.forumGroups.forEach(e => {
 
   - netherStars - 下界之星
 
-  - devotions - 贡献
+  - devotion - 贡献
 
-  - benevolences - 爱心
+  - benevolence - 爱心
 
   - diamonds - 钻石
+
+  - popularity - 人气
+
+  - usingSpace - 已用空间
+
+  - globalIntegral - 总积分量
 
   - threadCount - 发布的主题数量
 

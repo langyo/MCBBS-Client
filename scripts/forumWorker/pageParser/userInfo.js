@@ -67,8 +67,14 @@ for (let i of document.querySelectorAll('div.pbm.mbm.bbda.cl > ul > li')) {
       i.removeChild(i.querySelector('em'));
       user.bedrockVersionID = i.innerText.trim();
       break;
-    // case '管理组':
-    // case '用户组':
+
+    case '管理组':
+      user.managerGroup = /gid=([0-9]+)/.exec(i.querySelector('a').getAttribute('href'))[1];
+      break;
+
+    case '用户组':
+      user.userGroup = /gid=([0-9]+)/.exec(i.querySelector('a').getAttribute('href'))[1];
+      break;
     // case '扩展用户组':
 
     case '在线时间':
@@ -95,6 +101,53 @@ for (let i of document.querySelectorAll('div.pbm.mbm.bbda.cl > ul > li')) {
     case '所在时区':
       i.removeChild(i.querySelector('em'));
       user.timeZone = i.innerText.trim();
+      break;
+  }
+}
+
+for (let i of document.querySelectorAll('#psts > ul > li')) {
+  let type = i.querySelector('em').innerText.trim();
+  i.removeChild(i.querySelector('em'));
+
+  switch (type) {
+    case '已用空间':
+      user.states.usingSpace = i.innerText.trim();
+      break;
+
+    case '积分':
+      user.states.globalIntegral = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '人气':
+      user.states.popularity = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '金粒':
+      user.states.goldNuggets = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '金锭':
+      user.states.goldIngots = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '绿宝石':
+      user.states.emeralds = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '下界之星':
+      user.states.netherStars = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '贡献':
+      user.states.devotion = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '爱心':
+      user.states.benevolence = /[0-9]+/.exec(i.innerText.trim())[0];
+      break;
+
+    case '钻石':
+      user.states.diamonds = /[0-9]+/.exec(i.innerText.trim())[0];
       break;
   }
 }
