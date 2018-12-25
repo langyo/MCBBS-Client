@@ -241,11 +241,15 @@ res.mainPage.forumGroups.forEach(e => {
 
 - name - 用户昵称
 
-- group - 用户组 ID
+- id - 账户 ID
 
-- extraGroup - 扩展用户组 ID
+- mailState - 邮箱状态
 
-- integralCount - 总计分量
+- videoProve - 视频认证状态
+
+- rank - 自定义头衔
+
+- signature - 签名档信息，也就是个人签名；这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
 
 - stats{} - 数据统计：
 
@@ -263,27 +267,37 @@ res.mainPage.forumGroups.forEach(e => {
 
   - diamonds - 钻石
 
-- signature - 签名档信息，这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
+  - threadCount - 发布的主题数量
 
-- rank - 自定义头衔
+  - replyCount - 发布的回复总量
 
-- threadCount - 发布的主题数量
+  - friendCount - 好友总量
 
-- replyCount - 发布的回复总量
+- starSign - 星座
 
-- friendCount - 好友总量
+- homePage - 个人主页
 
-- knownFriendRelationShip[\] - 已知的好友列表；此列表仅仅作为在同客户端多账户的环境下是否能够加为好友/解除好友的判据
+- javaVersionID - Java 版游戏 ID
 
-- medal[\] - 勋章列表
+- bedrockVersionID - 基岩版游戏 ID
 
-- online - 是否在线；默认为不在线
+- managerGroup - 管理组 ID
 
-- history[\] - 历史记录
+- userGroup - 用户组 ID
 
-  - ... - 增量更新被修改的内容
+- extraUserGroup - 扩展用户组 ID
 
-  - editTime - 更新时间
+- onlineTimeCount - 在线时长
+
+- registerTime - 注册时间
+
+- latestOnlineTime - 最后访问时间
+
+- latestReplyTime - 最后活动时间
+
+- timeZone - 时区
+
+- medalList[\] - 勋章列表
 
 ## userGroups
 
