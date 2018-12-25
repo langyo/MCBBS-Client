@@ -162,6 +162,10 @@ class MainWindow extends React.Component {
     leftBarType: 'main'
   };
 
+  handleOpenDevTools = () => {
+    remote.getCurrentWebContents().openDevTools({detach:true});
+  }
+
   handleDrawerOpenUsers = () => {
     this.setState({ leftBarType: 'users' });
   }
@@ -185,206 +189,215 @@ class MainWindow extends React.Component {
   render() {
     const { classes, theme } = this.props;
 
-    return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <Drawer
-          variant="permanent"
-          className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.leftBarType !== 'main',
-            [classes.drawerClose]: this.state.leftBarType === 'main'
-          })}
-          classes={{
-            paper: classNames({
+    try {
+      return (
+        <div className={classes.root}>
+          <CssBaseline />
+          <Drawer
+            variant="permanent"
+            className={classNames(classes.drawer, {
               [classes.drawerOpen]: this.state.leftBarType !== 'main',
               [classes.drawerClose]: this.state.leftBarType === 'main'
-            })
-          }}
-          open={this.state.leftBarType !== 'main'}
-        >
-          {
-            this.state.leftBarType === 'documents' && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade in={this.state.leftBarType === 'documents'} timeout={500}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            })}
+            classes={{
+              paper: classNames({
+                [classes.drawerOpen]: this.state.leftBarType !== 'main',
+                [classes.drawerClose]: this.state.leftBarType === 'main'
+              })
+            }}
+            open={this.state.leftBarType !== 'main'}
+          >
+            {
+              this.state.leftBarType === 'documents' && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade in={this.state.leftBarType === 'documents'} timeout={500}>
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    {tags.map((n, index) => {
+                      return (
+                        <ListItem key={index} button>
+                          {n.icon}
+                          <ListItemText primary={n.title} secondary={n.subTitle} />
+                          {n.enableClose && (
+                            <ListItemSecondaryAction>
+                              <IconButton>
+                                <CloseIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          )}
+                        </ListItem>
+                      );
+                    })}
+                    <ListSubheader>快速通道</ListSubheader>
+                    <ListItem button>
+                      <HomeIcon />
+                      <ListItemText primary="主页" />
+                    </ListItem>
+                    <ListItem button>
+                      <TodayIcon />
+                      <ListItemText primary="签到" secondary={"您今日还未签到！"} />
+                    </ListItem>
+                    <ListItem button>
+                      <StarIcon />
+                      <ListItemText primary="收藏" />
+                    </ListItem>
+                    <ListItem button>
+                      <ListAltIcon />
+                      <ListItemText primary="任务" />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  {tags.map((n, index) => {
-                    return (
-                      <ListItem key={index} button>
-                        {n.icon}
-                        <ListItemText primary={n.title} secondary={n.subTitle} />
-                        {n.enableClose && (
-                          <ListItemSecondaryAction>
-                            <IconButton>
-                              <CloseIcon />
-                            </IconButton>
-                          </ListItemSecondaryAction>
-                        )}
-                      </ListItem>
-                    );
-                  })}
-                  <ListSubheader>快速通道</ListSubheader>
-                  <ListItem button>
-                    <HomeIcon />
-                    <ListItemText primary="主页" />
-                  </ListItem>
-                  <ListItem button>
-                    <TodayIcon />
-                    <ListItemText primary="签到" secondary={"您今日还未签到！"} />
-                  </ListItem>
-                  <ListItem button>
-                    <StarIcon />
-                    <ListItemText primary="收藏" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListAltIcon />
-                    <ListItemText primary="任务" />
-                  </ListItem>
-                </List>
-              </div>
-            )
-          }
+              )
+            }
 
-          {
-            this.state.leftBarType === 'navigation' && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade in={this.state.leftBarType === 'navigation'} timeout={500}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === 'navigation' && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade in={this.state.leftBarType === 'navigation'} timeout={500}>
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    <ListSubheader>通知</ListSubheader>
+                    <ListItem button>
+                      <SendIcon />
+                      <ListItemText primary="消息" secondary={"没有新消息"} />
+                    </ListItem>
+                    <ListItem button>
+                      <NoticeIcon />
+                      <ListItemText primary="我的帖子" secondary={"没有新通知"} />
+                    </ListItem>
+                    <ListItem button>
+                      <SettingIcon />
+                      <ListItemText primary="系统提醒" secondary={"没有新通知"} />
+                    </ListItem>
+                    <ListItem button>
+                      <FaceIcon />
+                      <ListItemText primary="坛友互动" secondary={"没有新通知"} />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  <ListSubheader>通知</ListSubheader>
-                  <ListItem button>
-                    <SendIcon />
-                    <ListItemText primary="消息" secondary={"没有新消息"} />
-                  </ListItem>
-                  <ListItem button>
-                    <NoticeIcon />
-                    <ListItemText primary="我的帖子" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListItem button>
-                    <SettingIcon />
-                    <ListItemText primary="系统提醒" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListItem button>
-                    <FaceIcon />
-                    <ListItemText primary="坛友互动" secondary={"没有新通知"} />
-                  </ListItem>
-                </List>
-              </div>
-            )
-          }
+              )
+            }
 
-          {
-            this.state.leftBarType === 'settings' && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade in={this.state.leftBarType === 'settings'} timeout={500}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === 'settings' && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade in={this.state.leftBarType === 'settings'} timeout={500}>
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    <ListSubheader>个性化</ListSubheader>
+                    <ListItem button>
+                      <SettingIcon />
+                      <ListItemText primary="本体设置" />
+                    </ListItem>
+                    <ListItem button>
+                      <PaintIcon />
+                      <ListItemText primary="主题" />
+                    </ListItem>
+                    <ListItem button>
+                      <InfoIcon />
+                      <ListItemText primary="关于" />
+                    </ListItem>
+                    <ListSubheader>插件控制</ListSubheader>
+                    <ListItem button>
+                      <StoreIcon />
+                      <ListItemText primary="插件中心" />
+                    </ListItem>
+                    <ListItem button onClick={ this.handleOpenDevTools}>
+                      <SettingIcon />
+                      <ListItemText primary="开发者控制" />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  <ListSubheader>个性化</ListSubheader>
-                  <ListItem button>
-                    <SettingIcon />
-                    <ListItemText primary="本体设置" />
-                  </ListItem>
-                  <ListItem button>
-                    <PaintIcon />
-                    <ListItemText primary="主题" />
-                  </ListItem>
-                  <ListItem button>
-                    <InfoIcon />
-                    <ListItemText primary="关于" />
-                  </ListItem>
-                  <ListSubheader>插件控制</ListSubheader>
-                  <ListItem button>
-                    <StoreIcon />
-                    <ListItemText primary="插件中心" />
-                  </ListItem>
-                </List>
-              </div>
-            )
-          }
+              )
+            }
 
-          {
-            this.state.leftBarType === 'users' && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade in={this.state.leftBarType === 'users'} timeout={500}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === 'users' && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade in={this.state.leftBarType === 'users'} timeout={500}>
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    <ListItem button>
+                      <AddIcon />
+                      <ListItemText primary="新增账户" />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  <ListItem button>
-                    <AddIcon />
-                    <ListItemText primary="新增账户" />
-                  </ListItem>
-                </List>
-              </div>
-            )
-          }
+              )
+            }
 
-          <div className={classes.toolbarDrawerClosing}>
+            <div className={classes.toolbarDrawerClosing}>
+              <Fade in={this.state.leftBarType === 'main'} timeout={500}>
+                <IconButton
+                  onClick={this.handleDrawerOpenUsers}
+                  className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
+                >
+                  <AccountCircleIcon />
+                </IconButton>
+              </Fade>
+            </div>
+            <Divider />
             <Fade in={this.state.leftBarType === 'main'} timeout={500}>
               <IconButton
-                onClick={this.handleDrawerOpenUsers}
+                onClick={this.handleDrawerOpenDocuments}
                 className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
               >
-                <AccountCircleIcon />
+                <DescriptionIcon />
               </IconButton>
             </Fade>
-          </div>
-          <Divider />
-          <Fade in={this.state.leftBarType === 'main'} timeout={500}>
-            <IconButton
-              onClick={this.handleDrawerOpenDocuments}
-              className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
-            >
-              <DescriptionIcon />
-            </IconButton>
-          </Fade>
-          <Fade in={this.state.leftBarType === 'main'} timeout={500}>
-            <IconButton
-              onClick={this.handleDrawerOpenNavigation}
-              className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
-            >
-              <ListIcon />
-            </IconButton>
-          </Fade>
-          <Fade in={this.state.leftBarType === 'main'} timeout={500}>
-            <IconButton
-              onClick={this.handleDrawerOpenSettings}
-              className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
-            >
-              <WidgetsIcon />
-            </IconButton>
-          </Fade>
-          <Divider />
-        </Drawer>
-        <main className={classes.content}>
-          <CustomScroll allowOuterScroll={true}>
-            <MainPageRender />
-          </CustomScroll>
-        </main>
-      </div>
-    );
+            <Fade in={this.state.leftBarType === 'main'} timeout={500}>
+              <IconButton
+                onClick={this.handleDrawerOpenNavigation}
+                className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
+              >
+                <ListIcon />
+              </IconButton>
+            </Fade>
+            <Fade in={this.state.leftBarType === 'main'} timeout={500}>
+              <IconButton
+                onClick={this.handleDrawerOpenSettings}
+                className={this.state.leftBarType !== 'main' ? " " + classes.hide : ""}
+              >
+                <WidgetsIcon />
+              </IconButton>
+            </Fade>
+            <Divider />
+          </Drawer>
+          <main className={classes.content}>
+            <CustomScroll allowOuterScroll={true}>
+              <MainPageRender />
+            </CustomScroll>
+          </main>
+        </div>
+      );
+    }catch(e){
+      remote.getCurrentWebContents().openDevTools();
+      throw e;
+    }
   }
 }
 
