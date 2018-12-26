@@ -21,6 +21,8 @@ import VoteIcon from "@material-ui/icons/HowToVote";
 import MessageIcon from "@material-ui/icons/Message";
 import EditIcon from "@material-ui/icons/Edit";
 
+import testData from "./testData";
+
 const styles = theme => ({
   actions: {
     display: "flex"
@@ -48,10 +50,7 @@ class Floor extends React.Component {
       <Card>
         <CardHeader
           avatar={
-            <Avatar
-              className={classes.avatar}
-              src="http://www.mcbbs.net/uc_server/data/avatar/001/28/74/72_avatar_middle.jpg"
-            />
+            <Avatar className={classes.avatar} src={this.props.accountAvatar} />
           }
           action={
             <IconButton>

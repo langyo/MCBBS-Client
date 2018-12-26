@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 
-import Floor from "../utils/floor";
+import Floor from "./floor";
 
-import testData from "../testData";
+import testData from "./testData";
 
 const styles = theme => ({});
 
@@ -18,10 +18,15 @@ class Thread extends React.Component {
         {testData.threads[this.props.thread].posts.map((n, id) => (
           <Floor
             key={n}
-            accountName={testData.posts["post_" + n].author}
+            accountAvatar={
+              testData.users[testData.posts["post_" + n].author].avatar
+            }
+            accountName={
+              testData.users[testData.posts["post_" + n].author].name
+            }
             accountInfo={"Lv ? ."}
             contentTimeInfo={"发布于 ?"}
-            contentFloor={id}
+            contentFloor={id + 1}
             content={testData.posts["post_" + n].content}
             reply
             rate

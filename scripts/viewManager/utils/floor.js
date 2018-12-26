@@ -45,6 +45,8 @@ var _Message = _interopRequireDefault(require("@material-ui/icons/Message"));
 
 var _Edit = _interopRequireDefault(require("@material-ui/icons/Edit"));
 
+var _testData = _interopRequireDefault(require("./testData"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -83,7 +85,7 @@ class Floor extends _react.default.Component {
     return _react.default.createElement(_Card.default, null, _react.default.createElement(_CardHeader.default, {
       avatar: _react.default.createElement(_Avatar.default, {
         className: classes.avatar,
-        src: "http://www.mcbbs.net/uc_server/data/avatar/001/28/74/72_avatar_middle.jpg"
+        src: this.props.accountAvatar
       }),
       action: _react.default.createElement(_IconButton.default, null, _react.default.createElement(_MoreVert.default, null)),
       title: this.props.accountName,
