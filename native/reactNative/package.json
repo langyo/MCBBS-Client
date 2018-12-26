@@ -9,6 +9,7 @@
   },
   "author": "langyo",
   "license": "Unlicense",
+  "homepage": "https://github.com/langyo/MCBBS-Client",
   "dependencies": {
     "electron": "^3.0.11",
     "react": "16.6.1",

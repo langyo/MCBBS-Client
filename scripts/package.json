@@ -1,9 +1,9 @@
 {
   "name": "mcbbs-client-scripts",
-  "version": "0.1.10",
-  "description": "MCBBS 客户端的平台无关程序库支持",
+  "version": "0.2.0",
+  "description": "MCBBS 客户端的平台无关程序库支持；现不再向 NPM 上传，请注意",
   "scripts": {
-    "watch": "babel ./sourceCode -d ./ -w"
+    "watch": "babel ./src/ -d ../scriptsTranslated/ -w"
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",
@@ -29,5 +29,6 @@
     "babelify": "^10.0.0"
   },
   "author": "langyo",
-  "license": "Unlicense"
+  "license": "Unlicense",
+  "homepage": "https://github.com/langyo/MCBBS-Client"
 }
