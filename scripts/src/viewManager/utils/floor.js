@@ -21,7 +21,7 @@ import VoteIcon from "@material-ui/icons/HowToVote";
 import MessageIcon from "@material-ui/icons/Message";
 import EditIcon from "@material-ui/icons/Edit";
 
-import testData from "./testData";
+import testData from "../testData";
 
 const styles = theme => ({
   actions: {

@@ -65,7 +65,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 
 import CustomScroll from 'react-custom-scroll';
 
-import MainPageRender from 'mcbbs-client-scripts/viewManager/pages/mainPage';
+import MainPageRender from './scripts/viewManager/pages/mainPage';
+import WatchThreadRender from './scripts/viewManager/pages/watchThread';
 
 const drawerWidth = 200;
 
@@ -121,10 +122,10 @@ const styles = theme => ({
 
 // 标签图标列表
 const icons = {
-  "主页": <HomeIcon />,
-  "帖子": <DescriptionIcon />,
-  "投票": <VoteIcon />,
-  "悬赏": <NeedHelpIcon />,
+  home: <HomeIcon />,
+  thread: <DescriptionIcon />,
+  vote: <VoteIcon />,
+  question: <NeedHelpIcon />,
 }
 
 let tags = [];
@@ -389,7 +390,8 @@ class MainWindow extends React.Component {
           </Drawer>
           <main className={classes.content}>
             <CustomScroll allowOuterScroll={true}>
-              <MainPageRender />
+              {/* <MainPageRender /> */}
+              <WatchThreadRender thread={825413} />
             </CustomScroll>
           </main>
         </div>

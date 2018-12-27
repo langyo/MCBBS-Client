@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 
-import Floor from "./floor";
+import Floor from "../utils/floor";
 
-import testData from "./testData";
+import testData from "../testData";
 
 const styles = theme => ({});
 
