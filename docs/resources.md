@@ -103,6 +103,8 @@ res.mainPage.forumGroups.forEach(e => {
 
 - threads[\] - 帖子 ID 列表
 
+- subForums[\] - 子版块 ID 列表
+
 ## threads
 
 此节点存储了所有主题的具体信息。此节点为一个关联容器（map），键名为帖子 ID。

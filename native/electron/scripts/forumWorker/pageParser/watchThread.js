@@ -14,21 +14,22 @@ for (let i = 0; i < postList.length; ++i) {
     posts[match[1]] = {}; // 内容
 
     try {
-      posts[match[1]].content = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.plc > div.pct > div.pcb > div.t_fsz')[0].innerHTML;
+      posts[match[1]].content = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.plc > div.pct > div.pcb > div.t_fsz > table > tbody > tr > td.t_f')[0].innerHTML;
     } catch (e) {
       console.log(e);
-    } // 作者
+    } // 层主
 
 
     try {
       posts[match[1]].author = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href').match(/uid=([0-9]+)/)[1];
     } catch (e) {
       console.log(e);
-    } // 请求获取用户数据
-    // mposter.send('newParseTask', postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href'))
-    // 请求获取评分数据
-    // poster.send('newParseTask', document.querySelectorAll('.rate')[0].querySelectorAll('dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a')[0].getAttribute('href'));
+    } // 层主数据获取
 
+
+    console.log(postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href')); // 评分数据获取
+
+    console.log(document.querySelectorAll('.rate')[0].querySelectorAll('dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a')[0].getAttribute('href'));
   }
 } // 标题解析
 

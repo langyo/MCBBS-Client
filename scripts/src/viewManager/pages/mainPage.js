@@ -18,7 +18,7 @@ class MainPage extends React.Component {
                     Object.keys(TestData.mainPage.forumGroups).map(n => (
                         <ForumPanel
                             key={TestData.mainPage.forumGroups[n].forumGroupId}
-                            forumGroupName={TestData.mainPage.forumGroups[n].forumGroupName}                 
+                            forumGroupName={TestData.mainPage.forumGroups[n].forumGroupName}
                             forums={TestData.mainPage.forumGroups[n].forums}
                         />
                     ))
