@@ -19,15 +19,15 @@ class Thread extends React.Component {
           <Floor
             key={n}
             accountAvatar={
-              testData.users[testData.posts["post_" + n].author].avatar
+              testData.users[testData.posts[n].author].avatar
             }
             accountName={
-              testData.users[testData.posts["post_" + n].author].name
+              testData.users[testData.posts[n].author].name
             }
             accountInfo={"Lv ? ."}
             contentTimeInfo={"发布于 ?"}
             contentFloor={id + 1}
-            content={testData.posts["post_" + n].content}
+            content={testData.posts[n].content}
             reply
             rate
             edit

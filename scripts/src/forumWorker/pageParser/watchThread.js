@@ -8,16 +8,16 @@ for (let i = 0; i < postList.length; ++i) {
     let match;
     if (match = /^post_([0-9]+)$/.exec(postList[i].id)) {
         thread.posts.push(match[1]);
-        posts[postList[i].id] = {};
+        posts[match[1]] = {};
         // 内容
         try {
-            posts[postList[i].id].content = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.plc > div.pct > div.pcb > div.t_fsz')[0].innerHTML;
+            posts[match[1]].content = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.plc > div.pct > div.pcb > div.t_fsz')[0].innerHTML;
         } catch (e) {
             console.log(e);
         }
         // 作者
         try {
-            posts[postList[i].id].author = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href').match(/uid=([0-9]+)/)[1];
+            posts[match[1]].author = postList[i].querySelectorAll('table > tbody > tr')[0].querySelectorAll('td.pls > div > div.pi > div > a')[0].getAttribute('href').match(/uid=([0-9]+)/)[1];
         } catch (e) {
             console.log(e);
         }

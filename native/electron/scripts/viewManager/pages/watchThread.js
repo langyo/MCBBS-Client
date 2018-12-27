@@ -28,12 +28,12 @@ class Thread extends _react.default.Component {
     } = this.props;
     return _react.default.createElement("div", null, _testData.default.threads[this.props.thread].posts.map((n, id) => _react.default.createElement(_floor.default, {
       key: n,
-      accountAvatar: _testData.default.users[_testData.default.posts["post_" + n].author].avatar,
-      accountName: _testData.default.users[_testData.default.posts["post_" + n].author].name,
+      accountAvatar: _testData.default.users[_testData.default.posts[n].author].avatar,
+      accountName: _testData.default.users[_testData.default.posts[n].author].name,
       accountInfo: "Lv ? .",
       contentTimeInfo: "发布于 ?",
       contentFloor: id + 1,
-      content: _testData.default.posts["post_" + n].content,
+      content: _testData.default.posts[n].content,
       reply: true,
       rate: true,
       edit: true
