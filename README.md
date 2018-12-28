@@ -1,6 +1,11 @@
 # MCBBS-Client
 
+[![447a2b32e7ec7bd5fb486.png](http://miao.su/images/2018/12/24/447a2b32e7ec7bd5fb486.png)](http://miao.su/image/HdIbf)
+
 MCBBS 客户端
+
+![https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master]
+
 
 正在全速开发中，请耐心等待……
 
