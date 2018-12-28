@@ -1,15 +1,10 @@
-# MCBBS-Client
+# MCBBS-Client (MCBBS 客户端)
 
-[![447a2b32e7ec7bd5fb486.th.png](http://miao.su/images/2018/12/24/447a2b32e7ec7bd5fb486.th.png)](http://miao.su/image/HdIbf)
+[![Build Status](https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master)](https://travis-ci.com/langyo/MCBBS-Client)
 
-MCBBS 客户端
-
-!(https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master)
-
+[![447a2b32e7ec7bd5fb486.md.png](http://miao.su/images/2018/12/24/447a2b32e7ec7bd5fb486.md.png)](http://miao.su/image/HdIbf)
 
 正在全速开发中，请耐心等待……
-
-[此客户端的在线编辑地址](https://codesandbox.io/s/github/langyo/MCBBS-Client/tree/master/)
 
 ## 此客户端的开发模式
 
