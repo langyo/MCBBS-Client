@@ -13,7 +13,7 @@ for(let i of document.querySelectorAll('#threadlisttableid > tbody > tr')){
 		title: i.querySelector('th > a.s.xst').innerText.trim(),
 		type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
 		states:{
-			
+			closed: i.querySelector('th').className == 'lock'
 		}
 	});
 }

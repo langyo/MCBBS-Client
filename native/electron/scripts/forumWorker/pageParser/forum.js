@@ -13,6 +13,8 @@ for (let i of document.querySelectorAll('#threadlisttableid > tbody > tr')) {
     author: i.querySelector('td:nth-child(3) > cite > a') && /uid=([0-9]+)/.exec(i.querySelector('td:nth-child(3) > cite > a').getAttribute('href'))[1] || "0",
     title: i.querySelector('th > a.s.xst').innerText.trim(),
     type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
-    states: {}
+    states: {
+      closed: i.querySelector('th').className == 'lock'
+    }
   });
 }
