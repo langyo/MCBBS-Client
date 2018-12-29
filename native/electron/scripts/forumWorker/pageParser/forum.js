@@ -1,5 +1,7 @@
 "use strict";
 
+// 解析的页面：
+// forum-[a-zA-Z0-9]+-[0-9]+\.html
 let forum = {
   info: {},
   threads: []

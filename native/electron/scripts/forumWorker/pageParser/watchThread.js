@@ -1,5 +1,8 @@
 "use strict";
 
+// 解析的页面：
+// thread-[0-9]+-[0-9]+-1\.html
+// forum\.php\?mod=viewthread&tid=[0-9]+&page=[0-9]+(#pid[0-9]+)?
 let thread = {};
 let posts = {}; // 帖子回复列表解析
 

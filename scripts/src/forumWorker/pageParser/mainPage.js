@@ -1,3 +1,6 @@
+// 解析的页面：
+// forum\.php
+
 let mainPage = {
 	headImages: [],
 	forumGroups: {},

@@ -1,3 +1,6 @@
+// 解析的页面：
+// home\.php\?mod=space&uid=[0-9]+
+
 let user = {
     id: /[0-9]+/.exec(document.querySelectorAll('#ct > div > div.bm.bw0 > div > div.bm_c.u_profile > div:nth-child(1) > h2 > span')[0].innerText.trim())[0],
     states: {}
