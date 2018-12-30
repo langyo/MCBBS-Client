@@ -18,13 +18,13 @@ class Thread extends React.Component {
         {testData.threads[this.props.thread].posts.map((n, id) => (
           <Floor
             key={n}
-            accountAvatar={
-              testData.users[testData.posts[n].author].avatar
+            accountAvatar={testData.users[testData.posts[n].author].avatar}
+            accountName={testData.users[testData.posts[n].author].name}
+            accountInfo={
+              testData.userGroups[
+                testData.users[testData.posts[n].author].userGroup
+              ].name
             }
-            accountName={
-              testData.users[testData.posts[n].author].name
-            }
-            accountInfo={"Lv ? ."}
             contentTimeInfo={"发布于 ?"}
             contentFloor={id + 1}
             content={testData.posts[n].content}

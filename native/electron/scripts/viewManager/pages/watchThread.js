@@ -30,7 +30,7 @@ class Thread extends _react.default.Component {
       key: n,
       accountAvatar: _testData.default.users[_testData.default.posts[n].author].avatar,
       accountName: _testData.default.users[_testData.default.posts[n].author].name,
-      accountInfo: "Lv ? .",
+      accountInfo: _testData.default.userGroups[_testData.default.users[_testData.default.posts[n].author].userGroup].name,
       contentTimeInfo: "发布于 ?",
       contentFloor: id + 1,
       content: _testData.default.posts[n].content,
