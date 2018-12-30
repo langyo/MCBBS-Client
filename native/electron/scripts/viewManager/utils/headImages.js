@@ -13,8 +13,6 @@ var _styles = require("@material-ui/core/styles");
 
 var _MobileStepper = _interopRequireDefault(require("@material-ui/core/MobileStepper"));
 
-var _Paper = _interopRequireDefault(require("@material-ui/core/Paper"));
-
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
 var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
@@ -26,12 +24,6 @@ var _KeyboardArrowRight = _interopRequireDefault(require("@material-ui/icons/Key
 var _reactSwipeableViews = _interopRequireDefault(require("react-swipeable-views"));
 
 var _reactSwipeableViewsUtils = require("react-swipeable-views-utils");
-
-var _GridList = _interopRequireDefault(require("@material-ui/core/GridList"));
-
-var _GridListTile = _interopRequireDefault(require("@material-ui/core/GridListTile"));
-
-var _GridListTileBar = _interopRequireDefault(require("@material-ui/core/GridListTileBar"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49,13 +41,21 @@ const styles = theme => ({
     width: "100%",
     height: "100%"
   },
-  titleBar: {
-    background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " + "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+  titleBarText: {
     top: 0,
-    padding: 12,
+    margin: 10,
     position: "absolute",
     width: "100%",
-    height: 16
+    height: 16,
+    color: "#FFF",
+    fontWeight: "bold"
+  },
+  titleBar: {
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)",
+    top: 0,
+    position: "absolute",
+    width: "100%",
+    height: 32
   }
 });
 
@@ -103,18 +103,17 @@ class HeadImages extends _react.default.Component {
       onChangeIndex: this.handleStepChange,
       enableMouseEvents: true
     }, this.props.headImages.map((step, index) => _react.default.createElement("div", {
-      key: index
-    }, Math.abs(activeStep - index) <= 2 ? _react.default.createElement("div", {
-      key: index
-    }, _react.default.createElement("img", {
+      key: step.label
+    }, Math.abs(activeStep - index) <= 2 ? _react.default.createElement("div", null, _react.default.createElement("img", {
       className: classes.img,
       src: step.img,
       alt: step.href
     }), _react.default.createElement("div", {
       className: classes.titleBar
-    }, _react.default.createElement(_Typography.default, {
-      variant: "subtitle1"
-    }, step.title))) : null))), _react.default.createElement(_MobileStepper.default, {
+    }), _react.default.createElement(_Typography.default, {
+      variant: "subtitle1",
+      className: classes.titleBarText
+    }, step.title)) : null))), _react.default.createElement(_MobileStepper.default, {
       steps: maxSteps,
       position: "static",
       activeStep: activeStep,

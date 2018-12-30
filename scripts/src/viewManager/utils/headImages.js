@@ -2,17 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import MobileStepper from "@material-ui/core/MobileStepper";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -26,15 +21,22 @@ const styles = theme => ({
     width: "100%",
     height: "100%"
   },
-  titleBar: {
-    background:
-      "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+  titleBarText: {
     top: 0,
-    padding: 12,
+    margin: 10,
     position: "absolute",
     width: "100%",
-    height: 16
+    height: 16,
+    color: "#FFF",
+    fontWeight: "bold"
+  },
+  titleBar: {
+    background:
+      "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)",
+    top: 0,
+    position: "absolute",
+    width: "100%",
+    height: 32
   }
 });
 
@@ -45,13 +47,19 @@ class HeadImages extends React.Component {
 
   handleNext = () => {
     this.setState(prevState => ({
-      activeStep: prevState.activeStep + 1 >= this.props.headImages.length ? 0 : prevState.activeStep + 1
+      activeStep:
+        prevState.activeStep + 1 >= this.props.headImages.length
+          ? 0
+          : prevState.activeStep + 1
     }));
   };
 
   handleBack = () => {
     this.setState(prevState => ({
-      activeStep: prevState.activeStep - 1 < 0 ? this.props.headImages.length - 1 : prevState.activeStep - 1
+      activeStep:
+        prevState.activeStep - 1 < 0
+          ? this.props.headImages.length - 1
+          : prevState.activeStep - 1
     }));
   };
 
@@ -72,22 +80,22 @@ class HeadImages extends React.Component {
           onChangeIndex={this.handleStepChange}
           enableMouseEvents
         >
-          {
-            this.props.headImages.map((step, index) => (
-              <div key={index}>
-                {
-                  Math.abs(activeStep - index) <= 2 ? (
-                    <div key={index}>
-                      <img className={classes.img} src={step.img} alt={step.href} />
-                      <div className={classes.titleBar}>
-                        <Typography variant="subtitle1">{step.title}</Typography>
-                      </div>
-                    </div>
-                  ) : null
-                }
-              </div>
-            ))
-          }
+          {this.props.headImages.map((step, index) => (
+            <div key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <div>
+                  <img className={classes.img} src={step.img} alt={step.href} />
+                  <div className={classes.titleBar} />
+                  <Typography
+                    variant="subtitle1"
+                    className={classes.titleBarText}
+                  >
+                    {step.title}
+                  </Typography>
+                </div>
+              ) : null}
+            </div>
+          ))}
         </AutoPlaySwipeableViews>
         <MobileStepper
           steps={maxSteps}
@@ -95,18 +103,12 @@ class HeadImages extends React.Component {
           activeStep={activeStep}
           className={classes.mobileStepper}
           nextButton={
-            <Button
-              size="small"
-              onClick={this.handleNext}
-            >
+            <Button size="small" onClick={this.handleNext}>
               <KeyboardArrowRight />
             </Button>
           }
           backButton={
-            <Button
-              size="small"
-              onClick={this.handleBack}
-            >
+            <Button size="small" onClick={this.handleBack}>
               <KeyboardArrowLeft />
             </Button>
           }
