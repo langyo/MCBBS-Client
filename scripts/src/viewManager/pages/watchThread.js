@@ -21,11 +21,11 @@ class Thread extends React.Component {
             accountAvatar={testData.users[testData.posts[n].author].avatar}
             accountName={testData.users[testData.posts[n].author].name}
             accountInfo={
-              testData.userGroups[
+              testData.userGroup[
                 testData.users[testData.posts[n].author].userGroup
               ].name
             }
-            contentTimeInfo={"发布于 ?"}
+            contentTimeInfo={"发布于 " + testData.posts[n].createTime}
             contentFloor={id + 1}
             content={testData.posts[n].content}
             reply
