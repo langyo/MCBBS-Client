@@ -81,7 +81,7 @@ class HeadImages extends React.Component {
           enableMouseEvents
         >
           {this.props.headImages.map((step, index) => (
-            <div key={step.label}>
+            <div key={index}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <div>
                   <img className={classes.img} src={step.img} alt={step.href} />

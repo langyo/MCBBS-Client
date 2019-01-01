@@ -144,6 +144,9 @@ native/electron/mock/dist
 native/electron/mock/test_less
 native/electron/mock/release
 
+# electron 打包文件
+native/electron/packaged/
+
 # --- 针对 scripts 的部分 ---
 
 # electron

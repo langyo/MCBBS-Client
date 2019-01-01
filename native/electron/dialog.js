@@ -68,6 +68,8 @@ import CustomScroll from 'react-custom-scroll';
 import MainPageRender from './scripts/viewManager/pages/mainPage';
 import WatchThreadRender from './scripts/viewManager/pages/watchThread';
 
+import TestData from "./scripts/viewManager/testData";
+
 const drawerWidth = 200;
 
 const styles = theme => ({
@@ -157,14 +159,22 @@ function newTag(object) {
   tags.push(new Tag(object));
 }
 
+// 测试数据
+newTag({
+  title: TestData.threads[825413].title,
+  subTitle: TestData.users[TestData.threads[825413].author].name,
+  render: (<WatchThreadRender thread={825413} />)
+});
+
 // 窗口主体
 class MainWindow extends React.Component {
   state = {
-    leftBarType: 'main'
+    leftBarType: 'main',
+    tag: 'mainPage'
   };
 
   handleOpenDevTools = () => {
-    remote.getCurrentWebContents().openDevTools({detach:true});
+    remote.getCurrentWebContents().openDevTools({ detach: true });
   }
 
   handleDrawerOpenUsers = () => {
@@ -185,6 +195,12 @@ class MainWindow extends React.Component {
 
   handleDrawerClose = () => {
     this.setState({ leftBarType: 'main' });
+  };
+
+  handleCreateTagSelector = function (id) {
+    return () => {
+      this.setState({ tag: id });
+    };
   };
 
   render() {
@@ -222,7 +238,7 @@ class MainWindow extends React.Component {
                   <List>
                     {tags.map((n, index) => {
                       return (
-                        <ListItem key={index} button>
+                        <ListItem key={index} button onClick={this.handleCreateTagSelector(index)}>
                           {n.icon}
                           <ListItemText primary={n.title} secondary={n.subTitle} />
                           {n.enableClose && (
@@ -236,7 +252,7 @@ class MainWindow extends React.Component {
                       );
                     })}
                     <ListSubheader>快速通道</ListSubheader>
-                    <ListItem button>
+                    <ListItem button onClick={this.handleCreateTagSelector("mainPage")}>
                       <HomeIcon />
                       <ListItemText primary="主页" />
                     </ListItem>
@@ -321,7 +337,7 @@ class MainWindow extends React.Component {
                       <StoreIcon />
                       <ListItemText primary="插件中心" />
                     </ListItem>
-                    <ListItem button onClick={ this.handleOpenDevTools}>
+                    <ListItem button onClick={this.handleOpenDevTools}>
                       <SettingIcon />
                       <ListItemText primary="开发者控制" />
                     </ListItem>
@@ -390,13 +406,18 @@ class MainWindow extends React.Component {
           </Drawer>
           <main className={classes.content}>
             <CustomScroll allowOuterScroll={true}>
-              {/* <MainPageRender /> */}
-              <WatchThreadRender thread={825413} />
+              {
+                (this.state.tag === "mainPage" && <MainPageRender />)
+                ||
+                (<div key={this.state.tag}>
+                  {tags[this.state.tag].render}
+                </div>)
+              }
             </CustomScroll>
           </main>
         </div>
       );
-    }catch(e){
+    } catch (e) {
       remote.getCurrentWebContents().openDevTools();
       throw e;
     }

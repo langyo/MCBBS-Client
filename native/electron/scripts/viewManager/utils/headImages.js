@@ -103,7 +103,7 @@ class HeadImages extends _react.default.Component {
       onChangeIndex: this.handleStepChange,
       enableMouseEvents: true
     }, this.props.headImages.map((step, index) => _react.default.createElement("div", {
-      key: step.label
+      key: index
     }, Math.abs(activeStep - index) <= 2 ? _react.default.createElement("div", null, _react.default.createElement("img", {
       className: classes.img,
       src: step.img,
