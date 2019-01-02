@@ -28,10 +28,11 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-custom-scroll": "^4.0.1",
+    "react-desktop": "^0.3.7",
     "react-dom": "^16.6.3",
+    "react-free-scrollbar": "^0.3.2",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
-    "react-desktop": "^0.3.7",
     "regenerator-runtime": "^0.13.1",
     "watchify": "^3.11.0",
     "webpack": "^4.26.1"

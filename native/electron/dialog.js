@@ -197,10 +197,12 @@ class MainWindow extends React.Component {
 
   handleCreateTagSelector = function (id) {
     return () => {
-      window.scrollTo(0, 0);
+      this.mainRef.current.scrollTo(0, 0);
       this.setState({ tag: id });
     };
   };
+
+  mainRef = React.createRef();
 
   render() {
     const { classes, theme } = this.props;
@@ -403,7 +405,7 @@ class MainWindow extends React.Component {
             </Fade>
             <Divider />
           </Drawer>
-          <main className={classes.content}>
+          <main className={classes.content} ref={this.mainRef}>
             {
               (this.state.tag === "mainPage" && <MainPageRender />)
               ||
