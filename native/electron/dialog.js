@@ -63,8 +63,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 
-import CustomScroll from 'react-custom-scroll';
-
 import MainPageRender from './scripts/viewManager/pages/mainPage';
 import WatchThreadRender from './scripts/viewManager/pages/watchThread';
 
@@ -199,6 +197,7 @@ class MainWindow extends React.Component {
 
   handleCreateTagSelector = function (id) {
     return () => {
+      window.scrollTo(0, 0);
       this.setState({ tag: id });
     };
   };
@@ -405,15 +404,13 @@ class MainWindow extends React.Component {
             <Divider />
           </Drawer>
           <main className={classes.content}>
-            <CustomScroll allowOuterScroll={true}>
-              {
-                (this.state.tag === "mainPage" && <MainPageRender />)
-                ||
-                (<div key={this.state.tag}>
-                  {tags[this.state.tag].render}
-                </div>)
-              }
-            </CustomScroll>
+            {
+              (this.state.tag === "mainPage" && <MainPageRender />)
+              ||
+              (<div key={this.state.tag}>
+                {tags[this.state.tag].render}
+              </div>)
+            }
           </main>
         </div>
       );
