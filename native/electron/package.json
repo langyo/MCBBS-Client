@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ./main.js",
     "watch": "watchify dialogRender.js -t babelify -o public/js/bundle.js --debug --verbose",
-    "package": "electron-packager ./ MCBBS-Client --overwrite --app-version=0.2.0 --electron-version 1.7.9 --platform=win32 --out=./packaged/ --icon=./public/img/win.ico",
+    "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/win.ico",
     "test": "jest --watch"
   },
   "author": "langyo",
@@ -23,6 +23,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0-beta.0",
     "classnames": "^2.2.6",
+    "electron-builder": "^20.38.4",
     "firebase": "^5.6.0",
     "lowdb": "^1.0.0",
     "prop-types": "^15.6.2",
@@ -30,7 +31,6 @@
     "react-custom-scroll": "^4.0.1",
     "react-desktop": "^0.3.7",
     "react-dom": "^16.6.3",
-    "react-free-scrollbar": "^0.3.2",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
     "regenerator-runtime": "^0.13.1",
@@ -64,5 +64,11 @@
         "@babel/plugin-proposal-class-properties"
       ]
     ]
+  },
+  "build": {
+    "appId": "net.mcbbs.langyo",
+    "mac": {
+      "category": "net.mcbbs.langyo.client-desktop"
+    }
   }
 }
