@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ./main.js",
     "watch": "watchify dialogRender.js -t babelify -o public/js/bundle.js --debug --verbose",
-    "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/win.ico",
+    "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "test": "jest --watch",
     "packageRepair-cleanCache": "npm cache clean --force"
   },
