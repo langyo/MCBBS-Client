@@ -4,7 +4,7 @@
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
   "scripts": {
-    "start": "electron ./main.js",
+    "start": "electron ./index.js",
     "watch": "watchify dialogRender.js -t babelify -o public/js/bundle.js --debug --verbose",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "test": "jest --watch",
@@ -65,11 +65,5 @@
         "@babel/plugin-proposal-class-properties"
       ]
     ]
-  },
-  "build": {
-    "appId": "net.mcbbs.langyo",
-    "mac": {
-      "category": "net.mcbbs.langyo.client-desktop"
-    }
   }
 }

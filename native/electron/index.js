@@ -23,6 +23,7 @@ function createMainWnd() {
 
     mainWnd.on('closed', () => {
        mainWnd = null;
+       process.exit();
     });
 }
 
