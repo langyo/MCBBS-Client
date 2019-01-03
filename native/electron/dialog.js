@@ -37,6 +37,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Tooltip from "@material-ui/core/Tooltip";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
@@ -113,7 +114,6 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
     overflowX: "hidden",
     overflowY: "scroll",
     maxHeight: "600px"
@@ -246,14 +246,19 @@ class MainWindow extends React.Component {
                       >
                         {n.icon}
                         <ListItemText
-                          primary={n.title}
+                          primary={<Typography noWrap>{n.title}</Typography>}
                           secondary={n.subTitle}
                         />
                         {n.enableClose && (
                           <ListItemSecondaryAction>
-                            <IconButton>
-                              <CloseIcon />
-                            </IconButton>
+                            <Fade
+                              in={this.state.leftBarType === "documents"}
+                              timeout={500}
+                            >
+                              <IconButton>
+                                <CloseIcon />
+                              </IconButton>
+                            </Fade>
                           </ListItemSecondaryAction>
                         )}
                       </ListItem>
@@ -426,6 +431,7 @@ class MainWindow extends React.Component {
             <Divider />
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
+            <LinearProgress />
             {(this.state.tag === "mainPage" && <MainPageRender />) || (
               <div key={this.state.tag}>{tags[this.state.tag].render}</div>
             )}
@@ -433,6 +439,7 @@ class MainWindow extends React.Component {
         </div>
       );
     } catch (e) {
+      remote.getCurrentWebContents().openDevTools();
       throw e;
     }
   }
