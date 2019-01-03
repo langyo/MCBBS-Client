@@ -11,6 +11,9 @@ let threads = {};
 for(let i of document.querySelectorAll('#threadlisttableid > tbody > tr')){
 	if(i.className !== "") continue;
 
+	// 如果连 id 也没有，说明为无效节点，直接跳过
+	if(!i.querySelector('th > a.s.xst')) continue;
+
 	let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.s.xst').getAttribute('href'))[1];
 	forum.threads.push(id);
 
