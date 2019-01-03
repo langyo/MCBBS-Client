@@ -173,6 +173,10 @@ class MainWindow extends React.Component {
     tag: "mainPage"
   };
 
+  handleOpenDevTools = () => {
+    remote.getCurrentWebContents().openDevTools({ detach: true });
+  }
+
   handleDrawerOpenUsers = () => {
     this.setState({ leftBarType: "users" });
   };

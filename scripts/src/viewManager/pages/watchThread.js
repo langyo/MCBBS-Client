@@ -3,11 +3,17 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 
+import Typography from "@material-ui/core/Typography";
+
 import Floor from "../utils/floor";
 
 import testData from "../testData";
 
-const styles = theme => ({});
+const styles = theme => ({
+  title: {
+    padding: '12px'
+  }
+});
 
 class Thread extends React.Component {
   render() {
@@ -15,6 +21,9 @@ class Thread extends React.Component {
 
     return (
       <div>
+        <Typography variant="h6" color="inherit" className={classes.title}>
+          {testData.threads[this.props.thread].title}
+        </Typography>
         {testData.threads[this.props.thread].posts.map((n, id) => (
           <Floor
             key={n}
