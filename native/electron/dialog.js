@@ -247,6 +247,7 @@ class MainWindow extends React.Component {
                         key={index}
                         button
                         onClick={this.handleCreateTagSelector(index)}
+                        selected={this.state.tag === index}
                       >
                         {n.icon}
                         <ListItemText
@@ -272,6 +273,7 @@ class MainWindow extends React.Component {
                   <ListItem
                     button
                     onClick={this.handleCreateTagSelector("mainPage")}
+                    selected={this.state.tag === 'mainPage'}
                   >
                     <HomeIcon />
                     <ListItemText primary="主页" />
