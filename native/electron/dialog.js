@@ -63,6 +63,7 @@ import StoreIcon from "@material-ui/icons/StoreMallDirectory";
 import InfoIcon from "@material-ui/icons/Info";
 import AddIcon from "@material-ui/icons/Add";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import LanguageIcon from "@material-ui/icons/Language";
 
 import MainPageRender from "./scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "./scripts/viewManager/pages/watchThread";
@@ -163,6 +164,11 @@ newTag({
   icon: <WidgetsIcon />,
   render: <ForumRender forum="announcement-1" />
 });
+newTag({
+  title: "浏览器标签",
+  icon: <LanguageIcon />,
+  render: <webview src="http://www.mcbbs.net/forum.php" />
+})
 
 // 窗口主体
 class MainWindow extends React.Component {
