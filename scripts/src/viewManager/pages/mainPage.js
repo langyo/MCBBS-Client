@@ -7,25 +7,30 @@ import HeadImages from "../utils/headImages";
 import TestData from "../testData";
 
 const styles = theme => ({
+  padding: {
+    padding: "8px"
+  }
 });
 
 class MainPage extends React.Component {
-    render() {
-        return (
-            <div>
-                <HeadImages headImages={TestData.mainPage.headImages} />
-                {
-                    Object.keys(TestData.mainPage.forumGroups).map(n => (
-                        <ForumPanel
-                            key={TestData.mainPage.forumGroups[n].forumGroupId}
-                            forumGroupName={TestData.mainPage.forumGroups[n].forumGroupName}
-                            forums={TestData.mainPage.forumGroups[n].forums}
-                        />
-                    ))
-                }
-            </div>
-        )
-    }
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        <HeadImages headImages={TestData.mainPage.headImages} className={classes.padding} />
+        {
+          Object.keys(TestData.mainPage.forumGroups).map(n => (
+            <ForumPanel
+              key={TestData.mainPage.forumGroups[n].forumGroupId}
+              forumGroupName={TestData.mainPage.forumGroups[n].forumGroupName}
+              forums={TestData.mainPage.forumGroups[n].forums}
+            />
+          ))
+        }
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles, { withTheme: true })(MainPage);

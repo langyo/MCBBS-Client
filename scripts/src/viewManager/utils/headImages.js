@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+
 import MobileStepper from "@material-ui/core/MobileStepper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -13,13 +14,15 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    padding: "8px"
   },
   img: {
     display: "block",
     overflow: "hidden",
     width: "100%",
-    height: "100%"
+    height: "240px",
+    borderRadius: "4px"
   },
   titleBarText: {
     top: 0,
@@ -37,6 +40,9 @@ const styles = theme => ({
     position: "absolute",
     width: "100%",
     height: 32
+  },
+  stepper: {
+
   }
 });
 
@@ -112,6 +118,7 @@ class HeadImages extends React.Component {
               <KeyboardArrowLeft />
             </Button>
           }
+          className={classes.stepper}
         />
       </div>
     );

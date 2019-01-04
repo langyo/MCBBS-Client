@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -14,6 +13,11 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import testData from "../testData";
 
 const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: "8px"
+  },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
   },
@@ -35,13 +39,13 @@ class Forum extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div className={classes.root}>
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.forums[this.props.forum].name}
         </Typography>
         <List>
           {testData.forums[this.props.forum].threads.map((n, id) => (
-            <ListItem button>
+            <ListItem button key={n}>
               <ListItemIcon>
                 <DescriptionIcon />
               </ListItemIcon>
@@ -51,7 +55,7 @@ class Forum extends React.Component {
                   (testData.threads[n].author === "0"
                     ? "匿名"
                     : testData.users[testData.threads[n].author] &&
-                      testData.users[testData.threads[n].author].name) || "?"
+                    testData.users[testData.threads[n].author].name) || "?"
                 }
               />
             </ListItem>

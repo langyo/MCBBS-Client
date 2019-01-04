@@ -33,13 +33,15 @@ const AutoPlaySwipeableViews = (0, _reactSwipeableViewsUtils.autoPlay)(_reactSwi
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    padding: "8px"
   },
   img: {
     display: "block",
     overflow: "hidden",
     width: "100%",
-    height: "100%"
+    height: "240px",
+    borderRadius: "4px"
   },
   titleBarText: {
     top: 0,
@@ -56,7 +58,8 @@ const styles = theme => ({
     position: "absolute",
     width: "100%",
     height: 32
-  }
+  },
+  stepper: {}
 });
 
 class HeadImages extends _react.default.Component {
@@ -125,7 +128,8 @@ class HeadImages extends _react.default.Component {
       backButton: _react.default.createElement(_Button.default, {
         size: "small",
         onClick: this.handleBack
-      }, _react.default.createElement(_KeyboardArrowLeft.default, null))
+      }, _react.default.createElement(_KeyboardArrowLeft.default, null)),
+      className: classes.stepper
     }));
   }
 

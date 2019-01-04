@@ -84,11 +84,6 @@ function ForumPanel(props) {
             ))}
           </List>
         </ExpansionPanelDetails>
-        <ExpansionPanelActions>
-          <IconButton color="inherit">
-            <MoreIcon />
-          </IconButton>
-        </ExpansionPanelActions>
       </ExpansionPanel>
     </div>
   );

@@ -109,9 +109,7 @@ function ForumPanel(props) {
     secondary: n.info
   }), _react.default.createElement(_ListItemSecondaryAction.default, null, _react.default.createElement(_IconButton.default, {
     "aria-label": "Comments"
-  }, _react.default.createElement(_MoreVert.default, null))))))), _react.default.createElement(_ExpansionPanelActions.default, null, _react.default.createElement(_IconButton.default, {
-    color: "inherit"
-  }, _react.default.createElement(_MoreVert.default, null)))));
+  }, _react.default.createElement(_MoreVert.default, null)))))))));
 }
 
 ForumPanel.propTypes = {

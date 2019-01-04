@@ -74,7 +74,14 @@ const drawerWidth = 200;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    overflow: "hidden"
+  },
+  content: {
+    flexGrow: 1,
+    overflowX: "hidden",
+    overflowY: "scroll",
+    maxHeight: "600px"
   },
   hide: {
     display: "none"
@@ -112,12 +119,6 @@ const styles = theme => ({
     justifyContent: "center",
     padding: "0 8px",
     ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    overflowX: "hidden",
-    overflowY: "scroll",
-    maxHeight: "600px"
   }
 });
 
@@ -435,7 +436,7 @@ class MainWindow extends React.Component {
             <Divider />
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
-            <LinearProgress />
+            {/* <LinearProgress /> */}
             {(this.state.tag === "mainPage" && <MainPageRender />) || (
               <div key={this.state.tag}>{tags[this.state.tag].render}</div>
             )}
