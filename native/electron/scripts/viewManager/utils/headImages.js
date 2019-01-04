@@ -40,7 +40,7 @@ const styles = theme => ({
     display: "block",
     overflow: "hidden",
     width: "100%",
-    height: "240px",
+    height: "260px",
     borderRadius: "4px"
   },
   titleBarText: {

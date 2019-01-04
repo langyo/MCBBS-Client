@@ -32,6 +32,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 const styles = theme => ({
+  fill: {
+    width: "100%",
+    height: "100%",
+    maxHeight: "100%"
+  },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
 
@@ -62,7 +67,9 @@ class Forum extends _react.default.Component {
       variant: "h6",
       color: "inherit",
       className: classes.title
-    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_List.default, null, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
+    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_List.default, {
+      className: classes.fill
+    }, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
       button: true,
       key: n
     }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_Description.default, null)), _react.default.createElement(_ListItemText.default, {

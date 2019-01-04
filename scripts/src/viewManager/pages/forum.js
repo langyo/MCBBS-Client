@@ -14,6 +14,11 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import testData from "../testData";
 
 const styles = theme => ({
+  fill: {
+    width: "100%",
+    height: "100%",
+    maxHeight: "100%"
+  },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
   },
@@ -39,7 +44,7 @@ class Forum extends React.Component {
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.forums[this.props.forum].name}
         </Typography>
-        <List>
+        <List className={classes.fill}>
           {testData.forums[this.props.forum].threads.map((n, id) => (
             <ListItem button key={n}>
               <ListItemIcon>

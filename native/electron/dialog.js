@@ -65,6 +65,8 @@ import AddIcon from "@material-ui/icons/Add";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import LanguageIcon from "@material-ui/icons/Language";
 
+import CustomScroll from "react-custom-scroll";
+
 import MainPageRender from "./scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "./scripts/viewManager/pages/watchThread";
 import ForumRender from "./scripts/viewManager/pages/forum";
@@ -79,9 +81,10 @@ const styles = theme => ({
     overflow: "hidden"
   },
   content: {
-    overflow: "auto",
+    overflowX: "hidden",
+    overflowY: "auto",
     maxHeight: "600px",
-    width: "100%"
+    width: "752px"
   },
   hide: {
     display: "none"
@@ -165,9 +168,9 @@ newTag({
   render: <ForumRender forum="announcement-1" />
 });
 newTag({
-  title: "浏览器标签",
+  title: "模拟浏览器标签",
   icon: <LanguageIcon />,
-  render: <webview src="http://www.mcbbs.net/forum.php" />
+  render: <webview src="http://www.mcbbs.net/forum.php" style={{ width: "770px", height: "600px" }} />
 })
 
 // 窗口主体
@@ -441,10 +444,10 @@ class MainWindow extends React.Component {
             <Divider />
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
-            {/* <LinearProgress /> */}
-            {(this.state.tag === "mainPage" && <MainPageRender />) || (
-              <div key={this.state.tag}>{tags[this.state.tag].render}</div>
-            )}
+              {/* <LinearProgress /> */}
+              {(this.state.tag === "mainPage" && <MainPageRender />) || (
+                <div key={this.state.tag}>{tags[this.state.tag].render}</div>
+              )}
           </main>
         </div>
       );
