@@ -2,7 +2,7 @@
 // forum-[a-zA-Z0-9]+-[0-9]+\.html
 
 let forum = {
-	info: {},
+	info: document.querySelector('#ct > div > div.bm.bml.pbn > div.bm_c.cl > div:nth-child(2)').innerHTML,
 	threads: []
 };
 
