@@ -1,66 +1,71 @@
-// 解析的页面：
-// forum-[a-zA-Z0-9]+-[0-9]+\.html
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 
-let forum = {
-	info: document.querySelector('#ct > div > div.bm.bml.pbn > div.bm_c.cl > div:nth-child(2)').innerHTML,
-	threads: []
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Typography from "@material-ui/core/Typography";
+
+import DescriptionIcon from "@material-ui/icons/Description";
+
+import testData from "../testData";
+
+const styles = theme => ({
+  actions: {
+    display: "flex"
+  },
+  expand: {
+    marginLeft: "auto" // 右侧按钮对齐
+  },
+  floatLeft: {
+    float: "left"
+  },
+  floatRight: {
+    float: "right"
+  },
+  title: {
+    padding: "12px"
+  }
+});
+
+class Forum extends React.Component {
+  state = {};
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        <Typography variant="h6" color="inherit" className={classes.title}>
+          {testData.forums[this.props.forum].name}
+        </Typography>
+        <List component="nav">
+          {testData.forums[this.props.forum].threads.map((n, id) => (
+            <ListItem button key={n}>
+              <ListItemIcon>
+                <DescriptionIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={testData.threads[n].title}
+                secondary={
+                  (testData.threads[n].author === "0"
+                    ? "匿名"
+                    : testData.users[testData.threads[n].author] &&
+                      testData.users[testData.threads[n].author].name) || "?"
+                }
+              />
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    );
+  }
+}
+
+Forum.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
-let threads = {};
-
-for(let i of document.querySelectorAll('#threadlisttableid > tbody > tr')){
-	if(i.className !== "") continue;
-
-	// 如果连 id 也没有，说明为无效节点，直接跳过
-	if(!i.querySelector('th > a.s.xst')) continue;
-
-	let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.s.xst').getAttribute('href'))[1];
-	forum.threads.push(id);
-
-	let info = {
-		author: i.querySelector('td:nth-child(3) > cite > a') && /uid=([0-9]+)/.exec(i.querySelector('td:nth-child(3) > cite > a').getAttribute('href'))[1] || "0",
-		title: i.querySelector('th > a.s.xst').innerText.trim(),
-		type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
-		states:{}
-	};
-
-	// 帖子状态解析
-	let state = i.querySelector('td.icn > a').getAttribute('title');
-	if(/关闭的主题/.test(state)) info.states.closed = true;
-	if(/全局置顶主题/.test(state)) info.states.topLevel = 3;
-	else if(/分类置顶主题/.test(state)) info.states.topLevel = 2;
-	else if(/本版置顶主题/.test(state)) info.states.topLevel = 1;
-
-	// 标题状态解析
-	if(i.querySelector('th > a.s.xst').style.color) info.states.titleColor = i.querySelector('th > a.s.xst').style.color.trim();
-	if(i.querySelector('th > a.s.xst').style.fontWeight === 'bold') info.states.titleBold = true;
-
-	// 帖子分级解析
-	for(let j of i.querySelectorAll('th > img')){
-		switch(j.getAttribute('src')){
-            case 'template/mcbbs/image/digest_1.gif':
-				// 精华 I
-				info.states.starLevel = 1;
-				break;
-			case 'template/mcbbs/image/digest_2.gif':
-				// 精华 II
-				info.states.starLevel = 2;
-				break;
-			case 'template/mcbbs/image/digest_3.gif':
-				// 精华 III
-				info.states.starLevel = 3;
-				break;
-        }
-
-		// 图章检测
-		if(/static\/image\/stamp\/[0-9]+\.small\.gif/.test(j.getAttribute('src'))){
-			info.stamp = j.getAttribute('alt');
-		}
-    }
-
-	// 帖子统计解析
-	info.replyCount = i.querySelector('td.num > a').innerText.trim();
-	info.watchCount = i.querySelector('td.num > em').innerText.trim();
-
-	threads[id] = info;
-}
+export default withStyles(styles)(Forum);

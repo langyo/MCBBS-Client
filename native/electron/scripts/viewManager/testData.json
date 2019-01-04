@@ -444,6 +444,7 @@
   },
   "forums": {
     "news_1": {
+      "name": "新闻资讯",
       "info": "\n<div class=\"ptn xg2\"><div align=\"center\"><img id=\"aimg_iLIeN\" class=\"zoom\" width=\"700\" height=\"291\" src=\"http://ww4.sinaimg.cn/large/94492606gw1eluwksmw3yj21h20lu0xb.jpg\" border=\"0\" alt=\"\"></div><br>\n<br>\n<br>\n<div align=\"center\"><font size=\"3\"><font color=\"Black\"><strong><br>\n这里是一个任何人都可以参与播报的中文Minecraft资讯平台</strong></font></font></div><br>\n<br>\n<br>\n<div align=\"center\"><font size=\"2\"><font color=\"Black\">本版用于Mojang AB及其作品的<strong>官方</strong>相关资讯，官网非新闻类博文请发到<a href=\"http://www.mcbbs.net/forum.php?mod=forumdisplay&amp;fid=1015&amp;page=1\" target=\"_blank\"><font color=\"DarkRed\">翻译&amp;Wiki版</font></a></font></font><br>\n<font size=\"2\"><font color=\"Black\">发帖前请阅读<a href=\"http://www.mcbbs.net/thread-666050-1-1.html#bangui\" target=\"_blank\"><font color=\"DarkRed\">版规</font></a>以及<a href=\"http://www.mcbbs.net/thread-109969-1-1.html\" target=\"_blank\"><font color=\"DarkRed\">发帖须知</font></a></font></font><br>\n<font size=\"2\"><font color=\"Black\">本版内容未特别说明者，均允许转载，但<a href=\"http://www.creativecommons.org/licenses/by-sa/3.0/cn/legalcode\" target=\"_blank\"><font color=\"DarkRed\">需要署名并以相同方式共享</font></a>，具体参见<a href=\"http://www.mcbbs.net/thread-666050-1-1.html\" target=\"_blank\"><font color=\"DarkRed\">版规具体规章第六条/转载须知</font></a><br>\n此外，欢迎加入新闻版块翻译&amp;新闻交流qq群：<font color=\"DarkRed\">643353107</font></font></font></div></div>\n",
       "threads": [
         "565057",
@@ -480,6 +481,7 @@
       ]
     },
     "gameplay_1": {
+      "name": "游戏技巧",
       "info": "\n<div class=\"ptn xg2\"><font size=\"4\"><strong><font color=\"Navy\">欢迎来到游戏技巧版！</font></strong><br>\n<font color=\"353535\">在这里，您可以<strong><font color=\"Blue\">学习</font>与<font color=\"Blue\">分享</font></strong>包括<strong><font color=\"Red\"><img id=\"aimg_yZP5V\" class=\"zoom\" width=\"24\" height=\"24\" src=\"http://www.mcbbs.net/static/image/smiley/mc_material/redstone_dust.gif\" border=\"0\" alt=\"\">红石</font>、<font color=\"DimGray\"><img id=\"aimg_b6v7C\" class=\"zoom\" width=\"24\" height=\"24\" src=\"http://www.mcbbs.net/static/image/smiley/mc_tool/minecart.gif\" border=\"0\" alt=\"\">铁路</font>、<font color=\"Green\"><img id=\"aimg_bda4b\" class=\"zoom\" width=\"24\" height=\"24\" src=\"http://www.mcbbs.net/static/image/smiley/mc_tool/diamond_pickaxe.gif\" border=\"0\" alt=\"\">生产</font>、<font color=\"Black\"><img id=\"aimg_uqrIf\" class=\"zoom\" width=\"24\" height=\"24\" src=\"http://www.mcbbs.net/static/image/smiley/mc_material/brick.gif\" border=\"0\" alt=\"\">美化</font>、<font color=\"DarkRed\"><img id=\"aimg_ljx4h\" class=\"zoom\" width=\"24\" height=\"24\" src=\"http://www.mcbbs.net/static/image/smiley/mc_tool/diamond_sword.gif\" border=\"0\" alt=\"\">冒险</font>等等</strong>属于<strong>PC原版单人游戏</strong>生存创造过程中的<strong>一切经历体验和技巧心得</strong>。<br>\n本版交流以<strong>教学、探讨</strong>为主要宗旨，<font color=\"Red\">大家触才是真的触</font>。</font></font><br>\n<img id=\"aimg_L533Z\" class=\"zoom\" width=\"700\" height=\"393\" src=\"http://attachment.mcbbs.net/forum/201408/14/231541pgjg3c6qm66c385e.jpg\" border=\"0\" alt=\"\"><br>\n<font size=\"2\"><font color=\"Black\">我们先声明，发表任何文章就当作你已经阅读过本版版规 因此若有任何违规的行为, 我们不会允许任何辩解的行为。<br>\n<strong>本版的版规请查看以下地址:</strong><a href=\"http://www.mcbbs.net/thread-13354-1-1.html\" target=\"_blank\"><strong><font color=\"Red\">http://www.mcbbs.net/thread-13354-1-1.html</font></strong></a></font></font><br>\n<font size=\"6\"><font color=\"Black\"><strong>本版不允许发表一切求助帖。请到<a href=\"http://www.mcbbs.net/forum-qanda-1.html\" target=\"_blank\"><strong><font color=\"Blue\">你问我答版</font></strong></a>各对应分类发帖。</strong></font></font><br>\n<font size=\"6\"><font face=\"微软雅黑\">工机巧艺重启中</font></font><br>\n<font color=\"DarkGreen\"><font size=\"3\">讨论<i><strong>单机MOD</strong></i>相关内容请移步<a href=\"http://www.mcbbs.net/forum-moddiscussion-1.html\" target=\"_blank\"><strong><font color=\"Magenta\">MOD讨论版</font></strong></a>；纯粹为分享地图种子、软件、皮肤材质请到论坛各个对应版块下，谢谢！</font></font></div>\n",
       "threads": [
         "565057",
@@ -516,6 +518,7 @@
       ]
     },
     "software_1": {
+      "name": "软件资源",
       "info": "\n<div class=\"ptn xg2\"><a href=\"http://www.mcbbs.net/thread-825456-1-1.html\" target=\"_blank\"><img id=\"aimg_S3cFc\" class=\"zoom\" src=\"http://api.mcxk.net:3003/image/software/header.png\" border=\"0\" alt=\"\"></a><br>\n<a href=\"http://www.mcbbs.net/thread-294562-1-1.html\" target=\"_blank\"><img id=\"aimg_O3Ooz\" class=\"zoom\" src=\"http://api.mcxk.net:3003/image/software/rule.png\" border=\"0\" alt=\"\"></a><a href=\"http://www.mcbbs.net/thread-38297-1-1.html\" target=\"_blank\"><img id=\"aimg_j1sZV\" class=\"zoom\" src=\"http://api.mcxk.net:3003/image/software/download.png\" border=\"0\" alt=\"\"></a><img id=\"aimg_A6y0O\" class=\"zoom\" src=\"http://api.mcxk.net:3003/image/software/mojang.png\" border=\"0\" alt=\"\"><br>\n<a href=\"http://www.mcbbs.net/forum.php?mod=post&amp;action=newthread&amp;fid=43&amp;extra=page%3D1&amp;sortid=27\" target=\"_blank\"><img id=\"aimg_Wd94L\" class=\"zoom\" src=\"http://api.mcxk.net:3003/image/software/post.png\" border=\"0\" alt=\"\"></a></div>\n",
       "threads": [
         "565057",
@@ -552,6 +555,7 @@
       ]
     },
     "announcement-1": {
+      "name": "公告和反馈",
       "info": "\n<div class=\"ptn xg2\"><font color=\"Red\">本版<strong>仅用于</strong>论坛事务的公告、版主申请以及对论坛事务的建议等。</font><br>\n<a href=\"http://www.mcbbs.net/forum.php?gid=364\" target=\"_blank\">求助帖请去<font color=\"Blue\">你问我答版</font></a></div>\n",
       "threads": [
         "565057",

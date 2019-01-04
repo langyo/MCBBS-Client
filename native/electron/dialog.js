@@ -66,6 +66,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 
 import MainPageRender from "./scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "./scripts/viewManager/pages/watchThread";
+import ForumRender from "./scripts/viewManager/pages/forum";
 
 import TestData from "./scripts/viewManager/testData";
 
@@ -120,14 +121,6 @@ const styles = theme => ({
   }
 });
 
-// 标签图标列表
-const icons = {
-  home: <HomeIcon />,
-  thread: <DescriptionIcon />,
-  vote: <VoteIcon />,
-  question: <NeedHelpIcon />
-};
-
 let tags = [];
 
 // 构建新的标签实体
@@ -164,6 +157,11 @@ newTag({
   title: TestData.threads[825413].title,
   subTitle: TestData.users[TestData.threads[825413].author].name,
   render: <WatchThreadRender thread={825413} />
+});
+newTag({
+  title: TestData.forums["announcement-1"].name,
+  icon: <WidgetsIcon />,
+  render: <ForumRender forum="announcement-1" />
 });
 
 // 窗口主体

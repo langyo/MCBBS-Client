@@ -1,59 +1,85 @@
 "use strict";
 
-// 解析的页面：
-// forum-[a-zA-Z0-9]+-[0-9]+\.html
-let forum = {
-  info: document.querySelector('#ct > div > div.bm.bml.pbn > div.bm_c.cl > div:nth-child(2)').innerHTML,
-  threads: []
-};
-let threads = {};
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-for (let i of document.querySelectorAll('#threadlisttableid > tbody > tr')) {
-  if (i.className !== "") continue; // 如果连 id 也没有，说明为无效节点，直接跳过
+var _react = _interopRequireDefault(require("react"));
 
-  if (!i.querySelector('th > a.s.xst')) continue;
-  let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.s.xst').getAttribute('href'))[1];
-  forum.threads.push(id);
-  let info = {
-    author: i.querySelector('td:nth-child(3) > cite > a') && /uid=([0-9]+)/.exec(i.querySelector('td:nth-child(3) > cite > a').getAttribute('href'))[1] || "0",
-    title: i.querySelector('th > a.s.xst').innerText.trim(),
-    type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
-    states: {}
-  }; // 帖子状态解析
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-  let state = i.querySelector('td.icn > a').getAttribute('title');
-  if (/关闭的主题/.test(state)) info.states.closed = true;
-  if (/全局置顶主题/.test(state)) info.states.topLevel = 3;else if (/分类置顶主题/.test(state)) info.states.topLevel = 2;else if (/本版置顶主题/.test(state)) info.states.topLevel = 1; // 标题状态解析
+var _styles = require("@material-ui/core/styles");
 
-  if (i.querySelector('th > a.s.xst').style.color) info.states.titleColor = i.querySelector('th > a.s.xst').style.color.trim();
-  if (i.querySelector('th > a.s.xst').style.fontWeight === 'bold') info.states.titleBold = true; // 帖子分级解析
+var _List = _interopRequireDefault(require("@material-ui/core/List"));
 
-  for (let j of i.querySelectorAll('th > img')) {
-    switch (j.getAttribute('src')) {
-      case 'template/mcbbs/image/digest_1.gif':
-        // 精华 I
-        info.states.starLevel = 1;
-        break;
+var _ListItem = _interopRequireDefault(require("@material-ui/core/ListItem"));
 
-      case 'template/mcbbs/image/digest_2.gif':
-        // 精华 II
-        info.states.starLevel = 2;
-        break;
+var _ListItemIcon = _interopRequireDefault(require("@material-ui/core/ListItemIcon"));
 
-      case 'template/mcbbs/image/digest_3.gif':
-        // 精华 III
-        info.states.starLevel = 3;
-        break;
-    } // 图章检测
+var _ListItemText = _interopRequireDefault(require("@material-ui/core/ListItemText"));
 
+var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
-    if (/static\/image\/stamp\/[0-9]+\.small\.gif/.test(j.getAttribute('src'))) {
-      info.stamp = j.getAttribute('alt');
-    }
-  } // 帖子统计解析
+var _Description = _interopRequireDefault(require("@material-ui/icons/Description"));
 
+var _testData = _interopRequireDefault(require("../testData"));
 
-  info.replyCount = i.querySelector('td.num > a').innerText.trim();
-  info.watchCount = i.querySelector('td.num > em').innerText.trim();
-  threads[id] = info;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+const styles = theme => ({
+  actions: {
+    display: "flex"
+  },
+  expand: {
+    marginLeft: "auto" // 右侧按钮对齐
+
+  },
+  floatLeft: {
+    float: "left"
+  },
+  floatRight: {
+    float: "right"
+  },
+  title: {
+    padding: "12px"
+  }
+});
+
+class Forum extends _react.default.Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {});
+  }
+
+  render() {
+    const {
+      classes
+    } = this.props;
+    return _react.default.createElement("div", null, _react.default.createElement(_Typography.default, {
+      variant: "h6",
+      color: "inherit",
+      className: classes.title
+    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_List.default, {
+      component: "nav"
+    }, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
+      button: true,
+      key: n
+    }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_Description.default, null)), _react.default.createElement(_ListItemText.default, {
+      primary: _testData.default.threads[n].title,
+      secondary: (_testData.default.threads[n].author === "0" ? "匿名" : _testData.default.users[_testData.default.threads[n].author] && _testData.default.users[_testData.default.threads[n].author].name) || "?"
+    })))));
+  }
+
 }
+
+Forum.propTypes = {
+  classes: _propTypes.default.object.isRequired
+};
+
+var _default = (0, _styles.withStyles)(styles)(Forum);
+
+exports.default = _default;
