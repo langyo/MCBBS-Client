@@ -78,10 +78,9 @@ const styles = theme => ({
     overflow: "hidden"
   },
   content: {
-    flexGrow: 1,
-    overflowX: "hidden",
-    overflowY: "scroll",
-    maxHeight: "600px"
+    overflow: "auto",
+    maxHeight: "600px",
+    width: "100%"
   },
   hide: {
     display: "none"

@@ -11,6 +11,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _styles = require("@material-ui/core/styles");
 
+var _Card = _interopRequireDefault(require("@material-ui/core/Card"));
+
 var _List = _interopRequireDefault(require("@material-ui/core/List"));
 
 var _ListItem = _interopRequireDefault(require("@material-ui/core/ListItem"));
@@ -30,11 +32,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: "8px"
-  },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
 
@@ -61,9 +58,7 @@ class Forum extends _react.default.Component {
     const {
       classes
     } = this.props;
-    return _react.default.createElement("div", {
-      className: classes.root
-    }, _react.default.createElement(_Typography.default, {
+    return _react.default.createElement(_Card.default, null, _react.default.createElement(_Typography.default, {
       variant: "h6",
       color: "inherit",
       className: classes.title

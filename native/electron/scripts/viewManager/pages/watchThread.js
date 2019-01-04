@@ -11,8 +11,6 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _styles = require("@material-ui/core/styles");
 
-var _classnames = _interopRequireDefault(require("classnames"));
-
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
 var _floor = _interopRequireDefault(require("../utils/floor"));

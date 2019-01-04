@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
+import Card from "@material-ui/core/Card";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -13,11 +14,6 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import testData from "../testData";
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: "8px"
-  },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
   },
@@ -39,7 +35,7 @@ class Forum extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <Card>
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.forums[this.props.forum].name}
         </Typography>
@@ -61,7 +57,7 @@ class Forum extends React.Component {
             </ListItem>
           ))}
         </List>
-      </div>
+      </Card>
     );
   }
 }

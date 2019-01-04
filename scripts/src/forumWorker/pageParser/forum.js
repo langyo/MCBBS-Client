@@ -41,7 +41,7 @@ class Forum extends React.Component {
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.forums[this.props.forum].name}
         </Typography>
-        <List component="nav">
+        <List>
           {testData.forums[this.props.forum].threads.map((n, id) => (
             <ListItem button key={n}>
               <ListItemIcon>

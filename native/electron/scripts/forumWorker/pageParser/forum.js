@@ -63,9 +63,7 @@ class Forum extends _react.default.Component {
       variant: "h6",
       color: "inherit",
       className: classes.title
-    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_List.default, {
-      component: "nav"
-    }, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
+    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_List.default, null, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
       button: true,
       key: n
     }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_Description.default, null)), _react.default.createElement(_ListItemText.default, {
