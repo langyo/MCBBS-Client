@@ -211,7 +211,9 @@ class MainWindow extends React.Component {
   handleCreateTagDestoryer = function(id) {
     return () => {
       tags.splice(id, 1);
-      this.setState({});
+      this.setState({
+        tag: this.state.tag === (+ this.state.tag) && this.state.tag - 1 < 0 ? "mainPage" : this.state.tag - 1
+      });
     }
   }
 
