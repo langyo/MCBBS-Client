@@ -12,6 +12,7 @@ import classNames from "classnames";
 
 import { withStyles } from "@material-ui/core/styles";
 import Fade from "@material-ui/core/Fade";
+import Grow from '@material-ui/core/Grow';
 
 import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";
@@ -29,12 +30,6 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import MobileStepper from "@material-ui/core/MobileStepper";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Tooltip from "@material-ui/core/Tooltip";
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -130,6 +125,8 @@ let tags = [];
 // 构建新的标签实体
 class Tag {
   constructor(object, where) {
+    this.uuid = + new Date();
+
     this.title = object.title == null ? "未知标题" : object.title;
     this.subTitle = object.subTitle == null ? "" : object.subTitle;
     this.icon = object.icon == null ? <DescriptionIcon /> : object.icon;
@@ -211,6 +208,13 @@ class MainWindow extends React.Component {
     };
   };
 
+  handleCreateTagDestoryer = function(id) {
+    return () => {
+      tags.splice(id, 1);
+      this.setState({});
+    }
+  }
+
   mainRef = React.createRef();
 
   render() {
@@ -251,7 +255,7 @@ class MainWindow extends React.Component {
                   {tags.map((n, index) => {
                     return (
                       <ListItem
-                        key={index}
+                        key={n.uuid}
                         button
                         onClick={this.handleCreateTagSelector(index)}
                         selected={this.state.tag === index}
@@ -268,7 +272,7 @@ class MainWindow extends React.Component {
                               timeout={500}
                             >
                               <IconButton>
-                                <CloseIcon />
+                                <CloseIcon onClick={this.handleCreateTagDestoryer(index)}/>
                               </IconButton>
                             </Fade>
                           </ListItemSecondaryAction>
