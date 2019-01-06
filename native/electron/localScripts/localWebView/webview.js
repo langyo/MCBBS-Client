@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   hide: {
@@ -35,7 +35,7 @@ class WebView extends React.Component {
         <Button variant="contained" className={classes.button} onClick={this.handleOpenDevTools}>
           打开此页面的控制台
         </Button>
-        <webview className={classes.hide} src={this.props.url} ref="webview" />
+        <webview className={classes.hide} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js"/>
       </div>
     )
   }
