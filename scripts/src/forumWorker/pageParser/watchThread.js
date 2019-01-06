@@ -17,9 +17,13 @@ for (let i of document.querySelectorAll("#postlist > div")) {
             // latestEditTime
             try {
                 posts[match[1]].latestEditTime = /[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}\s*[0-9]{1,2}\:[0-9]{1,2}/.exec(i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pct > div > div.t_fsz > table > tbody > tr > td > i').innerText)[0];
-            } catch (e) { }
+            } catch (e) { 
+                // 这里忽略错误其实是因为可能不存在所谓的 latestEditTime，这里的理念是没有此数据就不往返回的对象里写 
+            }
+
             // createTime
             posts[match[1]].createTime = /[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}\s*[0-9]{1,2}\:[0-9]{1,2}\:[0-9]{1,2}/.exec(i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pi > div.pti > div.authi > em > span') && i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pi > div.pti > div.authi > em > span').getAttribute('title') || i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pi > div.pti > div.authi > em').innerText)[0];
+
             // content
             posts[match[1]].content = i.querySelector("table > tbody > tr > td.plc > div.pct > div.pcb > div.t_fsz > table > tbody > tr > td.t_f").innerHTML;
         } catch (e) { }
@@ -95,3 +99,8 @@ if (document.querySelectorAll("#tath > a").length > 0) {
             .querySelector("#postlist > div > table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href").match(/uid=([0-9]+)/)[1];
     } catch (e) { }
 }
+
+export default {
+    thread: thread,
+    posts: posts
+};

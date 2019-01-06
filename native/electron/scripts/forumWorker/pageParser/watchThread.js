@@ -1,5 +1,9 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 // 解析的页面：
 // thread-[0-9]+-[0-9]+-1\.html
 // forum\.php\?mod=viewthread&tid=[0-9]+&page=[0-9]+(#pid[0-9]+)?
@@ -19,7 +23,8 @@ for (let i of document.querySelectorAll("#postlist > div")) {
       // latestEditTime
       try {
         posts[match[1]].latestEditTime = /[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}\s*[0-9]{1,2}\:[0-9]{1,2}/.exec(i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pct > div > div.t_fsz > table > tbody > tr > td > i').innerText)[0];
-      } catch (e) {} // createTime
+      } catch (e) {} // 这里忽略错误其实是因为可能不存在所谓的 latestEditTime，这里的理念是没有此数据就不往返回的对象里写 
+      // createTime
 
 
       posts[match[1]].createTime = /[0-9]{4}\-[0-9]{1,2}\-[0-9]{1,2}\s*[0-9]{1,2}\:[0-9]{1,2}\:[0-9]{1,2}/.exec(i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pi > div.pti > div.authi > em > span') && i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pi > div.pti > div.authi > em > span').getAttribute('title') || i.querySelector('table > tbody > tr:nth-child(1) > td.plc > div.pi > div.pti > div.authi > em').innerText)[0]; // content
@@ -85,3 +90,9 @@ if (document.querySelectorAll("#tath > a").length > 0) {
     thread.author = document.querySelector("#postlist > div > table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href").match(/uid=([0-9]+)/)[1];
   } catch (e) {}
 }
+
+var _default = {
+  thread: thread,
+  posts: posts
+};
+exports.default = _default;
