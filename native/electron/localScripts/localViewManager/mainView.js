@@ -64,6 +64,7 @@ import CustomScroll from "react-custom-scroll";
 import MainPageRender from "../../scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "../../scripts/viewManager/pages/watchThread";
 import ForumRender from "../../scripts/viewManager/pages/forum";
+import WebView from "../localWebView/webview";
 
 import TestData from "../../scripts/viewManager/testData";
 
@@ -169,7 +170,7 @@ newTag({
   uuid: 3,
   title: "模拟浏览器标签",
   icon: <LanguageIcon />,
-  render: <webview src="http://www.mcbbs.net/forum.php" style={{ width: "770px", height: "600px" }} />
+  render: <WebView url="http://www.mcbbs.net/thread-809600-1-1.html"/>
 })
 
 // 窗口主体
@@ -214,7 +215,7 @@ class MainWindow extends React.Component {
     return () => {
       tags.splice(id, 1);
       this.setState({
-        tag: this.state.tag === (+ this.state.tag) && this.state.tag - 1 < 0 ? "mainPage" : this.state.tag - 1
+        tag: this.state.tag == (+ this.state.tag) && this.state.tag - 1 < 0 ? "mainPage" : this.state.tag - 1
       });
     }
   }
