@@ -30,7 +30,7 @@ class WebView extends React.Component {
 
   state = {
     openResult: false,
-    result: {}
+    result: ""
   }
 
   handleOpenDevTools = () => {
@@ -66,18 +66,27 @@ class WebView extends React.Component {
           <DialogTitle>输出结果</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {""}
+              {this.state.result}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCloseResultDialog} color="primary">
-              {"OjbK"}
+              OjbK
             </Button>
           </DialogActions>
         </Dialog>
         <webview className={classes.hide} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.refs.webview.addEventListener('ipc-message', (n) => {
+      console.log(n);
+      this.setState({
+        result: n.channel
+      });
+    })
   }
 }
 
