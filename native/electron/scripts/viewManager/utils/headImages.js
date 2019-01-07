@@ -17,9 +17,9 @@ var _Typography = _interopRequireDefault(require("@material-ui/core/Typography")
 
 var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
 
-var _KeyboardArrowLeft = _interopRequireDefault(require("@material-ui/icons/KeyboardArrowLeft"));
+var _ChevronLeft = _interopRequireDefault(require("mdi-material-ui/ChevronLeft"));
 
-var _KeyboardArrowRight = _interopRequireDefault(require("@material-ui/icons/KeyboardArrowRight"));
+var _ChevronRight = _interopRequireDefault(require("mdi-material-ui/ChevronRight"));
 
 var _reactSwipeableViews = _interopRequireDefault(require("react-swipeable-views"));
 
@@ -124,11 +124,11 @@ class HeadImages extends _react.default.Component {
       nextButton: _react.default.createElement(_Button.default, {
         size: "small",
         onClick: this.handleNext
-      }, _react.default.createElement(_KeyboardArrowRight.default, null)),
+      }, _react.default.createElement(_ChevronRight.default, null)),
       backButton: _react.default.createElement(_Button.default, {
         size: "small",
         onClick: this.handleBack
-      }, _react.default.createElement(_KeyboardArrowLeft.default, null)),
+      }, _react.default.createElement(_ChevronLeft.default, null)),
       className: classes.stepper
     }));
   }

@@ -23,9 +23,9 @@ var _ExpansionPanelActions = _interopRequireDefault(require("@material-ui/core/E
 
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
-var _ExpandMore = _interopRequireDefault(require("@material-ui/icons/ExpandMore"));
+var _ChevronDown = _interopRequireDefault(require("mdi-material-ui/ChevronDown"));
 
-var _MoreVert = _interopRequireDefault(require("@material-ui/icons/MoreVert"));
+var _DotsVertical = _interopRequireDefault(require("mdi-material-ui/DotsVertical"));
 
 var _Divider = _interopRequireDefault(require("@material-ui/core/Divider"));
 
@@ -88,7 +88,7 @@ function ForumPanel(props) {
   }, _react.default.createElement(_ExpansionPanel.default, {
     defaultExpanded: true
   }, _react.default.createElement(_ExpansionPanelSummary.default, {
-    expandIcon: _react.default.createElement(_ExpandMore.default, null)
+    expandIcon: _react.default.createElement(_ChevronDown.default, null)
   }, _react.default.createElement("div", {
     className: classes.column
   }, _react.default.createElement(_Typography.default, {
@@ -109,7 +109,7 @@ function ForumPanel(props) {
     secondary: n.info
   }), _react.default.createElement(_ListItemSecondaryAction.default, null, _react.default.createElement(_IconButton.default, {
     "aria-label": "Comments"
-  }, _react.default.createElement(_MoreVert.default, null)))))))));
+  }, _react.default.createElement(_DotsVertical.default, null)))))))));
 }
 
 ForumPanel.propTypes = {

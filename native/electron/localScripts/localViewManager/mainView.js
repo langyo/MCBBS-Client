@@ -46,13 +46,13 @@ import SendIcon from "mdi-material-ui/Send";
 import NoticeIcon from "mdi-material-ui/Bell";
 import SettingIcon from "mdi-material-ui/Settings";
 import FaceIcon from "mdi-material-ui/Face";
-import SignInIcon from "mdi-material-ui/CalendarToday";
+import SignInIcon from "mdi-material-ui/CalendarClock";
 import StarIcon from "mdi-material-ui/Star";
 import PaintIcon from "mdi-material-ui/Palette";
 import StoreIcon from "mdi-material-ui/Store";
 import InfoIcon from "mdi-material-ui/Information";
 import AddIcon from "mdi-material-ui/Plus";
-import TaskIcon from "mdi-material-ui/PlaylistCheck";
+import TaskIcon from "mdi-material-ui/CalendarText";
 import WebIcon from "mdi-material-ui/Web";
 
 import CustomScroll from "react-custom-scroll";

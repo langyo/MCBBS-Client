@@ -8,8 +8,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import Typography from "@material-ui/core/Typography";
 
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import DownIcon from "mdi-material-ui/ChevronDown";
+import MoreIcon from "mdi-material-ui/DotsVertical";
 
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
@@ -60,7 +60,7 @@ function ForumPanel(props) {
   return (
     <div className={classes.root}>
       <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <ExpansionPanelSummary expandIcon={<DownIcon />}>
           <div className={classes.column}>
             <Typography className={classes.heading}>
               {props.forumGroupName}

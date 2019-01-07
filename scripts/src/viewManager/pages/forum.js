@@ -9,7 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 
-import DescriptionIcon from "@material-ui/icons/Description";
+import DocumentIcon from "mdi-material-ui/FileDocument";
 
 import testData from "../testData";
 
@@ -48,7 +48,7 @@ class Forum extends React.Component {
           {testData.forums[this.props.forum].threads.map((n, id) => (
             <ListItem button key={n}>
               <ListItemIcon>
-                <DescriptionIcon />
+                <DocumentIcon />
               </ListItemIcon>
               <ListItemText
                 primary={testData.threads[n].title}

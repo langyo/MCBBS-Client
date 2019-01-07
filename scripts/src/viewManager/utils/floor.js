@@ -13,13 +13,13 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import VoteIcon from "@material-ui/icons/HowToVote";
-import MessageIcon from "@material-ui/icons/Message";
-import EditIcon from "@material-ui/icons/Edit";
+import FavoriteIcon from "mdi-material-ui/Heart";
+import ShareIcon from "mdi-material-ui/Share";
+import DownIcon from "mdi-material-ui/ChevronDown";
+import MoreIcon from "mdi-material-ui/DotsVertical";
+import VoteIcon from "mdi-material-ui/VoteOutline";
+import MessageIcon from "mdi-material-ui/MessageTextOutline";
+import EditIcon from "mdi-material-ui/SquareEditOutline";
 
 import testData from "../testData";
 
@@ -54,7 +54,7 @@ class Floor extends React.Component {
           }
           action={
             <IconButton>
-              <MoreVertIcon />
+              <MoreIcon />
             </IconButton>
           }
           title={this.props.accountName}

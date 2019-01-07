@@ -31,19 +31,19 @@ var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton")
 
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
-var _Favorite = _interopRequireDefault(require("@material-ui/icons/Favorite"));
+var _Heart = _interopRequireDefault(require("mdi-material-ui/Heart"));
 
-var _Share = _interopRequireDefault(require("@material-ui/icons/Share"));
+var _Share = _interopRequireDefault(require("mdi-material-ui/Share"));
 
-var _ExpandMore = _interopRequireDefault(require("@material-ui/icons/ExpandMore"));
+var _ChevronDown = _interopRequireDefault(require("mdi-material-ui/ChevronDown"));
 
-var _MoreVert = _interopRequireDefault(require("@material-ui/icons/MoreVert"));
+var _DotsVertical = _interopRequireDefault(require("mdi-material-ui/DotsVertical"));
 
-var _HowToVote = _interopRequireDefault(require("@material-ui/icons/HowToVote"));
+var _VoteOutline = _interopRequireDefault(require("mdi-material-ui/VoteOutline"));
 
-var _Message = _interopRequireDefault(require("@material-ui/icons/Message"));
+var _MessageTextOutline = _interopRequireDefault(require("mdi-material-ui/MessageTextOutline"));
 
-var _Edit = _interopRequireDefault(require("@material-ui/icons/Edit"));
+var _SquareEditOutline = _interopRequireDefault(require("mdi-material-ui/SquareEditOutline"));
 
 var _testData = _interopRequireDefault(require("../testData"));
 
@@ -87,7 +87,7 @@ class Floor extends _react.default.Component {
         className: classes.avatar,
         src: this.props.accountAvatar
       }),
-      action: _react.default.createElement(_IconButton.default, null, _react.default.createElement(_MoreVert.default, null)),
+      action: _react.default.createElement(_IconButton.default, null, _react.default.createElement(_DotsVertical.default, null)),
       title: this.props.accountName,
       subheader: this.props.accountInfo
     }), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
@@ -104,9 +104,9 @@ class Floor extends _react.default.Component {
     })), _react.default.createElement(_CardActions.default, {
       className: classes.actions,
       disableActionSpacing: true
-    }, _react.default.createElement(_IconButton.default, null, this.props.reply && _react.default.createElement(_Message.default, null)), _react.default.createElement(_IconButton.default, null, this.props.edit && _react.default.createElement(_Edit.default, null)), _react.default.createElement(_IconButton.default, {
+    }, _react.default.createElement(_IconButton.default, null, this.props.reply && _react.default.createElement(_MessageTextOutline.default, null)), _react.default.createElement(_IconButton.default, null, this.props.edit && _react.default.createElement(_SquareEditOutline.default, null)), _react.default.createElement(_IconButton.default, {
       className: classes.expand
-    }, this.props.rate && _react.default.createElement(_HowToVote.default, null)), _react.default.createElement(_IconButton.default, null, _react.default.createElement(_Share.default, null))));
+    }, this.props.rate && _react.default.createElement(_VoteOutline.default, null)), _react.default.createElement(_IconButton.default, null, _react.default.createElement(_Share.default, null))));
   }
 
 }

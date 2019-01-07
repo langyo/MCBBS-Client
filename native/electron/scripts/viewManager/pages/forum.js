@@ -23,7 +23,7 @@ var _ListItemText = _interopRequireDefault(require("@material-ui/core/ListItemTe
 
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
-var _Description = _interopRequireDefault(require("@material-ui/icons/Description"));
+var _FileDocument = _interopRequireDefault(require("mdi-material-ui/FileDocument"));
 
 var _testData = _interopRequireDefault(require("../testData"));
 
@@ -72,7 +72,7 @@ class Forum extends _react.default.Component {
     }, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
       button: true,
       key: n
-    }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_Description.default, null)), _react.default.createElement(_ListItemText.default, {
+    }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_FileDocument.default, null)), _react.default.createElement(_ListItemText.default, {
       primary: _testData.default.threads[n].title,
       secondary: (_testData.default.threads[n].author === "0" ? "匿名" : _testData.default.users[_testData.default.threads[n].author] && _testData.default.users[_testData.default.threads[n].author].name) || "?"
     })))));
