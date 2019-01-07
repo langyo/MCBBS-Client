@@ -33,31 +33,27 @@ import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Tooltip from "@material-ui/core/Tooltip";
 import LinearProgress from '@material-ui/core/LinearProgress';
-import MenuIcon from "@material-ui/icons/Menu";
-import CloseIcon from "@material-ui/icons/Close";
-import DescriptionIcon from "@material-ui/icons/Description";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import WidgetsIcon from "@material-ui/icons/Widgets";
-import ListIcon from "@material-ui/icons/List";
-import HomeIcon from "@material-ui/icons/Home";
-import VoteIcon from "@material-ui/icons/HowToVote";
-import NeedHelpIcon from "@material-ui/icons/LiveHelp";
-import LeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import RightIcon from "@material-ui/icons/KeyboardArrowRight";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import SendIcon from "@material-ui/icons/Send";
-import NoticeIcon from "@material-ui/icons/Notifications";
-import SettingIcon from "@material-ui/icons/Settings";
-import FaceIcon from "@material-ui/icons/Face";
-import TodayIcon from "@material-ui/icons/Today";
-import StarIcon from "@material-ui/icons/Star";
-import PaintIcon from "@material-ui/icons/ColorLens";
-import StoreIcon from "@material-ui/icons/StoreMallDirectory";
-import InfoIcon from "@material-ui/icons/Info";
-import AddIcon from "@material-ui/icons/Add";
-import ListAltIcon from "@material-ui/icons/ListAlt";
-import LanguageIcon from "@material-ui/icons/Language";
+
+import MenuIcon from "mdi-material-ui/Menu";
+import CloseIcon from "mdi-material-ui/Close";
+import DocumentIcon from "mdi-material-ui/FileDocument";
+import AccountCircleIcon from "mdi-material-ui/AccountCircle";
+import WidgetsIcon from "mdi-material-ui/Widgets";
+import ListIcon from "mdi-material-ui/FormatListBulleted";
+import HomeIcon from "mdi-material-ui/Home";
+import ChevronLeftIcon from "mdi-material-ui/ChevronLeft";
+import SendIcon from "mdi-material-ui/Send";
+import NoticeIcon from "mdi-material-ui/Bell";
+import SettingIcon from "mdi-material-ui/Settings";
+import FaceIcon from "mdi-material-ui/Face";
+import SignInIcon from "mdi-material-ui/CalendarToday";
+import StarIcon from "mdi-material-ui/Star";
+import PaintIcon from "mdi-material-ui/Palette";
+import StoreIcon from "mdi-material-ui/Store";
+import InfoIcon from "mdi-material-ui/Information";
+import AddIcon from "mdi-material-ui/Plus";
+import TaskIcon from "mdi-material-ui/PlaylistCheck";
+import WebIcon from "mdi-material-ui/Web";
 
 import CustomScroll from "react-custom-scroll";
 
@@ -129,7 +125,7 @@ class Tag {
 
     this.title = object.title == null ? "未知标题" : object.title;
     this.subTitle = object.subTitle == null ? "" : object.subTitle;
-    this.icon = object.icon == null ? <DescriptionIcon /> : object.icon;
+    this.icon = object.icon == null ? <DocumentIcon /> : object.icon;
     this.content = object.content == null ? {} : object.content;
 
     this.enableClose = object.enableClose == null ? true : object.enableClose;
@@ -169,8 +165,8 @@ newTag({
 newTag({
   uuid: 3,
   title: "模拟浏览器标签",
-  icon: <LanguageIcon />,
-  render: <WebView url="http://www.mcbbs.net/thread-809600-1-1.html"/>
+  icon: <WebIcon />,
+  render: <WebView url="http://www.mcbbs.net/thread-809600-1-1.html" />
 })
 
 // 窗口主体
@@ -295,7 +291,7 @@ class MainWindow extends React.Component {
                     <ListItemText primary="主页" />
                   </ListItem>
                   <ListItem button>
-                    <TodayIcon />
+                    <SignInIcon />
                     <ListItemText
                       primary="签到"
                       secondary={"您今日还未签到！"}
@@ -306,7 +302,7 @@ class MainWindow extends React.Component {
                     <ListItemText primary="收藏" />
                   </ListItem>
                   <ListItem button>
-                    <ListAltIcon />
+                    <TaskIcon />
                     <ListItemText primary="任务" />
                   </ListItem>
                 </List>
@@ -427,7 +423,7 @@ class MainWindow extends React.Component {
                   this.state.leftBarType !== "main" ? " " + classes.hide : ""
                 }
               >
-                <DescriptionIcon />
+                <DocumentIcon />
               </IconButton>
             </Fade>
             <Fade in={this.state.leftBarType === "main"} timeout={500}>
