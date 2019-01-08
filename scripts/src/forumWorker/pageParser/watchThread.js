@@ -100,7 +100,7 @@ if (document.querySelectorAll("#tath > a").length > 0) {
     } catch (e) { }
 }
 
-export default {
+export let data =  {
     thread: thread,
     posts: posts
 };

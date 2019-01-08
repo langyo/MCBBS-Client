@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.data = void 0;
 // 解析的页面：
 // thread-[0-9]+-[0-9]+-1\.html
 // forum\.php\?mod=viewthread&tid=[0-9]+&page=[0-9]+(#pid[0-9]+)?
@@ -91,8 +91,8 @@ if (document.querySelectorAll("#tath > a").length > 0) {
   } catch (e) {}
 }
 
-var _default = {
+let data = {
   thread: thread,
   posts: posts
 };
-exports.default = _default;
+exports.data = data;

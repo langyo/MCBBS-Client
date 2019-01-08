@@ -11,6 +11,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import JsonView from "react-json-view";
+
 const styles = theme => ({
   hide: {
     // display: "none",
@@ -30,7 +32,7 @@ class WebView extends React.Component {
 
   state = {
     openResult: false,
-    result: ""
+    result: null
   }
 
   handleOpenDevTools = () => {
@@ -65,9 +67,15 @@ class WebView extends React.Component {
         >
           <DialogTitle>输出结果</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              {this.state.result}
-            </DialogContentText>
+            {
+              this.state.result
+              &&
+              <JsonView src={this.state.result} name="由页面返回的解析数据" />
+              ||
+              <DialogContentText>
+                数据正在解析，请稍候……
+              </DialogContentText>
+            }
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCloseResultDialog} color="primary">
@@ -82,9 +90,9 @@ class WebView extends React.Component {
 
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
-      console.log(n);
+      console.log(JSON.parse(n.channel));
       this.setState({
-        result: n.channel
+        result: JSON.parse(n.channel)
       });
     })
   }

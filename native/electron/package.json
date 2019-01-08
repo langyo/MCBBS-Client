@@ -32,6 +32,7 @@
     "react-custom-scroll": "^4.0.1",
     "react-desktop": "^0.3.7",
     "react-dom": "^16.6.3",
+    "react-json-view": "^1.19.1",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
     "regenerator-runtime": "^0.13.1",
