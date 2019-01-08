@@ -122,6 +122,7 @@ const styles = theme => ({
 });
 
 let tags = [];
+let virtualBrowsers = [];
 
 // 构建新的标签实体
 class Tag {
@@ -472,7 +473,8 @@ class MainWindow extends React.Component {
             <DialogTitle>关于</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                {"作者：langyo  当前版本：0.2.2"}
+                <Typography variant="subtitle1">作者：langyo</Typography>
+                <Typography variant="subtitle1">当前版本：0.2.2</Typography>
               </DialogContentText>
             </DialogContent>
             <DialogActions>
