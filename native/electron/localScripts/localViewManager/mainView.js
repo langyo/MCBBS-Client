@@ -33,6 +33,11 @@ import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Tooltip from "@material-ui/core/Tooltip";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import MenuIcon from "mdi-material-ui/Menu";
 import CloseIcon from "mdi-material-ui/Close";
@@ -173,7 +178,8 @@ newTag({
 class MainWindow extends React.Component {
   state = {
     leftBarType: "main",
-    tag: "mainPage"
+    tag: "mainPage",
+    aboutDialog: false
   };
 
   handleOpenDevTools = () => {
@@ -215,6 +221,10 @@ class MainWindow extends React.Component {
       });
     }
   }
+
+  handleOpenAboutDialog = () => this.setState({ aboutDialog: true });
+
+  handleCloseAboutDialog = () => this.setState({ aboutDialog: false });
 
   mainRef = React.createRef();
 
@@ -367,7 +377,7 @@ class MainWindow extends React.Component {
                     <PaintIcon />
                     <ListItemText primary="主题" />
                   </ListItem>
-                  <ListItem button>
+                  <ListItem button onClick={this.handleOpenAboutDialog}>
                     <InfoIcon />
                     <ListItemText primary="关于" />
                   </ListItem>
@@ -454,6 +464,23 @@ class MainWindow extends React.Component {
               <div key={this.state.tag}>{tags[this.state.tag].render}</div>
             )}
           </main>
+          <Dialog
+            open={this.state.aboutDialog}
+            onClose={this.handleCloseAboutDialog}
+            aria-labelledby="about-dialog"
+          >
+            <DialogTitle>关于</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {"作者：langyo  当前版本：0.2.2"}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleCloseAboutDialog} color="primary">
+                OjbK
+            </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       );
     } catch (e) {
