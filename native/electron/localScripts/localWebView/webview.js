@@ -14,9 +14,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import JsonView from "react-json-view";
 
 const styles = theme => ({
-  hide: {
-    // display: "none",
-    // width: "600px",
+  hideMode: {
+    display: "none",
+    height: 0,
+    width: 0
+  },
+  debugMode: {
     height: "600px"
   },
   buttons: {
@@ -52,14 +55,16 @@ class WebView extends React.Component {
 
     return (
       <div>
-        <div className={classes.buttons}>
-          <Button variant="contained" onClick={this.handleOpenDevTools}>
-            打开此页面的控制台
+        {
+          this.props.debug && <div className={classes.buttons}>
+            <Button variant="contained" onClick={this.handleOpenDevTools}>
+              打开此页面的控制台
           </Button>
-          <Button variant="contained" onClick={this.handleOpenResultDialog}>
-            打开输出结果
+            <Button variant="contained" onClick={this.handleOpenResultDialog}>
+              打开输出结果
           </Button>
-        </div>
+          </div>
+        }
         <Dialog
           open={this.state.openResult}
           onClose={this.handleCloseResultDialog}
@@ -83,15 +88,18 @@ class WebView extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <webview className={classes.hide} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
+        {
+          this.prop.debug && <webview className={classes.debugMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
+          || <webview className={classes.hideMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
+        }
       </div>
     )
   }
 
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
-      console.log(JSON.parse(n.channel));
-      this.setState({
+      this.props.onLoad(JSON.parse(n.channel));
+      this.props.debug && this.setState({
         result: JSON.parse(n.channel)
       });
     })

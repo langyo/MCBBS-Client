@@ -175,6 +175,13 @@ newTag({
   render: <WebView url="http://www.mcbbs.net/thread-809600-1-1.html" />
 })
 
+class VirtualBrowser extends React.Component {
+  constructor(url, debug) {
+    this.webview = <WebView url={url} debug={debug === true}/>
+    this.url = url;
+  }
+}
+
 // 窗口主体
 class MainWindow extends React.Component {
   state = {
