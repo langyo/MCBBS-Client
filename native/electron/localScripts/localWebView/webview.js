@@ -89,7 +89,7 @@ class WebView extends React.Component {
           </DialogActions>
         </Dialog>
         {
-          this.prop.debug && <webview className={classes.debugMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
+          this.props.debug && <webview className={classes.debugMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
           || <webview className={classes.hideMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
         }
       </div>
@@ -98,10 +98,10 @@ class WebView extends React.Component {
 
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
-      this.props.onLoad(JSON.parse(n.channel));
       this.props.debug && this.setState({
         result: JSON.parse(n.channel)
       });
+      console.log(this.props.onLoad);
     })
   }
 }

@@ -172,12 +172,12 @@ newTag({
   uuid: 3,
   title: "模拟浏览器标签",
   icon: <WebIcon />,
-  render: <WebView url="http://www.mcbbs.net/thread-809600-1-1.html" />
+  render: <WebView url="http://www.mcbbs.net/thread-809600-1-1.html" debug/>
 })
 
 class VirtualBrowser extends React.Component {
   constructor(url, debug) {
-    this.webview = <WebView url={url} debug={debug === true}/>
+    this.webview = <WebView url={url} debug={debug === true} onLoad={((n) => console.log(n))}/>
     this.url = url;
   }
 }
