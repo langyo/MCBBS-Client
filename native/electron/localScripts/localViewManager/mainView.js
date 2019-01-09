@@ -68,6 +68,7 @@ import ForumRender from "../../scripts/viewManager/pages/forum";
 import WebView from "../localWebView/webview";
 
 import TestData from "../../scripts/viewManager/testData";
+import PageBindScript from "../../scripts/forumWorker/pageBindScript";
 
 const drawerWidth = 200;
 
@@ -168,18 +169,17 @@ newTag({
   icon: <WidgetsIcon />,
   render: <ForumRender forum="announcement-1" />
 });
-newTag({
-  uuid: 3,
-  title: "模拟浏览器标签",
-  icon: <WebIcon />,
-  render: <WebView url="http://www.mcbbs.net/thread-837079-1-1.html" debug/>
-})
 
-class VirtualBrowser extends React.Component {
+class VirtualBrowser{
   constructor(url, debug) {
     this.webview = <WebView url={url} debug={debug === true}/>
     this.url = url;
+    this.isDebugMode = debug === true;
   }
+}
+
+function newBrowser(type, object){
+
 }
 
 // 窗口主体
