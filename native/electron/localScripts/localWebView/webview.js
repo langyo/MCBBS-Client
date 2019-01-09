@@ -105,7 +105,7 @@ class WebView extends React.Component {
         result: data
       });
       db.merge(data.data).write();
-      console.log(db.getState());
+      this.props.callback();
     })
   }
 }

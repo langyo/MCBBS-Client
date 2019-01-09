@@ -68,7 +68,7 @@ import ForumRender from "../../scripts/viewManager/pages/forum";
 import WebView from "../localWebView/webview";
 
 import TestData from "../../scripts/viewManager/testData";
-import PageBindScript from "../../scripts/forumWorker/pageBindScript";
+import pageBindScript from "../../scripts/forumWorker/pageBindScript";
 
 const drawerWidth = 200;
 
@@ -170,17 +170,27 @@ newTag({
   render: <ForumRender forum="announcement-1" />
 });
 
-class VirtualBrowser{
-  constructor(url, debug) {
-    this.webview = <WebView url={url} debug={debug === true}/>
+class VirtualBrowser {
+  constructor(url, preload, callback, debug) {
+    this.webview = <WebView url={url} debug={debug === true} preload={preload} callback={callback || (() => {})}/>
     this.url = url;
     this.isDebugMode = debug === true;
   }
 }
 
-function newBrowser(type, object){
-
+function newBrowser(type, url, callback) {
+  for (let i of Object.keys(pageBindScript)) {
+    if (pageBindScript[i] === type) {
+      // 找到对应的类型，立即创建
+      console.log("这里正常，" + type)
+      virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callBack);
+      return virtualBrowsers[virtualBrowsers.length - 1];
+    }
+  }
 }
+
+// 测试虚拟浏览器
+newBrowser('thread', "http://www.mcbbs.net/thread-835370-1-1.html", () => console.log("done"));
 
 // 窗口主体
 class MainWindow extends React.Component {
