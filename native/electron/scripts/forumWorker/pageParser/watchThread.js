@@ -44,9 +44,9 @@ for (let i of document.querySelectorAll("#postlist > div")) {
     subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
   }
 } // 评分数据获取
+// console.log(document.querySelector(".rate > dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a").getAttribute("href"));
+// 标题解析
 
-
-console.log(document.querySelector(".rate > dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a").getAttribute("href")); // 标题解析
 
 try {
   thread.title = document.querySelectorAll("#thread_subject")[0].innerHTML;

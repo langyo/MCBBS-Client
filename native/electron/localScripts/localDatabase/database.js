@@ -4,11 +4,7 @@ import Memory from 'lowdb/adapters/Memory';
 
 import init from '../../scripts/resourceManager/initializer';
 
-let db = low(
-    process.env.NODE_ENV === 'test'
-    ? new Memory()
-    : new LocalStorage('db')
-);
+let db = low(new LocalStorage('db'));
 
 init(db);
 

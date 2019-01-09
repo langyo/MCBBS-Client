@@ -44,7 +44,7 @@ for (let i of document.querySelectorAll("#postlist > div")) {
 }
 
 // 评分数据获取
-console.log(document.querySelector(".rate > dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a").getAttribute("href"));
+// console.log(document.querySelector(".rate > dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a").getAttribute("href"));
 
 // 标题解析
 try {

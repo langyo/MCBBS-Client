@@ -13,7 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import JsonView from "react-json-view";
 
-import Database from "../localDatabase/database";
+import db from "../localDatabase/database";
 
 const styles = theme => ({
   hideMode: {
@@ -100,10 +100,12 @@ class WebView extends React.Component {
 
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
+      let data = JSON.parse(n.channel);
       this.props.debug && this.setState({
-        result: JSON.parse(n.channel)
+        result: data
       });
-      console.log(this.props.handleOnLoad);
+      db.merge(data.data).write();
+      console.log(db.getState());
     })
   }
 }
