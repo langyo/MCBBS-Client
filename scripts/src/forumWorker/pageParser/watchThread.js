@@ -5,6 +5,13 @@
 let thread = {};
 let posts = {};
 
+let subBrowseUrl = [];
+
+// 帖子编号解析
+let threadID = /thread-([0-9]+)-[0-9]+-1\.html/.exec(location.href)[1] 
+ || /forum\.php\?mod=viewthread&tid=([0-9]+)&page=[0-9]+(#pid[0-9]+)?/.exec(location.href)[1]
+
+
 // 帖子回复列表解析
 if (!Array.isArray(thread.posts)) thread.posts = [];
 for (let i of document.querySelectorAll("#postlist > div")) {
@@ -32,9 +39,7 @@ for (let i of document.querySelectorAll("#postlist > div")) {
             posts[match[1]].author = i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href").match(/uid=([0-9]+)/)[1];
         } catch (e) { }
         // 层主数据获取
-        console.log(
-            i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href")
-        );
+        subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
     }
 }
 
@@ -100,7 +105,11 @@ if (document.querySelectorAll("#tath > a").length > 0) {
     } catch (e) { }
 }
 
-export let data =  {
-    thread: thread,
+let exportData =  {
+    threads:{},
     posts: posts
 };
+exportData.threads[threadID] = thread;
+
+export let data = exportData;
+export let subTask = subBrowseUrl;

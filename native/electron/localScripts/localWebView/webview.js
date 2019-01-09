@@ -13,6 +13,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import JsonView from "react-json-view";
 
+import Database from "../localDatabase/database";
+
 const styles = theme => ({
   hideMode: {
     display: "none",
@@ -101,7 +103,7 @@ class WebView extends React.Component {
       this.props.debug && this.setState({
         result: JSON.parse(n.channel)
       });
-      console.log(this.props.onLoad);
+      console.log(this.props.handleOnLoad);
     })
   }
 }

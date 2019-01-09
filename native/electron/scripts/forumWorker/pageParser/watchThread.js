@@ -3,12 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.data = void 0;
+exports.subTask = exports.data = void 0;
 // 解析的页面：
 // thread-[0-9]+-[0-9]+-1\.html
 // forum\.php\?mod=viewthread&tid=[0-9]+&page=[0-9]+(#pid[0-9]+)?
 let thread = {};
-let posts = {}; // 帖子回复列表解析
+let posts = {};
+let subBrowseUrl = []; // 帖子编号解析
+
+let threadID = /thread-([0-9]+)-[0-9]+-1\.html/.exec(location.href)[1] || /forum\.php\?mod=viewthread&tid=([0-9]+)&page=[0-9]+(#pid[0-9]+)?/.exec(location.href)[1]; // 帖子回复列表解析
 
 if (!Array.isArray(thread.posts)) thread.posts = [];
 
@@ -38,7 +41,7 @@ for (let i of document.querySelectorAll("#postlist > div")) {
     } catch (e) {} // 层主数据获取
 
 
-    console.log(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
+    subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
   }
 } // 评分数据获取
 
@@ -91,8 +94,12 @@ if (document.querySelectorAll("#tath > a").length > 0) {
   } catch (e) {}
 }
 
-let data = {
-  thread: thread,
+let exportData = {
+  threads: {},
   posts: posts
 };
+exportData.threads[threadID] = thread;
+let data = exportData;
 exports.data = data;
+let subTask = subBrowseUrl;
+exports.subTask = subTask;

@@ -176,8 +176,10 @@ newTag({
 })
 
 class VirtualBrowser extends React.Component {
+  handleLog = () => console.log("done");
+
   constructor(url, debug) {
-    this.webview = <WebView url={url} debug={debug === true} onLoad={((n) => console.log(n))}/>
+    this.webview = <WebView url={url} debug={debug === true} handleOnLoad={handleLog}/>
     this.url = url;
   }
 }
