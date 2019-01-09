@@ -9,6 +9,7 @@ const remote = electron.remote;
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import shortid from "shortid";
 
 import { withStyles } from "@material-ui/core/styles";
 import Fade from "@material-ui/core/Fade";
@@ -172,7 +173,7 @@ newTag({
 
 class VirtualBrowser {
   constructor(url, preload, callback, debug) {
-    this.webview = <WebView url={url} debug={debug === true} preload={preload} callback={callback || (() => {})}/>
+    this.webview = <WebView url={url} debug={debug === true} preload={preload} callback={callback || (() => { })} key={shortid.generate()} />
     this.url = url;
     this.isDebugMode = debug === true;
   }
@@ -180,10 +181,9 @@ class VirtualBrowser {
 
 function newBrowser(type, url, callback) {
   for (let i of Object.keys(pageBindScript)) {
-    if (pageBindScript[i] === type) {
+    if (i === type) {
       // 找到对应的类型，立即创建
-      console.log("这里正常，" + type)
-      virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callBack);
+      virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callback);
       return virtualBrowsers[virtualBrowsers.length - 1];
     }
   }
@@ -283,6 +283,34 @@ class MainWindow extends React.Component {
                 <List>
                   {tags.map((n, index) => {
                     return (
+                      <ListItem
+                        key={n.uuid}
+                        button
+                        onClick={this.handleCreateTagSelector(index)}
+                        selected={this.state.tag === index}
+                      >
+                        {n.icon}
+                        <ListItemText
+                          primary={<Typography noWrap>{n.title}</Typography>}
+                          secondary={n.subTitle}
+                        />
+                        {n.enableClose && (
+                          <ListItemSecondaryAction>
+                            <Fade
+                              in={this.state.leftBarType === "documents"}
+                              timeout={500}
+                            >
+                              <IconButton>
+                                <CloseIcon onClick={this.handleCreateTagDestoryer(index)} />
+                              </IconButton>
+                            </Fade>
+                          </ListItemSecondaryAction>
+                        )}
+                      </ListItem>
+                    );
+                  })}
+                  {virtualBrowsers.map((n, index) => {
+                    return n.debug && (
                       <ListItem
                         key={n.uuid}
                         button
@@ -478,9 +506,16 @@ class MainWindow extends React.Component {
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
             {/* <LinearProgress /> */}
-            {(this.state.tag === "mainPage" && <MainPageRender />) || (
-              <div key={this.state.tag}>{tags[this.state.tag].render}</div>
-            )}
+            {
+              (this.state.tag === "mainPage" && <MainPageRender />) || (
+                <div key={this.state.tag}>{tags[this.state.tag].render}</div>
+              )
+            }
+            {
+              virtualBrowsers.map((n) => {
+                return n.webview;
+              })
+            }
           </main>
           <Dialog
             open={this.state.aboutDialog}
