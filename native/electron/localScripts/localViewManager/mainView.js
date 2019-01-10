@@ -170,25 +170,32 @@ newTag({
 });
 
 class VirtualBrowser {
-  constructor(url, preload, callback, debug) {
-    this.webview = <WebView url={url} debug={debug === true} preload={preload} callback={callback || (() => { })} key={shortid.generate()} />
+  constructor(url, preload, callback) {
+    console.log("已创建 " + url + " 的标签")
+    this.webview = <WebView url={url} preload={preload} callBack={callback} key={shortid.generate()} />
     this.url = url;
-    this.isDebugMode = debug === true;
   }
 }
 
-function newBrowser(type, url, callback) {
+function newBrowser(url, callback) {
+  console.log("监测到回调函数：");
+  console.log(callback);
   for (let i of Object.keys(pageBindScript)) {
-    if (i === type) {
-      // 找到对应的类型，立即创建
-      virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callback);
-      return virtualBrowsers[virtualBrowsers.length - 1];
+    for (let exprString of Object.keys(pageBindScript[i].url)) {
+      // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
+      let expr = new RegExp(exprString);
+      if(expr.test(url)){
+        virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callback);
+        return;
+      }
     }
   }
+  // 没有任何匹配时，当然就要报错了
+  throw Error("URL 解析错误：已阅，狗屁不通！"); 
 }
 
 // 测试虚拟浏览器
-newBrowser('thread', "http://www.mcbbs.net/thread-835370-1-1.html", () => console.log("done"));
+newBrowser("http://www.mcbbs.net/thread-835370-1-1.html", function(){console.log("success")});
 
 // 窗口主体
 class MainWindow extends React.Component {
