@@ -16,11 +16,6 @@ import JsonView from "react-json-view";
 import db from "../localDatabase/database";
 
 const styles = theme => ({
-  hideMode: {
-    display: "none",
-    height: 0,
-    width: 0
-  },
   debugMode: {
     height: "600px"
   },
@@ -90,10 +85,7 @@ class WebView extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-        {
-          this.props.debug && <webview className={classes.debugMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
-          || <webview className={classes.hideMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
-        }
+        <webview className={classes.debugMode} src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
       </div>
     )
   }

@@ -85,7 +85,11 @@ const styles = theme => ({
     width: "752px"
   },
   hide: {
-    display: "none"
+    display: "none",
+    width: 0,
+    height: 0,
+    padding: 0,
+    margin: 0
   },
   drawer: {
     width: drawerWidth,
@@ -128,8 +132,9 @@ let virtualBrowsers = [];
 
 // 构建新的标签实体
 class Tag {
-  constructor(object, where) {
-    this.uuid = object.uuid == null ? (+ new Date()) : object.uuid;
+  constructor(object) {
+    let key = shortid.generate();
+    this.key = key;
 
     this.title = object.title == null ? "未知标题" : object.title;
     this.subTitle = object.subTitle == null ? "" : object.subTitle;
@@ -149,7 +154,7 @@ class Tag {
     this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
 
     if (object.render == null) throw Error("未定义标签的渲染器！");
-    this.render = object.render;
+    this.render = <div key={key}>{object.render}</div>;
   }
 }
 
@@ -159,23 +164,22 @@ function newTag(object) {
 
 // 测试数据
 newTag({
-  uuid: 1,
   title: TestData.threads[825413].title,
   subTitle: TestData.users[TestData.threads[825413].author].name,
   render: <WatchThreadRender thread={825413} />
 });
 newTag({
-  uuid: 2,
   title: TestData.forums["announcement-1"].name,
   icon: <WidgetsIcon />,
   render: <ForumRender forum="announcement-1" />
 });
 
 class VirtualBrowser {
-  constructor(url, preload, callback, debug) {
-    this.webview = <WebView url={url} debug={debug === true} preload={preload} callback={callback || (() => { })} key={shortid.generate()} />
+  constructor(url, preload, callback) {
+    let key = shortid.generate();
+    this.webview = <WebView url={url} preload={preload} callback={callback || (() => { })} key={key} />
     this.url = url;
-    this.isDebugMode = debug === true;
+    this.key = key;
   }
 }
 
@@ -183,10 +187,11 @@ function newBrowser(type, url, callback) {
   for (let i of Object.keys(pageBindScript)) {
     if (i === type) {
       // 找到对应的类型，立即创建
-      virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callback);
-      return virtualBrowsers[virtualBrowsers.length - 1];
+      virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload, callback));
+      return;
     }
   }
+  throw Error("无法识别的浏览器标签页！");
 }
 
 // 测试虚拟浏览器
@@ -197,7 +202,8 @@ class MainWindow extends React.Component {
   state = {
     leftBarType: "main",
     tag: "mainPage",
-    aboutDialog: false
+    aboutDialog: false,
+    debug: true
   };
 
   handleOpenDevTools = () => {
@@ -233,9 +239,10 @@ class MainWindow extends React.Component {
 
   handleCreateTagDestoryer = function (id) {
     return () => {
-      tags.splice(id, 1);
+      // 等待修复
+      tags.splice(tags.indexOf(id), 1);
       this.setState({
-        tag: this.state.tag == (+ this.state.tag) && this.state.tag - 1 < 0 ? "mainPage" : this.state.tag - 1
+        tag: "mainPage"
       });
     }
   }
@@ -267,197 +274,197 @@ class MainWindow extends React.Component {
             }}
             open={this.state.leftBarType !== "main"}
           >
-            {this.state.leftBarType === "documents" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade
-                    in={this.state.leftBarType === "documents"}
-                    timeout={500}
-                  >
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === "documents" && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade
+                      in={this.state.leftBarType === "documents"}
+                      timeout={500}
+                    >
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    {
+                      tags.map((n, index) => {
+                        return (
+                          <ListItem
+                            key={n.key}
+                            button
+                            onClick={this.handleCreateTagSelector(n.key)}
+                            selected={this.state.tag === n.key}
+                          >
+                            {n.icon}
+                            <ListItemText
+                              primary={<Typography noWrap>{n.title}</Typography>}
+                              secondary={n.subTitle}
+                            />
+                            {n.enableClose && (
+                              <ListItemSecondaryAction>
+                                <Fade
+                                  in={this.state.leftBarType === "documents"}
+                                  timeout={500}
+                                >
+                                  <IconButton>
+                                    <CloseIcon onClick={this.handleCreateTagDestoryer(n.key)} />
+                                  </IconButton>
+                                </Fade>
+                              </ListItemSecondaryAction>
+                            )}
+                          </ListItem>
+                        );
+                      })}
+                    {
+                      virtualBrowsers && <ListSubheader>DEBUG 浏览器列表</ListSubheader>
+                    }
+                    {
+                      virtualBrowsers.map((n, index) => {
+                        return this.state.debug && (
+                          <ListItem
+                            key={n.key}
+                            button
+                            onClick={this.handleCreateTagSelector(n.key)}
+                            selected={this.state.tag === n.key}
+                          >
+                            <WebIcon />
+                            <ListItemText
+                              primary={<Typography>{n.url}</Typography>}
+                            />
+                          </ListItem>
+                        );
+                      })}
+                    <ListSubheader>快速通道</ListSubheader>
+                    <ListItem
+                      button
+                      onClick={this.handleCreateTagSelector("mainPage")}
+                      selected={this.state.tag === 'mainPage'}
+                    >
+                      <HomeIcon />
+                      <ListItemText primary="主页" />
+                    </ListItem>
+                    <ListItem button>
+                      <SignInIcon />
+                      <ListItemText
+                        primary="签到"
+                        secondary={"您今日还未签到！"}
+                      />
+                    </ListItem>
+                    <ListItem button>
+                      <StarIcon />
+                      <ListItemText primary="收藏" />
+                    </ListItem>
+                    <ListItem button>
+                      <TaskIcon />
+                      <ListItemText primary="任务" />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  {tags.map((n, index) => {
-                    return (
-                      <ListItem
-                        key={n.uuid}
-                        button
-                        onClick={this.handleCreateTagSelector(index)}
-                        selected={this.state.tag === index}
-                      >
-                        {n.icon}
-                        <ListItemText
-                          primary={<Typography noWrap>{n.title}</Typography>}
-                          secondary={n.subTitle}
-                        />
-                        {n.enableClose && (
-                          <ListItemSecondaryAction>
-                            <Fade
-                              in={this.state.leftBarType === "documents"}
-                              timeout={500}
-                            >
-                              <IconButton>
-                                <CloseIcon onClick={this.handleCreateTagDestoryer(index)} />
-                              </IconButton>
-                            </Fade>
-                          </ListItemSecondaryAction>
-                        )}
-                      </ListItem>
-                    );
-                  })}
-                  {virtualBrowsers.map((n, index) => {
-                    return n.debug && (
-                      <ListItem
-                        key={n.uuid}
-                        button
-                        onClick={this.handleCreateTagSelector(index)}
-                        selected={this.state.tag === index}
-                      >
-                        {n.icon}
-                        <ListItemText
-                          primary={<Typography noWrap>{n.title}</Typography>}
-                          secondary={n.subTitle}
-                        />
-                        {n.enableClose && (
-                          <ListItemSecondaryAction>
-                            <Fade
-                              in={this.state.leftBarType === "documents"}
-                              timeout={500}
-                            >
-                              <IconButton>
-                                <CloseIcon onClick={this.handleCreateTagDestoryer(index)} />
-                              </IconButton>
-                            </Fade>
-                          </ListItemSecondaryAction>
-                        )}
-                      </ListItem>
-                    );
-                  })}
-                  <ListSubheader>快速通道</ListSubheader>
-                  <ListItem
-                    button
-                    onClick={this.handleCreateTagSelector("mainPage")}
-                    selected={this.state.tag === 'mainPage'}
-                  >
-                    <HomeIcon />
-                    <ListItemText primary="主页" />
-                  </ListItem>
-                  <ListItem button>
-                    <SignInIcon />
-                    <ListItemText
-                      primary="签到"
-                      secondary={"您今日还未签到！"}
-                    />
-                  </ListItem>
-                  <ListItem button>
-                    <StarIcon />
-                    <ListItemText primary="收藏" />
-                  </ListItem>
-                  <ListItem button>
-                    <TaskIcon />
-                    <ListItemText primary="任务" />
-                  </ListItem>
-                </List>
-              </div>
-            )}
+              )
+            }
 
-            {this.state.leftBarType === "navigation" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade
-                    in={this.state.leftBarType === "navigation"}
-                    timeout={500}
-                  >
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === "navigation" && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade
+                      in={this.state.leftBarType === "navigation"}
+                      timeout={500}
+                    >
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    <ListSubheader>通知</ListSubheader>
+                    <ListItem button>
+                      <SendIcon />
+                      <ListItemText primary="消息" secondary={"没有新消息"} />
+                    </ListItem>
+                    <ListItem button>
+                      <NoticeIcon />
+                      <ListItemText primary="我的帖子" secondary={"没有新通知"} />
+                    </ListItem>
+                    <ListItem button>
+                      <SettingIcon />
+                      <ListItemText primary="系统提醒" secondary={"没有新通知"} />
+                    </ListItem>
+                    <ListItem button>
+                      <FaceIcon />
+                      <ListItemText primary="坛友互动" secondary={"没有新通知"} />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  <ListSubheader>通知</ListSubheader>
-                  <ListItem button>
-                    <SendIcon />
-                    <ListItemText primary="消息" secondary={"没有新消息"} />
-                  </ListItem>
-                  <ListItem button>
-                    <NoticeIcon />
-                    <ListItemText primary="我的帖子" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListItem button>
-                    <SettingIcon />
-                    <ListItemText primary="系统提醒" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListItem button>
-                    <FaceIcon />
-                    <ListItemText primary="坛友互动" secondary={"没有新通知"} />
-                  </ListItem>
-                </List>
-              </div>
-            )}
+              )
+            }
 
-            {this.state.leftBarType === "settings" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade
-                    in={this.state.leftBarType === "settings"}
-                    timeout={500}
-                  >
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === "settings" && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade
+                      in={this.state.leftBarType === "settings"}
+                      timeout={500}
+                    >
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    <ListSubheader>个性化</ListSubheader>
+                    <ListItem button>
+                      <SettingIcon />
+                      <ListItemText primary="本体设置" />
+                    </ListItem>
+                    <ListItem button>
+                      <PaintIcon />
+                      <ListItemText primary="主题" />
+                    </ListItem>
+                    <ListItem button onClick={this.handleOpenAboutDialog}>
+                      <InfoIcon />
+                      <ListItemText primary="关于" />
+                    </ListItem>
+                    <ListSubheader>插件控制</ListSubheader>
+                    <ListItem button>
+                      <StoreIcon />
+                      <ListItemText primary="插件中心" />
+                    </ListItem>
+                    <ListItem button onClick={this.handleOpenDevTools}>
+                      <SettingIcon />
+                      <ListItemText primary="开发者控制" />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  <ListSubheader>个性化</ListSubheader>
-                  <ListItem button>
-                    <SettingIcon />
-                    <ListItemText primary="本体设置" />
-                  </ListItem>
-                  <ListItem button>
-                    <PaintIcon />
-                    <ListItemText primary="主题" />
-                  </ListItem>
-                  <ListItem button onClick={this.handleOpenAboutDialog}>
-                    <InfoIcon />
-                    <ListItemText primary="关于" />
-                  </ListItem>
-                  <ListSubheader>插件控制</ListSubheader>
-                  <ListItem button>
-                    <StoreIcon />
-                    <ListItemText primary="插件中心" />
-                  </ListItem>
-                  <ListItem button onClick={this.handleOpenDevTools}>
-                    <SettingIcon />
-                    <ListItemText primary="开发者控制" />
-                  </ListItem>
-                </List>
-              </div>
-            )}
+              )
+            }
 
-            {this.state.leftBarType === "users" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade in={this.state.leftBarType === "users"} timeout={500}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
+            {
+              this.state.leftBarType === "users" && (
+                <div>
+                  <div className={classes.toolbar}>
+                    <Fade in={this.state.leftBarType === "users"} timeout={500}>
+                      <IconButton onClick={this.handleDrawerClose}>
+                        <ChevronLeftIcon />
+                      </IconButton>
+                    </Fade>
+                  </div>
+                  <Divider />
+                  <List>
+                    <ListItem button>
+                      <AddIcon />
+                      <ListItemText primary="新增账户" />
+                    </ListItem>
+                  </List>
                 </div>
-                <Divider />
-                <List>
-                  <ListItem button>
-                    <AddIcon />
-                    <ListItemText primary="新增账户" />
-                  </ListItem>
-                </List>
-              </div>
-            )}
+              )
+            }
 
             <div className={classes.toolbarDrawerClosing}>
               <Fade in={this.state.leftBarType === "main"} timeout={500}>
@@ -507,13 +514,19 @@ class MainWindow extends React.Component {
           <main className={classes.content} ref={this.mainRef}>
             {/* <LinearProgress /> */}
             {
-              (this.state.tag === "mainPage" && <MainPageRender />) || (
+              (this.state.tag === "mainPage" && <MainPageRender />) || 
+              (
                 <div key={this.state.tag}>{tags[this.state.tag].render}</div>
               )
             }
             {
               virtualBrowsers.map((n) => {
-                return n.webview;
+                console.log(n);
+                return (
+                  <div className={!this.state.tag === n.key ? classes.hide : ""} key={n.key}>
+                    {n.webview}
+                  </div>
+                );
               })
             }
           </main>
@@ -527,6 +540,7 @@ class MainWindow extends React.Component {
               <DialogContentText>
                 <Typography variant="subtitle1">作者：langyo</Typography>
                 <Typography variant="subtitle1">当前版本：0.2.2</Typography>
+                <Typography variant="subtitle1">已开源，Github 地址：https://github.com/langyo/MCBBS-Client</Typography>
               </DialogContentText>
             </DialogContent>
             <DialogActions>
