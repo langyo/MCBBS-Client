@@ -60,8 +60,10 @@ import InfoIcon from "mdi-material-ui/Information";
 import AddIcon from "mdi-material-ui/Plus";
 import TaskIcon from "mdi-material-ui/CalendarText";
 import WebIcon from "mdi-material-ui/Web";
+import DatabaseIcon from "mdi-material-ui/Database";
 
 import CustomScroll from "react-custom-scroll";
+import JsonView from "react-json-view";
 
 import MainPageRender from "../../scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "../../scripts/viewManager/pages/watchThread";
@@ -70,6 +72,7 @@ import WebView from "../localWebView/webview";
 
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+import db from "../localDatabase/database";
 
 const drawerWidth = 200;
 
@@ -171,9 +174,9 @@ newTag({
 
 class VirtualBrowser {
   handleCallBack = (type, value) => {
-    switch(type){
+    switch (type) {
       case 'newTask':
-        for(let i of value){
+        for (let i of value) {
           console.log('Loading: ' + i);
           newBrowser(i);
         }
@@ -202,18 +205,18 @@ function newBrowser(url) {
     for (let exprString of Object.keys(pageBindScript[i].url)) {
       // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
       let expr = new RegExp(exprString);
-      if(expr.test(url)){
+      if (expr.test(url)) {
         virtualBrowsers.push(new VirtualBrowser(url));
         return;
       }
     }
   }
   // 没有任何匹配时，当然就要报错了
-  throw Error("URL 解析错误：已阅，狗屁不通！"); 
+  throw Error("URL 解析错误：已阅，狗屁不通！");
 }
 
 // 测试虚拟浏览器
-newBrowser("http://www.mcbbs.net/thread-835370-1-1.html", function(){console.log("success")});
+newBrowser("http://www.mcbbs.net/thread-835370-1-1.html", function () { console.log("success") });
 
 // 窗口主体
 class MainWindow extends React.Component {
@@ -221,6 +224,7 @@ class MainWindow extends React.Component {
     leftBarType: "main",
     tag: "mainPage",
     aboutDialog: false,
+    databaseDebugDialog: false,
     loading: false
   };
 
@@ -267,6 +271,10 @@ class MainWindow extends React.Component {
   handleOpenAboutDialog = () => this.setState({ aboutDialog: true });
 
   handleCloseAboutDialog = () => this.setState({ aboutDialog: false });
+
+  handleOpenDatabaseDebugDialog = () => this.setState({ databaseDebugDialog: true });
+
+  handleCloseDatabaseDebugDialog = () => this.setState({ databaseDebugDialog: false });
 
   mainRef = React.createRef();
 
@@ -434,6 +442,10 @@ class MainWindow extends React.Component {
                     <SettingIcon />
                     <ListItemText primary="开发者控制" />
                   </ListItem>
+                  <ListItem button onClick={this.handleOpenDatabaseDebugDialog}>
+                    <DatabaseIcon />
+                    <ListItemText primary="数据库调试" />
+                  </ListItem>
                 </List>
               </div>
             )}
@@ -522,7 +534,6 @@ class MainWindow extends React.Component {
           <Dialog
             open={this.state.aboutDialog}
             onClose={this.handleCloseAboutDialog}
-            aria-labelledby="about-dialog"
           >
             <DialogTitle>关于</DialogTitle>
             <DialogContent>
@@ -533,6 +544,20 @@ class MainWindow extends React.Component {
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleCloseAboutDialog} color="primary">
+                OjbK
+            </Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={this.state.databaseDebugDialog}
+            onClose={this.handleCloseDatabaseDebugDialog}
+          >
+            <DialogTitle>数据库</DialogTitle>
+            <DialogContent>
+              <JsonView src={db.getState()} name="由页面返回的解析数据" />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleCloseDatabaseDebugDialog} color="primary">
                 OjbK
             </Button>
             </DialogActions>
