@@ -28,8 +28,6 @@ class WebView extends React.Component {
   refWebView = React.createRef();
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div>
         <webview src={this.props.url} ref="webview" preload="../scripts/forumWorker/export.js" />
@@ -41,8 +39,7 @@ class WebView extends React.Component {
     this.refs.webview.addEventListener('ipc-message', (n) => {
       let data = JSON.parse(n.channel);
       db.merge(data.data).write();
-      console.log(this.props);
-      this.props.callBack();
+      this.props.callBack('done', data.task);
     })
   }
 

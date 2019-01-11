@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.subTask = exports.data = void 0;
+exports.task = exports.data = void 0;
 // 解析的页面：
 // thread-[0-9]+-[0-9]+-1\.html
 // forum\.php\?mod=viewthread&tid=[0-9]+&page=[0-9]+(#pid[0-9]+)?
@@ -101,5 +101,5 @@ let exportData = {
 exportData.threads[threadID] = thread;
 let data = exportData;
 exports.data = data;
-let subTask = subBrowseUrl;
-exports.subTask = subTask;
+let task = subBrowseUrl;
+exports.task = task;

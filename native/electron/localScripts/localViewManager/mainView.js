@@ -170,21 +170,26 @@ newTag({
 });
 
 class VirtualBrowser {
-  handleLog = () => {
-    console.log("hhh");
+  handleCallBack = (type, value) => {
+    switch(type){
+      case 'done':
+        console.log("Done!");
+        console.log(value);
+        break;
+      case 'error':
+        console.error(value);
+        break;
+      default:
+    }
   }
 
   constructor(url, preload, callback) {
-    console.log("已创建 " + url + " 的标签");
-    console.log(callback);
-    this.webview = <WebView url={url} preload={preload} callBack={this.handleLog} key={shortid.generate()} />
+    this.webview = <WebView url={url} preload={preload} callBack={this.handleCallBack} key={shortid.generate()} />
     this.url = url;
   }
 }
 
 function newBrowser(url, callback) {
-  console.log("监测到回调函数：");
-  console.log(callback);
   for (let i of Object.keys(pageBindScript)) {
     for (let exprString of Object.keys(pageBindScript[i].url)) {
       // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
