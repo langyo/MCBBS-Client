@@ -45,10 +45,17 @@ class WebView extends React.Component {
       this.props.callBack();
     })
   }
+
+  componentWillUnmount() {
+    this.refs.webview.removeEventListener('ipc-message');
+  }
 }
 
 WebView.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  url: PropTypes.string,
+  preload: PropTypes.arrayOf(PropTypes.string),
+  callBack: PropTypes.func
 };
 
 export default withStyles(styles)(WebView);

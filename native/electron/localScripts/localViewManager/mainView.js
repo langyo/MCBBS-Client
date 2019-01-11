@@ -6,7 +6,7 @@ const electron = window.require('electron');
 const { ipcRenderer, shell } = electron;
 const remote = electron.remote;
 
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
@@ -170,9 +170,14 @@ newTag({
 });
 
 class VirtualBrowser {
+  handleLog = () => {
+    console.log("hhh");
+  }
+
   constructor(url, preload, callback) {
-    console.log("已创建 " + url + " 的标签")
-    this.webview = <WebView url={url} preload={preload} callBack={callback} key={shortid.generate()} />
+    console.log("已创建 " + url + " 的标签");
+    console.log(callback);
+    this.webview = <WebView url={url} preload={preload} callBack={this.handleLog} key={shortid.generate()} />
     this.url = url;
   }
 }
