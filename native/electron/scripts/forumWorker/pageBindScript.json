@@ -7,5 +7,15 @@
         "preload": [
             "pageParser/watchThread"
         ]
+    },
+    "users": {
+        "url": [
+            "home\\.php\\?mod=space&username=.+",
+            "\\?[0-9]+",
+            "home.php\\?mod=space&uid=[0-9]+"
+        ],
+        "preload": [
+            "pageParser/userInfo"
+        ]
     }
 }

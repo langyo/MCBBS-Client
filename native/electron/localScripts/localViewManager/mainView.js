@@ -172,30 +172,38 @@ newTag({
 class VirtualBrowser {
   handleCallBack = (type, value) => {
     switch(type){
+      case 'newTask':
+        for(let i of value){
+          console.log('Loading: ' + i);
+          newBrowser(i);
+        }
+        break;
       case 'done':
-        console.log("Done!");
-        console.log(value);
+        console.log('Done! ' + this.url);
         break;
       case 'error':
+        console.error('There\'s someting wrong at this url :' + this.url)
         console.error(value);
         break;
+      case 'log':
+        console.log(value);
       default:
     }
   }
 
-  constructor(url, preload, callback) {
-    this.webview = <WebView url={url} preload={preload} callBack={this.handleCallBack} key={shortid.generate()} />
+  constructor(url) {
+    this.webview = <WebView url={url} callBack={this.handleCallBack} key={shortid.generate()} />
     this.url = url;
   }
 }
 
-function newBrowser(url, callback) {
+function newBrowser(url) {
   for (let i of Object.keys(pageBindScript)) {
     for (let exprString of Object.keys(pageBindScript[i].url)) {
       // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
       let expr = new RegExp(exprString);
       if(expr.test(url)){
-        virtualBrowsers.push(new VirtualBrowser(url, pageBindScript[i].preload), callback);
+        virtualBrowsers.push(new VirtualBrowser(url));
         return;
       }
     }
