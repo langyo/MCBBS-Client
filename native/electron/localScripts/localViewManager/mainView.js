@@ -173,23 +173,25 @@ newTag({
 });
 
 class VirtualBrowser {
-  handleCallBack = (type, value) => {
-    switch (type) {
+  handleCallBack = (n) => {
+    console.log(n);
+    switch (n.state) {
       case 'newTask':
-        for (let i of value) {
+        console.log('Done! ' + this.url);
+        for (let i of n.newTask) {
           console.log('Loading: ' + i);
           newBrowser(i);
         }
         break;
-      case 'done':
+      case 'success':
         console.log('Done! ' + this.url);
         break;
       case 'error':
         console.error('There\'s someting wrong at this url :' + this.url)
-        console.error(value);
+        console.error(n.data);
         break;
       case 'log':
-        console.log(value);
+        console.log(n.data);
       default:
     }
   }

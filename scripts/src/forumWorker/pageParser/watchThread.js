@@ -111,8 +111,6 @@ let exportData = {
 };
 exportData.threads[threadID] = thread;
 
-export default exportData;
-
-// export let data = exportData;
-// export let newTask = subBrowseUrl;
-// export let state = 'success';
+export let data = exportData;
+export let newTask = subBrowseUrl;
+export let state = 'newTask';
