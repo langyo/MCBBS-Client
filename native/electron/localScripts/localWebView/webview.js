@@ -24,7 +24,6 @@ class WebView extends React.Component {
       console.log(this.props);
       console.log(data);
       this.props.callBack(data);
-      console.log(3);
     })
   }
 

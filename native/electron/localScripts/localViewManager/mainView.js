@@ -181,6 +181,7 @@ class VirtualBrowser {
         for (let i of n.newTask) {
           console.log('Loading: ' + i);
           newBrowser(i);
+          this.refreshFunction && this.refreshFunction();
         }
         break;
       case 'success':
@@ -196,19 +197,20 @@ class VirtualBrowser {
     }
   }
 
-  constructor(url) {
+  constructor(url, refreshFunction) {
     this.webview = <WebView url={url} callBack={this.handleCallBack} key={shortid.generate()} />
     this.url = url;
+    this.refreshFunction = refreshFunction;
   }
 }
 
-function newBrowser(url) {
+function newBrowser(url, refreshFunction) {
   for (let i of Object.keys(pageBindScript)) {
     for (let exprString of Object.keys(pageBindScript[i].url)) {
       // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
       let expr = new RegExp(exprString);
       if (expr.test(url)) {
-        virtualBrowsers.push(new VirtualBrowser(url));
+        virtualBrowsers.push(new VirtualBrowser(url, refreshFunction));
         return;
       }
     }
@@ -216,9 +218,6 @@ function newBrowser(url) {
   // 没有任何匹配时，当然就要报错了
   throw Error("URL 解析错误：已阅，狗屁不通！");
 }
-
-// 测试虚拟浏览器
-newBrowser("http://www.mcbbs.net/thread-835370-1-1.html", function () { console.log("success") });
 
 // 窗口主体
 class MainWindow extends React.Component {
@@ -228,6 +227,18 @@ class MainWindow extends React.Component {
     aboutDialog: false,
     databaseDebugDialog: false,
     loading: false
+  };
+
+  constructor() {
+    super();
+
+    // 测试虚拟浏览器
+    newBrowser("http://www.mcbbs.net/thread-835370-1-1.html", this.handleRefresh);
+  }
+
+  handleRefresh = () => {
+    console.log('refresh!')
+    this.setState({});
   };
 
   handleOpenDevTools = () => {
