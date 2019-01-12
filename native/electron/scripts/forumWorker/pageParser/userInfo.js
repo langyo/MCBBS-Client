@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.data = void 0;
+exports.state = exports.data = void 0;
 // 解析的页面：
 // home\.php\?mod=space&uid=[0-9]+
 let user = {
@@ -168,3 +168,5 @@ let exportData = {};
 exportData[user.id] = user;
 let data = exportData;
 exports.data = data;
+let state = 'success';
+exports.state = state;
