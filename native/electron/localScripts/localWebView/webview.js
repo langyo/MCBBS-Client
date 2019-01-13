@@ -2,12 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import { withStyles } from "@material-ui/core/styles";
-
 import db from "../localDatabase/database";
-
-const styles = theme => ({
-});
 
 class WebView extends React.Component {
   render() {
@@ -38,4 +33,4 @@ WebView.propTypes = {
   callBack: PropTypes.func
 };
 
-export default withStyles(styles)(WebView);
+export default WebView;

@@ -68,7 +68,7 @@ import JsonView from "react-json-view";
 import MainPageRender from "../../scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "../../scripts/viewManager/pages/watchThread";
 import ForumRender from "../../scripts/viewManager/pages/forum";
-import WebView from "../localWebView/webview";
+import WebviewRender from "../localWebView/webviewRender";
 
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
@@ -181,15 +181,6 @@ class MainWindow extends React.Component {
     loading: false
   };
 
-  virtualBrowsers = [];
-
-  constructor() {
-    super();
-
-    // 测试虚拟浏览器
-    this.newBrowser("http://www.mcbbs.net/thread-835370-1-1.html", this.handleRefresh);
-  }
-
   handleRefresh = () => {
     console.log('refresh!');
     this.setState({});
@@ -244,57 +235,6 @@ class MainWindow extends React.Component {
   handleCloseDatabaseDebugDialog = () => this.setState({ databaseDebugDialog: false });
 
   mainRef = React.createRef();
-
-  newBrowser = (url, refreshFunction) => {
-    for (let i of Object.keys(pageBindScript)) {
-      for (let exprString of Object.keys(pageBindScript[i].url)) {
-        // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
-        let expr = new RegExp(exprString);
-        if (expr.test(url)) {
-          this.virtualBrowsers.push(new this.VirtualBrowser(url, refreshFunction));
-          return;
-        }
-      }
-    }
-    // 没有任何匹配时，当然就要报错了
-    throw Error("URL 解析错误：已阅，狗屁不通！");
-  }
-
-  VirtualBrowser = class __VirtualBrowser{
-    handleCallBack = (n) => {
-      console.log(n);
-      switch (n.state) {
-        case 'newTask':
-          console.log('Done! ' + this.url);
-          for (let i of n.newTask) {
-            console.log('Loading: ' + i);
-            // 这里报错了，调试后发现 this.newBrowser === undefined
-            // 此时发现，this 指向的不是外层的 MainWindow，而是这个本体 __VirtualBrowser
-            // 暂时把笔记放这里，明天再修
-            console.log(this);
-            this.newBrowser(i);
-            this.refreshFunction && this.refreshFunction();
-          }
-          break;
-        case 'success':
-          console.log('Done! ' + this.url);
-          break;
-        case 'error':
-          console.error('There\'s someting wrong at this url :' + this.url)
-          console.error(n.data);
-          break;
-        case 'log':
-          console.log(n.data);
-        default:
-      }
-    }
-  
-    constructor(url, refreshFunction) {
-      this.webview = <WebView url={url} callBack={this.handleCallBack} key={shortid.generate()} />
-      this.url = url;
-      this.refreshFunction = refreshFunction;
-    }
-  }
 
   render() {
     const { classes, theme } = this.props;
@@ -541,13 +481,7 @@ class MainWindow extends React.Component {
                 </div>
               )
             }
-            <div className={classes.hide}>
-              {
-                this.virtualBrowsers.map((n) => {
-                  return n.webview;
-                })
-              }
-            </div>
+            <WebviewRender ref="virtualBrowsers" />
           </main>
           <Dialog
             open={this.state.aboutDialog}
