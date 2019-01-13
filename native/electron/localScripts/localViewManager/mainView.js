@@ -481,7 +481,7 @@ class MainWindow extends React.Component {
                 </div>
               )
             }
-            <WebviewRender ref="virtualBrowsers" />
+            <WebviewRender ref="virtualBrowsers" parentRefresh={this.handleRefresh} />
           </main>
           <Dialog
             open={this.state.aboutDialog}

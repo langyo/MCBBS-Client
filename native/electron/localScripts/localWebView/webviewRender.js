@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
 
+import WebView from "./webview";
+
+import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+
 class VirtualBrowser extends React.Component {
     virtualBrowsers = [];
 
@@ -37,6 +41,7 @@ class VirtualBrowser extends React.Component {
                 // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
                 let expr = new RegExp(exprString);
                 if (expr.test(url)) {
+                    console.log("成功匹配 " + url);
                     this.virtualBrowsers.push(<WebView url={url} callBack={this.handleCallBack} key={shortid.generate()} />);
                     return;
                 }
@@ -47,13 +52,22 @@ class VirtualBrowser extends React.Component {
     }
 
     render() {
-        return (<div>
-            {this.virtualBrowsers.map(n => n)}
-        </div>)
+        return (
+            <div>
+                {this.virtualBrowsers.map(n => n)}
+            </div>
+        );
+    }
+
+    constructor() {
+        super();
+        console.log("已加载 Virtual Browser");
+        // 以下为调试代码
+        this.newBrowser("http://www.mcbbs.net/thread-834717-1-1.html");
     }
 }
 
-VirtualBrowser.PropTypes = {
+VirtualBrowser.propTypes = {
     parentRefresh: PropTypes.func
 };
 

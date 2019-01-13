@@ -28,7 +28,6 @@ class WebView extends React.Component {
 }
 
 WebView.propTypes = {
-  classes: PropTypes.object.isRequired,
   url: PropTypes.string,
   callBack: PropTypes.func
 };
