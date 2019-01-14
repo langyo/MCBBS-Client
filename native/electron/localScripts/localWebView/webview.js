@@ -18,7 +18,10 @@ class WebView extends React.Component {
       console.log(this.props);
       console.log(data);
       this.props.callBack(data);
-    })
+    });
+    this.refs.webview.addEventListener('console-message', n => {
+      n.level >= 2 && console.warn(n);
+    });
   }
 
   componentWillUnmount() {
