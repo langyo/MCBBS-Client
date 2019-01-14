@@ -15,12 +15,11 @@ class WebView extends React.Component {
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
       let data = JSON.parse(n.channel);
-      console.log(this.props);
-      console.log(data);
+      console.warn(data);
       this.props.callBack(data);
     });
     this.refs.webview.addEventListener('console-message', n => {
-      n.level >= 2 && console.warn(n);
+      console.log("Level " + n.level + " : " + n.message + " at " + n.line);
     });
   }
 

@@ -51,7 +51,7 @@ class VirtualBrowser extends React.Component {
 
     newBrowser = (url) => {
         for (let i of Object.keys(pageBindScript)) {
-            for (let exprString of Object.keys(pageBindScript[i].url)) {
+            for (let exprString of pageBindScript[i].url) {
                 // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
                 let expr = new RegExp(exprString);
                 if (expr.test(url)) {
