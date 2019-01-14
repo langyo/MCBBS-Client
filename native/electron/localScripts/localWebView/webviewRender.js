@@ -8,7 +8,9 @@ import WebView from "./webview";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
 
 class VirtualBrowser extends React.Component {
+    state = {};
     virtualBrowsers = [];
+    hasLoad = false;
 
     handleCallBack = (n) => {
         console.log(n);
@@ -43,6 +45,8 @@ class VirtualBrowser extends React.Component {
                 if (expr.test(url)) {
                     console.log("成功匹配 " + url);
                     this.virtualBrowsers.push(<WebView url={url} callBack={this.handleCallBack} key={shortid.generate()} />);
+                    this.hasLoad && this.setState({});
+                    console.log(this.virtualBrowsers);
                     return;
                 }
             }
@@ -59,6 +63,14 @@ class VirtualBrowser extends React.Component {
         );
     }
 
+    componentWillMount() {
+        this.hasLoad = true;
+    }
+
+    componentWillUnmount() {
+        this,hasLoad = false;
+    }
+
     constructor() {
         super();
         console.log("已加载 Virtual Browser");
@@ -68,7 +80,6 @@ class VirtualBrowser extends React.Component {
 }
 
 VirtualBrowser.propTypes = {
-    parentRefresh: PropTypes.func
 };
 
 export default VirtualBrowser;
