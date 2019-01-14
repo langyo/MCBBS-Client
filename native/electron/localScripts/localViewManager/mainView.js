@@ -68,7 +68,7 @@ import JsonView from "react-json-view";
 import MainPageRender from "../../scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "../../scripts/viewManager/pages/watchThread";
 import ForumRender from "../../scripts/viewManager/pages/forum";
-import webviewRender from "../localWebView/webviewRender";
+import WebviewRender from "../localWebView/webviewRender";
 
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
@@ -481,6 +481,7 @@ class MainWindow extends React.Component {
                 </div>
               )
             }
+            <WebviewRender ref="virtualBrowsers" />
           </main>
           <Dialog
             open={this.state.aboutDialog}
