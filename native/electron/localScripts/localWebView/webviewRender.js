@@ -1,4 +1,4 @@
-const remote = require("electron").remote;
+const remote = window.require("electron").remote;
 const {BrowserWindow} = remote;
 
 import shortid from "shortid";
@@ -6,6 +6,8 @@ import shortid from "shortid";
 import WebView from "./webview";
 
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+
+let taskWnd = [];
 
 function handleCallBack(n) {
     console.log(n);
@@ -41,11 +43,16 @@ function newBrowser(url) {
                 let wnd = new BrowserWindow({
                     width: 800,
                     height: 600,
-                    show: true
+                    show: true,
+                    webPreferences: {
+                        preload: '../../scripts/forumWorker/export.js'
+                    }
                 });
-                wnd.loadURL(`file://${__dirname}/public/workpage.html`);
-                remote.getGlobal("taskWnd").push(wnd);
-                console.log(this.virtualBrowsers);
+                wnd.loadURL(url);
+                wnd.webContents.openDevTools({ detach:true });
+                taskWnd.push(wnd);
+                console.log(taskWnd);
+                return;
             }
         }
     }
@@ -55,5 +62,5 @@ function newBrowser(url) {
 
 console.log("已加载 Virtual Browser");
 // 以下为调试代码
-this.newBrowser("http://www.mcbbs.net/thread-834717-1-1.html");
+newBrowser("http://www.mcbbs.net/thread-834717-1-1.html");
 
