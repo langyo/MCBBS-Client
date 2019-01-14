@@ -3,9 +3,21 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
 
+import { withStyles } from "@material-ui/core/styles";
+
 import WebView from "./webview";
 
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+
+const styles = theme => ({
+    hide: {
+        width: 0,
+        height: 0,
+        margin: 0,
+        padding: 0,
+        display: "none"
+    }
+});
 
 class VirtualBrowser extends React.Component {
     state = {};
@@ -56,8 +68,10 @@ class VirtualBrowser extends React.Component {
     }
 
     render() {
+        const { classes, theme } = this.props;
+
         return (
-            <div>
+            <div className={classes.hide}>
                 {this.virtualBrowsers.map(n => n)}
             </div>
         );
@@ -82,4 +96,4 @@ class VirtualBrowser extends React.Component {
 VirtualBrowser.propTypes = {
 };
 
-export default VirtualBrowser;
+export default withStyles(styles)(VirtualBrowser);
