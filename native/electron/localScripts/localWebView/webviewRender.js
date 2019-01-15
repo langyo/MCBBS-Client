@@ -28,20 +28,18 @@ class VirtualBrowser extends React.Component {
         console.log(n);
         switch (n.state) {
             case 'newTask':
-                console.log('Done! ' + this.url);
+                console.log('Done!');
                 for (let i of n.newTask) {
                     console.log('Loading: ' + i);
-                    console.log(this);
                     this.newBrowser("http://www.mcbbs.net/" + i);
                     this.props.refreshFunction && this.refreshFunction();
                 }
                 break;
             case 'success':
-                console.log('Done! ' + this.url);
+                console.log('Done!');
                 break;
             case 'error':
                 console.error('There\'s someting wrong at this url :' + this.url)
-                console.error(n.data);
                 break;
             case 'log':
                 console.log(n.data);

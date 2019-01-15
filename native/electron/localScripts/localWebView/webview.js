@@ -15,7 +15,9 @@ class WebView extends React.Component {
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
       let data = JSON.parse(n.channel);
-      console.warn(data);
+      console.log("即将合并的数据：");
+      console.log(data);
+      db.merge(data.data).write();
       this.props.callBack(data);
     });
     this.refs.webview.addEventListener('console-message', n => {

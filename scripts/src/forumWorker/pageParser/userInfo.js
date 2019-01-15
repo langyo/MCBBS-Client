@@ -146,8 +146,10 @@ for (let i of document.querySelectorAll("#psts > ul > li")) {
     }
 }
 
-let exportData = {};
-exportData[user.id] = user;
+let exportData = {
+    users: {}
+};
+exportData.users[user.id] = user;
 
 export let data = exportData;
 export let state = 'success';
