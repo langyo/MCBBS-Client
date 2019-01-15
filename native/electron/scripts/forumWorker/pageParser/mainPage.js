@@ -1,5 +1,9 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.state = exports.data = void 0;
 // 解析的页面：
 // forum\.php
 let mainPage = {
@@ -87,3 +91,11 @@ for (let i of document.querySelectorAll('#portal_block_809_content > div > ul > 
     author: /uid=([0-9]+)/.exec(i.querySelector('em > a').getAttribute('href'))[1]
   });
 }
+
+let exportData = {
+  mainPage: mainPage
+};
+let data = exportData;
+exports.data = data;
+let state = 'success';
+exports.state = state;

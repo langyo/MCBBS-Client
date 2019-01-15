@@ -81,3 +81,10 @@ for(let i of document.querySelectorAll('#portal_block_809_content > div > ul > l
 		author: /uid=([0-9]+)/.exec(i.querySelector('em > a').getAttribute('href'))[1]
     });
 }
+
+let exportData = {
+	mainPage: mainPage
+};
+
+export let data = exportData;
+export let state = 'success'
