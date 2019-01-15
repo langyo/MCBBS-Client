@@ -69,6 +69,10 @@ for (let i of document.querySelectorAll('#threadlisttableid > tbody > tr')) {
   threads[id] = info;
 }
 
-export let data = forum;
+let exportData = {
+  forum: forum
+}
+
+export let data = exportData;
 export let newTask = subBrowseUrl;
 export let state = 'newTask';
