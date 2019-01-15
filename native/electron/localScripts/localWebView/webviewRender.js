@@ -32,7 +32,7 @@ class VirtualBrowser extends React.Component {
                 for (let i of n.newTask) {
                     console.log('Loading: ' + i);
                     console.log(this);
-                    this.newBrowser(i);
+                    this.newBrowser("http://www.mcbbs.net/" + i);
                     this.props.refreshFunction && this.refreshFunction();
                 }
                 break;
