@@ -23,6 +23,8 @@ var _ListItemText = _interopRequireDefault(require("@material-ui/core/ListItemTe
 
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
+var _Paper = _interopRequireDefault(require("@material-ui/core/Paper"));
+
 var _FileDocument = _interopRequireDefault(require("mdi-material-ui/FileDocument"));
 
 var _testData = _interopRequireDefault(require("../testData"));
@@ -32,10 +34,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 const styles = theme => ({
-  fill: {
-    width: "100%",
-    height: "100%",
-    maxHeight: "100%"
+  actions: {
+    display: "flex"
   },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
@@ -49,6 +49,11 @@ const styles = theme => ({
   },
   title: {
     padding: "12px"
+  },
+  paper: {
+    width: "100%",
+    padding: 8,
+    margin: 8
   }
 });
 
@@ -63,15 +68,20 @@ class Forum extends _react.default.Component {
     const {
       classes
     } = this.props;
-    return _react.default.createElement(_Card.default, null, _react.default.createElement(_Typography.default, {
+    return _react.default.createElement("div", null, _react.default.createElement(_Typography.default, {
       variant: "h6",
       color: "inherit",
       className: classes.title
-    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_List.default, {
-      className: classes.fill
+    }, _testData.default.forums[this.props.forum].name), _react.default.createElement(_Paper.default, {
+      className: classes.paper
+    }, _react.default.createElement("div", {
+      dangerouslySetInnerHTML: {
+        __html: _testData.default.forums[this.props.forum].info
+      }
+    })), _react.default.createElement(_List.default, {
+      component: "nav"
     }, _testData.default.forums[this.props.forum].threads.map((n, id) => _react.default.createElement(_ListItem.default, {
-      button: true,
-      key: n
+      button: true
     }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement(_FileDocument.default, null)), _react.default.createElement(_ListItemText.default, {
       primary: _testData.default.threads[n].title,
       secondary: (_testData.default.threads[n].author === "0" ? "匿名" : _testData.default.users[_testData.default.threads[n].author] && _testData.default.users[_testData.default.threads[n].author].name) || "?"

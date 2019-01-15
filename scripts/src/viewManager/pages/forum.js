@@ -8,16 +8,15 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
 import DocumentIcon from "mdi-material-ui/FileDocument";
 
 import testData from "../testData";
 
 const styles = theme => ({
-  fill: {
-    width: "100%",
-    height: "100%",
-    maxHeight: "100%"
+  actions: {
+    display: "flex"
   },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
@@ -30,6 +29,11 @@ const styles = theme => ({
   },
   title: {
     padding: "12px"
+  },
+  paper:{
+    width: "100%",
+    padding: 8,
+    margin: 8
   }
 });
 
@@ -40,13 +44,17 @@ class Forum extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Card>
+      <div>
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.forums[this.props.forum].name}
         </Typography>
-        <List className={classes.fill}>
+        <Paper className={classes.paper}>
+        
+          <div dangerouslySetInnerHTML={{ __html: testData.forums[this.props.forum].info }}></div>
+        </Paper>
+        <List component="nav">
           {testData.forums[this.props.forum].threads.map((n, id) => (
-            <ListItem button key={n}>
+            <ListItem button>
               <ListItemIcon>
                 <DocumentIcon />
               </ListItemIcon>
@@ -56,13 +64,13 @@ class Forum extends React.Component {
                   (testData.threads[n].author === "0"
                     ? "匿名"
                     : testData.users[testData.threads[n].author] &&
-                    testData.users[testData.threads[n].author].name) || "?"
+                      testData.users[testData.threads[n].author].name) || "?"
                 }
               />
             </ListItem>
           ))}
         </List>
-      </Card>
+      </div>
     );
   }
 }
