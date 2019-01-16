@@ -13,7 +13,7 @@ var _forumPanel = _interopRequireDefault(require("../utils/forumPanel"));
 
 var _headImages = _interopRequireDefault(require("../utils/headImages"));
 
-var _testData = _interopRequireDefault(require("../testData"));
+var _indexPageThreads = _interopRequireDefault(require("../utils/indexPageThreads"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,12 +29,13 @@ class MainPage extends _react.default.Component {
       classes
     } = this.props;
     return _react.default.createElement("div", null, _react.default.createElement(_headImages.default, {
-      headImages: _testData.default.mainPage.headImages,
+      headImages: TestData.mainPage.headImages,
       className: classes.padding
-    }), Object.keys(_testData.default.mainPage.forumGroups).map(n => _react.default.createElement(_forumPanel.default, {
-      key: _testData.default.mainPage.forumGroups[n].forumGroupId,
-      forumGroupName: _testData.default.mainPage.forumGroups[n].forumGroupName,
-      forums: _testData.default.mainPage.forumGroups[n].forums
+    }), // TODO: 这里开始往 indexPageThreads 套接
+    Object.keys(TestData.mainPage.forumGroups).map(n => _react.default.createElement(_forumPanel.default, {
+      key: TestData.mainPage.forumGroups[n].forumGroupId,
+      forumGroupName: TestData.mainPage.forumGroups[n].forumGroupName,
+      forums: TestData.mainPage.forumGroups[n].forums
     })));
   }
 

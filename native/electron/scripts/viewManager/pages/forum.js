@@ -11,8 +11,6 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _styles = require("@material-ui/core/styles");
 
-var _Card = _interopRequireDefault(require("@material-ui/core/Card"));
-
 var _List = _interopRequireDefault(require("@material-ui/core/List"));
 
 var _ListItem = _interopRequireDefault(require("@material-ui/core/ListItem"));
