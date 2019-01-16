@@ -12,6 +12,10 @@ var _default = {
   "users": {
     "url": ["home\\.php\\?mod=space&username=.+", "\\?[0-9]+", "home.php\\?mod=space&uid=[0-9]+"],
     "preload": ["pageParser/userInfo"]
+  },
+  "forum": {
+    "url": ["forum-[a-zA-Z0-9]+-[0-9]+\.html"],
+    "preload": ["pageParser/forum"]
   }
 };
 exports.default = _default;

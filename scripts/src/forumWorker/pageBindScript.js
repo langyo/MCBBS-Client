@@ -17,5 +17,13 @@ export default {
         "preload": [
             "pageParser/userInfo"
         ]
+    },
+    "forum": {
+        "url": [
+            "forum-[a-zA-Z0-9]+-[0-9]+\.html"
+        ],
+        "preload": [
+            "pageParser/forum"
+        ]
     }
 };

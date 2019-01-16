@@ -25,7 +25,7 @@ for (let i of document.querySelectorAll('#threadlisttableid > tbody > tr')) {
     type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
     states: {}
   };
-  subBrowseUrl.push(info.author); // 帖子状态解析
+  info.author !== "0" && subBrowseUrl.push("?" + info.author); // 帖子状态解析
 
   let state = i.querySelector('td.icn > a').getAttribute('title');
   exports.state = state;
@@ -65,9 +65,11 @@ for (let i of document.querySelectorAll('#threadlisttableid > tbody > tr')) {
   threads[id] = info;
 }
 
+let key = /forum-([a-zA-Z0-9]+-[0-9]+)\.html/.exec(location.href)[1];
 let exportData = {
-  forum: forum
+  forums: {}
 };
+exportData.forums[key] = forum;
 let data = exportData;
 exports.data = data;
 let newTask = subBrowseUrl;
