@@ -16,6 +16,10 @@ var _default = {
   "forum": {
     "url": ["forum-[a-zA-Z0-9]+-[0-9]+\.html"],
     "preload": ["pageParser/forum"]
+  },
+  "index-threads-list": {
+    "url": ["forum\.php\?mod=guide&view={hot|digest|new|newthread}"],
+    "preload": ["pageParser/threadGroup"]
   }
 };
 exports.default = _default;

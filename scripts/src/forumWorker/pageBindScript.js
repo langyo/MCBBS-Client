@@ -25,5 +25,13 @@ export default {
         "preload": [
             "pageParser/forum"
         ]
+    },
+    "index-threads-list": {
+        "url": [
+            "forum\.php\?mod=guide&view={hot|digest|new|newthread}"
+        ],
+        "preload":[
+            "pageParser/threadGroup"
+        ]
     }
 };

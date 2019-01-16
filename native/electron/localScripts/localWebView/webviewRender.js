@@ -87,7 +87,7 @@ class VirtualBrowser extends React.Component {
         super();
         console.log("已加载 Virtual Browser");
         // 以下为调试代码
-        this.newBrowser("http://www.mcbbs.net/forum-news-1.html");
+        this.newBrowser("http://www.mcbbs.net/forum\.php\?mod=guide&view=new");
     }
 }
 

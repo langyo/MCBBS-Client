@@ -13,7 +13,8 @@ let threads = {};
 let subBrowseUrl = [];
 
 for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody > tr")) {
-  subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
+  // 这一行暂时注释掉，因为这一句有点恐怖，会让你的机器瞬间开满几百个浏览器实体 XD
+  // subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
   let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.xst').getAttribute('href'))[1];
   let info = {
     author: i.querySelector('td:nth-child(4) > cite > a') && /uid=([0-9]+)/.exec(i.querySelector('td:nth-child(4) > cite > a').getAttribute('href'))[1] || "0",
