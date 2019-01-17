@@ -28,10 +28,6 @@ class WebView extends React.Component {
       console.groupEnd();
     });
   }
-
-  componentWillUnmount() {
-    this.refs.webview.removeEventListener('ipc-message');
-  }
 }
 
 WebView.propTypes = {

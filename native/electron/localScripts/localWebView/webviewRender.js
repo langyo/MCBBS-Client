@@ -23,12 +23,14 @@ const styles = theme => ({
 class VirtualBrowser extends React.Component {
     state = {};
     virtualBrowsers = [];
+    virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").value();
     virtualBrowserState = [];
     /*
         virtualBrowserState 的每一个元素为下述的其中一种值：
             - free : 空闲
             - loading : 正在加载页面
             - waiting : 正在等待主进程提供数据
+            - error : 出错
     */
 
     hasLoad = false;
@@ -40,29 +42,38 @@ class VirtualBrowser extends React.Component {
         return (n) => {
             switch (n.state) {
                 case 'newTask':
-                    console.log('Done!');
+                    console.log('%cMainThread', 'color: blue;', 'Done!');
                     for (let i of n.newTask) {
                         console.log('%cMainThread', 'color: blue;', 'Loading: ' + i);
                         this.newBrowser("http://www.mcbbs.net/" + i);
-                        this.props.refreshFunction();
                     }
+                    this.checkBrowserStack();
                     break;
                 case 'success':
                     console.log('%cMainThread', 'color: blue;', 'Done!');
+                    this.checkBrowserStack();
                     break;
                 case 'error':
                     console.log('%cMainThread', 'color: blue;', 'There\'s someting wrong at this url :' + this.url)
+                    this.checkBrowserStack();
                     break;
                 case 'log':
                     console.log('%cMainThread', 'color: blue;', 'Log data:');
                     console.log(n.data);
+                    break;
                 default:
             }
         }
     }
 
     checkBrowserStack = () => {
-
+        for(let i = 0; i < this.virtualBrowserCount; ++i){
+            // 检查哪个虚拟浏览器能用的，能就依次提取 taskStack 里的 URL
+            if(this.virtualBrowserState[i] === 'free' && this.taskStack.length > 0){
+                this.virtualBrowsers[i] = <WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={this.taskStack.pop()}/>
+            }
+        }
+        // this.props.refreshFunction();
     }
 
     newBrowser = (url) => {
@@ -104,15 +115,14 @@ class VirtualBrowser extends React.Component {
 
     constructor() {
         super();
-        let virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").value();
-        for (let i = 0; i < virtualBrowserCount; ++i) {
+        for (let i = 0; i < this.virtualBrowserCount; ++i) {
             this.virtualBrowsers.push(<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} />);
             this.virtualBrowserState.push('free');
         }
         console.log('%cMainThread', 'color: blue;', "已加载 Virtual Browser");
 
         // 以下为调试代码
-        this.newBrowser("http://www.mcbbs.net/forum\.php\?mod=guide&view=new");
+        this.newBrowser("http://www.mcbbs.net/thread-672030-1-1.html");
     }
 }
 
