@@ -21,7 +21,11 @@ class WebView extends React.Component {
       this.props.callBack(data);
     });
     this.refs.webview.addEventListener('console-message', n => {
-      console.log("Level " + n.level + " : " + n.message + " at " + n.line);
+      console.group("Virtual Browser " + this.props.id);
+      console.log('%cLevel ' + n.level, 'color: red;');
+      console.log(n.message);
+      console.log("%cAt " + n.line, 'color: blue;');
+      console.groupEnd();
     });
   }
 
@@ -31,7 +35,7 @@ class WebView extends React.Component {
 }
 
 WebView.propTypes = {
-  url: PropTypes.string,
+  id: PropTypes.number,
   callBack: PropTypes.func
 };
 

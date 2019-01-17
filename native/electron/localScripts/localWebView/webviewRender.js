@@ -23,32 +23,46 @@ const styles = theme => ({
 class VirtualBrowser extends React.Component {
     state = {};
     virtualBrowsers = [];
+    virtualBrowserState = [];
+    /*
+        virtualBrowserState 的每一个元素为下述的其中一种值：
+            - free : 空闲
+            - loading : 正在加载页面
+            - waiting : 正在等待主进程提供数据
+    */
+
     hasLoad = false;
 
     timeStamp = [];
     taskStack = [];
 
-    handleCallBack = (n) => {
-        console.log(n);
-        switch (n.state) {
-            case 'newTask':
-                console.log('Done!');
-                for (let i of n.newTask) {
-                    console.log('Loading: ' + i);
-                    this.newBrowser("http://www.mcbbs.net/" + i);
-                    this.props.refreshFunction && this.refreshFunction();
-                }
-                break;
-            case 'success':
-                console.log('Done!');
-                break;
-            case 'error':
-                console.error('There\'s someting wrong at this url :' + this.url)
-                break;
-            case 'log':
-                console.log(n.data);
-            default:
+    handleCallBack = function (id) {
+        return (n) => {
+            switch (n.state) {
+                case 'newTask':
+                    console.log('Done!');
+                    for (let i of n.newTask) {
+                        console.log('%cMainThread', 'color: blue;', 'Loading: ' + i);
+                        this.newBrowser("http://www.mcbbs.net/" + i);
+                        this.props.refreshFunction();
+                    }
+                    break;
+                case 'success':
+                    console.log('%cMainThread', 'color: blue;', 'Done!');
+                    break;
+                case 'error':
+                    console.log('%cMainThread', 'color: blue;', 'There\'s someting wrong at this url :' + this.url)
+                    break;
+                case 'log':
+                    console.log('%cMainThread', 'color: blue;', 'Log data:');
+                    console.log(n.data);
+                default:
+            }
         }
+    }
+
+    checkBrowserStack = () => {
+
     }
 
     newBrowser = (url) => {
@@ -57,8 +71,9 @@ class VirtualBrowser extends React.Component {
                 // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
                 let expr = new RegExp(exprString);
                 if (expr.test(url)) {
-                    console.log("成功匹配 " + url);
-                    this.virtualBrowsers.push(<WebView url={url} callBack={this.handleCallBack} key={shortid.generate()} />);
+                    console.log('%cMainThread', 'color: blue;', "成功匹配 " + url);
+                    this.taskStack.push(url);
+                    this.checkBrowserStack();
                     this.hasLoad && this.setState({});
                     console.log(this.virtualBrowsers);
                     return;
@@ -90,10 +105,11 @@ class VirtualBrowser extends React.Component {
     constructor() {
         super();
         let virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").value();
-        for(let i = 0; i < virtualBrowserCount; ++i){
-            
+        for (let i = 0; i < virtualBrowserCount; ++i) {
+            this.virtualBrowsers.push(<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} />);
+            this.virtualBrowserState.push('free');
         }
-        console.log("已加载 Virtual Browser");
+        console.log('%cMainThread', 'color: blue;', "已加载 Virtual Browser");
 
         // 以下为调试代码
         this.newBrowser("http://www.mcbbs.net/forum\.php\?mod=guide&view=new");
@@ -103,7 +119,7 @@ class VirtualBrowser extends React.Component {
 VirtualBrowser.propTypes = {
     refreshFunction: PropTypes.func,
     setProgressOpenFunction: PropTypes.func,
-    setProgressCloseFunction : PropTypes.func
+    setProgressCloseFunction: PropTypes.func
 };
 
 export default withStyles(styles)(VirtualBrowser);
