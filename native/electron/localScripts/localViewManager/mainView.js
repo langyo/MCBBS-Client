@@ -234,6 +234,10 @@ class MainWindow extends React.Component {
 
   handleCloseDatabaseDebugDialog = () => this.setState({ databaseDebugDialog: false });
 
+  handleOpenLoadingProgress = () => this.setState({ loading: true });
+
+  handleCloseLoadingProgress = () => this.setState({ loading: false });
+
   mainRef = React.createRef();
 
   render() {
@@ -481,7 +485,11 @@ class MainWindow extends React.Component {
                 </div>
               )
             }
-            <WebviewRender ref="virtualBrowsers" />
+            <WebviewRender 
+              refreshFunction={this.handleRefresh}
+              setProgressOpenFunction={this.handleOpenLoadingProgress}
+              setProgressCloseFunction={this.handleCloseLoadingProgress}
+            />
           </main>
           <Dialog
             open={this.state.aboutDialog}

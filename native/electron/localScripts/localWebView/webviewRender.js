@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import WebView from "./webview";
 
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+import db from "../localDatabase/database";
 
 const styles = theme => ({
     hide: {
@@ -23,6 +24,9 @@ class VirtualBrowser extends React.Component {
     state = {};
     virtualBrowsers = [];
     hasLoad = false;
+
+    timeStamp = [];
+    taskStack = [];
 
     handleCallBack = (n) => {
         console.log(n);
@@ -80,18 +84,26 @@ class VirtualBrowser extends React.Component {
     }
 
     componentWillUnmount() {
-        this,hasLoad = false;
+        this.hasLoad = false;
     }
 
     constructor() {
         super();
+        let virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").value();
+        for(let i = 0; i < virtualBrowserCount; ++i){
+            
+        }
         console.log("已加载 Virtual Browser");
+
         // 以下为调试代码
         this.newBrowser("http://www.mcbbs.net/forum\.php\?mod=guide&view=new");
     }
 }
 
 VirtualBrowser.propTypes = {
+    refreshFunction: PropTypes.func,
+    setProgressOpenFunction: PropTypes.func,
+    setProgressCloseFunction : PropTypes.func
 };
 
 export default withStyles(styles)(VirtualBrowser);

@@ -97,7 +97,9 @@ export default (db) => {
             // 虚拟浏览器设置
             browserSettings: {
                 // User-Agent 设置
-                userAgent: ""
+                userAgent: "",
+                // 最大虚拟浏览器个数
+                maxVirtalBrowserCount: 4
             },
     
             // 客户端个性化设置
