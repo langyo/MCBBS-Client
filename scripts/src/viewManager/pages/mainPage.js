@@ -5,7 +5,7 @@ import ForumPanel from "../utils/forumPanel";
 import HeadImages from "../utils/headImages";
 import MiniThread from "../utils/indexPageThreads";
 
-
+import TestData from "../testData"
 
 const styles = theme => ({
   padding: {

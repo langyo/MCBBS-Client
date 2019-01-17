@@ -46,7 +46,6 @@ class Floor extends React.Component {
           subheader={this.props.contentTimeInfo}
         />
         <CardContent>
-          <div className={classes.cover} />
           <Typography
             className={classes.content}
             component="p"

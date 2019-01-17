@@ -68,9 +68,7 @@ class Floor extends _react.default.Component {
       }),
       title: this.props.threadTitle,
       subheader: this.props.contentTimeInfo
-    }), _react.default.createElement(_CardContent.default, null, _react.default.createElement("div", {
-      className: classes.cover
-    }), _react.default.createElement(_Typography.default, {
+    }), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
       className: classes.content,
       component: "p",
       dangerouslySetInnerHTML: {
