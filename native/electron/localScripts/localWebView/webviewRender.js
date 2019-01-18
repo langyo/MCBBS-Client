@@ -47,6 +47,8 @@ class VirtualBrowser extends React.Component {
                 case 'newTask':
                     console.log('%cMainThread ', 'color: blue;', 'Done!');
                     virtualBrowserState[id] = 'free';
+                    console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowserState 列表：");
+                    console.log(virtualBrowserState);
                     for (let i of n.newTask) {
                         console.log('%cMainThread ', 'color: blue;', 'Loading: ' + i);
                         this.newBrowser("http://www.mcbbs.net/" + i);
@@ -56,6 +58,8 @@ class VirtualBrowser extends React.Component {
                 case 'success':
                     console.log('%cMainThread ', 'color: blue;', 'Done!');
                     virtualBrowserState[id] = 'free';
+                    console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowserState 列表：");
+                    console.log(virtualBrowserState);
                     this.checkBrowserStack();
                     break;
                 case 'error':
@@ -73,15 +77,17 @@ class VirtualBrowser extends React.Component {
     }
 
     checkBrowserStack = () => {
-        for(let i = 0; i < virtualBrowserCount; ++i){
+        for (let i = 0; i < virtualBrowserCount; ++i) {
             // 检查哪个虚拟浏览器能用的，能就依次提取 taskStack 里的 URL
-            if(virtualBrowserState[i] === 'free' && taskStack.length > 0){
-                virtualBrowsers[i] = (<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={taskStack.pop()}/>);
+            if (virtualBrowserState[i] === 'free' && taskStack.length > 0) {
+                // 查出错误了，下面这句压根就没成功修改 virtualBrowsers[i]
+                // （我真的很懵……这都什么鬼畜问题……）
+                virtualBrowsers[i] = <WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={taskStack.pop()} />;
                 virtualBrowserState[i] = 'loading';
             }
-            if(virtualBrowserState[i] === 'error'){
+            if (virtualBrowserState[i] === 'error') {
                 console.log('%cMainThread ', 'color: blue;', "重新加载：" + virtualBrowsers[i].props.url)
-                virtualBrowsers[i] = (<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={virtualBrowsers[i].props.url}/>)
+                virtualBrowsers[i] = (<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={virtualBrowsers[i].props.url} />)
             }
         }
         console.log('%cMainThread ', 'color: blue;', "当前的 taskStack 列表：");
