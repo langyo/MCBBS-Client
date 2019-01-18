@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import db from "../localDatabase/database";
 
 class WebView extends React.Component {
+  timeoutObject;
+  done = false;
+
   render() {
     return (
       <div>
@@ -14,6 +17,7 @@ class WebView extends React.Component {
 
   componentDidMount() {
     this.refs.webview.addEventListener('ipc-message', (n) => {
+      this.done = true;
       let data = JSON.parse(n.channel);
       console.log('%cMainThread', 'color: blue;', "即将合并的数据：");
       console.log(data);
@@ -27,6 +31,31 @@ class WebView extends React.Component {
       console.log("%cAt " + n.line, 'color: blue;');
       console.groupEnd();
     });
+    this.refs.webview.addEventListener('did-fail-load', n => {
+      console.group("Virtual Browser " + this.props.id);
+      console.log('%c ERR code ' + n.errorCode + " : " + n.errorDescription, 'color: red;');
+      console.groupEnd();
+      this.refs.webview.reloadIgnoringCache();
+    });
+    this.refs.webview.addEventListener('crashed', n => {
+      console.group("Virtual Browser " + this.props.id);
+      console.log('%c ERR : 浏览器标签崩溃！重新刷新', 'color: red;');
+      console.groupEnd();
+      this.refs.webview.reloadIgnoringCache();
+    });
+    this.timeoutObject = setInterval(() => {
+      if(!this.done) {
+        console.group("Virtual Browser " + this.props.id);
+        console.log('%c WARN : 浏览器无反应，重新刷新', 'background: yellow;');
+        console.groupEnd();
+        this.refs.webview.reloadIgnoringCache();
+      }
+    }, 3000)
+  }
+
+  componentWillUnmount(){
+    this.done = true;
+    clearTimeout(this.timeoutObject);
   }
 }
 

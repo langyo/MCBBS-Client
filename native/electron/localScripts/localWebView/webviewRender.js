@@ -34,6 +34,8 @@ let virtualBrowserState = [];
 let timeStamp = [];
 let taskStack = [];
 
+let timeoutObject;
+
 class VirtualBrowser extends React.Component {
     state = {};
 
@@ -76,6 +78,10 @@ class VirtualBrowser extends React.Component {
             if(virtualBrowserState[i] === 'free' && taskStack.length > 0){
                 virtualBrowsers[i] = (<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={taskStack.pop()}/>);
                 virtualBrowserState[i] = 'loading';
+            }
+            if(virtualBrowserState[i] === 'error'){
+                console.log('%cMainThread ', 'color: blue;', "重新加载：" + virtualBrowsers[i].props.url)
+                virtualBrowsers[i] = (<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={virtualBrowsers[i].props.url}/>)
             }
         }
         console.log('%cMainThread ', 'color: blue;', "当前的 taskStack 列表：");
@@ -135,6 +141,10 @@ class VirtualBrowser extends React.Component {
             virtualBrowserState.push('free');
         }
         console.log('%cMainThread ', 'color: blue;', "已加载 Virtual Browser");
+
+        timeoutObject = setTimeout(() => {
+            this.checkBrowserStack();
+        }, 5000);
 
         // 以下为调试代码
         this.newBrowser("http://www.mcbbs.net/forum.php?mod=guide&view=new");
