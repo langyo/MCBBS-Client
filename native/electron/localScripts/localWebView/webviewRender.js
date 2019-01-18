@@ -147,6 +147,8 @@ class VirtualBrowser extends React.Component {
             virtualBrowserState.push('free');
         }
         console.log('%cMainThread ', 'color: blue;', "已加载 Virtual Browser");
+        console.log(virtualBrowsers);
+        console.log(virtualBrowserState);
 
         timeoutObject = setTimeout(() => {
             this.checkBrowserStack();

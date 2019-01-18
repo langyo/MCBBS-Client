@@ -36,6 +36,7 @@ class Thread extends _react.default.Component {
       className: classes.title
     }, _testData.default.threads[this.props.thread].title), _testData.default.threads[this.props.thread].posts.map((n, id) => _react.default.createElement(_floor.default, {
       key: n,
+      className: classes.floor,
       accountAvatar: _testData.default.users[_testData.default.posts[n].author].avatar,
       accountName: _testData.default.users[_testData.default.posts[n].author].name,
       accountInfo: _testData.default.userGroup[_testData.default.users[_testData.default.posts[n].author].userGroup].name,

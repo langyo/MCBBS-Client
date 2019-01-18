@@ -50,8 +50,8 @@ const styles = theme => ({
   },
   paper: {
     width: "100%",
-    padding: 8,
-    margin: 8
+    padding: "8px",
+    margin: "8px"
   }
 });
 

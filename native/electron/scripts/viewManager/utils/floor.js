@@ -52,6 +52,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 const styles = theme => ({
+  floor: {
+    padding: '8px',
+    margin: '8px'
+  },
   actions: {
     display: "flex"
   },
@@ -82,7 +86,9 @@ class Floor extends _react.default.Component {
     const {
       classes
     } = this.props;
-    return _react.default.createElement(_Card.default, null, _react.default.createElement(_CardHeader.default, {
+    return _react.default.createElement(_Card.default, {
+      className: classes.floor
+    }, _react.default.createElement(_CardHeader.default, {
       avatar: _react.default.createElement(_Avatar.default, {
         className: classes.avatar,
         src: this.props.accountAvatar

@@ -24,6 +24,10 @@ import EditIcon from "mdi-material-ui/SquareEditOutline";
 import testData from "../testData";
 
 const styles = theme => ({
+  floor: {
+    padding: '8px',
+    margin: '8px'
+  },
   actions: {
     display: "flex"
   },
@@ -47,7 +51,7 @@ class Floor extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Card>
+      <Card className={classes.floor}>
         <CardHeader
           avatar={
             <Avatar className={classes.avatar} src={this.props.accountAvatar} />

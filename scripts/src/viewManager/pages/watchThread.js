@@ -26,6 +26,7 @@ class Thread extends React.Component {
         {testData.threads[this.props.thread].posts.map((n, id) => (
           <Floor
             key={n}
+            className={classes.floor}
             accountAvatar={testData.users[testData.posts[n].author].avatar}
             accountName={testData.users[testData.posts[n].author].name}
             accountInfo={

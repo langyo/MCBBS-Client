@@ -35,20 +35,20 @@ class WebView extends React.Component {
       console.group("Virtual Browser " + this.props.id);
       console.log('%c ERR code ' + n.errorCode + " : " + n.errorDescription, 'color: red;');
       console.groupEnd();
-      this.refs.webview.reloadIgnoringCache();
+      this.refs.webview.reload();
     });
     this.refs.webview.addEventListener('crashed', n => {
       console.group("Virtual Browser " + this.props.id);
       console.log('%c ERR : 浏览器标签崩溃！重新刷新', 'color: red;');
       console.groupEnd();
-      this.refs.webview.reloadIgnoringCache();
+      this.refs.webview.reload();
     });
     this.timeoutObject = setInterval(() => {
       if(!this.done) {
         console.group("Virtual Browser " + this.props.id);
         console.log('%c WARN : 浏览器无反应，重新刷新', 'background: yellow;');
         console.groupEnd();
-        this.refs.webview.reloadIgnoringCache();
+        this.refs.webview.reload();
       }
     }, 3000)
   }
