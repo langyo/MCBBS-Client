@@ -80,6 +80,10 @@ class VirtualBrowser extends React.Component {
         }
         console.log('%cMainThread ', 'color: blue;', "当前的 taskStack 列表：");
         console.log(taskStack);
+        console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowsers 列表：");
+        console.log(virtualBrowsers);
+        console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowserState 列表：");
+        console.log(virtualBrowserState);
         // this.props.refreshFunction();
     }
 
@@ -106,6 +110,9 @@ class VirtualBrowser extends React.Component {
     render() {
         const { classes, theme } = this.props;
 
+        console.log('%cMainThread ', 'color: blue;', "Props:");
+        console.log(this.props);
+
         return (
             <div className={classes.hide}>
                 {virtualBrowsers.map(n => n)}
@@ -130,7 +137,7 @@ class VirtualBrowser extends React.Component {
         console.log('%cMainThread ', 'color: blue;', "已加载 Virtual Browser");
 
         // 以下为调试代码
-        this.newBrowser("http://www.mcbbs.net/thread-672030-1-1.html");
+        this.newBrowser("http://www.mcbbs.net/forum.php?mod=guide&view=new");
     }
 }
 
