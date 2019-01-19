@@ -1,11 +1,13 @@
 # MCBBS-Client (MCBBS 客户端)
 
-[![Build Status](https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master)](https://travis-ci.com/langyo/MCBBS-Client)
-
 <div align="center">
 <a href="http://miao.su/image/HdIbf">
 <img src="http://miao.su/images/2018/12/24/447a2b32e7ec7bd5fb486.md.png" width="200" height="200">
 </a>
+</div>
+
+<div align="center">
+[![Build Status](https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master)](https://travis-ci.com/langyo/MCBBS-Client)
 </div>
 
 正在全速开发中，请耐心等待……
