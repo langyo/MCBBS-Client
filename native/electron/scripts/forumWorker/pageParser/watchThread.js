@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.state = exports.newTask = exports.data = void 0;
+exports.state = exports.data = void 0;
 // 解析的页面：
 // thread-[0-9]+-[0-9]+-1\.html
 // forum\.php\?mod=viewthread&tid=[0-9]+&page=[0-9]+(#pid[0-9]+)?
 let thread = {};
 let posts = {};
-let subBrowseUrl = []; // 帖子编号解析
+let users = {}; // 帖子编号解析
 
 let threadID = /thread-([0-9]+)-[0-9]+-1\.html/.exec(location.href)[1] || /forum\.php\?mod=viewthread&tid=([0-9]+)&page=[0-9]+(#pid[0-9]+)?/.exec(location.href)[1]; // 帖子回复列表解析
 
@@ -37,11 +37,18 @@ for (let i of document.querySelectorAll("#postlist > div")) {
 
 
     try {
-      posts[match[1]].author = i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href").match(/uid=([0-9]+)/)[1];
-    } catch (e) {} // 层主数据获取
+      let u = i.querySelector('table > tbody > tr:nth-child(1) > td.pls > div');
+      let id = /uid=([0-9]+)/.exec(u.querySelector('div.pi > div.authi > a').getAttribute('href'))[1];
+      posts[match[1]].author = id;
+      users[id] = {
+        name: u.querySelector('div.pi > div.authi > a').innerText.trim(),
+        id: id
+      };
+    } catch (e) {
+      console.log(e);
+    } // 层主数据获取
+    // subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
 
-
-    subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
   }
 } // 评分数据获取
 // console.log(document.querySelector(".rate > dd > table > tbody:nth-child(1) > tr > th:nth-child(1) > a").getAttribute("href"));
@@ -101,7 +108,5 @@ let exportData = {
 exportData.threads[threadID] = thread;
 let data = exportData;
 exports.data = data;
-let newTask = subBrowseUrl;
-exports.newTask = newTask;
-let state = 'newTask';
+let state = 'success';
 exports.state = state;

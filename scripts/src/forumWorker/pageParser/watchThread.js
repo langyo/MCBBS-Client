@@ -4,8 +4,7 @@
 
 let thread = {};
 let posts = {};
-
-let subBrowseUrl = [];
+let users = {};
 
 // 帖子编号解析
 let threadID = /thread-([0-9]+)-[0-9]+-1\.html/.exec(location.href)[1]
@@ -36,10 +35,16 @@ for (let i of document.querySelectorAll("#postlist > div")) {
         } catch (e) { }
         // 层主
         try {
-            posts[match[1]].author = i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href").match(/uid=([0-9]+)/)[1];
-        } catch (e) { }
+			let u = i.querySelector('table > tbody > tr:nth-child(1) > td.pls > div');
+			let id = /uid=([0-9]+)/.exec(u.querySelector('div.pi > div.authi > a').getAttribute('href'))[1];
+			posts[match[1]].author = id;
+			users[id] = {
+				name: u.querySelector('div.pi > div.authi > a').innerText.trim(),
+				id: id
+			};
+        } catch (e) { console.log(e) }
         // 层主数据获取
-        subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
+        // subBrowseUrl.push(i.querySelector("table > tbody > tr > td.pls > div > div.pi > div > a").getAttribute("href"));
     }
 }
 
@@ -112,5 +117,4 @@ let exportData = {
 exportData.threads[threadID] = thread;
 
 export let data = exportData;
-export let newTask = subBrowseUrl;
-export let state = 'newTask';
+export let state = 'success';

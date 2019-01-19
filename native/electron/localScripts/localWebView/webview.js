@@ -44,7 +44,7 @@ class WebView extends React.Component {
       this.refs.webview.reload();
     });
     this.timeoutObject = setInterval(() => {
-      if(!this.done) {
+      if(!this.done && this.props.url !== undefined) {
         console.group("Virtual Browser " + this.props.id);
         console.log('%c WARN : 浏览器无反应，重新刷新', 'background: yellow;');
         console.groupEnd();
