@@ -5,11 +5,12 @@ let mainPage = {
     headThreads: {}
 }
 let threads = {};
+let users = {};
 
-let subBrowseUrl = [];
+// let subBrowseUrl = [];
 
 for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody > tr")){
-    // 这一行暂时注释掉，因为这一句有点恐怖，会让你的机器瞬间开满几百个浏览器实体 XD
+    // 这注释掉的一句有点恐怖，因为它会让你的机器瞬间开满几百个浏览器实体 XD
     // subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
 
     let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.xst').getAttribute('href'))[1];
@@ -21,7 +22,11 @@ for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody 
         states: {}
     };
 
-    subBrowseUrl.push("?" + info.author);
+    if(i.querySelector('td:nth-child(4) > cite > a')){
+		users[info.author] = {
+			name: i.querySelector('td:nth-child(4) > cite > a').innerText.trim()
+		};
+    }
 
     // 帖子状态解析
     let state = i.querySelector('td.icn > a').getAttribute('title');
@@ -88,9 +93,9 @@ switch(hrefType){
 
 let exportData = {
     mainPage: mainPage,
-    threads: threads
+    threads: threads,
+	users: users
 };
 
 export let data = exportData;
-export let newTask = subBrowseUrl;
-export let state = 'newTask';
+export let state = 'success';

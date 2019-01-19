@@ -151,6 +151,7 @@ class VirtualBrowser extends React.Component {
         console.log(virtualBrowserState);
 
         timeoutObject = setTimeout(() => {
+            console.log('%cMainThread ', 'color: blue;', "定时事件：检查虚拟浏览器栈");
             this.checkBrowserStack();
         }, 5000);
 

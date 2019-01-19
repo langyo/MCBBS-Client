@@ -3,17 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.state = exports.newTask = exports.data = void 0;
+exports.state = exports.data = void 0;
 // 解析的页面
 // forum\.php\?mod=guide&view={hot|digest|new|newthread}
 let mainPage = {
   headThreads: {}
 };
 let threads = {};
-let subBrowseUrl = [];
+let users = {}; // let subBrowseUrl = [];
 
 for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody > tr")) {
-  // 这一行暂时注释掉，因为这一句有点恐怖，会让你的机器瞬间开满几百个浏览器实体 XD
+  // 这注释掉的一句有点恐怖，因为它会让你的机器瞬间开满几百个浏览器实体 XD
   // subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
   let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.xst').getAttribute('href'))[1];
   let info = {
@@ -22,7 +22,13 @@ for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody 
     type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
     states: {}
   };
-  subBrowseUrl.push("?" + info.author); // 帖子状态解析
+
+  if (i.querySelector('td:nth-child(4) > cite > a')) {
+    users[info.author] = {
+      name: i.querySelector('td:nth-child(4) > cite > a').innerText.trim()
+    };
+  } // 帖子状态解析
+
 
   let state = i.querySelector('td.icn > a').getAttribute('title');
   exports.state = state;
@@ -89,11 +95,10 @@ switch (hrefType) {
 
 let exportData = {
   mainPage: mainPage,
-  threads: threads
+  threads: threads,
+  users: users
 };
 let data = exportData;
 exports.data = data;
-let newTask = subBrowseUrl;
-exports.newTask = newTask;
-let state = 'newTask';
+let state = 'success';
 exports.state = state;
