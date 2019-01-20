@@ -20,6 +20,9 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: "100%"
   },
+  maxWidth: {
+    width: "100%"
+  },
   dense: {
     marginTop: 16
   },
@@ -29,7 +32,7 @@ const styles = theme => ({
   button: {
     marginLeft: "auto",
     marginRight: "auto",
-    width: "80%"
+    width: "60%"
   },
   hide: {
     display: "none"
@@ -130,16 +133,18 @@ class Login extends React.Component {
             </MenuItem>
           ))}
         </TextField>
+        <div className={classes.textField}>
         <div className={this.state.question === "nil" && classes.hide}>
           <TextField
             id="outlined-name"
             label="安全提问答案"
-            className={classes.textField}
+            className={classes.maxWidth}
             value={this.state.answer}
             onChange={this.handleChange("answer")}
             margin="normal"
             variant="outlined"
           />
+        </div>
         </div>
         <Button variant="outlined" color="primary" className={classes.button}>
           {"登录"}

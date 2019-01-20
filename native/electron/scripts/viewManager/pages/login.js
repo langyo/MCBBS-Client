@@ -38,6 +38,9 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: "100%"
   },
+  maxWidth: {
+    width: "100%"
+  },
   dense: {
     marginTop: 16
   },
@@ -47,7 +50,7 @@ const styles = theme => ({
   button: {
     marginLeft: "auto",
     marginRight: "auto",
-    width: "80%"
+    width: "60%"
   },
   hide: {
     display: "none"
@@ -142,16 +145,18 @@ class Login extends _react.default.Component {
       key: option.value,
       value: option.value
     }, option.label))), _react.default.createElement("div", {
+      className: classes.textField
+    }, _react.default.createElement("div", {
       className: this.state.question === "nil" && classes.hide
     }, _react.default.createElement(_TextField.default, {
       id: "outlined-name",
       label: "\u5B89\u5168\u63D0\u95EE\u7B54\u6848",
-      className: classes.textField,
+      className: classes.maxWidth,
       value: this.state.answer,
       onChange: this.handleChange("answer"),
       margin: "normal",
       variant: "outlined"
-    })), _react.default.createElement(_Button.default, {
+    }))), _react.default.createElement(_Button.default, {
       variant: "outlined",
       color: "primary",
       className: classes.button
