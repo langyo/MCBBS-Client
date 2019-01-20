@@ -69,6 +69,7 @@ import MainPageRender from "../../scripts/viewManager/pages/mainPage";
 import WatchThreadRender from "../../scripts/viewManager/pages/watchThread";
 import ForumRender from "../../scripts/viewManager/pages/forum";
 import WebviewRender from "../localWebView/webviewRender";
+import LoginRender from "../../scripts/viewManager/pages/login";
 
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
@@ -423,7 +424,9 @@ class MainWindow extends React.Component {
                 </div>
                 <Divider />
                 <List>
-                  <ListItem button>
+                  <ListItem button
+                    onClick={this.handleCreateTagSelector("login")}
+                    selected={this.state.tag === "login"}>
                     <AddIcon />
                     <ListItemText primary="新增账户" />
                   </ListItem>
@@ -479,13 +482,14 @@ class MainWindow extends React.Component {
           <main className={classes.content} ref={this.mainRef}>
             {this.state.loading && <LinearProgress />}
             {
-              (this.state.tag === "mainPage" && <MainPageRender />) || (
+              (this.state.tag === "mainPage" && <MainPageRender />) ||
+              (this.state.tag === "login" && <LoginRender />) || (
                 <div key={this.state.tag}>
                   {tags.find(n => this.state.tag === n.key).render}
                 </div>
               )
             }
-            <WebviewRender 
+            <WebviewRender
               refreshFunction={this.handleRefresh}
               setProgressOpenFunction={this.handleOpenLoadingProgress}
               setProgressCloseFunction={this.handleCloseLoadingProgress}
