@@ -3,25 +3,28 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.state = exports.data = void 0;
+exports.state = exports.newTask = exports.data = void 0;
 // 解析的页面
 // forum\.php\?mod=guide&view={hot|digest|new|newthread}
 let mainPage = {
   headThreads: {}
 };
 let threads = {};
-let users = {}; // let subBrowseUrl = [];
+let users = {};
+let subBrowseUrl = [];
 
 for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody > tr")) {
-  // 这注释掉的一句有点恐怖，因为它会让你的机器瞬间开满几百个浏览器实体 XD
-  // subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
+  // 额外请求
+  subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
   let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.xst').getAttribute('href'))[1];
   let info = {
     author: i.querySelector('td:nth-child(4) > cite > a') && /uid=([0-9]+)/.exec(i.querySelector('td:nth-child(4) > cite > a').getAttribute('href'))[1] || "0",
     title: i.querySelector('th > a.xst').innerText.trim(),
     type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
     states: {}
-  };
+  }; // 额外请求
+
+  subBrowseUrl.push("?" + info.author);
 
   if (i.querySelector('td:nth-child(4) > cite > a')) {
     users[info.author] = {
@@ -100,5 +103,7 @@ let exportData = {
 };
 let data = exportData;
 exports.data = data;
-let state = 'success';
+let newTask = subBrowseUrl;
+exports.newTask = newTask;
+let state = 'newTask';
 exports.state = state;

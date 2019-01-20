@@ -25,27 +25,27 @@ class WebView extends React.Component {
       this.props.callBack(data);
     });
     this.refs.webview.addEventListener('console-message', n => {
-      console.group("Virtual Browser " + this.props.id);
+      console.group("Virtual Browser " + this.props.url);
       console.log('%cLevel ' + n.level, 'color: red;');
       console.log(n.message);
       console.log("%cAt " + n.line, 'color: blue;');
       console.groupEnd();
     });
     this.refs.webview.addEventListener('did-fail-load', n => {
-      console.group("Virtual Browser " + this.props.id);
+      console.group("Virtual Browser " + this.props.url);
       console.log('%c ERR code ' + n.errorCode + " : " + n.errorDescription, 'color: red;');
       console.groupEnd();
       this.refs.webview.reload();
     });
     this.refs.webview.addEventListener('crashed', n => {
-      console.group("Virtual Browser " + this.props.id);
+      console.group("Virtual Browser " + this.props.url);
       console.log('%c ERR : 浏览器标签崩溃！重新刷新', 'color: red;');
       console.groupEnd();
       this.refs.webview.reload();
     });
     this.timeoutObject = setInterval(() => {
       if(!this.done && this.props.url !== undefined) {
-        console.group("Virtual Browser " + this.props.id);
+        console.group("Virtual Browser " + this.props.url);
         console.log('%c WARN : 浏览器无反应，重新刷新', 'background: yellow;');
         console.groupEnd();
         this.refs.webview.reload();
@@ -60,7 +60,6 @@ class WebView extends React.Component {
 }
 
 WebView.propTypes = {
-  id: PropTypes.number,
   callBack: PropTypes.func
 };
 

@@ -21,15 +21,8 @@ const styles = theme => ({
 });
 
 let virtualBrowsers = [];
+let renderingVirtualBrowsers = [];
 let virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").value();
-let virtualBrowserState = [];
-/*
-    virtualBrowserState 的每一个元素为下述的其中一种值：
-        - free : 空闲
-        - loading : 正在加载页面
-        - waiting : 正在等待主进程提供数据
-        - error : 出错
-*/
 
 let timeStamp = [];
 let taskStack = [];
@@ -45,10 +38,12 @@ class VirtualBrowser extends React.Component {
         return (n) => {
             switch (n.state) {
                 case 'newTask':
+                    // 清除此 webview 在 renderingVirtualBrowsers 中的标识，使 React 卸载这个页面
+                    renderingVirtualBrowsers.splice(renderingVirtualBrowsers.indexOf(id), 1);
+                    this.setState({});
+
                     console.log('%cMainThread ', 'color: blue;', 'Done!');
-                    // virtualBrowserState[id] = 'free';
-                    // console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowserState 列表：");
-                    // console.log(virtualBrowserState);
+                    
                     for (let i of n.newTask) {
                         console.log('%cMainThread ', 'color: blue;', 'Loading: ' + i);
                         this.newBrowser("http://www.mcbbs.net/" + i);
@@ -56,10 +51,12 @@ class VirtualBrowser extends React.Component {
                     this.checkBrowserStack();
                     break;
                 case 'success':
+                    // 清除此 webview 在 renderingVirtualBrowsers 中的标识，使 React 卸载这个页面
+                    renderingVirtualBrowsers.splice(renderingVirtualBrowsers.indexOf(id), 1);
+                    this.setState({});
+
                     console.log('%cMainThread ', 'color: blue;', 'Done!');
-                    // virtualBrowserState[id] = 'free';
-                    // console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowserState 列表：");
-                    // console.log(virtualBrowserState);
+                    
                     this.checkBrowserStack();
                     break;
                 case 'error':
@@ -77,29 +74,10 @@ class VirtualBrowser extends React.Component {
     }
 
     checkBrowserStack = () => {
-        // for (let i = 0; i < virtualBrowserCount; ++i) {
-        //     // 检查哪个虚拟浏览器能用的，能就依次提取 taskStack 里的 URL
-        //     if (virtualBrowserState[i] === 'free' && taskStack.length > 0) {
-        //         // 查出错误了，下面这句压根就没成功修改 virtualBrowsers[i]
-        //         // （我真的很懵……这都什么鬼畜问题……）
-        //         virtualBrowsers[i] = <WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={taskStack.pop()} />;
-        //         virtualBrowserState[i] = 'loading';
-        //     }
-        //     if (virtualBrowserState[i] === 'error') {
-        //         console.log('%cMainThread ', 'color: blue;', "重新加载：" + virtualBrowsers[i].props.url)
-        //         virtualBrowsers[i] = (<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} url={virtualBrowsers[i].props.url} />)
-        //     }
-        // }
-        // console.log('%cMainThread ', 'color: blue;', "当前的 taskStack 列表：");
-        // console.log(taskStack);
-        // console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowsers 列表：");
-        // console.log(virtualBrowsers);
-        // console.log('%cMainThread ', 'color: blue;', "当前的 virtualBrowserState 列表：");
-        // console.log(virtualBrowserState);
-        // this.props.refreshFunction();
-
-        // 以下为比较直接的粗俗实现
-        virtualBrowsers.push(<WebView id={233} callBack={this.handleCallBack(233)} key={shortid.generate()} url={taskStack.pop()} />);
+        while(taskStack.length > 0 && renderingVirtualBrowsers.length <= virtualBrowserCount){
+            renderingVirtualBrowsers.push(virtualBrowsers.length);
+            virtualBrowsers.push(<WebView callBack={this.handleCallBack(virtualBrowsers.length)} key={shortid.generate()} url={taskStack.pop()} />);
+        }
     }
 
     newBrowser = (url) => {
@@ -123,14 +101,14 @@ class VirtualBrowser extends React.Component {
     }
 
     render() {
-        const { classes, theme } = this.props;
+        const { classes } = this.props;
 
         console.log('%cMainThread ', 'color: blue;', "Props:");
         console.log(this.props);
 
         return (
             <div className={classes.hide}>
-                {virtualBrowsers.map(n => n)}
+                {renderingVirtualBrowsers.map(n => virtualBrowsers[n])}
             </div>
         );
     }
@@ -145,18 +123,6 @@ class VirtualBrowser extends React.Component {
 
     constructor() {
         super();
-        // for (let i = 0; i < virtualBrowserCount; ++i) {
-        //     virtualBrowsers.push(<WebView id={i} callBack={this.handleCallBack(i)} key={shortid.generate()} />);
-        //     virtualBrowserState.push('free');
-        // }
-        // console.log('%cMainThread ', 'color: blue;', "已加载 Virtual Browser");
-        // console.log(virtualBrowsers);
-        // console.log(virtualBrowserState);
-
-        // timeoutObject = setTimeout(() => {
-        //     console.log('%cMainThread ', 'color: blue;', "定时事件：检查虚拟浏览器栈");
-        //     this.checkBrowserStack();
-        // }, 5000);
 
         // 以下为调试代码
         this.newBrowser("http://www.mcbbs.net/forum.php?mod=guide&view=new");

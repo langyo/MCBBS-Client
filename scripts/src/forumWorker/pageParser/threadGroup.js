@@ -7,11 +7,11 @@ let mainPage = {
 let threads = {};
 let users = {};
 
-// let subBrowseUrl = [];
+let subBrowseUrl = [];
 
 for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody > tr")){
-    // 这注释掉的一句有点恐怖，因为它会让你的机器瞬间开满几百个浏览器实体 XD
-    // subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
+    // 额外请求
+    subBrowseUrl.push(i.querySelector('th > a.xst').getAttribute('href'));
 
     let id = /thread-([0-9]+)-/.exec(i.querySelector('th > a.xst').getAttribute('href'))[1];
 
@@ -21,6 +21,9 @@ for (let i of document.querySelectorAll("#threadlist > div.bm_c > table > tbody 
         type: i.querySelector('th > em > a') && /typeid=([0-9]+)/.exec(i.querySelector('th > em > a').getAttribute('href'))[1] || "0",
         states: {}
     };
+
+    // 额外请求
+    subBrowseUrl.push("?" + info.author);
 
     if(i.querySelector('td:nth-child(4) > cite > a')){
 		users[info.author] = {
@@ -98,4 +101,5 @@ let exportData = {
 };
 
 export let data = exportData;
-export let state = 'success';
+export let newTask = subBrowseUrl;
+export let state = 'newTask';
