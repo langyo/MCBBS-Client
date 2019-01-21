@@ -191,7 +191,7 @@ class MainWindow extends React.Component {
       this.latestRefreshTimeStamp = temp;
       this.setState({});
     }
-    this.latestRefreshTimeStampTimeout = setTimeout(latestRefreshTimeStampFunc, 500);
+    this.latestRefreshTimeStampTimeout = setTimeout(this.latestRefreshTimeStampFunc, 500);
   };
 
   latestRefreshTimeStampTimeout = setTimeout(this.latestRefreshTimeStampFunc, 500);
