@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import shortid from "shortid";
+
 import db from "../localDatabase/database";
 
 class WebView extends React.Component {
@@ -21,7 +23,7 @@ class WebView extends React.Component {
       let data = JSON.parse(n.channel);
       console.log('%cMainThread', 'color: blue;', "即将合并的数据：");
       console.log(data);
-      db.merge(data.data).write();
+      db.merge(data.data).set("local.timeStamp", shortid.generate()).write();
       this.props.callBack(data);
     });
     this.refs.webview.addEventListener('console-message', n => {

@@ -182,6 +182,20 @@ class MainWindow extends React.Component {
     loading: false
   };
 
+  latestRefreshTimeStamp = db.get("local.timeStamp").value();
+
+  latestRefreshTimeStampFunc = () => {
+    let temp = db.get("local.timeStamp").value();
+    console.log('%cMainThread', 'color: blue;', "  --Time-- " + temp);
+    if(this.latestRefreshTimeStamp !== temp){
+      this.latestRefreshTimeStamp = temp;
+      this.setState({});
+    }
+    this.latestRefreshTimeStampTimeout = setTimeout(latestRefreshTimeStampFunc, 500);
+  };
+
+  latestRefreshTimeStampTimeout = setTimeout(this.latestRefreshTimeStampFunc, 500);
+
   handleRefresh = () => {
     console.log('refresh!');
     this.setState({});
