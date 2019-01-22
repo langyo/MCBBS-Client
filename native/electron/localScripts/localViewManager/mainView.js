@@ -187,7 +187,7 @@ class MainWindow extends React.Component {
   latestRefreshTimeStampFunc = () => {
     let temp = db.get("local.timeStamp").value();
     console.log('%cMainThread', 'color: blue;', "  --Time-- " + temp);
-    if(this.latestRefreshTimeStamp !== temp){
+    if (this.latestRefreshTimeStamp !== temp) {
       this.latestRefreshTimeStamp = temp;
       this.setState({});
     }
@@ -234,9 +234,13 @@ class MainWindow extends React.Component {
 
   handleCreateTagDestoryer = function (id) {
     return () => {
+      let where = tags.indexOf(id);
+      let selecting = tags.indexOf(this.state.tag);
+      if(where === selecting) where = 0;
+
       tags.splice(id, 1);
       this.setState({
-        tag: tags.length <= 1 ? "mainPage" : tags[0].key
+        tag: tags.length <= 1 ? "mainPage" : tags[where].key
       });
     }
   }

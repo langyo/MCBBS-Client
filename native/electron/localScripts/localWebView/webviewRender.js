@@ -125,7 +125,7 @@ class VirtualBrowser extends React.Component {
         super();
 
         // 以下为调试代码
-        this.newBrowser("http://www.mcbbs.net/forum.php?mod=guide&view=new");
+        // this.newBrowser("http://www.mcbbs.net/forum.php?mod=guide&view=new");
     }
 }
 
