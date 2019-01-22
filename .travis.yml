@@ -2,6 +2,9 @@ language: node_js
 cache: npm
 node_js:
   - "8"
+install:
+  - cd native/electron && npm i
+  - cd scripts && npm i
 script:
   - cd native/electron && npm run watchOnce
   - cd scripts && npm run watchOnce
