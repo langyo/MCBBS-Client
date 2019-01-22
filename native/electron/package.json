@@ -6,9 +6,9 @@
   "scripts": {
     "start": "electron ./index.js",
     "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/js/bundle.js --debug --verbose",
+    "watchOnce": "browserify ./localScripts/localViewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "test": "jest --watch",
-    "packageRepair-cleanCache": "npm cache clean --force"
+    "test": "jest --watch"
   },
   "author": "langyo",
   "license": "Unlicense",

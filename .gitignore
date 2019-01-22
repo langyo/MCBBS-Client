@@ -149,10 +149,13 @@ native/electron/packaged/
 
 # --- 针对 scripts 的部分 ---
 
+# // 有关 scripts：这些都是经过 Babel 转译后得到的 ES5 代码，其实本没有留下的必要，但仍留下来
+# // 具体原因，请见：https://github.com/langyo/MCBBS-Client/issues/4
+
 # electron
 
 # native/electron/scripts/
 
 # reactNative
 
-# native/reactNative/scripts
+# native/reactNative/scripts/
