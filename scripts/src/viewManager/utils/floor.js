@@ -21,6 +21,8 @@ import VoteIcon from "mdi-material-ui/VoteOutline";
 import MessageIcon from "mdi-material-ui/MessageTextOutline";
 import EditIcon from "mdi-material-ui/SquareEditOutline";
 
+import db from "../../../localScripts/localDatabase/database";
+
 import testData from "../testData";
 
 const styles = theme => ({

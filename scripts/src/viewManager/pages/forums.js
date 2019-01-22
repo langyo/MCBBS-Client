@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 import ForumPanel from "../utils/forumPanel";
 
+import db from "../../../localScripts/localDatabase/database";
+
 import TestData from "../testData";
 
 const styles = theme => ({

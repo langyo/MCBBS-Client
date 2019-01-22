@@ -11,6 +11,8 @@ var _styles = require("@material-ui/core/styles");
 
 var _forumPanel = _interopRequireDefault(require("../utils/forumPanel"));
 
+var _database = _interopRequireDefault(require("../../../localScripts/localDatabase/database"));
+
 var _testData = _interopRequireDefault(require("../testData"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

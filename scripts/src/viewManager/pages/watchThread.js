@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 
 import Floor from "../utils/floor";
 
+import db from "../../../localScripts/localDatabase/database";
+
 import testData from "../testData";
 
 const styles = theme => ({

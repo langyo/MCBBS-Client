@@ -15,6 +15,8 @@ var _headImages = _interopRequireDefault(require("../utils/headImages"));
 
 var _indexPageThreads = _interopRequireDefault(require("../utils/indexPageThreads"));
 
+var _database = _interopRequireDefault(require("../../../localScripts/localDatabase/database"));
+
 var _testData = _interopRequireDefault(require("../testData"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
