@@ -2,20 +2,32 @@ language: node_js
 cache: npm
 node_js:
   - "8"
-install:
-  - cd native/electron
-  - npm i
-  - cd ../../scripts
-  - npm i
-  - cd ..
-script:
-  - cd scripts
-  - npm run build
-  - cd ../native/electron
-  - npm run build
-  - npm run package
 
 matrix:
   include:
     - os: osx
+    install:
+      - cd native/electron
+      - npm i
+      - cd ../../scripts
+      - npm i
+      - cd ..
+    script:
+      - cd scripts
+      - npm run build
+      - cd ../native/electron
+      - npm run build
+      - npm run package:mac
     - os: windows
+    install:
+      - cd native/electron
+      - npm i
+      - cd ../../scripts
+      - npm i
+      - cd ..
+    script:
+      - cd scripts
+      - npm run build
+      - cd ../native/electron
+      - npm run build
+      - npm run package:windows
