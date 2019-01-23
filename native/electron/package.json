@@ -7,7 +7,7 @@
     "start": "electron ./index.js",
     "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/js/bundle.js --debug --verbose",
     "build": "browserify ./localScripts/localViewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
-    "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
+    "package": "electron-builder build",
     "package:mac": "electron-builder build --mac",
     "test": "jest --watch"
   },

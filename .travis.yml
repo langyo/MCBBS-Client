@@ -1,6 +1,5 @@
 language: node_js
 cache: npm
-os: osx
 node_js:
   - "8"
 install:
@@ -14,4 +13,9 @@ script:
   - npm run build
   - cd ../native/electron
   - npm run build
-  - npm run package:mac
+  - npm run package
+
+matrix:
+  include:
+    - os: osx
+    - os: windows
