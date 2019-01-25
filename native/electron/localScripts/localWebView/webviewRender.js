@@ -5,6 +5,8 @@ import shortid from "shortid";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 import WebView from "./webview";
 
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
@@ -20,30 +22,28 @@ const styles = theme => ({
     }
 });
 
-let virtualBrowsers = [];
-let renderingVirtualBrowsers = [];
 let virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").value();
 
-let timeStamp = [];
-let taskStack = [];
-
-let timeoutObject;
+// let urlTimeStamp = []; // 此部分将直接与数据库对接
 
 class VirtualBrowser extends React.Component {
     state = {};
 
     hasLoad = false;
+    taskStack = [];
+    virtualBrowsers = [];
+    renderingVirtualBrowsers = [];
 
     handleCallBack = function (id) {
         return (n) => {
             switch (n.state) {
                 case 'newTask':
                     // 清除此 webview 在 renderingVirtualBrowsers 中的标识，使 React 卸载这个页面
-                    renderingVirtualBrowsers.splice(renderingVirtualBrowsers.indexOf(id), 1);
+                    this.renderingVirtualBrowsers.splice(this.renderingVirtualBrowsers.indexOf(id), 1);
                     this.setState({});
 
                     console.log('%cMainThread ', 'color: blue;', 'Done!');
-                    
+
                     for (let i of n.newTask) {
                         console.log('%cMainThread ', 'color: blue;', 'Loading: ' + i);
                         this.newBrowser("http://www.mcbbs.net/" + i);
@@ -52,16 +52,15 @@ class VirtualBrowser extends React.Component {
                     break;
                 case 'success':
                     // 清除此 webview 在 renderingVirtualBrowsers 中的标识，使 React 卸载这个页面
-                    renderingVirtualBrowsers.splice(renderingVirtualBrowsers.indexOf(id), 1);
+                    this.renderingVirtualBrowsers.splice(this.renderingVirtualBrowsers.indexOf(id), 1);
                     this.setState({});
 
                     console.log('%cMainThread ', 'color: blue;', 'Done!');
-                    
+
                     this.checkBrowserStack();
                     break;
                 case 'error':
                     console.log('%cMainThread ', 'color: blue;', 'There\'s someting wrong at this url :' + this.url)
-                    // virtualBrowserState[id] = 'error';
                     this.checkBrowserStack();
                     break;
                 case 'log':
@@ -74,24 +73,30 @@ class VirtualBrowser extends React.Component {
     }
 
     checkBrowserStack = () => {
-        while(taskStack.length > 0 && renderingVirtualBrowsers.length <= virtualBrowserCount){
-            renderingVirtualBrowsers.push(virtualBrowsers.length);
-            virtualBrowsers.push(<WebView callBack={this.handleCallBack(virtualBrowsers.length)} key={shortid.generate()} url={taskStack.pop()} />);
+        while (this.taskStack.length > 0 && this.renderingVirtualBrowsers.length <= virtualBrowserCount) {
+            this.renderingVirtualBrowsers.push(virtualBrowsers.length);
+            this.virtualBrowsers.push(<WebView callBack={this.handleCallBack(this.virtualBrowsers.length)} key={shortid.generate()} url={this.taskStack.pop()} />);
         }
     }
 
-    newBrowser = (url) => {
+    /**
+     * @description 用于根据一个具体的 url 或标识对象，创建一个新的 webview
+     * @param {string|object} URL 或 一个包含了一些标识信息的对象
+     * @todo 准备支持传入对象（不过 URL 形式也保留）
+     * @todo 另外额外提一句，这个包含了额外标识信息的对象，其中必定有 type 与 url 两个键（也就是说不论你以哪种方式传入参数，此子程序总会自动帮你补全 url）
+     */
+    newBrowser = (n) => {
         for (let i of Object.keys(pageBindScript)) {
             for (let exprString of pageBindScript[i].url) {
                 // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
                 let expr = new RegExp(exprString);
-                if (expr.test(url)) {
-                    console.log('%cMainThread ', 'color: blue;', "成功匹配 " + url);
-                    taskStack.push(url);
-                    console.log(taskStack);
+                if (expr.test(n)) {
+                    console.log('%cMainThread ', 'color: blue;', "成功匹配 " + n);
+                    this.taskStack.push(n);
+                    console.log(this.taskStack);
                     this.checkBrowserStack();
                     this.hasLoad && this.setState({});
-                    console.log(virtualBrowsers);
+                    console.log(this.virtualBrowsers);
                     return;
                 }
             }
@@ -107,8 +112,11 @@ class VirtualBrowser extends React.Component {
         console.log(this.props);
 
         return (
-            <div className={classes.hide}>
-                {renderingVirtualBrowsers.map(n => virtualBrowsers[n])}
+            <div>
+                {(!this.hasLoad) && (<LinearProgress />)}
+                <div className={classes.hide}>
+                    {this.renderingVirtualBrowsers.map(n => this.virtualBrowsers[n])}
+                </div>
             </div>
         );
     }
@@ -124,15 +132,15 @@ class VirtualBrowser extends React.Component {
     constructor() {
         super();
 
-        // 以下为调试代码
-        // this.newBrowser("http://www.mcbbs.net/forum.php?mod=guide&view=new");
+        /**
+         * @todo 这里很可能会出问题，有可能 props 无法正常读取，所以这里需要 console.log 调试下
+         */
+        this.newBrowser(this.props.url);
     }
 }
 
 VirtualBrowser.propTypes = {
-    refreshFunction: PropTypes.func,
-    setProgressOpenFunction: PropTypes.func,
-    setProgressCloseFunction: PropTypes.func
+    url: PropTypes.string
 };
 
 export default withStyles(styles)(VirtualBrowser);

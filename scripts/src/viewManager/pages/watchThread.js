@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { withStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 
+import WebviewRender from "../../../localScripts/localWebView/webviewRender";
 import Floor from "../utils/floor";
 
 import db from "../../../localScripts/localDatabase/database";
@@ -25,6 +27,7 @@ class Thread extends React.Component {
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.threads[this.props.thread].title}
         </Typography>
+        <WebviewRender url={} />
         {testData.threads[this.props.thread].posts.map((n, id) => (
           <Floor
             key={n}
@@ -50,7 +53,8 @@ class Thread extends React.Component {
 }
 
 Thread.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  thread: PropTypes.number
 };
 
 export default withStyles(styles)(Thread);

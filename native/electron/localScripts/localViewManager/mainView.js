@@ -33,7 +33,6 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Tooltip from "@material-ui/core/Tooltip";
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -498,7 +497,6 @@ class MainWindow extends React.Component {
             <Divider />
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
-            {this.state.loading && <LinearProgress />}
             {
               (this.state.tag === "mainPage" && <MainPageRender />) ||
               (this.state.tag === "login" && <LoginRender />) || (
@@ -507,11 +505,6 @@ class MainWindow extends React.Component {
                 </div>
               )
             }
-            <WebviewRender
-              refreshFunction={this.handleRefresh}
-              setProgressOpenFunction={this.handleOpenLoadingProgress}
-              setProgressCloseFunction={this.handleCloseLoadingProgress}
-            />
           </main>
           <Dialog
             open={this.state.aboutDialog}

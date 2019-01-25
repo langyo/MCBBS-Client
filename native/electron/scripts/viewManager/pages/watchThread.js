@@ -13,6 +13,8 @@ var _styles = require("@material-ui/core/styles");
 
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
+var _webviewRender = _interopRequireDefault(require("../../../localScripts/localWebView/webviewRender"));
+
 var _floor = _interopRequireDefault(require("../utils/floor"));
 
 var _database = _interopRequireDefault(require("../../../localScripts/localDatabase/database"));
