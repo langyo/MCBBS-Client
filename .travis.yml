@@ -34,6 +34,8 @@ deploy:
   provider: releases
   api_key:
     secure: aYpd4I4HCSb1zIehrjOmfSTsvEI3yNiWlh5hFQhdnuYcp5H4yrPmMNvHLQXa5TpiW31/Wo93eT+3ocshmr1XeQrgznJ9goC24f+9+Iyl+bPlOnkh6zT1NREQ4vOv4rbY5/R3SRY4t5JqQEDxJ6jnqbh6M6tDWBk1RMchkcE9+zMfBxkp8kCTaVllOnkzOFpfJs8pow54z8s7o/l45asIhHMAl8dOaZcFJ0Nkd22fAsHgbEu0bpgCT9beZKVnOtYnYVXiw5tqP0oTYrzl/H6QOm0PFpg6sTRom2qBHvjbcLZgBRfCWlqno98oaNdNbyNjpl721t0qRIl+jdWrjix+QoKb/kLQuPPIMczuG7uvqiN0i780wpa5GcitIXv3U+Sd+bx9YQzQxeatNpE9SWl6FNIVXfKULN+42ImlNVfjfMts025bSSkoq4GTL6kO7yAt8Zoy4AmthH3yl78bdH4dwRTpKPnKbpZMWzIhuhe11Srsz4Fy2BwHLJujoYOCM5lfztdYPON4aGM5M1q1aPPqkz7Q5OkrXcss2Y7SqjxE9koQy6eleAeI/EqomX5Zty5eJOKX1u71m3+wgR1DeWz+0j43UEf2hO5Psu4m6V5t0efbthEO2FKEKPWRwgtIuFreoNf3nssxLmuG6uEK0Zn0q1772AxkknXDlnvtJPReRuk=
-  file: releaser
+  file: dist.tar.gz
+  skip_cleanup: true
   on:
     repo: langyo/MCBBS-Client
+    branch: master
