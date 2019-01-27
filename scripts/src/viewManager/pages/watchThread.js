@@ -27,7 +27,7 @@ class Thread extends React.Component {
         <Typography variant="h6" color="inherit" className={classes.title}>
           {testData.threads[this.props.thread].title}
         </Typography>
-        <WebviewRender url={} />
+        <WebviewRender url={"http://www.mcbbs.net/thread-" + this.props.thread + "-1-1.html"} />
         {testData.threads[this.props.thread].posts.map((n, id) => (
           <Floor
             key={n}
