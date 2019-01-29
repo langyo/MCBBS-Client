@@ -159,3 +159,7 @@ native/electron/packaged/
 # reactNative
 
 # native/reactNative/scripts/
+
+# --- 临时补充：针对 macos 的部分 ----
+
+.DS_Store
