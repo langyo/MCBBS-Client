@@ -39,3 +39,4 @@ deploy:
   file: "./native/electron/packaged/*"
   on:
     repo: langyo/MCBBS-Client
+    tags: true
