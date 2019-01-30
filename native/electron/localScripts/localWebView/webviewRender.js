@@ -122,20 +122,13 @@ class VirtualBrowser extends React.Component {
     }
 
     componentWillMount() {
+        console.log('%cMainThread ', 'color: blue;', "Loading URL: " + this.props.url)
+        this.newBrowser(this.props.url);
         this.hasLoad = true;
     }
 
     componentWillUnmount() {
         this.hasLoad = false;
-    }
-
-    constructor() {
-        super();
-
-        /**
-         * @todo 这里很可能会出问题，有可能 props 无法正常读取，所以这里需要 console.log 调试下
-         */
-        this.newBrowser(this.props.url);
     }
 }
 

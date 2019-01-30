@@ -19,29 +19,38 @@ const styles = theme => ({
 });
 
 class Thread extends React.Component {
+  state = {
+    title: "加载中...",
+    author: "",
+    topIcons: [],
+    posts: [],
+    users: []
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <div>
         <Typography variant="h6" color="inherit" className={classes.title}>
-          {testData.threads[this.props.thread].title}
+          {this.state.title}
         </Typography>
         <WebviewRender url={"http://www.mcbbs.net/thread-" + this.props.thread + "-1-1.html"} />
-        {testData.threads[this.props.thread].posts.map((n, id) => (
+        {
+          this.state.posts.forEach((n, id) => (
           <Floor
             key={n}
             className={classes.floor}
-            accountAvatar={testData.users[testData.posts[n].author].avatar}
-            accountName={testData.users[testData.posts[n].author].name}
+            accountAvatar={this.state.users[n.author].avatar}
+            accountName={this.state.users[n.author].name}
             accountInfo={
               testData.userGroup[
-                testData.users[testData.posts[n].author].userGroup
+                this.state.users[n.author].userGroup
               ].name
             }
-            contentTimeInfo={"发布于 " + testData.posts[n].createTime}
+            contentTimeInfo={"发布于 " + n.createTime}
             contentFloor={id + 1}
-            content={testData.posts[n].content}
+            content={n.content}
             reply
             rate
             edit
