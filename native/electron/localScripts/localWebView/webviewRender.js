@@ -74,7 +74,7 @@ class VirtualBrowser extends React.Component {
 
     checkBrowserStack = () => {
         while (this.taskStack.length > 0 && this.renderingVirtualBrowsers.length <= virtualBrowserCount) {
-            this.renderingVirtualBrowsers.push(virtualBrowsers.length);
+            this.renderingVirtualBrowsers.push(this.virtualBrowsers.length);
             this.virtualBrowsers.push(<WebView callBack={this.handleCallBack(this.virtualBrowsers.length)} key={shortid.generate()} url={this.taskStack.pop()} />);
         }
     }
@@ -100,7 +100,7 @@ class VirtualBrowser extends React.Component {
         }else if(typeof n === 'string'){
             // 给定参数为字符串时，当作 URL 进行解析
             for (let i of Object.keys(pageBindScript)) {
-                for (let exprString of pageBindScript[i].url) {
+                for (let exprString of pageBindScript[i].urlReg) {
                     // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
                     let expr = new RegExp(exprString);
                     if (expr.test(n)) {
