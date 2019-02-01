@@ -5,13 +5,13 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "run-windows": "react-native run-windows"
+    "run-windows": "react-native run-windows",
+    "run-ios": "react-native run-ios",
+    "run-android": "react-native run-android"
   },
   "author": "langyo",
   "license": "Unlicense",
-  "homepage": "https://github.com/langyo/MCBBS-Client",
   "dependencies": {
-    "electron": "^3.0.11",
     "react": "16.6.1",
     "react-native": "0.57.5"
   },
