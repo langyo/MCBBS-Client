@@ -13,6 +13,8 @@ var _styles = require("@material-ui/core/styles");
 
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
+var _LinearProgress = _interopRequireDefault(require("@material-ui/core/LinearProgress"));
+
 var _webviewRender = _interopRequireDefault(require("../../../localScripts/localWebView/webviewRender"));
 
 var _floor = _interopRequireDefault(require("../utils/floor"));
@@ -48,7 +50,7 @@ class Thread extends _react.default.Component {
     const {
       classes
     } = this.props;
-    return _react.default.createElement("div", null, _react.default.createElement(_Typography.default, {
+    return _react.default.createElement("div", null, this.state.title === "加载中..." && _react.default.createElement(_LinearProgress.default, null), _react.default.createElement(_Typography.default, {
       variant: "h6",
       color: "inherit",
       className: classes.title

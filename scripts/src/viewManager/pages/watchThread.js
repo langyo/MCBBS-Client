@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import WebviewRender from "../../../localScripts/localWebView/webviewRender";
 import Floor from "../utils/floor";
@@ -32,6 +33,7 @@ class Thread extends React.Component {
 
     return (
       <div>
+        {this.state.title === "加载中..." && <LinearProgress />}
         <Typography variant="h6" color="inherit" className={classes.title}>
           {this.state.title}
         </Typography>
