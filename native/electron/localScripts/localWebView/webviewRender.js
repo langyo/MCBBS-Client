@@ -75,7 +75,7 @@ class VirtualBrowser extends React.Component {
     checkBrowserStack = () => {
         while (this.taskStack.length > 0 && this.renderingVirtualBrowsers.length <= virtualBrowserCount) {
             this.renderingVirtualBrowsers.push(this.virtualBrowsers.length);
-            this.virtualBrowsers.push(<WebView callBack={this.handleCallBack(this.virtualBrowsers.length)} key={shortid.generate()} url={this.taskStack.pop()} />);
+            this.virtualBrowsers.push(<WebView callBack={this.handleCallBack(this.virtualBrowsers.length)} key={shortid.generate()} data={this.taskStack.pop()} />);
         }
     }
 
@@ -85,7 +85,7 @@ class VirtualBrowser extends React.Component {
      * @example 下面是传入对象的基本数据结构；这种数据结构不仅仅用于创建浏览器，也用于所虚拟浏览器对象的相关说明信息存储
      * {
      *   type: "thread",  // 要查看有哪些类型，请查阅 scripts/src/forumWorker/pageBindScript
-     *   url: "http://www.mcbbs.net/thread-811478-1-1.html",  // 如果传入的对象没有 URL，newBrowser 函数会自动生成一个的呢
+     *   url: "http://www.mcbbs.net/thread-811478-1-1.html",  // 可以没有
      *   args: {
      *     // 这里生成的供读取的链接参数，依赖于 scripts/src/forumWorker/pageBindScript
      *     threadID: 811478,
@@ -96,17 +96,28 @@ class VirtualBrowser extends React.Component {
     newBrowser = (n) => {
         if(typeof n === 'object'){
             // 给定参数为对象时，直接解析
-
+            if(n.type === undefined) throw Error("[参数错误] 你没有指定解析的页面类型！");
+            
         }else if(typeof n === 'string'){
             // 给定参数为字符串时，当作 URL 进行解析
             for (let i of Object.keys(pageBindScript)) {
                 for (let exprString of pageBindScript[i].urlReg) {
                     // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
                     let expr = new RegExp(exprString);
-                    if (expr.test(n)) {
+                    let match;
+                    if (match = expr.test(n)) {
                         console.log('%cMainThread ', 'color: blue;', "成功匹配 " + n);
-                        /** @todo 这里 push 的东西将不会是字符串了，而是虚拟浏览器的相关信息说明对象 */
-                        this.taskStack.push(n);
+                        // 初始化欲压入的对象
+                        let obj = {
+                            type: i,
+                            args: {},
+                            url: n
+                        };
+                        // 生成 args
+                        for(let k = 0; k < match.length - 1; ++k){
+                            obj.args[pageBindScript[i].urlRegArgsIndex[k]] = match[k + 1];
+                        }
+                        this.taskStack.push(obj);
                         console.log(this.taskStack);
                         this.checkBrowserStack();
                         this.hasLoad && this.setState({});
