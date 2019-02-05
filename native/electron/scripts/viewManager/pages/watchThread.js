@@ -38,7 +38,9 @@ class Thread extends _react.default.Component {
       variant: "h6",
       color: "inherit",
       className: classes.title
-    }, _testData.default.threads[this.props.thread].title), _testData.default.threads[this.props.thread].posts.map((n, id) => _react.default.createElement(_floor.default, {
+    }, _testData.default.threads[this.props.thread].title), _react.default.createElement(_webviewRender.default, {
+      url: "http://www.mcbbs.net/thread-" + this.props.thread + "-1-1.html"
+    }), _testData.default.threads[this.props.thread].posts.map((n, id) => _react.default.createElement(_floor.default, {
       key: n,
       className: classes.floor,
       accountAvatar: _testData.default.users[_testData.default.posts[n].author].avatar,
@@ -56,7 +58,8 @@ class Thread extends _react.default.Component {
 }
 
 Thread.propTypes = {
-  classes: _propTypes.default.object.isRequired
+  classes: _propTypes.default.object.isRequired,
+  thread: _propTypes.default.number
 };
 
 var _default = (0, _styles.withStyles)(styles)(Thread);
