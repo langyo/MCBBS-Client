@@ -10,7 +10,7 @@
     for (let i of Object.keys(pageBindScript)) {
       console.log(i);
 
-      for (let exprString of pageBindScript[i].url) {
+      for (let exprString of pageBindScript[i].urlReg) {
         console.log(exprString); // 如果匹配对应正则表达式，则凭此项对应的 preload 列表对 <webview /> 进行初始化
 
         let expr = new RegExp(exprString);

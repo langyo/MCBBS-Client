@@ -180,21 +180,7 @@ class MainWindow extends React.Component {
     databaseDebugDialog: false,
     loading: false
   };
-
-  latestRefreshTimeStamp = db.get("local.timeStamp").value();
-
-  latestRefreshTimeStampFunc = () => {
-    let temp = db.get("local.timeStamp").value();
-    console.log('%cMainThread', 'color: blue;', "  --Time-- " + temp);
-    if (this.latestRefreshTimeStamp !== temp) {
-      this.latestRefreshTimeStamp = temp;
-      this.setState({});
-    }
-    this.latestRefreshTimeStampTimeout = setTimeout(this.latestRefreshTimeStampFunc, 500);
-  };
-
-  latestRefreshTimeStampTimeout = setTimeout(this.latestRefreshTimeStampFunc, 500);
-
+ 
   handleRefresh = () => {
     console.log('refresh!');
     this.setState({});
@@ -519,7 +505,7 @@ class MainWindow extends React.Component {
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleCloseAboutDialog} color="primary">
-                OjbK
+                OK
             </Button>
             </DialogActions>
           </Dialog>

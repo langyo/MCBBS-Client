@@ -10,6 +10,7 @@ let users = {};
 let threadID = /thread-([0-9]+)-[0-9]+-1\.html/.exec(location.href)[1]
     || /forum\.php\?mod=viewthread&tid=([0-9]+)&page=[0-9]+(#pid[0-9]+)?/.exec(location.href)[1]
 
+console.log("[pageParser] 已开始解析……");
 
 // 帖子回复列表解析
 if (!Array.isArray(thread.posts)) thread.posts = [];
@@ -110,11 +111,15 @@ if (document.querySelectorAll("#tath > a").length > 0) {
     } catch (e) { }
 }
 
+console.log("[pageParser] 解析完成，正在打包……");
+
 let exportData = {
     threads: {},
     posts: posts
 };
 exportData.threads[threadID] = thread;
+
+console.log("[pageParser] 数据已投递");
 
 export let data = exportData;
 export let state = 'success';

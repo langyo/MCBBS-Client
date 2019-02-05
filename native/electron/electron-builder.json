@@ -1,0 +1,6 @@
+{
+	"icon": "public/img/logo.icns",
+	"directories": {
+		"output": "packaged"
+	}
+}
