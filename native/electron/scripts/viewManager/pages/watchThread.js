@@ -65,9 +65,9 @@ class Thread extends _react.default.Component {
       contentTimeInfo: "发布于 " + n.createTime,
       contentFloor: id + 1,
       content: n.content,
-      reply: true,
-      rate: true,
-      edit: true
+      reply: _database.default.get("accounts.nowUsing").value() != n.author && _database.default.get("accounts.nowUsing").value() != 0,
+      rate: _database.default.get("accounts.nowUsing").value() != n.author && _database.default.get("accounts.nowUsing").value() != 0,
+      edit: _database.default.get("accounts.nowUsing").value() == n.author
     })));
   }
 

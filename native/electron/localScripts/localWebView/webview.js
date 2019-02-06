@@ -32,6 +32,8 @@ class WebView extends React.Component {
       console.log(n.message);
       console.log("%cAt " + n.line, 'color: blue;');
       console.groupEnd();
+      // 能有控制台信息传入，说明连接上去了，取消自动刷新
+      clearTimeout(this.timeoutObject);
     });
     this.refs.webview.addEventListener('did-fail-load', n => {
       console.group("Virtual Browser " + this.props.data.url);

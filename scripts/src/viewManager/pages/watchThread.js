@@ -53,9 +53,9 @@ class Thread extends React.Component {
             contentTimeInfo={"发布于 " + n.createTime}
             contentFloor={id + 1}
             content={n.content}
-            reply
-            rate
-            edit
+            reply={db.get("accounts.nowUsing").value() != n.author && db.get("accounts.nowUsing").value() != 0}
+            rate={db.get("accounts.nowUsing").value() != n.author && db.get("accounts.nowUsing").value() != 0}
+            edit={db.get("accounts.nowUsing").value() == n.author}
           />
         ))}
       </div>
