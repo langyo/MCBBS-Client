@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "MCBBSClient";
+        return "MCBBS 论坛客户端";
     }
 }
