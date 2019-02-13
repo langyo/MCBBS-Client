@@ -1,17 +1,27 @@
 {
-  "name": "mcbbs",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "name": "mcbbs-client-mobile",
+  "version": "0.2.2",
+  "description": "A BBS client for MCBBS.",
+  "main": "index.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test": "jest --watch"
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langyo/MCBBS-Client.git"
+  },
+  "author": "langyo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/langyo/MCBBS-Client/issues"
+  },
+  "homepage": "https://github.com/langyo/MCBBS-Client",
   "dependencies": {
     "@angular/common": "^7.2.2",
     "@angular/core": "^7.2.2",
@@ -65,7 +75,6 @@
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project",
   "cordova": {
     "plugins": {
       "cordova-plugin-inappbrowser": {},
