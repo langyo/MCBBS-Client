@@ -12,16 +12,21 @@ const data = require('../../testData.json');
 export class SliderComponent implements OnInit {
 
     slideOpts = {
-        effect: 'flip'
+        effect: 'flip',
+        loop: true
     };
     pics: Array<string>;
+
     constructor() {
         const that = this;
         this.pics = [];
         data.mainPage.headImages.forEach(function (i) {
-            that.pics.push(i.img);
+            that.pics.push(i);
         });
-        console.log(this.pics);
+    }
+
+    onInie(e) {
+        e.target.startAutoplay();
     }
 
     ngOnInit() {

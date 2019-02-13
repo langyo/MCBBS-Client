@@ -1,5 +1,7 @@
 {
   "name": "mcbbs",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
