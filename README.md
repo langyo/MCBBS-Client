@@ -22,7 +22,7 @@
 
 后端部分的桌面端依赖 Electron，移动端依赖 Ionic。
 
-~~Electron 是电子，Ionic 是离子，这些库的取名真好玩~~~
+~~Electron 是电子，Ionic 是离子，这些库的取名真好玩~~
 
 ## 版本说明
 
