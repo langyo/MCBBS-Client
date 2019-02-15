@@ -18,9 +18,11 @@
 
 此客户端使用混合开发模式，本体为 HTML5 应用。
 
-前端部分依赖 React 与 Material-UI 库进行构造，这需要依赖 Node.js 环境对页面进行转译。
+前端部分依赖 React 库与 Material-UI 库进行构造，并使用 Reflux 库进行数据库与界面的数据交换。这需要依赖 Node.js 环境对页面进行预先转译。
 
-后端部分的桌面端依赖 Electron，移动端依赖 React-Native。
+后端部分的桌面端依赖 Electron，移动端依赖 Ionic。
+
+~~Electron 是电子，Ionic 是离子，这些库的取名真好玩~~~
 
 ## 版本说明
 

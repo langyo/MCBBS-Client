@@ -43,6 +43,7 @@
     "react-json-view": "^1.19.1",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
+    "reflux": "^6.4.1",
     "regenerator-runtime": "^0.13.1",
     "shortid": "^2.2.14",
     "watchify": "^3.11.0",
@@ -54,7 +55,7 @@
     "browserify": "^16.2.3",
     "electron": "^3.0.10",
     "electron-builder": "^20.38.5",
-    "electron-packager": "^12.2.0",
+    "electron-packager": "^13.0.1",
     "jest": "^23.6.0"
   },
   "babel": {

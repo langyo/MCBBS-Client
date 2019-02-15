@@ -24,6 +24,7 @@
     "react-dom": "^16.6.3",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
+    "reflux": "^6.4.1",
     "regenerator-runtime": "^0.13.1",
     "shortid": "^2.2.14"
   },
