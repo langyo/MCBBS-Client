@@ -5,11 +5,11 @@
   "scripts": {
     "watch:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/ -w",
     "watch:js:ionic": "babel ./srcJs/ -d ../native/ionic/scripts/ -w",
-    "watch:js": "npm run watch:js:electron & npm run watch:js:ionic",
+    "watch:js": "run-p watch:js:electron watch:js:ionic",
     "watch": "npm run watch:js",
     "build:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/",
     "build:js:ionic": "babel ./srcJs/ -d ../native/ionic/scripts/",
-    "build:js" : "npm run build:js:electron & npm run build:js:ionic",
+    "build:js": "run-p build:js:electron build:js:ionic",
     "build": "npm run build:js"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "firebase": "^5.6.0",
     "lowdb": "^1.0.0",
     "mdi-material-ui": "^5.8.0",
+    "npm-run-all": "^4.1.5",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
