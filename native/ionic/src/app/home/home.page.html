@@ -11,5 +11,7 @@
 
 <ion-content>
     <app-slider></app-slider>
-    <p>{{cont}}</p>
+    <div *ngFor="let i of p">
+        {{i.innerHTML}}
+    </div>
 </ion-content>
