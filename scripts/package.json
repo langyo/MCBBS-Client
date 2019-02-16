@@ -3,8 +3,14 @@
   "version": "0.2.1",
   "description": "MCBBS 客户端的平台无关程序库支持；现不再向 NPM 上传，请注意",
   "scripts": {
-    "watch": "babel ./src/ -d ../native/electron/scripts/ -w",
-    "build": "babel ./src/ -d ../native/electron/scripts/"
+    "watch:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/ -w",
+    "watch:js:ionic": "babel ./srcJs/ -d ../native/ionic/scripts/ -w",
+    "watch:js": "npm run watch:js:electron & npm run watch:js:ionic",
+    "watch": "npm run watch:js",
+    "build:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/",
+    "build:js:ionic": "babel ./srcJs/ -d ../native/ionic/scripts/",
+    "build:js" : "npm run build:js:electron & npm run build:js:ionic",
+    "build": "npm run build:js"
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",
