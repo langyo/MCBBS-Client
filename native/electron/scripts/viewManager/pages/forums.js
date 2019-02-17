@@ -1,21 +1,11 @@
-"use strict";
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+import ForumPanel from "../utils/forumPanel";
 
-var _react = _interopRequireDefault(require("react"));
+import db from "../../../localScripts/localDatabase/database";
 
-var _styles = require("@material-ui/core/styles");
-
-var _forumPanel = _interopRequireDefault(require("../utils/forumPanel"));
-
-var _database = _interopRequireDefault(require("../../../localScripts/localDatabase/database"));
-
-var _testData = _interopRequireDefault(require("../testData"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+import TestData from "../testData";
 
 const styles = theme => ({
   padding: {
@@ -23,22 +13,24 @@ const styles = theme => ({
   }
 });
 
-class MainPage extends _react.default.Component {
+class MainPage extends React.Component {
   render() {
-    const {
-      classes
-    } = this.props;
-    return _react.default.createElement("div", null, Object.keys(_testData.default.mainPage.forumGroups).map(n => _react.default.createElement(_forumPanel.default, {
-      key: _testData.default.mainPage.forumGroups[n].forumGroupId,
-      forumGroupName: _testData.default.mainPage.forumGroups[n].forumGroupName,
-      forums: _testData.default.mainPage.forumGroups[n].forums
-    })));
-  }
+    const { classes } = this.props;
 
+    return (
+      <div>
+        {
+          Object.keys(TestData.mainPage.forumGroups).map(n => (
+            <ForumPanel
+              key={TestData.mainPage.forumGroups[n].forumGroupId}
+              forumGroupName={TestData.mainPage.forumGroups[n].forumGroupName}
+              forums={TestData.mainPage.forumGroups[n].forums}
+            />
+          ))
+        }
+      </div>
+    )
+  }
 }
 
-var _default = (0, _styles.withStyles)(styles, {
-  withTheme: true
-})(MainPage);
-
-exports.default = _default;
+export default withStyles(styles, { withTheme: true })(MainPage);

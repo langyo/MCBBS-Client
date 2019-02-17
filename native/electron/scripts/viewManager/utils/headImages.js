@@ -1,46 +1,30 @@
-"use strict";
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+import MobileStepper from "@material-ui/core/MobileStepper";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
-var _react = _interopRequireDefault(require("react"));
+import KeyboardArrowLeft from "mdi-material-ui/ChevronLeft";
+import KeyboardArrowRight from "mdi-material-ui/ChevronRight";
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 
-var _styles = require("@material-ui/core/styles");
-
-var _MobileStepper = _interopRequireDefault(require("@material-ui/core/MobileStepper"));
-
-var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
-
-var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
-
-var _ChevronLeft = _interopRequireDefault(require("mdi-material-ui/ChevronLeft"));
-
-var _ChevronRight = _interopRequireDefault(require("mdi-material-ui/ChevronRight"));
-
-var _reactSwipeableViews = _interopRequireDefault(require("react-swipeable-views"));
-
-var _reactSwipeableViewsUtils = require("react-swipeable-views-utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-const AutoPlaySwipeableViews = (0, _reactSwipeableViewsUtils.autoPlay)(_reactSwipeableViews.default);
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    padding: "8px"
+    padding: "8px",
+    width:"25%"
   },
   img: {
     display: "block",
     overflow: "hidden",
     width: "100%",
-    height: "260px",
+    height: "200px",
     borderRadius: "4px"
   },
   titleBarText: {
@@ -50,98 +34,103 @@ const styles = theme => ({
     width: "100%",
     height: 16,
     color: "#FFF",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize:"14px"
   },
   titleBar: {
-    background: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)",
+    background:
+      "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)",
     top: 0,
     position: "absolute",
     width: "100%",
     height: 32
   },
-  stepper: {}
+  stepper: {
+  }
 });
 
-class HeadImages extends _react.default.Component {
-  constructor(...args) {
-    super(...args);
+class HeadImages extends React.Component {
+  state = {
+    activeStep: 0
+  };
 
-    _defineProperty(this, "state", {
-      activeStep: 0
-    });
+  handleNext = () => {
+    this.setState(prevState => ({
+      activeStep:
+        prevState.activeStep + 1 >= this.props.headImages.length
+          ? 0
+          : prevState.activeStep + 1
+    }));
+  };
 
-    _defineProperty(this, "handleNext", () => {
-      this.setState(prevState => ({
-        activeStep: prevState.activeStep + 1 >= this.props.headImages.length ? 0 : prevState.activeStep + 1
-      }));
-    });
+  handleBack = () => {
+    this.setState(prevState => ({
+      activeStep:
+        prevState.activeStep - 1 < 0
+          ? this.props.headImages.length - 1
+          : prevState.activeStep - 1
+    }));
+  };
 
-    _defineProperty(this, "handleBack", () => {
-      this.setState(prevState => ({
-        activeStep: prevState.activeStep - 1 < 0 ? this.props.headImages.length - 1 : prevState.activeStep - 1
-      }));
-    });
-
-    _defineProperty(this, "handleStepChange", activeStep => {
-      this.setState({
-        activeStep
-      });
-    });
-  }
+  handleStepChange = activeStep => {
+    this.setState({ activeStep });
+  };
 
   render() {
-    const {
-      classes,
-      theme
-    } = this.props;
-    const {
-      activeStep
-    } = this.state;
+    const { classes, theme } = this.props;
+    const { activeStep } = this.state;
     const maxSteps = this.props.headImages.length;
-    return _react.default.createElement("div", {
-      className: classes.root
-    }, _react.default.createElement(AutoPlaySwipeableViews, {
-      axis: theme.direction === "rtl" ? "x-reverse" : "x",
-      index: activeStep,
-      onChangeIndex: this.handleStepChange,
-      enableMouseEvents: true
-    }, this.props.headImages.map((step, index) => _react.default.createElement("div", {
-      key: index
-    }, Math.abs(activeStep - index) <= 2 ? _react.default.createElement("div", null, _react.default.createElement("img", {
-      className: classes.img,
-      src: step.img,
-      alt: step.href
-    }), _react.default.createElement("div", {
-      className: classes.titleBar
-    }), _react.default.createElement(_Typography.default, {
-      variant: "subtitle1",
-      className: classes.titleBarText
-    }, step.title)) : null))), _react.default.createElement(_MobileStepper.default, {
-      steps: maxSteps,
-      position: "static",
-      activeStep: activeStep,
-      className: classes.mobileStepper,
-      nextButton: _react.default.createElement(_Button.default, {
-        size: "small",
-        onClick: this.handleNext
-      }, _react.default.createElement(_ChevronRight.default, null)),
-      backButton: _react.default.createElement(_Button.default, {
-        size: "small",
-        onClick: this.handleBack
-      }, _react.default.createElement(_ChevronLeft.default, null)),
-      className: classes.stepper
-    }));
-  }
 
+    return (
+      <div className={classes.root}>
+        <AutoPlaySwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={activeStep}
+          onChangeIndex={this.handleStepChange}
+          enableMouseEvents
+        >
+          {this.props.headImages.map((step, index) => (
+            <div key={index}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <div>
+                  <img className={classes.img} src={step.img} alt={step.href} />
+                  <div className={classes.titleBar} />
+                  <Typography
+                    variant="subtitle1"
+                    className={classes.titleBarText}
+                  >
+                    {step.title}
+                  </Typography>
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </AutoPlaySwipeableViews>
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          className={classes.mobileStepper}
+          nextButton={
+            <Button size="small" onClick={this.handleNext}>
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button size="small" onClick={this.handleBack}>
+              <KeyboardArrowLeft />
+            </Button>
+          }
+          className={classes.stepper}
+        />
+      </div>
+    );
+  }
 }
 
 HeadImages.propTypes = {
-  classes: _propTypes.default.object.isRequired,
-  theme: _propTypes.default.object.isRequired
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(styles, {
-  withTheme: true
-})(HeadImages);
-
-exports.default = _default;
+export default withStyles(styles, { withTheme: true })(HeadImages);

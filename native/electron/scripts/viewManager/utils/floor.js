@@ -1,57 +1,29 @@
-"use strict";
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import classnames from "classnames";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 
-var _react = _interopRequireDefault(require("react"));
+import FavoriteIcon from "mdi-material-ui/Heart";
+import ShareIcon from "mdi-material-ui/Share";
+import DownIcon from "mdi-material-ui/ChevronDown";
+import MoreIcon from "mdi-material-ui/DotsVertical";
+import VoteIcon from "mdi-material-ui/VoteOutline";
+import MessageIcon from "mdi-material-ui/MessageTextOutline";
+import EditIcon from "mdi-material-ui/SquareEditOutline";
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
+import db from "../../../localScripts/localDatabase/database";
 
-var _styles = require("@material-ui/core/styles");
-
-var _classnames = _interopRequireDefault(require("classnames"));
-
-var _Card = _interopRequireDefault(require("@material-ui/core/Card"));
-
-var _CardHeader = _interopRequireDefault(require("@material-ui/core/CardHeader"));
-
-var _CardMedia = _interopRequireDefault(require("@material-ui/core/CardMedia"));
-
-var _CardContent = _interopRequireDefault(require("@material-ui/core/CardContent"));
-
-var _CardActions = _interopRequireDefault(require("@material-ui/core/CardActions"));
-
-var _Collapse = _interopRequireDefault(require("@material-ui/core/Collapse"));
-
-var _Avatar = _interopRequireDefault(require("@material-ui/core/Avatar"));
-
-var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
-
-var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
-
-var _Heart = _interopRequireDefault(require("mdi-material-ui/Heart"));
-
-var _Share = _interopRequireDefault(require("mdi-material-ui/Share"));
-
-var _ChevronDown = _interopRequireDefault(require("mdi-material-ui/ChevronDown"));
-
-var _DotsVertical = _interopRequireDefault(require("mdi-material-ui/DotsVertical"));
-
-var _VoteOutline = _interopRequireDefault(require("mdi-material-ui/VoteOutline"));
-
-var _MessageTextOutline = _interopRequireDefault(require("mdi-material-ui/MessageTextOutline"));
-
-var _SquareEditOutline = _interopRequireDefault(require("mdi-material-ui/SquareEditOutline"));
-
-var _database = _interopRequireDefault(require("../../../localScripts/localDatabase/database"));
-
-var _testData = _interopRequireDefault(require("../testData"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+import testData from "../testData";
 
 const styles = theme => ({
   floor: {
@@ -63,7 +35,6 @@ const styles = theme => ({
   },
   expand: {
     marginLeft: "auto" // 右侧按钮对齐
-
   },
   floatLeft: {
     float: "left"
@@ -73,56 +44,59 @@ const styles = theme => ({
   }
 });
 
-class Floor extends _react.default.Component {
-  constructor(...args) {
-    super(...args);
-
-    _defineProperty(this, "handleExpandClick", () => {
-      this.setState(state => ({
-        expanded: !state.expanded
-      }));
-    });
-  }
+class Floor extends React.Component {
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
 
   render() {
-    const {
-      classes
-    } = this.props;
-    return _react.default.createElement(_Card.default, {
-      className: classes.floor
-    }, _react.default.createElement(_CardHeader.default, {
-      avatar: _react.default.createElement(_Avatar.default, {
-        className: classes.avatar,
-        src: this.props.accountAvatar
-      }),
-      action: _react.default.createElement(_IconButton.default, null, _react.default.createElement(_DotsVertical.default, null)),
-      title: this.props.accountName,
-      subheader: this.props.accountInfo
-    }), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
-      variant: "caption",
-      className: classes.floatLeft
-    }, this.props.contentTimeInfo), _react.default.createElement(_Typography.default, {
-      variant: "caption",
-      className: classes.floatRight
-    }, "# " + this.props.contentFloor)), _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, {
-      component: "p",
-      dangerouslySetInnerHTML: {
-        __html: this.props.content
-      }
-    })), _react.default.createElement(_CardActions.default, {
-      className: classes.actions,
-      disableActionSpacing: true
-    }, _react.default.createElement(_IconButton.default, null, this.props.reply && _react.default.createElement(_MessageTextOutline.default, null)), _react.default.createElement(_IconButton.default, null, this.props.edit && _react.default.createElement(_SquareEditOutline.default, null)), _react.default.createElement(_IconButton.default, {
-      className: classes.expand
-    }, this.props.rate && _react.default.createElement(_VoteOutline.default, null)), _react.default.createElement(_IconButton.default, null, _react.default.createElement(_Share.default, null))));
-  }
+    const { classes } = this.props;
 
+    return (
+      <Card className={classes.floor}>
+        <CardHeader
+          avatar={
+            <Avatar className={classes.avatar} src={this.props.accountAvatar} />
+          }
+          action={
+            <IconButton>
+              <MoreIcon />
+            </IconButton>
+          }
+          title={this.props.accountName}
+          subheader={this.props.accountInfo}
+        />
+        <CardContent>
+          <Typography variant="caption" className={classes.floatLeft}>
+            {this.props.contentTimeInfo}
+          </Typography>
+          <Typography variant="caption" className={classes.floatRight}>
+            {"# " + this.props.contentFloor}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography
+            component="p"
+            dangerouslySetInnerHTML={{ __html: this.props.content }}
+          />
+        </CardContent>
+        <CardActions className={classes.actions} disableActionSpacing>
+          <IconButton>{this.props.reply && <MessageIcon />}</IconButton>
+          <IconButton>{this.props.edit && <EditIcon />}</IconButton>
+          <IconButton className={classes.expand}>
+            {this.props.rate && <VoteIcon />}
+          </IconButton>
+          <IconButton>
+            <ShareIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+    );
+  }
 }
 
 Floor.propTypes = {
-  classes: _propTypes.default.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(styles)(Floor);
-
-exports.default = _default;
+export default withStyles(styles)(Floor);

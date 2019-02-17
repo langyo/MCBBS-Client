@@ -77,11 +77,10 @@ class VirtualBrowser extends React.Component {
             this.renderingVirtualBrowsers.push(this.virtualBrowsers.length);
             this.virtualBrowsers.push(<WebView callBack={this.handleCallBack(this.virtualBrowsers.length)} key={shortid.generate()} data={this.taskStack.pop()} />);
         }
-    }
+    };
 
     /**
      * @description 用于根据一个具体的 url 或标识对象，创建一个新的 webview
-     * @param {string|object} URL 或 一个包含了一些标识信息的对象
      * @example 下面是传入对象的基本数据结构；这种数据结构不仅仅用于创建浏览器，也用于所虚拟浏览器对象的相关说明信息存储
      * {
      *   type: "thread",  // 要查看有哪些类型，请查阅 scripts/src/forumWorker/pageBindScript
@@ -92,12 +91,12 @@ class VirtualBrowser extends React.Component {
      *     threadPageIndex: 1
      *   }
      * }
+     * @param n 传入的url 或标识对象
      */
     newBrowser = (n) => {
         if(typeof n === 'object'){
             // 给定参数为对象时，直接解析
             if(n.type === undefined) throw Error("[参数错误] 你没有指定解析的页面类型！");
-            
         }else if(typeof n === 'string'){
             // 给定参数为字符串时，当作 URL 进行解析
             for (let i of Object.keys(pageBindScript)) {

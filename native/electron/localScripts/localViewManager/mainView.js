@@ -84,8 +84,8 @@ const styles = theme => ({
   content: {
     overflowX: "hidden",
     overflowY: "auto",
-    maxHeight: "600px",
-    width: "752px"
+    maxHeight: "900px",
+    width: "1552px"
   },
   hide: {
     display: "none"
@@ -180,7 +180,7 @@ class MainWindow extends React.Component {
     databaseDebugDialog: false,
     loading: false
   };
- 
+
   handleRefresh = () => {
     console.log('refresh!');
     this.setState({});
@@ -188,7 +188,7 @@ class MainWindow extends React.Component {
 
   handleOpenDevTools = () => {
     remote.getCurrentWebContents().openDevTools({ detach: true });
-  }
+  };
 
   handleDrawerOpenUsers = () => {
     this.setState({ leftBarType: "users" });
@@ -228,7 +228,7 @@ class MainWindow extends React.Component {
         tag: tags.length <= 1 ? "mainPage" : tags[where].key
       });
     }
-  }
+  };
 
   handleOpenAboutDialog = () => this.setState({ aboutDialog: true });
 
