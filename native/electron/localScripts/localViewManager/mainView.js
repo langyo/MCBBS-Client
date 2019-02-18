@@ -73,7 +73,7 @@ import LoginRender from "../../scripts/viewManager/pages/login";
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
-
+import conf from '../localConfiguration/conf'
 const drawerWidth = 200;
 
 const styles = theme => ({
@@ -84,8 +84,8 @@ const styles = theme => ({
   content: {
     overflowX: "hidden",
     overflowY: "auto",
-    maxHeight: "900px",
-    width: "1552px"
+    maxHeight: "600px",
+    width: "752px"
   },
   hide: {
     display: "none"
@@ -371,7 +371,6 @@ class MainWindow extends React.Component {
                 </List>
               </div>
             )}
-
             {this.state.leftBarType === "settings" && (
               <div>
                 <div className={classes.toolbar}>

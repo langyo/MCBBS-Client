@@ -18,7 +18,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     padding: "8px",
-    width:"25%"
+    width:"50%"
   },
   img: {
     display: "block",

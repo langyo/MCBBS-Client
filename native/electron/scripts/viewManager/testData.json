@@ -111,47 +111,47 @@
           }
         ]
       },
-      "104": {
-        "forumGroupName": "相关游戏",
-        "forumGroupId": "104",
-        "forums": [
-          {
-            "name": "Minecraft: Story Mode (我的世界:故事模式)",
-            "id": "storymode-1",
-            "avatar": "http://attachment.mcbbs.net/common/cd/common_1062_icon.png"
-          },
-          {
-            "name": "Cobalt",
-            "id": "COBALT-1",
-            "avatar": "http://attachment.mcbbs.net/common/a5/common_1344_icon.png"
-          },
-          {
-            "name": "Besiege (围攻)",
-            "id": "besiege-1",
-            "avatar": "http://attachment.mcbbs.net/common/1c/common_930_icon.png"
-          },
-          {
-            "name": "StarBound (星界边境)",
-            "id": "starbound-1",
-            "avatar": "http://attachment.mcbbs.net/common/c3/common_488_icon.png"
-          },
-          {
-            "name": "Terraria (泰拉瑞亚)",
-            "id": "terraria-1",
-            "avatar": "http://attachment.mcbbs.net/common/3d/common_125_icon.png"
-          },
-          {
-            "name": "Unturned (未转变者)",
-            "id": "unturned-1",
-            "avatar": "http://attachment.mcbbs.net/common/e7/common_710_icon.png"
-          },
-          {
-            "name": "Astroneer (异星探险家)",
-            "id": "Astroneer-1",
-            "avatar": "http://attachment.mcbbs.net/common/0e/common_1369_icon.png"
-          }
-        ]
-      },
+//      "104": {
+//        "forumGroupName": "相关游戏",
+//        "forumGroupId": "104",
+//        "forums": [
+//          {
+//            "name": "Minecraft: Story Mode (我的世界:故事模式)",
+//            "id": "storymode-1",
+//            "avatar": "http://attachment.mcbbs.net/common/cd/common_1062_icon.png"
+//          },
+//          {
+//            "name": "Cobalt",
+//            "id": "COBALT-1",
+//            "avatar": "http://attachment.mcbbs.net/common/a5/common_1344_icon.png"
+//          },
+//          {
+//            "name": "Besiege (围攻)",
+//            "id": "besiege-1",
+//            "avatar": "http://attachment.mcbbs.net/common/1c/common_930_icon.png"
+//          },
+//          {
+//            "name": "StarBound (星界边境)",
+//            "id": "starbound-1",
+//            "avatar": "http://attachment.mcbbs.net/common/c3/common_488_icon.png"
+//          },
+//          {
+//            "name": "Terraria (泰拉瑞亚)",
+//            "id": "terraria-1",
+//            "avatar": "http://attachment.mcbbs.net/common/3d/common_125_icon.png"
+//          },
+//          {
+//            "name": "Unturned (未转变者)",
+//            "id": "unturned-1",
+//            "avatar": "http://attachment.mcbbs.net/common/e7/common_710_icon.png"
+//          },
+//          {
+//            "name": "Astroneer (异星探险家)",
+//            "id": "Astroneer-1",
+//            "avatar": "http://attachment.mcbbs.net/common/0e/common_1369_icon.png"
+//          }
+//        ]
+//      },
       "167": {
         "forumGroupName": "多人联机",
         "forumGroupId": "167",
@@ -214,37 +214,37 @@
         "forumGroupId": "363",
         "forums": [
           {
-            "name": "MCBBS创意馆(基岩版)",
+            "name": "MCBBS创意馆",
             "id": "creatorarena-1",
             "avatar": "http://attachment.mcbbs.net/common/3c/common_499_icon.png"
           },
           {
-            "name": "基岩版技巧教程",
+            "name": "技巧教程",
             "id": "pe-1",
             "avatar": "http://attachment.mcbbs.net/common/fa/common_164_icon.png"
           },
           {
-            "name": "基岩版软件资源",
+            "name": "软件资源",
             "id": "peresources-1",
             "avatar": "http://attachment.mcbbs.net/common/9b/common_365_icon.png"
           },
           {
-            "name": "基岩版作品发布",
+            "name": "作品发布",
             "id": "pemap-1",
             "avatar": "http://attachment.mcbbs.net/common/5e/common_366_icon.png"
           },
           {
-            "name": "基岩版多人联机",
+            "name": "多人联机",
             "id": "pemultiplayer-1",
             "avatar": "http://attachment.mcbbs.net/common/dd/common_435_icon.png"
           },
           {
-            "name": "Nukkit服务端专区",
+            "name": "Nukkit服务端",
             "id": "nukkit-1",
             "avatar": "http://attachment.mcbbs.net/common/6e/common_1163_icon.png"
           },
           {
-            "name": "PocketMine服务端专区",
+            "name": "PocketMine服务端",
             "id": "peservermod-1",
             "avatar": "http://attachment.mcbbs.net/common/fc/common_437_icon.png"
           }
