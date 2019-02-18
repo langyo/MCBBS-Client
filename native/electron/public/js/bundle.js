@@ -79911,7 +79911,7 @@ class ForumGroup extends _react.default.Component {
     super(...args);
 
     _defineProperty(this, "state", {
-      value: 0
+      value: '1'
     });
 
     _defineProperty(this, "handleChange", (event, value) => {
@@ -79939,8 +79939,7 @@ class ForumGroup extends _react.default.Component {
       indicatorColor: "primary",
       textColor: "primary",
       variant: "scrollable",
-      scrollButtons: "off",
-      centered: true
+      scrollButtons: "off"
     }, Object.keys(_testData.default.mainPage.forumGroups).map(n => _react.default.createElement(_Tab.default, {
       label: _testData.default.mainPage.forumGroups[n].forumGroupName,
       value: _testData.default.mainPage.forumGroups[n].forumGroupId
@@ -80178,8 +80177,7 @@ class ForumTabs extends _react.default.Component {
         indicatorColor: "primary",
         textColor: "primary",
         variant: "scrollable",
-        scrollButtons: "off",
-        centered: true
+        scrollButtons: "off"
       }, Object.keys(this.props.group.forums).map(n => _react.default.createElement(_Tab.default, {
         label: this.props.group.forums[n].name
       })));

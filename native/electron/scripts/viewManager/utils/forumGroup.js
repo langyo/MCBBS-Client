@@ -30,7 +30,7 @@ const styles = theme => ({
 
 class ForumGroup extends React.Component {
   state = {
-    value: 0,
+    value:'1',
   };
   handleChange = (event, value) => {
     this.setState({value});
@@ -50,7 +50,6 @@ class ForumGroup extends React.Component {
                 textColor="primary"
                 variant="scrollable"
                 scrollButtons="off"
-                centered={true}
             >
               {
                 Object.keys(TestData.mainPage.forumGroups).map(n => (

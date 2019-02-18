@@ -48,7 +48,6 @@ class ForumTabs extends React.Component {
               textColor="primary"
               variant="scrollable"
               scrollButtons="off"
-              centered={true}
           >
             {
               Object.keys(this.props.group.forums).map(n => (
