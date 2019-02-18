@@ -1,13 +1,14 @@
-"use strict";
+export default {
+    send:(selector, event, content) =>{
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  send: (selector, event, content) => {},
-  call: (selector, event, content, callback) => {},
-  listen: (event, callback) => {},
-  reply: (event, callback) => {}
+    },
+    call:(selector, event, content, callback) =>{
+
+    },
+    listen:(event, callback) =>{
+
+    },
+    reply:(event, callback)=>{
+        
+    }
 };
-exports.default = _default;

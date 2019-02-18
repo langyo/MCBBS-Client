@@ -1,5 +1,7 @@
 {
   "name": "MCBBS Client",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

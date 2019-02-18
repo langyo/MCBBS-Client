@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit , Input} from '@angular/core';
 import {forEach} from '@angular-devkit/schematics';
 import {of} from 'rxjs';
+import { InAppBrowserObject} from '@ionic-native/in-app-browser';
 
 const data = require('../../testData.json');
 
@@ -10,18 +11,23 @@ const data = require('../../testData.json');
     styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
-
+@Input() webSite: InAppBrowserObject;
     slideOpts = {
-        effect: 'flip'
+        effect: 'flip',
+        loop: true
     };
     pics: Array<string>;
+
     constructor() {
         const that = this;
         this.pics = [];
         data.mainPage.headImages.forEach(function (i) {
-            that.pics.push(i.img);
+            that.pics.push(i);
         });
-        console.log(this.pics);
+    }
+
+    onInie(e) {
+        e.target.startAutoplay();
     }
 
     ngOnInit() {

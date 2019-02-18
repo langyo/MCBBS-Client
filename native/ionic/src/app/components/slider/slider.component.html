@@ -1,5 +1,10 @@
-<ion-slides pager="true" [options]="slideOpts">
-  <ion-slide *ngFor="let pic of pics">
-      <img src= {{pic}}/>
-  </ion-slide>
+<ion-slides pager="true" [options]="slideOpts" (ionSlidesDidLoad)="onInie($event)">
+    <ion-slide *ngFor="let pic of pics">
+
+        <div>
+            <img src={{pic.img}}/>
+            <p>{{pic.title}}</p>
+        </div>
+
+    </ion-slide>
 </ion-slides>
