@@ -1,6 +1,6 @@
 {
   "name": "mcbbs-client-scripts",
-  "version": "0.2.1",
+  "version": "0.2.4",
   "description": "MCBBS 客户端的平台无关程序库支持；现不再向 NPM 上传，请注意",
   "scripts": {
     "watch:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/ -w",
