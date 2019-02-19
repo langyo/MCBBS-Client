@@ -47,6 +47,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _test = _interopRequireDefault(require("../../test/test"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -171,9 +173,9 @@ var _database = _interopRequireDefault(require("../localDatabase/database"));
 
 var _conf = _interopRequireDefault(require("../localConfiguration/conf"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -511,6 +513,12 @@ class MainWindow extends _react.default.Component {
         onClick: this.handleOpenDatabaseDebugDialog
       }, _react.default.createElement(_Database.default, null), _react.default.createElement(_ListItemText.default, {
         primary: "\u6570\u636E\u5E93\u8C03\u8BD5"
+      })), _react.default.createElement(_ListItem.default, {
+        button: true,
+        onClick: this.handleCreateTagSelector("test"),
+        selected: this.state.tag === "test"
+      }, _react.default.createElement(_Database.default, null), _react.default.createElement(_ListItemText.default, {
+        primary: "\u6D4B\u8BD5\u529F\u80FD"
       })))), this.state.leftBarType === "users" && _react.default.createElement("div", null, _react.default.createElement("div", {
         className: classes.toolbar
       }, _react.default.createElement(_Fade.default, {
@@ -553,7 +561,7 @@ class MainWindow extends _react.default.Component {
       }, _react.default.createElement(_Widgets.default, null))), _react.default.createElement(_Divider.default, null)), _react.default.createElement("main", {
         className: classes.content,
         ref: this.mainRef
-      }, this.state.tag === "mainPage" && _react.default.createElement(_mainPage.default, null) || this.state.tag === "login" && _react.default.createElement(_login.default, null) || _react.default.createElement("div", {
+      }, this.state.tag === "mainPage" && _react.default.createElement(_mainPage.default, null) || this.state.tag === "login" && _react.default.createElement(_login.default, null) || this.state.tag === "test" && _react.default.createElement(_test.default, null) || _react.default.createElement("div", {
         key: this.state.tag
       }, tags.find(n => this.state.tag === n.key).render)), _react.default.createElement(_Dialog.default, {
         open: this.state.aboutDialog,
@@ -591,7 +599,7 @@ var _default = (0, _styles.withStyles)(styles)(MainWindow);
 
 exports.default = _default;
 
-},{"../../scripts/forumWorker/pageBindScript":398,"../../scripts/viewManager/pages/forum":400,"../../scripts/viewManager/pages/login":401,"../../scripts/viewManager/pages/mainPage":402,"../../scripts/viewManager/pages/watchThread":403,"../../scripts/viewManager/testData":404,"../localConfiguration/conf":1,"../localDatabase/database":2,"../localWebView/webviewRender":6,"@material-ui/core/AppBar":40,"@material-ui/core/Avatar":42,"@material-ui/core/Button":52,"@material-ui/core/CssBaseline":66,"@material-ui/core/Dialog":76,"@material-ui/core/DialogActions":68,"@material-ui/core/DialogContent":72,"@material-ui/core/DialogContentText":70,"@material-ui/core/DialogTitle":74,"@material-ui/core/Divider":78,"@material-ui/core/Drawer":80,"@material-ui/core/Fade":90,"@material-ui/core/Grow":103,"@material-ui/core/IconButton":105,"@material-ui/core/List":131,"@material-ui/core/ListItem":126,"@material-ui/core/ListItemAvatar":117,"@material-ui/core/ListItemIcon":119,"@material-ui/core/ListItemSecondaryAction":121,"@material-ui/core/ListItemText":123,"@material-ui/core/ListSubheader":128,"@material-ui/core/Paper":152,"@material-ui/core/Toolbar":178,"@material-ui/core/Tooltip":180,"@material-ui/core/Typography":182,"@material-ui/core/styles":203,"classnames":230,"mdi-material-ui/AccountCircle":302,"mdi-material-ui/Bell":303,"mdi-material-ui/CalendarClock":304,"mdi-material-ui/CalendarText":305,"mdi-material-ui/ChevronLeft":307,"mdi-material-ui/Close":309,"mdi-material-ui/Database":310,"mdi-material-ui/Face":312,"mdi-material-ui/FileDocument":313,"mdi-material-ui/FormatListBulleted":314,"mdi-material-ui/Home":316,"mdi-material-ui/Information":317,"mdi-material-ui/Menu":318,"mdi-material-ui/Palette":320,"mdi-material-ui/Plus":321,"mdi-material-ui/Send":322,"mdi-material-ui/Settings":323,"mdi-material-ui/Star":326,"mdi-material-ui/Store":327,"mdi-material-ui/Web":329,"mdi-material-ui/Widgets":330,"prop-types":340,"react":371,"react-custom-scroll":343,"react-json-view":351,"shortid":385}],4:[function(require,module,exports){
+},{"../../scripts/forumWorker/pageBindScript":398,"../../scripts/viewManager/pages/forum":400,"../../scripts/viewManager/pages/login":401,"../../scripts/viewManager/pages/mainPage":402,"../../scripts/viewManager/pages/watchThread":403,"../../scripts/viewManager/testData":404,"../../test/test":412,"../localConfiguration/conf":1,"../localDatabase/database":2,"../localWebView/webviewRender":6,"@material-ui/core/AppBar":40,"@material-ui/core/Avatar":42,"@material-ui/core/Button":52,"@material-ui/core/CssBaseline":66,"@material-ui/core/Dialog":76,"@material-ui/core/DialogActions":68,"@material-ui/core/DialogContent":72,"@material-ui/core/DialogContentText":70,"@material-ui/core/DialogTitle":74,"@material-ui/core/Divider":78,"@material-ui/core/Drawer":80,"@material-ui/core/Fade":90,"@material-ui/core/Grow":103,"@material-ui/core/IconButton":105,"@material-ui/core/List":131,"@material-ui/core/ListItem":126,"@material-ui/core/ListItemAvatar":117,"@material-ui/core/ListItemIcon":119,"@material-ui/core/ListItemSecondaryAction":121,"@material-ui/core/ListItemText":123,"@material-ui/core/ListSubheader":128,"@material-ui/core/Paper":152,"@material-ui/core/Toolbar":178,"@material-ui/core/Tooltip":180,"@material-ui/core/Typography":182,"@material-ui/core/styles":203,"classnames":230,"mdi-material-ui/AccountCircle":302,"mdi-material-ui/Bell":303,"mdi-material-ui/CalendarClock":304,"mdi-material-ui/CalendarText":305,"mdi-material-ui/ChevronLeft":307,"mdi-material-ui/Close":309,"mdi-material-ui/Database":310,"mdi-material-ui/Face":312,"mdi-material-ui/FileDocument":313,"mdi-material-ui/FormatListBulleted":314,"mdi-material-ui/Home":316,"mdi-material-ui/Information":317,"mdi-material-ui/Menu":318,"mdi-material-ui/Palette":320,"mdi-material-ui/Plus":321,"mdi-material-ui/Send":322,"mdi-material-ui/Settings":323,"mdi-material-ui/Star":326,"mdi-material-ui/Store":327,"mdi-material-ui/Web":329,"mdi-material-ui/Widgets":330,"prop-types":340,"react":371,"react-custom-scroll":343,"react-json-view":351,"shortid":385}],4:[function(require,module,exports){
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -80442,4 +80450,113 @@ var _default = (0, _styles.withStyles)(styles)(Floor);
 
 exports.default = _default;
 
-},{"@material-ui/core/Avatar":42,"@material-ui/core/CardContent":56,"@material-ui/core/CardHeader":58,"@material-ui/core/Typography":182,"@material-ui/core/styles":203,"classnames":230,"prop-types":340,"react":371}]},{},[4]);
+},{"@material-ui/core/Avatar":42,"@material-ui/core/CardContent":56,"@material-ui/core/CardHeader":58,"@material-ui/core/Typography":182,"@material-ui/core/styles":203,"classnames":230,"prop-types":340,"react":371}],411:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
+
+var _Dialog = _interopRequireDefault(require("@material-ui/core/Dialog"));
+
+var _DialogActions = _interopRequireDefault(require("@material-ui/core/DialogActions"));
+
+var _DialogContent = _interopRequireDefault(require("@material-ui/core/DialogContent"));
+
+var _DialogContentText = _interopRequireDefault(require("@material-ui/core/DialogContentText"));
+
+var _DialogTitle = _interopRequireDefault(require("@material-ui/core/DialogTitle"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class LoginDialog extends _react.default.Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      open: this.props.open
+    });
+
+    _defineProperty(this, "handleClickOpen", () => {
+      this.setState({
+        open: true
+      });
+    });
+
+    _defineProperty(this, "handleClose", () => {
+      this.setState({
+        open: false
+      });
+    });
+  }
+
+  render() {
+    return _react.default.createElement("div", null, _react.default.createElement(_Dialog.default, {
+      open: this.state.open,
+      onClose: this.handleClose,
+      "aria-labelledby": "form-dialog-title"
+    }, _react.default.createElement(_DialogTitle.default, {
+      id: "form-dialog-title"
+    }, "\u767B\u9646"), _react.default.createElement(_DialogContent.default, null, _react.default.createElement(_TextField.default, {
+      autoFocus: true,
+      margin: "dense",
+      id: "name",
+      label: "\u7528\u6237\u540D",
+      type: "text",
+      fullWidth: true
+    }), _react.default.createElement(_TextField.default, {
+      autoFocus: true,
+      margin: "dense",
+      id: "password",
+      label: "\u5BC6\u7801",
+      type: "password",
+      fullWidth: true
+    })), _react.default.createElement(_DialogActions.default, null, _react.default.createElement(_Button.default, {
+      onClick: this.handleClose,
+      color: "primary"
+    }, "\u53D6\u6D88"), _react.default.createElement(_Button.default, {
+      onClick: this.handleClose,
+      color: "primary"
+    }, "\u767B\u9646"))));
+  }
+
+}
+
+exports.default = LoginDialog;
+
+},{"@material-ui/core/Button":52,"@material-ui/core/Dialog":76,"@material-ui/core/DialogActions":68,"@material-ui/core/DialogContent":72,"@material-ui/core/DialogContentText":70,"@material-ui/core/DialogTitle":74,"@material-ui/core/TextField":176,"react":371}],412:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _loginDialog = _interopRequireDefault(require("./loginDialog"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Test extends _react.default.Component {
+  render() {
+    return _react.default.createElement(_loginDialog.default, {
+      open: true
+    });
+  }
+
+}
+
+exports.default = Test;
+;
+
+},{"./loginDialog":411,"react":371}]},{},[4]);

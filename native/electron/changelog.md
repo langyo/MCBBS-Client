@@ -1,3 +1,10 @@
+### 19/2/19 11:40:00
+
+增加测试ui菜单（以后新功能会在这里）
+制作了新的UI界面  
+[![190219_00138ca3.th.png](https://miao.su/images/2019/02/19/190219_00138ca3.th.png)](https://miao.su/image/H7Fcw) 
+[![190219_002f38dc.th.png](https://miao.su/images/2019/02/19/190219_002f38dc.th.png)](https://miao.su/image/H7Gx7)
+
 ### 19/2/18 20:37:00
 
 - 更新了主界面大小，变回800*600.

@@ -1,6 +1,6 @@
 const electron = require('electron');
 const {app, BrowserWindow, Menu, ipcMain, ipcRenderer} = electron;
-
+const ipc = require('electron').ipcMain;
 let mainWnd = null;
 let taskWnd = [];
 
@@ -32,7 +32,9 @@ function createMainWnd() {
   });
 }
 
-app.on('ready', createMainWnd);
+app.on('ready', ()=>{
+  createMainWnd();
+});
 
 app.on('window-all-closed', () => {
   app.quit();
