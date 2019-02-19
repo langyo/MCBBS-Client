@@ -5,26 +5,26 @@ let mainWnd = null;
 let taskWnd = [];
 
 function createMainWnd() {
-  mainWnd = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth: 800,
-    maxWidth: 800,
-    minHeight: 600,
-    maxHeight: 600,
-    backgroundColor: '#fbf2db',
-    useContentSize: true,
-    show: false
-  });
+    mainWnd = new BrowserWindow({
+        width:1600,
+        height:900,
+        minWidth:1600,
+        maxWidth: 1600,
+        minHeight: 900,
+        maxHeight: 900,
+        backgroundColor:'#fbf2db',
+        useContentSize: true,
+        show: false
+    });
 
-  mainWnd.loadURL(`file://${__dirname}/public/index.html`);
+    mainWnd.loadURL(`file://${__dirname}/public/index.html`);
 
-  mainWnd.on('ready-to-show', () => {
-    // TODO: 未来可能会让菜单重新回归以支持一些新奇功能，不过绝对不是以原生菜单的形式
-    // Menu.setApplicationMenu(null);
-    mainWnd.show();
-    // mainWnd.webContents.openDevTools({ detach:true });
-  });
+    mainWnd.on('ready-to-show', ()=>{
+        // TODO: 未来可能会让菜单重新回归以支持一些新奇功能，不过绝对不是以原生菜单的形式
+        // Menu.setApplicationMenu(null);
+        mainWnd.show();
+        // mainWnd.webContents.openDevTools({ detach:true });
+    });
 
   mainWnd.on('closed', () => {
     mainWnd = null;
@@ -37,5 +37,5 @@ app.on('ready', ()=>{
 });
 
 app.on('window-all-closed', () => {
-  app.quit();
+    app.quit();
 });

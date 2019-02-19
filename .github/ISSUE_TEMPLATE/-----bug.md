@@ -1,8 +1,8 @@
 ---
-name: Bug 反馈
-about: 反馈一个 Bug 以帮助我们完善客户端
+name: 我想反馈 Bug
+about: 给我们丢一个八阿哥，以帮助我们完善客户端
 title: "[BUG]"
-labels: bug
+labels: 八阿哥 / bug
 assignees: ''
 
 ---

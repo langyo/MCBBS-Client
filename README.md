@@ -18,9 +18,11 @@
 
 此客户端使用混合开发模式，本体为 HTML5 应用。
 
-前端部分依赖 React 与 Material-UI 库进行构造，这需要依赖 Node.js 环境对页面进行转译。
+前端部分依赖 React 库与 Material-UI 库进行构造，并使用 Reflux 库进行数据库与界面的数据交换。这需要依赖 Node.js 环境对页面进行预先转译。
 
-后端部分的桌面端依赖 Electron，移动端依赖 React-Native。
+后端部分的桌面端依赖 Electron，移动端依赖 Ionic。
+
+~~Electron 是电子，Ionic 是离子，这些库的取名真好玩~~
 
 ## 版本说明
 
@@ -52,18 +54,20 @@
     // 运行
     npm start
 
-### 移动端（react native）
+### 移动端（ionic）
 
-React native 的工程文件夹（native/reactNative）下分别有对应于 Android Studio 与 XCode 的工程文件（分别是 android/build.gradle 与 ios/MCBBSClient.xcodeproj/project.pbxproj），直接使用对应开发环境打开此类文件即可进行测试，测试时 react native 会自动调用 react native packager 对源代码进行打包。
-
-在开始调试前，你应当执行以下命令：
-    npm start
+    // 进入 ionic 文件夹
+    cd native/ionic
+    // 安装依赖
+    npm i
+    // 构建
+    npm run build
 
 ## 源码结构说明
 
 - /native - 平台相关部分代码。
   - /electron - 以 electron 为核心开发的客户端部分。
-  - /reactNative - 以 reactNative 为核心开发的客户端部分。
+  - /ionic - 以 ionic 为核心开发的客户端部分。
 - /scripts - 平台无关部分代码。
 
 > P.S. 插件功能搁置中，后续再补

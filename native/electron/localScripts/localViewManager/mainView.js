@@ -86,8 +86,8 @@ const styles = theme => ({
   content: {
     overflowX: "hidden",
     overflowY: "auto",
-    maxHeight: "600px",
-    width: "752px"
+    maxHeight: "900px",
+    width: "1552px"
   },
   hide: {
     display: "none"

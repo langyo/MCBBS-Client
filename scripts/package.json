@@ -1,10 +1,16 @@
 {
   "name": "mcbbs-client-scripts",
-  "version": "0.2.1",
+  "version": "0.2.4",
   "description": "MCBBS 客户端的平台无关程序库支持；现不再向 NPM 上传，请注意",
   "scripts": {
-    "watch": "babel ./src/ -d ../native/electron/scripts/ -w",
-    "build": "babel ./src/ -d ../native/electron/scripts/"
+    "watch:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/ -w",
+    "watch:js:ionic": "babel ./srcJs/ -d ../native/ionic/scripts/ -w",
+    "watch:js": "run-p watch:js:electron watch:js:ionic",
+    "watch": "npm run watch:js",
+    "build:js:electron": "babel ./srcJs/ -d ../native/electron/scripts/",
+    "build:js:ionic": "babel ./srcJs/ -d ../native/ionic/scripts/",
+    "build:js": "run-p build:js:electron build:js:ionic",
+    "build": "npm run build:js"
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",
@@ -19,11 +25,13 @@
     "firebase": "^5.6.0",
     "lowdb": "^1.0.0",
     "mdi-material-ui": "^5.8.0",
+    "npm-run-all": "^4.1.5",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
+    "reflux": "^6.4.1",
     "regenerator-runtime": "^0.13.1",
     "shortid": "^2.2.14"
   },

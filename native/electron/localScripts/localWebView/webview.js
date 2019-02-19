@@ -12,7 +12,7 @@ class WebView extends React.Component {
   render() {
     return (
       <div>
-        <webview src={this.props.data.url} ref="webview" preload="../scripts/forumWorker/export.js" />
+        <webview src={this.props.data.url} ref="webview" preload="../scripts/forumWorker/preload.js" />
       </div>
     )
   }
