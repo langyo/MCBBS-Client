@@ -8,6 +8,8 @@ package-lock.json
 
 native/electron/node_modules/
 
+native/electron/public/js/
+
 native/electron/.idea
 native/electron/dist
 native/electron/dist/*
