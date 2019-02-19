@@ -2,10 +2,12 @@
 
 # Node.js
 
-native/electron/node_modules/
-native/electron/package-lock.json
+package-lock.json
 
-# 其它部分
+# --- 针对 native/electron 的部分 ---
+
+native/electron/node_modules/
+
 native/electron/.idea
 native/electron/dist
 native/electron/dist/*
@@ -26,7 +28,38 @@ native/electron/packaged/
 
 # --- 针对 native/ionic 的部分 ---
 
-# 【这里暂时并没有什么该忽略的 XD】
+native/ionic/*~
+native/ionic/*.sw[mnpcod]
+native/ionic/*.log
+native/ionic/*.tmp
+native/ionic/*.tmp.*
+native/ionic/log.txt
+native/ionic/*.sublime-project
+native/ionic/*.sublime-workspace
+native/ionic/.vscode/
+native/ionic/npm-debug.log*
+
+native/ionic/.idea/
+native/ionic/.ionic/
+native/ionic/.sourcemaps/
+native/ionic/.sass-cache/
+native/ionic/.tmp/
+native/ionic/.versions/
+native/ionic/coverage/
+native/ionic/www/
+native/ionic/tmp/
+native/ionic/temp/
+native/ionic/platforms/
+native/ionic/plugins/
+native/ionic/plugins/android.json
+native/ionic/plugins/ios.json
+native/ionic/$RECYCLE.BIN/
+
+native/ionic/node_modules/
+
+native/ionic/.DS_Store
+native/ionic/Thumbs.db
+native/ionic/UserInterfaceState.xcuserstate
 
 # --- 针对 scripts 的部分 ---
 
@@ -34,7 +67,3 @@ native/electron/packaged/
 # // 具体原因，请见：https://github.com/langyo/MCBBS-Client/issues/4
 
 scripts/node_modules/
-
-# --- 针对操作系统 Mac OS X 的部分 ----
-
-.DS_Store
