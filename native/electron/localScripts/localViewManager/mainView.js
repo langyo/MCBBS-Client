@@ -1,3 +1,5 @@
+import Test from "../../test/test";
+
 const events = window.require('events');
 const path = window.require('path');
 const fs = window.require('fs');
@@ -73,7 +75,7 @@ import LoginRender from "../../scripts/viewManager/pages/login";
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
-
+import conf from '../localConfiguration/conf'
 const drawerWidth = 200;
 
 const styles = theme => ({
@@ -371,7 +373,6 @@ class MainWindow extends React.Component {
                 </List>
               </div>
             )}
-
             {this.state.leftBarType === "settings" && (
               <div>
                 <div className={classes.toolbar}>
@@ -411,6 +412,12 @@ class MainWindow extends React.Component {
                   <ListItem button onClick={this.handleOpenDatabaseDebugDialog}>
                     <DatabaseIcon />
                     <ListItemText primary="数据库调试" />
+                  </ListItem>
+                  <ListItem button
+                            onClick={this.handleCreateTagSelector("test") }
+                              selected={this.state.tag === "test"} >
+                    <DatabaseIcon />
+                    <ListItemText primary="测试功能" />
                   </ListItem>
                 </List>
               </div>
@@ -485,7 +492,9 @@ class MainWindow extends React.Component {
           <main className={classes.content} ref={this.mainRef}>
             {
               (this.state.tag === "mainPage" && <MainPageRender />) ||
-              (this.state.tag === "login" && <LoginRender />) || (
+              (this.state.tag === "login" && <LoginRender />) ||
+              (this.state.tag === "test" && <Test/>)||
+              (
                 <div key={this.state.tag}>
                   {tags.find(n => this.state.tag === n.key).render}
                 </div>

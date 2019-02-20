@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron ./index.js --inspect=5858",
-    "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/js/bundle.js --release --verbose",
+    "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
     "build": "browserify ./localScripts/localViewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",

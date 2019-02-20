@@ -8,7 +8,7 @@ package-lock.json
 
 native/electron/node_modules/
 
-native/electron/public/js/
+native/electron/public/bundle.js
 
 native/electron/.idea
 native/electron/dist
