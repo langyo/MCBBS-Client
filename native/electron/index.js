@@ -6,12 +6,12 @@ let taskWnd = [];
 
 function createMainWnd() {
     mainWnd = new BrowserWindow({
-        width:1600,
-        height:900,
-        minWidth:1600,
-        maxWidth: 1600,
-        minHeight: 900,
-        maxHeight: 900,
+        width:800,
+        height:600,
+        minWidth:800,
+        maxWidth: 800,
+        minHeight: 600,
+        maxHeight: 600,
         backgroundColor:'#fbf2db',
         useContentSize: true,
         show: false
