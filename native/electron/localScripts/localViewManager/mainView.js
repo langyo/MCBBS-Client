@@ -223,7 +223,7 @@ class MainWindow extends React.Component {
     return () => {
       let where = tags.indexOf(id);
       let selecting = tags.indexOf(this.state.tag);
-      if(where === selecting) where = 0;
+      if (where === selecting) where = 0;
 
       tags.splice(id, 1);
       this.setState({
@@ -414,8 +414,8 @@ class MainWindow extends React.Component {
                     <ListItemText primary="数据库调试" />
                   </ListItem>
                   <ListItem button
-                            onClick={this.handleCreateTagSelector("test") }
-                              selected={this.state.tag === "test"} >
+                    onClick={this.handleCreateTagSelector("test")}
+                    selected={this.state.tag === "test"} >
                     <DatabaseIcon />
                     <ListItemText primary="测试功能" />
                   </ListItem>
@@ -493,7 +493,7 @@ class MainWindow extends React.Component {
             {
               (this.state.tag === "mainPage" && <MainPageRender />) ||
               (this.state.tag === "login" && <LoginRender />) ||
-              (this.state.tag === "test" && <Test/>)||
+              (this.state.tag === "test" && <Test />) ||
               (
                 <div key={this.state.tag}>
                   {tags.find(n => this.state.tag === n.key).render}
@@ -507,48 +507,48 @@ class MainWindow extends React.Component {
           >
             <DialogTitle>关于</DialogTitle>
             <DialogContent>
-                            <Typography paragraph variant="p">
-                                {"贡献者"}
-                            </Typography>
-                            <Typography paragraph variant="body1">
-                                {"@langyo "}
-                                <Button href="http://www.mcbbs.net/?1287472">MCBBS</Button>{" "}
-                                <Button href="https://github.com/langyo">GitHub</Button>{" "}
-                                <Button href="https://afdian.net/@langyo">爱发电</Button>
-                            </Typography>
-                            <Typography paragraph variant="body1">
-                                {"@simon300000 "}
-                                <Button href="http://www.mcbbs.net/?155499">MCBBS</Button>{" "}
-                                <Button href="https://github.com/simon300000">GitHub</Button>
-                            </Typography>
-                            <Typography paragraph variant="body1">
-                                {"@纪华裕 "}
-                                <Button href="http://www.mcbbs.net/?2460223">MCBBS</Button>{" "}
-                                <Button href="https://github.com/jihuayu">GitHub</Button>
-                            </Typography>
-                            <Typography paragraph variant="body1">
-                                <Button
-                                    className={classes.button}
-                                    variant="outlined"
-                                    color="primary"
-                                    href="https://github.com/langyo/MCBBS-Client"
-                                >
-                                    {"该项目在 GitHub 的开源仓库地址"}
-                                </Button>
-                                <Button
-                                    className={classes.button}
-                                    variant="outlined"
-                                    color="primary"
-                                    disabled
-                                    href="http://www.mcbbs.net/"
-                                >
-                                    {"该项目在 MCBBS 的发布贴"}
-                                </Button>
-                            </Typography>
-                            <Typography paragraph variant="p">
-                                {"当前版本 0.2.4"}
-                            </Typography>
-                        </DialogContent>
+              <Typography paragraph variant="p">
+                {"贡献者"}
+              </Typography>
+              <Typography paragraph variant="body1">
+                {"@langyo "}
+                <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?1287472")}>MCBBS</Button>{" "}
+                <Button onClick={() => shell.openExternal("https://github.com/langyo")}>GitHub</Button>{" "}
+                <Button onClick={() => shell.openExternal("https://afdian.net/@langyo")}>爱发电</Button>
+              </Typography>
+              <Typography paragraph variant="body1">
+                {"@simon300000 "}
+                <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?155499")}>MCBBS</Button>{" "}
+                <Button onClick={() => shell.openExternal("https://github.com/simon300000")}>GitHub</Button>
+              </Typography>
+              <Typography paragraph variant="body1">
+                {"@纪华裕 "}
+                <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?2460223")}>MCBBS</Button>{" "}
+                <Button onClick={() => shell.openExternal("https://github.com/jihuayu")}>GitHub</Button>
+              </Typography>
+              <Typography paragraph variant="body1">
+                <Button
+                  className={classes.button}
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => shell.openExternal("https://github.com/langyo/MCBBS-Client")}
+                >
+                  {"该项目在 GitHub 的开源仓库地址"}
+                </Button>
+                <Button
+                  className={classes.button}
+                  variant="outlined"
+                  color="primary"
+                  disabled
+                  onClick={() => shell.openExternal("http://www.mcbbs.net/")}
+                >
+                  {"该项目在 MCBBS 的发布贴"}
+                </Button>
+              </Typography>
+              <Typography paragraph variant="p">
+                {"当前版本 0.2.4"}
+              </Typography>
+            </DialogContent>
             <DialogActions>
               <Button onClick={this.handleCloseAboutDialog} color="primary">
                 OK
