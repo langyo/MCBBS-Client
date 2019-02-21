@@ -517,12 +517,12 @@ class MainWindow extends React.Component {
                                 <Button href="https://afdian.net/@langyo">爱发电</Button>
                             </Typography>
                             <Typography paragraph variant="body1">
-                                {"@simon300000 ("}
+                                {"@simon300000 "}
                                 <Button href="http://www.mcbbs.net/?155499">MCBBS</Button>{" "}
                                 <Button href="https://github.com/simon300000">GitHub</Button>
                             </Typography>
                             <Typography paragraph variant="body1">
-                                {"@纪华裕 ("}
+                                {"@纪华裕 "}
                                 <Button href="http://www.mcbbs.net/?2460223">MCBBS</Button>{" "}
                                 <Button href="https://github.com/jihuayu">GitHub</Button>
                             </Typography>
