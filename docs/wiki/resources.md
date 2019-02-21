@@ -1,19 +1,32 @@
 # resources 模块
 
-` 待修改
+> 待修改
 
 resources 模块对外提供了一个名为 res 的复合数据，其中定义了许多的可供访问的数据节点。要访问它们是很容易的事情，例如：
 
 ```javascript
-import { res } from "(到代码部分根目录)/lib/resources";
-res.mainPage.forumGroups.forEach(e => {
+import db from "..(该 native 端根目录)/localScripts/localDatabase/database";
+db.get("mainPage.forumGroups").forEach(e => {
   /*......*/
 });
 ```
 
-你还可以执行其中的一些方法，以对数据进行诸如刷新等操作。
+该数据库基于 [lowdb](https://github.com/typicode/lowdb)，而 lowdb 则是以 lodash 为基础构建的，因此你可以直接执行其中的来自 [lodash](https://github.com/lodash/lodash) 一些方法，以对数据进行诸如刷新等操作。
 
-`res` 的数据来源有两个模块，一个是 _pageParse.js _，另一个是 _localStorage.js _。
+虽然你能够直接去读写数据库，但强烈不建议在视图界面层这么做！更好的做法应当是将数据库的掌控权完全交给 [Reflux](https://github.com/reflux/refluxjs)。如果你需要修改数据，你只需要触发 Reflux 提供的 Reflux.Action 即可；如果你需要读取数据，请将其数据所属的 React 组件绑定对应的 Reflux.Store，然后直接从 this.state 提取数据即可。
+
+在 Reflux 下有以下的全局 Store 对象：
+- mainPage
+- forums
+- threads
+- posts
+- rates
+- users
+- userGroups
+- medals
+- tools
+- accounts
+- local
 
 # 数据结构说明
 
@@ -391,7 +404,7 @@ res.mainPage.forumGroups.forEach(e => {
 
   \[map:聊天对象 ID]
 
-  - type - 消息来源类型，只有 'send' | 'receive' 两种类型
+  - type - 消息来源类型，只有 'send' 与 'receive' 两种类型
 
   - content - 消息内容，这里直接存储 HTML 代码（未来的版本中会试图将下载的 HTML 代码转换为 UUB 再进行储存）
 
@@ -467,7 +480,7 @@ res.mainPage.forumGroups.forEach(e => {
 
 ##### 元素列表
 
-- type - 日志类型，只有 'warn' | 'info' | 'error' | 'log' 这四种类型
+- type - 日志类型，只有 'warn' 、 'info' 、 'error' 与 'log' 这四种类型
 
 - content - 内容
 
