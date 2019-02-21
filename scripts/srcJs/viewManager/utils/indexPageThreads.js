@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
@@ -28,7 +29,7 @@ const styles = theme => ({
   }
 });
 
-class Floor extends React.Component {
+class Floor extends Reflux.Component {
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };

@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reflux = _interopRequireDefault(require("reflux"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _styles = require("@material-ui/core/styles");
@@ -79,37 +81,40 @@ const styles = theme => ({
   }
 });
 
-function ForumPanel(props) {
-  const {
-    classes
-  } = props;
-  return _react.default.createElement("div", {
-    className: classes.root
-  }, _react.default.createElement(_ExpansionPanel.default, {
-    defaultExpanded: true
-  }, _react.default.createElement(_ExpansionPanelSummary.default, {
-    expandIcon: _react.default.createElement(_ChevronDown.default, null)
-  }, _react.default.createElement("div", {
-    className: classes.column
-  }, _react.default.createElement(_Typography.default, {
-    className: classes.heading
-  }, props.forumGroupName))), _react.default.createElement(_ExpansionPanelDetails.default, {
-    className: classes.details
-  }, _react.default.createElement(_List.default, {
-    component: "nav",
-    className: classes.list
-  }, props.forums.map((n, id) => _react.default.createElement(_ListItem.default, {
-    button: true,
-    key: id
-  }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement("img", {
-    alt: n.avatar,
-    src: n.avatar
-  })), _react.default.createElement(_ListItemText.default, {
-    primary: n.name,
-    secondary: n.info
-  }), _react.default.createElement(_ListItemSecondaryAction.default, null, _react.default.createElement(_IconButton.default, {
-    "aria-label": "Comments"
-  }, _react.default.createElement(_DotsVertical.default, null)))))))));
+class ForumPanel extends _reflux.default.Component {
+  render() {
+    const {
+      classes
+    } = this.props;
+    return _react.default.createElement("div", {
+      className: classes.root
+    }, _react.default.createElement(_ExpansionPanel.default, {
+      defaultExpanded: true
+    }, _react.default.createElement(_ExpansionPanelSummary.default, {
+      expandIcon: _react.default.createElement(_ChevronDown.default, null)
+    }, _react.default.createElement("div", {
+      className: classes.column
+    }, _react.default.createElement(_Typography.default, {
+      className: classes.heading
+    }, this.props.forumGroupName))), _react.default.createElement(_ExpansionPanelDetails.default, {
+      className: classes.details
+    }, _react.default.createElement(_List.default, {
+      component: "nav",
+      className: classes.list
+    }, this.props.forums.map((n, id) => _react.default.createElement(_ListItem.default, {
+      button: true,
+      key: id
+    }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement("img", {
+      alt: n.avatar,
+      src: n.avatar
+    })), _react.default.createElement(_ListItemText.default, {
+      primary: n.name,
+      secondary: n.info
+    }), _react.default.createElement(_ListItemSecondaryAction.default, null, _react.default.createElement(_IconButton.default, {
+      "aria-label": "Comments"
+    }, _react.default.createElement(_DotsVertical.default, null)))))))));
+  }
+
 }
 
 ForumPanel.propTypes = {

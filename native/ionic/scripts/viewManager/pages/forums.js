@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reflux = _interopRequireDefault(require("reflux"));
+
 var _styles = require("@material-ui/core/styles");
 
 var _forumPanel = _interopRequireDefault(require("../utils/forumPanel"));
@@ -23,7 +25,7 @@ const styles = theme => ({
   }
 });
 
-class MainPage extends _react.default.Component {
+class MainPage extends _reflux.default.Component {
   render() {
     const {
       classes

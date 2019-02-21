@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reflux = _interopRequireDefault(require("reflux"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _styles = require("@material-ui/core/styles");
@@ -62,7 +64,7 @@ const styles = theme => ({
   stepper: {}
 });
 
-class HeadImages extends _react.default.Component {
+class HeadImages extends _reflux.default.Component {
   constructor(...args) {
     super(...args);
 

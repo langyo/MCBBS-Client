@@ -9,6 +9,7 @@ const { ipcRenderer, shell } = electron;
 const remote = electron.remote;
 
 import React, { useCallback } from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
@@ -174,7 +175,7 @@ newTag({
 });
 
 // 窗口主体
-class MainWindow extends React.Component {
+class MainWindow extends Reflux.Component {
   state = {
     leftBarType: "main",
     tag: "mainPage",

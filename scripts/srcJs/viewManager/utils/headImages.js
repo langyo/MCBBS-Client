@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -48,7 +49,7 @@ const styles = theme => ({
   }
 });
 
-class HeadImages extends React.Component {
+class HeadImages extends Reflux.Component {
   state = {
     activeStep: 0
   };

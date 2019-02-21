@@ -1,25 +1,51 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
-import Typography from "@material-ui/core/Typography";
+"use strict";
 
-import DownIcon from "mdi-material-ui/ChevronDown";
-import MoreIcon from "mdi-material-ui/DotsVertical";
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-import Divider from "@material-ui/core/Divider";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
+var _react = _interopRequireDefault(require("react"));
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+var _reflux = _interopRequireDefault(require("reflux"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _styles = require("@material-ui/core/styles");
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _ExpansionPanel = _interopRequireDefault(require("@material-ui/core/ExpansionPanel"));
+
+var _ExpansionPanelDetails = _interopRequireDefault(require("@material-ui/core/ExpansionPanelDetails"));
+
+var _ExpansionPanelSummary = _interopRequireDefault(require("@material-ui/core/ExpansionPanelSummary"));
+
+var _ExpansionPanelActions = _interopRequireDefault(require("@material-ui/core/ExpansionPanelActions"));
+
+var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
+
+var _ChevronDown = _interopRequireDefault(require("mdi-material-ui/ChevronDown"));
+
+var _DotsVertical = _interopRequireDefault(require("mdi-material-ui/DotsVertical"));
+
+var _Divider = _interopRequireDefault(require("@material-ui/core/Divider"));
+
+var _Avatar = _interopRequireDefault(require("@material-ui/core/Avatar"));
+
+var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
+
+var _List = _interopRequireDefault(require("@material-ui/core/List"));
+
+var _ListItem = _interopRequireDefault(require("@material-ui/core/ListItem"));
+
+var _ListItemIcon = _interopRequireDefault(require("@material-ui/core/ListItemIcon"));
+
+var _ListItemText = _interopRequireDefault(require("@material-ui/core/ListItemText"));
+
+var _ListItemSecondaryAction = _interopRequireDefault(require("@material-ui/core/ListItemSecondaryAction"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const styles = theme => ({
   root: {
@@ -52,61 +78,49 @@ const styles = theme => ({
   },
   list: {
     width: "100%"
-  },
-  iconText:{
-    position: "static",
-    width:"200px",
-    height: "150px"
-  },
-  iconIcon: {
-    position: "static",
-    width:"60px",
-    height: "60px"
-  },
-  iconBtn:{
-
   }
 });
 
-function ForumPanel(props) {
-  const { classes } = props;
+class ForumPanel extends _reflux.default.Component {
+  render() {
+    const {
+      classes
+    } = this.props;
+    return _react.default.createElement("div", {
+      className: classes.root
+    }, _react.default.createElement(_ExpansionPanel.default, {
+      defaultExpanded: true
+    }, _react.default.createElement(_ExpansionPanelSummary.default, {
+      expandIcon: _react.default.createElement(_ChevronDown.default, null)
+    }, _react.default.createElement("div", {
+      className: classes.column
+    }, _react.default.createElement(_Typography.default, {
+      className: classes.heading
+    }, this.props.forumGroupName))), _react.default.createElement(_ExpansionPanelDetails.default, {
+      className: classes.details
+    }, _react.default.createElement(_List.default, {
+      component: "nav",
+      className: classes.list
+    }, this.props.forums.map((n, id) => _react.default.createElement(_ListItem.default, {
+      button: true,
+      key: id
+    }, _react.default.createElement(_ListItemIcon.default, null, _react.default.createElement("img", {
+      alt: n.avatar,
+      src: n.avatar
+    })), _react.default.createElement(_ListItemText.default, {
+      primary: n.name,
+      secondary: n.info
+    }), _react.default.createElement(_ListItemSecondaryAction.default, null, _react.default.createElement(_IconButton.default, {
+      "aria-label": "Comments"
+    }, _react.default.createElement(_DotsVertical.default, null)))))))));
+  }
 
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary expandIcon={<DownIcon />}>
-          <div className={classes.column}>
-            <Typography className={classes.heading}>
-              {props.forumGroupName}
-            </Typography>
-          </div>
-        </ExpansionPanelSummary>
-        <hr width="95%" />
-        <ExpansionPanelDetails className={classes.details}>
-          <List component="nav" className={classes.list}>
-            {props.forums.map((n, id) => (
-              <ListItem button key={id} className={classes.iconBtn}>
-                <ListItemIcon>
-                  <img alt={n.avatar} src={n.avatar} className={classes.iconIcon} />
-                  <ListItemText primary={n.name} secondary={n.info} className={classes.iconText} />
-                </ListItemIcon>
-                <p>此处填写一些热门帖子</p>
-                <ListItemSecondaryAction>
-                  <IconButton aria-label="Comments">
-                    <MoreIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
 }
 
 ForumPanel.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: _propTypes.default.object.isRequired
 };
 
-export default withStyles(styles)(ForumPanel);
+var _default = (0, _styles.withStyles)(styles)(ForumPanel);
+
+exports.default = _default;

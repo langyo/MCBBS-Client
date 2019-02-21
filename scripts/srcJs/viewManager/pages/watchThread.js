@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -19,7 +20,7 @@ const styles = theme => ({
   }
 });
 
-class Thread extends React.Component {
+class Thread extends Reflux.Component {
   state = {
     title: "加载中...",
     author: "",

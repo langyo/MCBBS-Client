@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
@@ -55,38 +56,40 @@ const styles = theme => ({
   }
 });
 
-function ForumPanel(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary expandIcon={<DownIcon />}>
-          <div className={classes.column}>
-            <Typography className={classes.heading}>
-              {props.forumGroupName}
-            </Typography>
-          </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.details}>
-          <List component="nav" className={classes.list}>
-            {props.forums.map((n, id) => (
-              <ListItem button key={id}>
-                <ListItemIcon>
-                  <img alt={n.avatar} src={n.avatar} />
-                </ListItemIcon>
-                <ListItemText primary={n.name} secondary={n.info} />
-                <ListItemSecondaryAction>
-                  <IconButton aria-label="Comments">
-                    <MoreIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
+class ForumPanel extends Reflux.Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <ExpansionPanel defaultExpanded>
+          <ExpansionPanelSummary expandIcon={<DownIcon />}>
+            <div className={classes.column}>
+              <Typography className={classes.heading}>
+                {this.props.forumGroupName}
+              </Typography>
+            </div>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={classes.details}>
+            <List component="nav" className={classes.list}>
+              {this.props.forums.map((n, id) => (
+                <ListItem button key={id}>
+                  <ListItemIcon>
+                    <img alt={n.avatar} src={n.avatar} />
+                  </ListItemIcon>
+                  <ListItemText primary={n.name} secondary={n.info} />
+                  <ListItemSecondaryAction>
+                    <IconButton aria-label="Comments">
+                      <MoreIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </div>
+    );
+  }
 }
 
 ForumPanel.propTypes = {

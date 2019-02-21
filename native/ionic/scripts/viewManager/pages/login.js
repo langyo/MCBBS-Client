@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reflux = _interopRequireDefault(require("reflux"));
+
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _classnames = _interopRequireDefault(require("classnames"));
@@ -83,7 +85,7 @@ const questions = [{
   label: "驾驶执照最后四位数字"
 }];
 
-class Login extends _react.default.Component {
+class Login extends _reflux.default.Component {
   constructor(...args) {
     super(...args);
 
