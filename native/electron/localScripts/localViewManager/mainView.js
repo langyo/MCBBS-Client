@@ -507,11 +507,48 @@ class MainWindow extends React.Component {
           >
             <DialogTitle>关于</DialogTitle>
             <DialogContent>
-              <DialogContentText>
-                <Typography variant="subtitle1">作者：langyo</Typography>
-                <Typography variant="subtitle1">当前版本：0.2.2</Typography>
-              </DialogContentText>
-            </DialogContent>
+                            <Typography paragraph variant="p">
+                                {"贡献者"}
+                            </Typography>
+                            <Typography paragraph variant="body1">
+                                {"@langyo "}
+                                <Button href="http://www.mcbbs.net/?1287472">MCBBS</Button>{" "}
+                                <Button href="https://github.com/langyo">GitHub</Button>{" "}
+                                <Button href="https://afdian.net/@langyo">爱发电</Button>
+                            </Typography>
+                            <Typography paragraph variant="body1">
+                                {"@simon300000 ("}
+                                <Button href="http://www.mcbbs.net/?155499">MCBBS</Button>{" "}
+                                <Button href="https://github.com/simon300000">GitHub</Button>
+                            </Typography>
+                            <Typography paragraph variant="body1">
+                                {"@纪华裕 ("}
+                                <Button href="http://www.mcbbs.net/?2460223">MCBBS</Button>{" "}
+                                <Button href="https://github.com/jihuayu">GitHub</Button>
+                            </Typography>
+                            <Typography paragraph variant="body1">
+                                <Button
+                                    className={classes.button}
+                                    variant="outlined"
+                                    color="primary"
+                                    href="https://github.com/langyo/MCBBS-Client"
+                                >
+                                    {"该项目在 GitHub 的开源仓库地址"}
+                                </Button>
+                                <Button
+                                    className={classes.button}
+                                    variant="outlined"
+                                    color="primary"
+                                    disabled
+                                    href="http://www.mcbbs.net/"
+                                >
+                                    {"该项目在 MCBBS 的发布贴"}
+                                </Button>
+                            </Typography>
+                            <Typography paragraph variant="p">
+                                {"当前版本 0.2.4"}
+                            </Typography>
+                        </DialogContent>
             <DialogActions>
               <Button onClick={this.handleCloseAboutDialog} color="primary">
                 OK

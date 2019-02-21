@@ -21,7 +21,7 @@ function createMainWnd() {
 
     mainWnd.on('ready-to-show', ()=>{
         // TODO: 未来可能会让菜单重新回归以支持一些新奇功能，不过绝对不是以原生菜单的形式
-        // Menu.setApplicationMenu(null);
+        Menu.setApplicationMenu(null);
         mainWnd.show();
         // mainWnd.webContents.openDevTools({ detach:true });
     });
