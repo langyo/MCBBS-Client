@@ -8,6 +8,7 @@
     "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
     "build": "browserify ./localScripts/localViewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
+    "webpack": "webpack --config webpack/webpack.config.js",
     "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:mac": "electron-builder build --mac --config electron-builder.json --publish never",
     "test": "jest --watch"
@@ -61,7 +62,8 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.12.4",
     "jest": "^23.6.0",
-    "webpack": "^4.29.5"
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   },
   "babel": {
     "presets": [
