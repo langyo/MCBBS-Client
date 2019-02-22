@@ -9,7 +9,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 import WebView from "./webview";
 
-import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
 
 const styles = theme => ({

@@ -67,14 +67,14 @@ import DatabaseIcon from "mdi-material-ui/Database";
 import CustomScroll from "react-custom-scroll";
 import JsonView from "react-json-view";
 
-import MainPageRender from "../../scripts/viewManager/pages/mainPage";
-import WatchThreadRender from "../../scripts/viewManager/pages/watchThread";
-import ForumRender from "../../scripts/viewManager/pages/forum";
+import MainPageRender from "../../../../scripts/srcJs/viewManager/pages/mainPage";
+import WatchThreadRender from "../../../../scripts/srcJs/viewManager/pages/watchThread";
+import ForumRender from "../../../../scripts/srcJs/viewManager/pages/forum";
 import WebviewRender from "../localWebView/webviewRender";
-import LoginRender from "../../scripts/viewManager/pages/login";
+import LoginRender from "../../../../scripts/srcJs/viewManager/pages/login";
 
-import TestData from "../../scripts/viewManager/testData";
-import pageBindScript from "../../scripts/forumWorker/pageBindScript";
+import TestData from "../../../../scripts/srcJs/viewManager/testData";
+import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
 import conf from '../localConfiguration/conf'
 const drawerWidth = 200;
