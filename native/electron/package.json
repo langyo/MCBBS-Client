@@ -52,12 +52,16 @@
   },
   "keywords": [],
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
     "electron": "^3.0.10",
     "electron-builder": "^20.38.5",
     "electron-packager": "^13.0.1",
     "jest": "^23.6.0"
+    "eslint": "^5.14.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-react": "^7.12.4",
   },
   "babel": {
     "presets": [
