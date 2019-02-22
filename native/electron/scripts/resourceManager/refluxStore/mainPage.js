@@ -35,13 +35,6 @@ class MainPage extends _reflux.default.Store {
     this.listenToMany(Actions);
   }
 
-  increment() {
-    var newCount = this.state.count + 1;
-    this.setState({
-      count: newCount
-    });
-  }
-
   updateForumGroup(name, id, forums) {
     let t = this.state.mainPage.forumGroups;
     t.push({
