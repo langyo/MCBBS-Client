@@ -1,0 +1,37 @@
+{
+    "nativeVersion": {
+        "electron": {
+            "windowsNT": "0.2.4",
+            "GNULinuxXWindow": "0.2.4",
+            "macOSX": "0.2.4"
+        },
+        "ionic":{
+            "android": "0.2.4",
+            "iOS": "0.2.4",
+            "windowsPhone": "0.2.4"
+        }
+    },
+    "nativeDownloadUrl":{
+        "electron": {
+            "windowsNT": "",
+            "GNULinuxXWindow": "",
+            "macOSX": ""
+        },
+        "ionic":{
+            "android": "",
+            "iOS": "",
+            "windowsPhone": ""
+        }
+    },
+    "scriptVersion": "0.2.4",
+    "scriptDownloadUrl": "",
+    "specialConfig": {
+        "theme":{
+            "primaryColor": "",
+            "secondaryColor": "",
+            "backGroundUrl": ""
+        },
+        "lock": {}
+    },
+    "version": 1
+}
