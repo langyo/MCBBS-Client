@@ -7,10 +7,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import WebviewRender from "../../../localScripts/localWebView/webviewRender";
+import WebviewRender from "../../../../native/electron/localScripts/localWebView/webviewRender";
 import Floor from "../utils/floor";
 
-import db from "../../../localScripts/localDatabase/database";
+import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 import testData from "../testData";
 

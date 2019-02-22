@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import ForumPanel from "../utils/forumPanel";
 
-import db from "../../../localScripts/localDatabase/database";
+import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 import TestData from "../testData";
 

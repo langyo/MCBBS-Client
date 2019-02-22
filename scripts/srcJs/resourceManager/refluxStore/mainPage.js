@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-import db from "../../../localScripts/localDatabase/database";
+import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 let Actions = Reflux.createActions([
     'updateForumGroup',
