@@ -14,6 +14,8 @@
 
 正在全速开发中，请耐心等待……
 
+[wiki 主页](https://langyo.github.io/MCBBS-Client/docs/index)
+
 ## 此客户端的开发模式
 
 此客户端使用混合开发模式，本体为 HTML5 应用。

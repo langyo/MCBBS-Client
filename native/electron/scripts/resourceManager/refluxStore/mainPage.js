@@ -1,12 +1,17 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.out = void 0;
+
 var _reflux = _interopRequireDefault(require("reflux"));
 
 var _database = _interopRequireDefault(require("../../../localScripts/localDatabase/database"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Actions = _reflux.default.createActions(['updateForumGroup', 'updateHeadImages', 'updateHeadThreads', 'pushNewPublishedThread', 'pushNewPublishedReply', 'pushNewPublishedStarThread', 'pushNewPublishedHotThread']);
+let Actions = _reflux.default.createActions(['updateForumGroup', 'updateHeadImages', 'updateHeadThreads', 'pushNewPublishedThread', 'pushNewPublishedReply', 'pushNewPublishedStarThread', 'pushNewPublishedHotThread']);
 
 class MainPage extends _reflux.default.Store {
   constructor() {
@@ -44,11 +49,14 @@ class MainPage extends _reflux.default.Store {
       forumGroupId: id,
       forums: forums
     });
+
+    _database.default.set("mainPage.forumGroups", t).write();
+
     this.setState({
       mainPage: {
         forumGroups: t
       }
-    }); // TODO: 同时也要去操作 db
+    });
   }
 
   updateHeadImages() {}
@@ -66,3 +74,8 @@ class MainPage extends _reflux.default.Store {
 }
 
 MainPage.id = 'mainPage';
+let out = {
+  store: _reflux.default.GlobalState['mainPage'],
+  actions: Actions
+};
+exports.out = out;

@@ -2,7 +2,7 @@ import Reflux from "reflux";
 
 import db from "../../../localScripts/localDatabase/database";
 
-const Actions = Reflux.createActions([
+let Actions = Reflux.createActions([
     'updateForumGroup',
     'updateHeadImages',
     'updateHeadThreads',
@@ -50,12 +50,14 @@ class MainPage extends Reflux.Store {
                 forums: forums
             }
         );
+
+        db.set("mainPage.forumGroups", t).write();
+
         this.setState({
             mainPage: {
                 forumGroups: t
             }
         });
-        // TODO: 同时也要去操作 db
     }
 
     updateHeadImages(){
@@ -84,3 +86,8 @@ class MainPage extends Reflux.Store {
 }
 
 MainPage.id = 'mainPage';
+
+export let out = {
+    store: Reflux.GlobalState['mainPage'],
+    actions: Actions
+};
