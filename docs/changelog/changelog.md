@@ -1,3 +1,9 @@
+### 19/2/24 5:47:00
+
+- 让electron使用webpack
+- electron不再需要babel编译scripts/srcJs，由webpack直接编译
+- 将electron和scripts/srcJs的node_modules合并到根目录
+
 ### 19/2/20 13:01:00
 
 - 修复了因为watch时没有js文件夹而失败的错误。

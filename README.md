@@ -24,7 +24,7 @@
 
 后端部分的桌面端依赖 Electron，移动端依赖 Ionic。
 
-~~Electron 是电子，Ionic 是离子，这些库的取名真好玩~~
+~~Electron 是电子，Ionic 是离子，Atom是原子，这些库的取名真好玩~~
 
 ## 版本说明
 
@@ -34,7 +34,7 @@
 
 ## 调试方式
 
-### 平台无关部分
+<!-- ### 平台无关部分
 
 在进行任何调试前，你都应当启用平台无关部分的实时编译。
 
@@ -43,28 +43,32 @@
     // 安装依赖
     npm i
     // 启动监视
-    npm run watch
+    npm run watch -->
 
 ### 桌面端（electron）
-
-    // 进入 electron 文件夹
-    cd native/electron
-    // 安装依赖
-    npm i
-    // 启动文件监视
-    npm run watch
-    // 运行
-    npm start
-
+```sh
+// 安装依赖
+npm i
+// 进入 electron 文件夹
+cd native/electron
+// 启动文件监视
+npm run watch
+// 运行
+npm start
+```
 ### 移动端（ionic）
-
-    // 进入 ionic 文件夹
-    cd native/ionic
-    // 安装依赖
-    npm i
-    // 构建
-    npm run build
-
+```sh
+// 安装依赖
+npm i
+// 进入 scripts 文件夹
+cd scripts
+// 启动监视
+npm run watch
+// 进入 ionic 文件夹
+cd native/ionic
+// 构建
+npm run build
+```
 ## 源码结构说明
 
 - /native - 平台相关部分代码。
