@@ -66,6 +66,8 @@ cd scripts
 npm run watch
 // 进入 ionic 文件夹
 cd native/ionic
+// 安装依赖
+npm i
 // 构建
 npm run build
 ```
