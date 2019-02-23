@@ -9,6 +9,7 @@ node_modules/
 # --- 针对 native/electron 的部分 ---
 
 native/electron/node_modules/
+native/electron/scripts/
 
 native/electron/public/bundle.js
 
@@ -61,6 +62,7 @@ native/ionic/plugins/ios.json
 native/ionic/$RECYCLE.BIN/
 
 native/ionic/node_modules/
+native/ionic/scripts/
 
 native/ionic/.DS_Store
 native/ionic/Thumbs.db

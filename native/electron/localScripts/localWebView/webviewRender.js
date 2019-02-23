@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
@@ -11,6 +12,7 @@ import WebView from "./webview";
 
 import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
+import reflux from "../localDatabase/reflux";
 
 const styles = theme => ({
     hide: {
@@ -26,7 +28,7 @@ let virtualBrowserCount = db.get("local.browserSettings.maxVirtalBrowserCount").
 
 // let urlTimeStamp = []; // 此部分将直接与数据库对接
 
-class VirtualBrowser extends React.Component {
+class VirtualBrowser extends Reflux.Component {
     state = {};
 
     hasLoad = false;
