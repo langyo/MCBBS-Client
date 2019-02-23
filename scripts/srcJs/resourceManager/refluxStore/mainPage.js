@@ -81,7 +81,4 @@ class MainPage extends Reflux.Store {
 
 MainPage.id = 'mainPage';
 
-export let out = {
-    store: Reflux.GlobalState['mainPage'],
-    actions: Actions
-};
+export let actions = Actions;

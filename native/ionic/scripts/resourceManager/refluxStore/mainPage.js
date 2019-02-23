@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.out = void 0;
+exports.actions = void 0;
 
 var _reflux = _interopRequireDefault(require("reflux"));
 
@@ -67,8 +67,5 @@ class MainPage extends _reflux.default.Store {
 }
 
 MainPage.id = 'mainPage';
-let out = {
-  store: _reflux.default.GlobalState['mainPage'],
-  actions: Actions
-};
-exports.out = out;
+let actions = Actions;
+exports.actions = actions;
