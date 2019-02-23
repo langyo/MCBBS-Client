@@ -8,7 +8,7 @@
     "watch": "webpack --config webpack/webpack.develop.config",
     "build": "node webpack/build",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
+    "package:windows": "npx electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:mac": "npx electron-builder build --mac --config electron-builder.json --publish never",
     "test": "jest --watch"
   },
