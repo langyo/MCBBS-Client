@@ -11,9 +11,7 @@ class UserGroups extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            userGroups: {
-                // [map:帖子 id]
-            }
+            userGroups: db.get("userGroups").value()
         };
 		this.listenToMany(Actions);
 	}

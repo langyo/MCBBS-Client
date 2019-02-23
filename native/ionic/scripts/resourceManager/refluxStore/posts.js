@@ -17,8 +17,7 @@ class Posts extends _reflux.default.Store {
   constructor() {
     super();
     this.state = {
-      posts: {// [map:楼层 ID]
-      }
+      posts: _database.default.get("posts").value()
     };
     this.listenToMany(Actions);
   }

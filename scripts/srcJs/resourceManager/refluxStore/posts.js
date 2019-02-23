@@ -11,9 +11,7 @@ class Posts extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            posts: {
-                // [map:楼层 ID]
-            }
+            posts: db.get("posts").value()
         };
 		this.listenToMany(Actions);
 	}

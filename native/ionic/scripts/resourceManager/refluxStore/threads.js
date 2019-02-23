@@ -17,8 +17,7 @@ class Threads extends _reflux.default.Store {
   constructor() {
     super();
     this.state = {
-      threads: {// [map:帖子 id]
-      }
+      threads: _database.default.get("threads").value()
     };
     this.listenToMany(Actions);
   }
