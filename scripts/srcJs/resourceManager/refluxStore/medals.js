@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-import db from "../../../localScripts/localDatabase/database";
+import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 let Actions = Reflux.createActions([
     'updateMedal'
@@ -15,7 +15,7 @@ class Medals extends Reflux.Store {
         };
 		this.listenToMany(Actions);
 	}
-	
+
 	updateMedal(id, object){
         let t = this.state.medals;
         t[id] = object;

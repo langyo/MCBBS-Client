@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-import actions from "../../scripts/resourceManager/actions";
+import actions from "../../../../scripts/srcJs/resourceManager/actions";
 
 export let out = {
     actions: actions,
