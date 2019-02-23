@@ -9,7 +9,7 @@
     "build": "node webpack/build",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "package:mac": "electron-builder build --mac --config electron-builder.json --publish never",
+    "package:mac": "npx electron-builder build --mac --config electron-builder.json --publish never",
     "test": "jest --watch"
   },
   "author": "langyo",
