@@ -24,26 +24,5 @@
   },
   "dependencies": {},
   "keywords": [],
-  "devDependencies": {},
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": "commonjs",
-          "targets": {
-            "node": "current"
-          }
-        }
-      ],
-      [
-        "@babel/preset-react"
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties"
-      ]
-    ]
-  }
+  "devDependencies": {}
 }
