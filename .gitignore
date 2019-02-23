@@ -12,6 +12,7 @@ native/electron/public/bundle.js
 
 native/electron/.idea
 native/electron/dist
+native/electron/scripts
 native/electron/dist/*
 native/electron/*/.DS_Store
 native/electron/.DS_Store
