@@ -35,8 +35,7 @@
     "shortid": "^2.2.14"
   },
   "devDependencies": {
-    "babelify": "^10.0.0",
-    "react-hot-loader": "^4.7.1"
+    "babelify": "^10.0.0"
   },
   "author": "langyo",
   "license": "Unlicense",
