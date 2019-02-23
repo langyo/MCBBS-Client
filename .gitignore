@@ -4,6 +4,8 @@
 
 package-lock.json
 
+node_modules/
+
 # --- 针对 native/electron 的部分 ---
 
 native/electron/node_modules/
