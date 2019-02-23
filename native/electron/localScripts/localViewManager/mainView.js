@@ -76,6 +76,8 @@ import LoginRender from "../../scripts/viewManager/pages/login";
 import TestData from "../../scripts/viewManager/testData";
 import pageBindScript from "../../scripts/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
+import reflux from "../localDatabase/reflux";
+
 const drawerWidth = 200;
 
 const styles = theme => ({

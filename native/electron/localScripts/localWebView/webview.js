@@ -1,11 +1,19 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 
 import shortid from "shortid";
 
 import db from "../localDatabase/database";
+import reflux from "../localDatabase/reflux";
 
-class WebView extends React.Component {
+class WebView extends Reflux.Component {
+  constructor(props){
+    super(props);
+    console.log("n:", reflux)
+    this.stores = reflux.stores;
+  }
+
   timeoutObject;
   done = false;
 
