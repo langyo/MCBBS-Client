@@ -12,9 +12,7 @@ matrix:
     - npm i
     - cd ..
     script:
-    - cd scripts
-    - npm run build
-    - cd ../native/electron
+    - cd native/electron
     - npm run build
     - npm run package:mac
     - cd ../..
@@ -26,9 +24,7 @@ matrix:
     - npm i
     - cd ..
     script:
-    - cd scripts
-    - npm run build
-    - cd ../native/electron
+    - cd native/electron
     - npm run build
     - npm run package:windows
     - cd ../..
