@@ -76,7 +76,6 @@ import LoginRender from "../../../../scripts/srcJs/viewManager/pages/login";
 import TestData from "../../../../scripts/srcJs/viewManager/testData";
 import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
-import conf from '../localConfiguration/conf'
 const drawerWidth = 200;
 
 const styles = theme => ({

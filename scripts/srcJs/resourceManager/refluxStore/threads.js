@@ -3,7 +3,7 @@ import Reflux from "reflux";
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 let Actions = Reflux.createActions([
-    'updateThread',
+    'updateThread'
 ]);
 
 class Threads extends Reflux.Store {
@@ -18,29 +18,17 @@ class Threads extends Reflux.Store {
 		this.listenToMany(Actions);
 	}
 	
-	// updateForumGroup(name, id, forums){
-    //     let t = this.state.mainPage.forumGroups;
-    //     t.push(
-    //         {
-    //             forumGroupName: name,
-    //             forumGroupId: id,
-    //             forums: forums
-    //         }
-    //     );
+	updateThread(id, object){
+        let t = this.state.threads;
+        t[id] = object;
+        db.set("threads[" + id + "]", object).write();
 
-    //     db.set("mainPage.forumGroups", t).write();
-
-    //     this.setState({
-    //         mainPage: {
-    //             forumGroups: t
-    //         }
-    //     });
-    // }
+        this.setState({
+            threads: t
+        });
+    }
 }
 
 Threads.id = 'threads';
 
-export let out = {
-    store: Reflux.GlobalState['threads'],
-    actions: Actions
-};
+export let actions = Actions;

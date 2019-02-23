@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.out = void 0;
+exports.actions = void 0;
 
 var _reflux = _interopRequireDefault(require("reflux"));
 
@@ -21,29 +21,21 @@ class Threads extends _reflux.default.Store {
       }
     };
     this.listenToMany(Actions);
-  } // updateForumGroup(name, id, forums){
-  //     let t = this.state.mainPage.forumGroups;
-  //     t.push(
-  //         {
-  //             forumGroupName: name,
-  //             forumGroupId: id,
-  //             forums: forums
-  //         }
-  //     );
-  //     db.set("mainPage.forumGroups", t).write();
-  //     this.setState({
-  //         mainPage: {
-  //             forumGroups: t
-  //         }
-  //     });
-  // }
+  }
 
+  updateThread(id, object) {
+    let t = this.state.threads;
+    t[id] = object;
+
+    _database.default.set("threads[" + id + "]", object).write();
+
+    this.setState({
+      threads: t
+    });
+  }
 
 }
 
 Threads.id = 'threads';
-let out = {
-  store: _reflux.default.GlobalState['threads'],
-  actions: Actions
-};
-exports.out = out;
+let actions = Actions;
+exports.actions = actions;
