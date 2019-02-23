@@ -11,9 +11,7 @@ class Rates extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            rates: {
-                // [map:评分 ID]
-            }
+            rates: db.get("rates").value()
         };
 		this.listenToMany(Actions);
 	}

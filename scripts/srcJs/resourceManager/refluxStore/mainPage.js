@@ -17,20 +17,7 @@ class MainPage extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            mainPage: {
-                // 版块
-                forumGroups: [],
-                // 头图
-                headImages: [],
-                // 主页上轮播的帖子
-                headThreads: {
-                    latestThread: [],
-                    // 主页上的最新被回复的帖子
-                    latestReply: [],
-                    // 主页上的最新精华帖
-                    latestStarThread: []
-                }
-            }
+            mainPage: db.get("mainPage").value()
         };
 		this.listenToMany(Actions);
 	}

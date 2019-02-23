@@ -11,9 +11,7 @@ class Forums extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            forums: {
-                // [map:版块特征码，特征码由对应板块在 URL 上体现的名称决定]
-            }
+            forums: db.get("forums").value()
         };
 		this.listenToMany(Actions);
 	}

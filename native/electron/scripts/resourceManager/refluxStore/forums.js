@@ -17,8 +17,7 @@ class Forums extends _reflux.default.Store {
   constructor() {
     super();
     this.state = {
-      forums: {// [map:版块特征码，特征码由对应板块在 URL 上体现的名称决定]
-      }
+      forums: _database.default.get("forums").value()
     };
     this.listenToMany(Actions);
   }

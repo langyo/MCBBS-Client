@@ -11,9 +11,7 @@ class Medals extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            medals: {
-                // [map:勋章 ID]
-            }
+            medals: db.get("medals").value()
         };
 		this.listenToMany(Actions);
 	}

@@ -11,9 +11,7 @@ class Threads extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            threads: {
-                // [map:帖子 id]
-            }
+            threads: db.get("threads").value()
         };
 		this.listenToMany(Actions);
 	}

@@ -17,8 +17,7 @@ class Rates extends _reflux.default.Store {
   constructor() {
     super();
     this.state = {
-      rates: {// [map:评分 ID]
-      }
+      rates: _database.default.get("rates").value()
     };
     this.listenToMany(Actions);
   }

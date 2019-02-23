@@ -17,8 +17,7 @@ class Medals extends _reflux.default.Store {
   constructor() {
     super();
     this.state = {
-      medals: {// [map:勋章 ID]
-      }
+      medals: _database.default.get("medals").value()
     };
     this.listenToMany(Actions);
   }

@@ -17,8 +17,7 @@ class UserGroups extends _reflux.default.Store {
   constructor() {
     super();
     this.state = {
-      userGroups: {// [map:帖子 id]
-      }
+      userGroups: _database.default.get("userGroups").value()
     };
     this.listenToMany(Actions);
   }
