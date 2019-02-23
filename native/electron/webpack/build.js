@@ -1,7 +1,7 @@
 'use strict'
 const ora = require('ora')
 const chalk = require('chalk')
-const webpackConfig = require('./webpack.base.config')
+const webpackConfig = require('./webpack.prod.config')
 const path = require('path')
 const webpack = require('webpack')
 
