@@ -1,17 +1,5 @@
 {
   "name": "mcbbs-client",
-  "description": "A BBS client for MCBBS.",
-  "scripts": {
-    "electron:start": "electron ./native/electron/index.js --inspect=5858",
-    "electron:watch": "watchify ./native/electron/localScripts/localViewManager/mainViewRender.js -t babelify -o ./native/electron/public/bundle.js --release --verbose",
-    "electron:build": "browserify ./native/electron/localScripts/localViewManager/mainViewRender.js -o ./native/electron/public/js/bundle.js -t babelify",
-    "electron:package": "electron-packager ./native/electron/ MCBBS-Client --all --overwrite --out=./native/electron/packaged/ --icon=./native/electron/public/img/logo.ico",
-    "electron:package:windows": "electron-packager ./native/electron/ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./native/electron/public/img/logo.ico",
-    "electron:package:mac": "electron-builder build --mac --config ./native/electron/electron-builder.json --publish never",
-    "electron:test": "jest --watch"
-  },
-  "author": "langyo",
-  "license": "Apache-2.0",
   "dependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
@@ -57,26 +45,5 @@
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-merge": "^4.2.1"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": "commonjs",
-          "targets": {
-            "node": "current"
-          }
-        }
-      ],
-      [
-        "@babel/preset-react"
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties"
-      ]
-    ]
   }
 }
