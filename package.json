@@ -1,9 +1,18 @@
 {
   "name": "mcbbs-client",
+  "version": "0.2.4",
   "description": "A BBS client for MCBBS.",
+  "bugs": {
+    "url": "https://github.com/langyo/MCBBS-Client/issues"
+  },
+  "homepage": "https://github.com/langyo/MCBBS-Client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langyo/MCBBS-Client.git"
+  },
   "scripts": {
     "electron:start": "electron ./native/electron/index.js --inspect=5858",
-    "electron:watch": "watchify ./native/electron/localScripts/localViewManager/mainViewRender.js -t babelify -o ./native/electron/public/bundle.js --release --verbose",
+    "electron:watch": "watchify ./native/electron/localScripts/localViewManager/mainViewRender.js -t babelify --presets @babel/preset-env @babel/preset-react --plugins @babel/plugin-proposal-class-properties -o ./native/electron/public/bundle.js --release --verbose",
     "electron:build": "browserify ./native/electron/localScripts/localViewManager/mainViewRender.js -o ./native/electron/public/js/bundle.js -t babelify",
     "electron:package": "electron-packager ./native/electron/ MCBBS-Client --all --overwrite --out=./native/electron/packaged/ --icon=./native/electron/public/img/logo.ico",
     "electron:package:windows": "electron-packager ./native/electron/ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./native/electron/public/img/logo.ico",
@@ -14,6 +23,9 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@material-ui/core": "^3.6.1",
     "babel-jest": "^24.1.0",
@@ -57,26 +69,5 @@
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-merge": "^4.2.1"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": "commonjs",
-          "targets": {
-            "node": "current"
-          }
-        }
-      ],
-      [
-        "@babel/preset-react"
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties"
-      ]
-    ]
   }
 }
