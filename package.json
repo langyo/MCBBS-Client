@@ -42,6 +42,7 @@
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.1.0",
     "ora": "^3.1.0",
+    "terser-webpack-plugin": "^1.2.2",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-merge": "^4.2.1"
