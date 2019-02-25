@@ -1,5 +1,5 @@
 {
-  "name": "mcbbs-client",
+  "name": "mcbbs-client-electron",
   "version": "0.2.4",
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
@@ -11,18 +11,5 @@
     "package:windows": "npx electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:mac": "npx electron-builder build --mac --config electron-builder.json --publish never",
     "test": "jest --watch"
-  },
-  "author": "langyo",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/langyo/MCBBS-Client/issues"
-  },
-  "homepage": "https://github.com/langyo/MCBBS-Client",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/langyo/MCBBS-Client.git"
-  },
-  "dependencies": {},
-  "keywords": [],
-  "devDependencies": {}
+  }
 }
