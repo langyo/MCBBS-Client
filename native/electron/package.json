@@ -4,8 +4,8 @@
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
   "scripts": {
-    "start": "electron ./index.js --inspect=5858",
-    "watch": "webpack --config webpack/webpack.develop.config",
+    "start": "npx electron ./index.js --inspect=5858",
+    "watch": "npx webpack-cli --config webpack/webpack.develop.config",
     "build": "node webpack/build",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:windows": "npx electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
