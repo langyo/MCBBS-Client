@@ -1,5 +1,17 @@
 {
   "name": "mcbbs-client",
+  "author": "langyo",
+  "version": "0.2.4",
+  "description": "A BBS client for MCBBS.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/langyo/MCBBS-Client/issues"
+  },
+  "homepage": "https://github.com/langyo/MCBBS-Client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langyo/MCBBS-Client.git"
+  },
   "dependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
