@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.6.1",
     "babel-jest": "^24.1.0",
     "classnames": "^2.2.6",
+    "cross-env": "^5.2.0",
     "firebase": "^5.8.0",
     "jsdom": "^13.2.0",
     "lowdb": "^1.0.0",
@@ -46,5 +47,14 @@
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-merge": "^4.2.1"
+  },
+  "scripts": {
+    "electron:start": "cd native/electron/ && npm run start",
+    "electron:watch": "cd native/electron/ && npm run watch",
+    "electron:build": "cd native/electron/ && npm run build",
+    "electron:package": "cd native/electron/ && npm run package",
+    "electron:package:windows": "cd native/electron/ && npm run package:windows",
+    "electron:package:mac": "cd native/electron/ && npm run package:mac",
+    "electron:test": "cd native/electron/ && npm run test"
   }
 }
