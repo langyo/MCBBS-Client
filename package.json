@@ -111,6 +111,23 @@
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
   },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-hot-code-push-plugin": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  },
   "scripts": {
     "electron:start": "cd native/electron/ && npm run start",
     "electron:watch": "cd native/electron/ && npm run watch",
