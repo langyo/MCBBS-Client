@@ -4,12 +4,12 @@
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "jest --watch",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ng": "npx ng",
+    "start": "npx ng serve",
+    "build": "npx ng build",
+    "test": "npx jest --watch",
+    "lint": "npx ng lint",
+    "e2e": "npx ng e2e"
   },
   "cordova": {
     "plugins": {
