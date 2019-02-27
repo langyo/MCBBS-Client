@@ -6,20 +6,18 @@ matrix:
   include:
   - os: osx
     install:
-    - npm i
+    - npm run install
     script:
-    - cd native/electron
     - npm run build
-    - npm run package:mac
-    - cd ../..
+    - npm run electron:build
+    - npm run electron:package:mac
   - os: windows
     install:
-    - npm i
+    - npm run install
     script:
-    - cd native/electron
     - npm run build
-    - npm run package:windows
-    - cd ../..
+    - npm run electron:build
+    - npm run electron:package:windows
 deploy:
   provider: releases
   api_key:

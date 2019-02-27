@@ -1,15 +1,83 @@
 {
   "name": "mcbbs-client-electron",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
   "scripts": {
-    "start": "npx electron ./index.js --inspect=5858",
-    "watch": "npx webpack-cli --config webpack/webpack.develop.config",
-    "build": "node webpack/build",
+    "start": "electron ./index.js --inspect=5858",
+    "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
+    "build": "browserify ./localScripts/localViewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "package:windows": "npx electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "package:mac": "npx electron-builder build --mac --config electron-builder.json --publish never",
+    "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
+    "package:mac": "electron-builder build --mac --config electron-builder.json --publish never",
     "test": "jest --watch"
+  },
+  "author": "langyo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/langyo/MCBBS-Client/issues"
+  },
+  "homepage": "https://github.com/langyo/MCBBS-Client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langyo/MCBBS-Client.git"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^3.6.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "classnames": "^2.2.6",
+    "firebase": "^5.8.0",
+    "lowdb": "^1.0.0",
+    "mdi-material-ui": "^5.8.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-custom-scroll": "^4.0.1",
+    "react-desktop": "^0.3.7",
+    "react-dom": "^16.6.3",
+    "react-json-view": "^1.19.1",
+    "react-swipeable-views": "^0.13.0",
+    "react-swipeable-views-utils": "^0.13.0",
+    "reflux": "^6.4.1",
+    "regenerator-runtime": "^0.13.1",
+    "shortid": "^2.2.14",
+    "watchify": "^3.11.0",
+    "webpack": "^4.26.1",
+    "typescript": "^2.8.3"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "electron": "^3.0.10",
+    "electron-builder": "^20.38.5",
+    "electron-packager": "^13.0.1",
+    "jest": "^23.6.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": "commonjs",
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      [
+        "@babel/preset-react"
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ]
   }
 }
