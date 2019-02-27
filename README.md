@@ -34,42 +34,23 @@
 
 ## 调试方式
 
-<!-- ### 平台无关部分
-
-在进行任何调试前，你都应当启用平台无关部分的实时编译。
-
-    // 进入 scripts 文件夹
-    cd scripts
-    // 安装依赖
-    npm i
-    // 启动监视
-    npm run watch -->
-
 ### 桌面端（electron）
 ```sh
 // 安装依赖
 npm i
-// 进入 electron 文件夹
-cd native/electron
 // 启动文件监视
 npm run watch
 // 运行
-npm start
+npm run electron:start
 ```
 ### 移动端（ionic）
 ```sh
 // 安装依赖
 npm i
-// 进入 scripts 文件夹
-cd scripts
 // 启动监视
 npm run watch
-// 进入 ionic 文件夹
-cd native/ionic
-// 安装依赖
-npm i
 // 构建
-npm run build
+npm run ionic:build
 ```
 ## 源码结构说明
 
