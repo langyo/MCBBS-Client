@@ -25,13 +25,7 @@ class MainPage extends Reflux.Component {
         <HeadImages headImages={TestData.mainPage.headImages} className={classes.padding} />
         {
           // TODO: 这里开始往 indexPageThreads 套接
-          Object.keys(TestData.mainPage.forumGroups).map(n => (
-            <ForumPanel
-              key={TestData.mainPage.forumGroups[n].forumGroupId}
-              forumGroupName={TestData.mainPage.forumGroups[n].forumGroupName}
-              forums={TestData.mainPage.forumGroups[n].forums}
-            />
-          ))
+          // (也就是最新帖子列表)
         }
       </div>
     )

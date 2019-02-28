@@ -72,6 +72,7 @@ import WatchThreadRender from "../../../../scripts/srcJs/viewManager/pages/watch
 import ForumRender from "../../../../scripts/srcJs/viewManager/pages/forum";
 import WebviewRender from "../localWebView/webviewRender";
 import LoginRender from "../../../../scripts/srcJs/viewManager/pages/login";
+import ForumsRender from "../../../../scripts/srcJs/viewManager/pages/forums";
 
 import TestData from "../../../../scripts/srcJs/viewManager/testData";
 import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
@@ -322,6 +323,16 @@ class MainWindow extends Reflux.Component {
                       <HomeIcon />
                       <ListItemText primary="主页" />
                     </ListItem>
+                    <ListItem
+                      onClick={this.handleCreateTagSelector("forums")}
+                      selected={this.state.tag === 'forums'}
+                      button
+                    >
+                      <ListIcon />
+                      <ListItemText
+                        primary="所有板块"
+                      />
+                    </ListItem>
                     <ListItem button>
                       <SignInIcon />
                       <ListItemText
@@ -494,6 +505,7 @@ class MainWindow extends Reflux.Component {
           <main className={classes.content} ref={this.mainRef}>
             {
               (this.state.tag === "mainPage" && <MainPageRender />) ||
+              (this.state.tag === "forums" && <ForumsRender />) || 
               (this.state.tag === "login" && <LoginRender />) ||
               (this.state.tag === "test" && <Test />) ||
               (
@@ -548,7 +560,7 @@ class MainWindow extends Reflux.Component {
                 </Button>
               </Typography>
               <Typography paragraph variant="p">
-                {"当前版本 0.2.4"}
+                {"当前版本 0.2.5"}
               </Typography>
             </DialogContent>
             <DialogActions>
