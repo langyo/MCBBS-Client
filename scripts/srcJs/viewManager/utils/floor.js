@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
@@ -21,6 +22,8 @@ import VoteIcon from "mdi-material-ui/VoteOutline";
 import MessageIcon from "mdi-material-ui/MessageTextOutline";
 import EditIcon from "mdi-material-ui/SquareEditOutline";
 
+import PostStore from "../../../../scripts/srcJs/resourceManager/refluxStore/posts";
+import UserStore from "../../../../scripts/srcJs/resourceManager/refluxStore/users";
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 import testData from "../testData";
@@ -44,7 +47,13 @@ const styles = theme => ({
   }
 });
 
-class Floor extends React.Component {
+class Floor extends Reflux.Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+    this.stores = [/* new PostStore(), */ new UserStore(props.user)]
+  }
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };

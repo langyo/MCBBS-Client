@@ -10,6 +10,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import WebviewRender from "../../../../native/electron/localScripts/localWebView/webviewRender";
 import Floor from "../utils/floor";
 
+import ThreadStore from "../../../../scripts/srcJs/resourceManager/refluxStore/threads";
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
 import testData from "../testData";
@@ -21,13 +22,17 @@ const styles = theme => ({
 });
 
 class Thread extends Reflux.Component {
-  state = {
-    title: "加载中...",
-    author: "",
-    topIcons: [],
-    posts: [],
-    users: []
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      title: "加载中...",
+      author: "",
+      topIcons: [],
+      posts: [],
+      users: []
+    };
+    this.store = new ThreadStore(props.thread);
+  }
 
   render() {
     const { classes } = this.props;
@@ -44,6 +49,8 @@ class Thread extends Reflux.Component {
           <Floor
             key={n}
             className={classes.floor}
+            user = {n.author}
+            /* post = {n.post} */
             accountAvatar={this.state.users[n.author].avatar}
             accountName={this.state.users[n.author].name}
             accountInfo={

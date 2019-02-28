@@ -6,7 +6,7 @@ let Actions = Reflux.createActions([
     'updateThread'
 ]);
 
-class Threads extends Reflux.Store {
+class Thread extends Reflux.Store {
 	constructor(id)
 	{
         super();
@@ -26,6 +26,6 @@ class Threads extends Reflux.Store {
     }
 }
 
-Threads.id = 'threads';
+Thread.id = 'threads';
 
-export let ret = Threads;
+export let ret = Thread;
