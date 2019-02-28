@@ -7,26 +7,25 @@ let Actions = Reflux.createActions([
 ]);
 
 class Threads extends Reflux.Store {
-	constructor()
+	constructor(id)
 	{
-		super();
+        super();
+        this.id = id;
 		this.state = {
-            threads: db.get("threads").value()
+            threads: db.get("threads["+ id + "]").value()
         };
 		this.listenToMany(Actions);
 	}
 	
-	updateThread(id, object){
-        let t = this.state.threads;
-        t[id] = object;
-        db.set("threads[" + id + "]", object).write();
+	updateThread(object){
+        db.set("threads[" + this.id + "]", object).write();
 
         this.setState({
-            threads: t
+            threads: object
         });
     }
 }
 
 Threads.id = 'threads';
 
-export let actions = Actions;
+export let ret = Threads;

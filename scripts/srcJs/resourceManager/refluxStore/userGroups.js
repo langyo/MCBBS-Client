@@ -29,4 +29,4 @@ class UserGroups extends Reflux.Store {
 
 UserGroups.id = 'userGroups';
 
-export let actions = Actions;
+export let ret = new UserGroups();

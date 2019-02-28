@@ -7,26 +7,25 @@ let Actions = Reflux.createActions([
 ]);
 
 class Users extends Reflux.Store {
-	constructor()
+	constructor(id)
 	{
-		super();
+        super();
+        this.id = id;
 		this.state = {
-            userGroups: db.get("users").value()
+            userGroups: db.get("users[" + id + "]").value()
         };
 		this.listenToMany(Actions);
 	}
 
-	updateUserGroup(id, object){
-        let t = this.state.users;
-        t[id] = object;
-        db.set("users[" + id + "]", object).write();
+	updateUserGroup(object){
+        db.set("users[" + this.id + "]", object).write();
 
         this.setState({
-            users: t
+            users: object
         });
     }
 }
 
 Users.id = 'users';
 
-export let actions = Actions;
+export let ret = Users;

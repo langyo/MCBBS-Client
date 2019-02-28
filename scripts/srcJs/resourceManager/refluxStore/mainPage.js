@@ -66,6 +66,4 @@ class MainPage extends Reflux.Store {
     }
 }
 
-MainPage.id = 'mainPage';
-
-export let actions = Actions;
+export let out = new MainPage();

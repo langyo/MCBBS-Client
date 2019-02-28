@@ -27,6 +27,4 @@ class Medals extends Reflux.Store {
     }
 }
 
-Medals.id = 'medals';
-
-export let actions = Actions;
+export let out = new Medals();
