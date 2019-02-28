@@ -27,4 +27,4 @@ class Medals extends Reflux.Store {
     }
 }
 
-export let out = new Medals();
+export default new Medals();

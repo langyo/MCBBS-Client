@@ -28,4 +28,4 @@ class Posts extends Reflux.Store {
 
 Posts.id = 'posts';
 
-export let out = Posts;
+export default Posts;

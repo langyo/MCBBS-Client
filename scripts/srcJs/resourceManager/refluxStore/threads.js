@@ -28,4 +28,4 @@ class Thread extends Reflux.Store {
 
 Thread.id = 'threads';
 
-export let ret = Thread;
+export default Thread;

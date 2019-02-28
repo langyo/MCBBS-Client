@@ -28,4 +28,4 @@ class Rates extends Reflux.Store {
 
 Rates.id = 'rates';
 
-export let ret = Rates;
+export default Rates;

@@ -28,4 +28,4 @@ class Users extends Reflux.Store {
 
 Users.id = 'users';
 
-export let ret = Users;
+export default Users;
