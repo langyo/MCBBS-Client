@@ -8,14 +8,12 @@ matrix:
     install:
     - npm run install
     script:
-    - npm run build
     - npm run electron:build
     - npm run electron:package:mac
   - os: windows
     install:
     - npm run install
     script:
-    - npm run build
     - npm run electron:build
     - npm run electron:package:windows
 deploy:
