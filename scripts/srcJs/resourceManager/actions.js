@@ -27,18 +27,18 @@ export let stores = {
 
     // 以下部分为用于创建 Store 的类
     single: {
-        post: Reflux.createActions([
+        post: [
             'updatePost'
-        ]),
-        rate: Reflux.createActions([
+        ],
+        rate: [
             'updateRate'
-        ]),
-        thread: Reflux.createActions([
+        ],
+        thread: [
             'updateThread'
-        ]),
+        ],
         /* tool: tools, */
-        user: Reflux.createActions([
+        user: [
             'updateUser'
-        ])
+        ]
     }
 };
