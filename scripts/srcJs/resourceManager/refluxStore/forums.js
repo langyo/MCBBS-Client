@@ -2,9 +2,7 @@ import Reflux from "reflux";
 
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
-let Actions = Reflux.createActions([
-    'updateForum'
-]);
+import Actions from "../actions";
 
 class Forums extends Reflux.Store {
 	constructor(id)
@@ -14,7 +12,7 @@ class Forums extends Reflux.Store {
 		this.state = {
             forums: db.get("forums[" + id + "]").value()
         };
-		this.listenToMany(Actions);
+		this.listenToMany(Actions.global.forums);
 	}
 
 	updateForum(object){

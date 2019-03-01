@@ -2,9 +2,7 @@ import Reflux from "reflux";
 
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
-let Actions = Reflux.createActions([
-    'updateMedal'
-]);
+import Actions from "../actions";
 
 class Medals extends Reflux.Store {
 	constructor()
@@ -13,7 +11,7 @@ class Medals extends Reflux.Store {
 		this.state = {
             medals: db.get("medals").value()
         };
-		this.listenToMany(Actions);
+		this.listenToMany(Actions.global.medals);
 	}
 
 	updateMedal(id, object){

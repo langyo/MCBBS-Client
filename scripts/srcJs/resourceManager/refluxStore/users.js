@@ -2,11 +2,9 @@ import Reflux from "reflux";
 
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
-let Actions = Reflux.createActions([
-    'updateUser'
-]);
+import Actions from "../actions";
 
-class Users extends Reflux.Store {
+class User extends Reflux.Store {
 	constructor(id)
 	{
         super();
@@ -14,7 +12,7 @@ class Users extends Reflux.Store {
 		this.state = {
             userGroups: db.get("users[" + id + "]").value()
         };
-		this.listenToMany(Actions);
+		this.listenToMany(Actions.single.user);
 	}
 
 	updateUserGroup(object){
@@ -26,6 +24,4 @@ class Users extends Reflux.Store {
     }
 }
 
-Users.id = 'users';
-
-export default Users;
+export default User;

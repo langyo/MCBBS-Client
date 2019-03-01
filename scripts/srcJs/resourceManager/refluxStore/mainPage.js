@@ -2,15 +2,7 @@ import Reflux from "reflux";
 
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
-let Actions = Reflux.createActions([
-    'updateForumGroup',
-    'updateHeadImages',
-    'updateHeadThreads',
-    'pushNewPublishedThread',
-    'pushNewPublishedReply',
-    'pushNewPublishedStarThread',
-    'pushNewPublishedHotThread'
-]);
+import Actions from "../actions";
 
 class MainPage extends Reflux.Store {
 	constructor()
@@ -19,7 +11,7 @@ class MainPage extends Reflux.Store {
 		this.state = {
             mainPage: db.get("mainPage").value()
         };
-		this.listenToMany(Actions);
+		this.listenToMany(Actions.global.mainPage);
 	}
 	
 	updateForumGroup(name, id, forums){

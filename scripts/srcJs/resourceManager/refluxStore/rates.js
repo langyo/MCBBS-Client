@@ -2,11 +2,9 @@ import Reflux from "reflux";
 
 import db from "../../../../native/electron/localScripts/localDatabase/database";
 
-let Actions = Reflux.createActions([
-    'updateRate'
-]);
+import Actions from "../actions";
 
-class Rates extends Reflux.Store {
+class Rate extends Reflux.Store {
 	constructor(id)
 	{
         super();
@@ -14,7 +12,7 @@ class Rates extends Reflux.Store {
 		this.state = {
             rates: db.get("rates["+ id + "]").value()
         };
-		this.listenToMany(Actions);
+		this.listenToMany(Actions.single.rate);
 	}
 
 	updateRate(object){
@@ -26,6 +24,4 @@ class Rates extends Reflux.Store {
     }
 }
 
-Rates.id = 'rates';
-
-export default Rates;
+export default Rate;
