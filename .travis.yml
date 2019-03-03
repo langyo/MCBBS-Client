@@ -6,13 +6,21 @@ matrix:
   include:
   - os: osx
     install:
-    - npm run install
+    - cd native/electron
+    - npm i
+    - cd ../../scripts
+    - npm i
+    - cd ..
     script:
     - npm run electron:build
     - npm run electron:package:mac
   - os: windows
     install:
-    - npm run install
+    - cd native/electron
+    - npm i
+    - cd ../../scripts
+    - npm i
+    - cd ..
     script:
     - npm run electron:build
     - npm run electron:package:windows
