@@ -26,8 +26,8 @@
     "ionic:test": "cd native/ionic/ && npm run test",
     "ionic:lint": "cd native/ionic/ && npm run lint",
     "ionic:e2e": "cd native/ionic/ && npm run e2e",
-    "install": "cd native/electron/ && npm i && cd ../../native/ionic && npm i",
-    "install:cnpm": "cd native/electron/ && cnpm i && cd ../../native/ionic && cnpm i",
-    "install:fix": "cd native/electron/ && npm audit fix --force && cd ../../native/ionic && npm audit fix --force"
+    "install": "cd native/electron/ && npm i && cd ../../native/ionic && npm i && cd ../../scripts && npm i",
+    "install:cnpm": "cd native/electron/ && cnpm i && cd ../../native/ionic && cnpm i && cd ../../scripts && cnpm i",
+    "install:fix": "cd native/electron/ && npm audit fix --force && cd ../../native/ionic && npm audit fix --force && cd ../../scripts && npm audit fix --force"
   }
 }
