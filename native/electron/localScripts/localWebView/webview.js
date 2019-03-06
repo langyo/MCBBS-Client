@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import shortid from "shortid";
 
 import db from "../localDatabase/database";
-import reflux from "../localDatabase/reflux";
+import reflux from "../../../../scripts/srcJs/resourceManager/actions";
 
 class WebView extends Reflux.Component {
   constructor(props){

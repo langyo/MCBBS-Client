@@ -12,6 +12,9 @@ class Thread extends Reflux.Store {
 		this.state = {
             threads: db.get("threads["+ id + "]").value()
         };
+        
+        console.log(ActionManager);
+        
 		this.listenToMany(ActionManager.createActions("thread", id));
 	}
 	
