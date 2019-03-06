@@ -77,7 +77,6 @@ import ForumsRender from "../../../../scripts/srcJs/viewManager/pages/forums";
 import TestData from "../../../../scripts/srcJs/viewManager/testData";
 import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
-import reflux from "../localDatabase/reflux";
 
 const drawerWidth = 200;
 

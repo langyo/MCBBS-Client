@@ -12,7 +12,6 @@ import WebView from "./webview";
 
 import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
-import reflux from "../localDatabase/reflux";
 
 const styles = theme => ({
     hide: {
