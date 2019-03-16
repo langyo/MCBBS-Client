@@ -1,21 +1,10 @@
 # Table of contents
 
-* [MCBBS-Client \(MCBBS 客户端\)](README.md)
-* [docs](docs/README.md)
-  * [wiki](docs/wiki/README.md)
-    * [resources](docs/wiki/resources.md)
-    * [api](docs/wiki/api.md)
-    * [config.json 配置文件结构](docs/wiki/config.md)
-  * [changelog](docs/changelog/README.md)
-    * [changelog](docs/changelog/changelog.md)
-  * [MCBBS Client Wiki](docs/index.md)
-* [native](native/README.md)
-  * [ionic](native/ionic/README.md)
-    * [README](native/ionic/resources.md)
-* [发生错误](404.md)
-* [.github](.github/README.md)
-  * [ISSUE\_TEMPLATE](.github/issue_template/README.md)
-    * [-----bug](.github/issue_template/bug.md)
-    * [------](.github/issue_template/undefined.md)
-    * [----](.github/issue_template/undefined-1.md)
+* [概览页](README.md)
+* [开发文档](docs/README.md)
+  * [插件开发 API](wiki/api.md)
+  * [数据库 API](wiki/resources.md)
+  * [config.json 插件配置信息文件数据结构](wiki/config.md)
+* 附属资源
+  * [插件计划列表](https://github.com/langyo/MCBBS-Client/projects/4)
 
