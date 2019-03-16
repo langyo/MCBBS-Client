@@ -1,4 +1,4 @@
-# config.json 配置文件结构
+# config.json 插件配置信息文件数据结构
 
 config.json 被用于定义一个插件的基本信息，功能与 npm 的 package.json 或与其类似的库管理系统的项目标识信息文件一致，提示客户端有关该插件的基本信息。
 
