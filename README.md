@@ -14,7 +14,7 @@
 
 正在全速开发中，请耐心等待……
 
-[Gitbook wiki 主页](https://langyo-china.gitbook.io/mcbbs-client-dev/)
+[Gitbook wiki 主页](https://mcbbs-client-developer.gitbook.io/mcbbs-client-dev/)
 
 ## 此客户端的开发模式
 
