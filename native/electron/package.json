@@ -41,6 +41,7 @@
     "react-desktop": "^0.3.7",
     "react-dom": "^16.6.3",
     "react-json-view": "^1.19.1",
+    "react-router-dom": "^5.0.0",
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
     "reflux": "^6.4.1",
