@@ -56,7 +56,7 @@
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
     "electron": "^3.0.10",
-    "electron-builder": "^20.38.5",
+    "electron-builder": "^20.39.0",
     "electron-packager": "^13.0.1",
     "jest": "^24.1.0"
   },

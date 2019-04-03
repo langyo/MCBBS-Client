@@ -10,6 +10,7 @@ const remote = electron.remote;
 
 import React, { useCallback } from "react";
 import Reflux from "reflux";
+import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
@@ -502,16 +503,19 @@ class MainWindow extends Reflux.Component {
             <Divider />
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
-            {
-              (this.state.tag === "mainPage" && <MainPageRender />) ||
-              (this.state.tag === "forums" && <ForumsRender />) || 
-              (this.state.tag === "login" && <LoginRender />) ||
-              (this.state.tag === "test" && <Test />) ||
-              (
+            <Router history={browserHistory}>
+              <IndexRoute component={() => <MainPageRender />} />
+              <Route path="/" component={() => <MainPageRender />} />
+              <Route path="forums" component={() => <ForumsRender />} />
+              <Route path="login" component={() => <LoginRender />} />
+              <Route path="test" component={() => <Test />} />
+            </Router>
+
+            {/* (
                 <div key={this.state.tag}>
                   {tags.find(n => this.state.tag === n.key).render}
                 </div>
-              )
+              ) */}
             }
           </main>
           <Dialog
