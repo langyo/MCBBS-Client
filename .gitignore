@@ -74,3 +74,8 @@ native/ionic/UserInterfaceState.xcuserstate
 # // 具体原因，请见：https://github.com/langyo/MCBBS-Client/issues/4
 
 scripts/node_modules/
+
+# yarn
+
+yarn-error.log
+yarn.lock
