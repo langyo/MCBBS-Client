@@ -65,7 +65,7 @@ import DatabaseIcon from "mdi-material-ui/Database";
 
 import CustomScroll from "react-custom-scroll";
 import JsonView from "react-json-view";
-import TitleBar from 'frameless-titlebar';
+// import TitleBar from 'frameless-titlebar';
 
 import MainPageRender from "../../../../scripts/srcJs/viewManager/pages/mainPage";
 import WatchThreadRender from "../../../../scripts/srcJs/viewManager/pages/watchThread";
@@ -254,9 +254,9 @@ class MainWindow extends Reflux.Component {
     try {
       return (
         <div className={classes.root}>
-          <TitleBar
+          {/* <TitleBar
             app="MCBBS Client"
-          />
+          /> */}
           <CssBaseline />
           <Drawer
             variant="permanent"
