@@ -1,5 +1,3 @@
-import Test from "../../test/test";
-
 const events = window.require('events');
 const path = window.require('path');
 const fs = window.require('fs');
@@ -67,6 +65,7 @@ import DatabaseIcon from "mdi-material-ui/Database";
 
 import CustomScroll from "react-custom-scroll";
 import JsonView from "react-json-view";
+import TitleBar from 'frameless-titlebar';
 
 import MainPageRender from "../../../../scripts/srcJs/viewManager/pages/mainPage";
 import WatchThreadRender from "../../../../scripts/srcJs/viewManager/pages/watchThread";
@@ -255,6 +254,9 @@ class MainWindow extends Reflux.Component {
     try {
       return (
         <div className={classes.root}>
+          <TitleBar
+            app="MCBBS Client"
+          />
           <CssBaseline />
           <Drawer
             variant="permanent"
@@ -503,20 +505,20 @@ class MainWindow extends Reflux.Component {
             <Divider />
           </Drawer>
           <main className={classes.content} ref={this.mainRef}>
-            <Router history={browserHistory}>
+            {/* <Router history={browserHistory}>
               <IndexRoute component={() => <MainPageRender />} />
               <Route path="/" component={() => <MainPageRender />} />
               <Route path="forums" component={() => <ForumsRender />} />
               <Route path="login" component={() => <LoginRender />} />
               <Route path="test" component={() => <Test />} />
-            </Router>
+            </Router> */}
 
             {/* (
                 <div key={this.state.tag}>
                   {tags.find(n => this.state.tag === n.key).render}
                 </div>
               ) */}
-            }
+
           </main>
           <Dialog
             open={this.state.aboutDialog}

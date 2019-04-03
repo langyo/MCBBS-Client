@@ -14,7 +14,9 @@ function createMainWnd() {
         maxHeight: 600,
         backgroundColor:'#fbf2db',
         useContentSize: true,
-        show: false
+        show: false,
+        frame: false,
+        titleBarStyle: 'hidden'
     });
 
     mainWnd.loadURL(`file://${__dirname}/public/index.html`);

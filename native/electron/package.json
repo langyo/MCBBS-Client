@@ -33,6 +33,7 @@
     "babel-loader": "^8.0.0-beta.0",
     "classnames": "^2.2.6",
     "firebase": "^5.8.0",
+    "frameless-titlebar": "^1.0.6",
     "lowdb": "^1.0.0",
     "mdi-material-ui": "^5.8.0",
     "prop-types": "^15.6.2",
