@@ -50,8 +50,9 @@ public class DataFixer {
                     Objects.requireNonNull(new File("..").getParentFile().listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
                     "scripts"
             );
-            Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
+            Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS)
                     .filter(path -> !Files.isDirectory(path))
+                    .filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
                     .map(path -> {
                         try {
                             return Tuple.asTuple(path, MessageDigestUtils.md5(Files.newInputStream(path)));
