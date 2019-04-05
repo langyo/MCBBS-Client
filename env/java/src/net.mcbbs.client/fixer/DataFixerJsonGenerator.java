@@ -1,7 +1,7 @@
-package net.mcbbs.client;
+package net.mcbbs.client.fixer;
 
 import com.google.gson.stream.JsonWriter;
-import net.mcbbs.client.util.MessageDigestUtils;
+import net.mcbbs.client.fixer.util.MessageDigestUtils;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -11,7 +11,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DataFixerJsonGenerator {
     public static void generate(String downloadURL) throws IOException {

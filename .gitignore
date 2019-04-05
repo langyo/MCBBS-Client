@@ -79,3 +79,9 @@ scripts/node_modules/
 
 yarn-error.log
 yarn.lock
+
+# --- 针对 env 的部分 ---
+env/java/lib/
+env/env.iml
+ent/java/.gradle/
+env/java/build/

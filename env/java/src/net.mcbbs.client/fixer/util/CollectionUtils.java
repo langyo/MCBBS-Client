@@ -1,4 +1,4 @@
-package net.mcbbs.client.util;
+package net.mcbbs.client.fixer.util;
 
 import java.util.Collection;
 import java.util.Map;
@@ -11,7 +11,7 @@ public final class CollectionUtils {
      * @param <E> used to make sure that both of two collections uses the same generic parameter.
      * @return An ordered tuple with two collections without repetition
      */
-    public static<E> Tuple<Collection<E>,Collection<E>> removeRepetition(Collection<E> first,Collection<E> last){
+    public static<E> Tuple<Collection<E>,Collection<E>> removeRepetition(Collection<E> first, Collection<E> last){
         for (E var:first) {
             if(last.contains(var)){
                 first.remove(var);

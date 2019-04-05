@@ -1,15 +1,12 @@
-package net.mcbbs.client;
+package net.mcbbs.client.fixer;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Maps;
-import com.google.common.collect.MultimapBuilder;
 import com.google.gson.*;
-import com.google.gson.internal.Streams;
 import com.google.gson.stream.JsonReader;
 
-import net.mcbbs.client.util.IOUtils;
-import net.mcbbs.client.util.MessageDigestUtils;
-import net.mcbbs.client.util.Tuple;
+import net.mcbbs.client.fixer.util.IOUtils;
+import net.mcbbs.client.fixer.util.MessageDigestUtils;
+import net.mcbbs.client.fixer.util.Tuple;
 
 import java.io.*;
 
