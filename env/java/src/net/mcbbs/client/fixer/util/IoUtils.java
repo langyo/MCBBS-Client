@@ -1,6 +1,5 @@
 package net.mcbbs.client.fixer.util;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,11 +13,8 @@ public final class IoUtils {
     public static byte[] readFullyFrom(String url) throws IOException {
         URL uri = new URL(url);
         URLConnection connection = uri.openConnection();
-        InputStream is = connection.getInputStream();
-        try {
+        try (InputStream is = connection.getInputStream()) {
             return is.readAllBytes();
-        }finally {
-            is.close();
         }
     }
 
@@ -29,10 +25,8 @@ public final class IoUtils {
     }
 
     public static boolean writeFullyToAndClose(OutputStream outputStream, byte[] data) throws IOException {
-        try{
-            return writeFullyTo(outputStream,data);
-        }finally {
-            outputStream.close();
+        try (outputStream) {
+            return writeFullyTo(outputStream, data);
         }
     }
 }
