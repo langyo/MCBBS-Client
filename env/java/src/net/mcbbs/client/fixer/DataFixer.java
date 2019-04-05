@@ -34,8 +34,9 @@ public class DataFixer {
     }
 
     public void fixUpData(String loc, String root, boolean fixUpCodes, boolean fixUpResources) throws IOException {
+        JsonReader jr = pullMD5Json(loc);
         JsonParser jp = new JsonParser();
-        JsonElement je = jp.parse(pullMD5Json(loc));
+        JsonElement je = jp.parse(jr);
         JsonArray array = je.getAsJsonArray();
         Iterator<JsonElement> iter = array.iterator();
         Map<String, Tuple<String, Tuple<String, String>>> fileMD5 = Maps.newHashMap();
@@ -62,10 +63,11 @@ public class DataFixer {
                 .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
         ).forEach(t -> {
             try {
-                IoUtils.writeFullyTo(new FileOutputStream(t.getV1().toFile().getName()), IoUtils.readFullyFrom(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1()));
+                IoUtils.writeFullyToAndClose(new FileOutputStream(t.getV1().toFile().getName()), IoUtils.readFullyFrom(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+        jr.close();
     }
 }

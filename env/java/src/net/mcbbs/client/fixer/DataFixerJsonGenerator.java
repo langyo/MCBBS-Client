@@ -38,6 +38,7 @@ public class DataFixerJsonGenerator {
         }
         writer.endArray();
         System.out.println(stringWriter.toString());
+        writer.close();
     }
 
     private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {

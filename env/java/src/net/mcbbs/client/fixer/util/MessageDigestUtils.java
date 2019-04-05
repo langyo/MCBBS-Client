@@ -30,6 +30,10 @@ public final class MessageDigestUtils {
         digestInputStream = new DigestInputStream(inputStream, MessageDigest.getInstance("MD5"));
         byte[] buffer = new byte[bufferSize];
         while (digestInputStream.read(buffer) > 0) ;
-        return new BigInteger(1, digestInputStream.getMessageDigest().digest()).toString(16);
+        try {
+            return new BigInteger(1, digestInputStream.getMessageDigest().digest()).toString(16);
+        }finally {
+            digestInputStream.close();
+        }
     }
 }
