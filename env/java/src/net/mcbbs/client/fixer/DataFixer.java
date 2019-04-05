@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import net.mcbbs.client.fixer.util.IOUtils;
+import net.mcbbs.client.fixer.util.IoUtils;
 import net.mcbbs.client.fixer.util.MessageDigestUtils;
 import net.mcbbs.client.fixer.util.Tuple;
 
@@ -21,7 +21,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * @author yinyangshi InitAuther97
@@ -50,8 +49,7 @@ public class DataFixer {
                 Objects.requireNonNull(new File("..").getParentFile().listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
                 "scripts"
         );
-        Stream<Path> fileStream = Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS);
-        fileStream.filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
+        Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
                 .map(path -> {
                     try {
                         return Tuple.asTuple(path, MessageDigestUtils.md5(Files.newInputStream(path)));
@@ -64,7 +62,7 @@ public class DataFixer {
                 .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
         ).forEach(t -> {
             try {
-                IOUtils.writeFullyTo(new FileOutputStream(t.getV1().toFile().getName()), IOUtils.readFullyFrom(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1()));
+                IoUtils.writeFullyTo(new FileOutputStream(t.getV1().toFile().getName()), IoUtils.readFullyFrom(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

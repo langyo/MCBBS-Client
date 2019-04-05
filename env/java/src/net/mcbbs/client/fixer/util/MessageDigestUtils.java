@@ -1,6 +1,5 @@
 package net.mcbbs.client.fixer.util;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -19,13 +18,13 @@ public final class MessageDigestUtils {
             md.update(plainText.getBytes());
             secretBytes = md.digest();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Cannot find MD5 MessageDigest!",e);
+            throw new RuntimeException("Cannot find MD5 MessageDigest!", e);
         }
         return new BigInteger(1, secretBytes).toString(16);
     }
+
     public static String md5(InputStream inputStream) throws NoSuchAlgorithmException, IOException {
         int bufferSize = 256 * 1024;
-        FileInputStream fileInputStream = null;
         DigestInputStream digestInputStream = null;
         // 拿到一个MD5转换器（同样，这里可以换成SHA1）
         digestInputStream = new DigestInputStream(inputStream, MessageDigest.getInstance("MD5"));
