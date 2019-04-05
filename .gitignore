@@ -87,3 +87,4 @@ gradlew
 gradlew.bat
 gradle
 build
+*.jar
