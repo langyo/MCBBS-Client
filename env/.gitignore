@@ -1,0 +1,89 @@
+# --- 针对 native/electron 的部分 ---
+
+# Node.js
+
+package-lock.json
+
+node_modules/
+
+# --- 针对 native/electron 的部分 ---
+
+native/electron/node_modules/
+native/electron/scripts/
+
+native/electron/public/bundle.js
+
+native/electron/.idea
+native/electron/dist
+native/electron/scripts
+native/electron/dist/*
+native/electron/*/.DS_Store
+native/electron/.DS_Store
+native/electron/npm-debug.log
+native/electron/*.swp
+native/electron/local.json
+native/electron/mock/data_origin
+native/electron/mock/data1
+native/electron/mock/data2
+native/electron/mock/dist
+native/electron/mock/test_less
+native/electron/mock/release
+
+# electron 打包文件
+native/electron/packaged/
+
+# --- 针对 native/ionic 的部分 ---
+
+native/ionic/*~
+native/ionic/*.sw[mnpcod]
+native/ionic/*.log
+native/ionic/*.tmp
+native/ionic/*.tmp.*
+native/ionic/log.txt
+native/ionic/*.sublime-project
+native/ionic/*.sublime-workspace
+native/ionic/.vscode/
+native/ionic/npm-debug.log*
+
+native/ionic/.idea/
+native/ionic/.ionic/
+native/ionic/.sourcemaps/
+native/ionic/.sass-cache/
+native/ionic/.tmp/
+native/ionic/.versions/
+native/ionic/coverage/
+native/ionic/www/
+native/ionic/tmp/
+native/ionic/temp/
+native/ionic/platforms/
+native/ionic/plugins/
+native/ionic/plugins/android.json
+native/ionic/plugins/ios.json
+native/ionic/$RECYCLE.BIN/
+
+native/ionic/node_modules/
+native/ionic/scripts/
+
+native/ionic/.DS_Store
+native/ionic/Thumbs.db
+native/ionic/UserInterfaceState.xcuserstate
+
+# --- 针对 scripts 的部分 ---
+
+# // 有关 scripts：这些都是经过 Babel 转译后得到的 ES5 代码，其实本没有留下的必要，但仍留下来
+# // 具体原因，请见：https://github.com/langyo/MCBBS-Client/issues/4
+
+scripts/node_modules/
+
+# yarn
+
+yarn-error.log
+yarn.lock
+
+# idea & gradle project configuration
+.idea
+.gradle
+gradlew
+gradlew.bat
+gradle
+build
