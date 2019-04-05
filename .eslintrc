@@ -1,10 +1,10 @@
 {
-  parser: "babel-eslint",
+  "parser": "babel-eslint",
   "plugins": [
     "react",
     "import"
   ],
   "parserOptions": {
-     "ecmaVersion": 6
-   }
+    "ecmaVersion": 6
+  }
 }
