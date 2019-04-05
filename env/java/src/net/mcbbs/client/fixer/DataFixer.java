@@ -23,6 +23,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+/**
+ * @author yinyangshi InitAuther97
+ */
 public class DataFixer {
     private JsonReader pullMD5Json(String loc) throws IOException {
         URL url = new URL(loc == null ? "http://langyo.github.io/MCBBS-Client/update.json" : loc);

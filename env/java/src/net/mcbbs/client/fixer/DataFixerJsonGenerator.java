@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author yinyangshi InitAuther97
+ */
 public class DataFixerJsonGenerator {
     public static void generate(String downloadURL) throws IOException {
         StringWriter stringWriter = new StringWriter();

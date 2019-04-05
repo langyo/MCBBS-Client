@@ -8,6 +8,9 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * @author InitAuther97
+ */
 public final class MessageDigestUtils {
     public static String md5(String plainText) {
         byte[] secretBytes = null;

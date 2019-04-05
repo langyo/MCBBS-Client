@@ -3,6 +3,9 @@ package net.mcbbs.client.fixer.util;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * @author InitAuther97
+ */
 public final class CollectionUtils {
     /**
      * Always foreach the first one!

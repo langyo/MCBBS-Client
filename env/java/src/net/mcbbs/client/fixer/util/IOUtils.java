@@ -6,6 +6,9 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * @author InitAuther97
+ */
 public final class IOUtils {
     public static byte[] readFullyFrom(String url) throws IOException {
         URL URl = new URL(url);
