@@ -4,9 +4,14 @@ import com.google.gson.stream.JsonWriter;
 import net.mcbbs.client.util.MessageDigestUtils;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DataFixerJsonGenerator {
     public static void generate(String downloadURL) throws IOException {
@@ -22,6 +27,8 @@ public class DataFixerJsonGenerator {
                 writer.value(info.md5);
                 writer.name("path");
                 writer.value(info.path);
+                writer.name("dest");
+                writer.value(info.dest);
                 writer.endObject();
             }
         } catch (NoSuchAlgorithmException e) {
@@ -31,24 +38,33 @@ public class DataFixerJsonGenerator {
         System.out.println(stringWriter.toString());
     }
 
-    private static FileInfo[] generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
+    private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
         List<FileInfo> infos = new ArrayList<>();
-        File[] files = new File(".").listFiles();
-        for(File f:files){
-            infos.add(new FileInfo(MessageDigestUtils.md5(new FileInputStream(f)),f.getName(),downloadURL.endsWith("/")?downloadURL.concat(f.getName()):downloadURL.concat("/").concat(f.getName())));
+        List<Path> paths = Files.walk(Paths.get(".")).collect(Collectors.toList());
+        if (!paths.isEmpty()) {
+            for(Path f:paths){
+                infos.add(new FileInfo(
+                        MessageDigestUtils.md5(Files.newInputStream(f)),
+                        f.getFileName().toString(),
+                        downloadURL.endsWith("/")?downloadURL.concat(f.getFileName().toString()):downloadURL.concat("/").concat(f.getFileName().toString()),
+                        f.toAbsolutePath().toString())
+                );
+            }
         }
-        return (FileInfo[])infos.toArray();
+        return infos;
     }
 
     private static class FileInfo {
         public final String name;
         public final String md5;
         public final String path;
+        public final String dest;
 
-        public FileInfo(String md5, String filename, String s1) {
+        public FileInfo(String md5, String filename, String s1, String dest) {
             this.name = filename;
             this.md5 = md5;
             this.path = s1;
+            this.dest=dest;
         }
     }
 }
