@@ -1,12 +1,9 @@
-package net.mcbbs.client.util;
-
-import sun.misc.Unsafe;
+package net.mcbbs.client.fixer.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.nio.file.Files;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

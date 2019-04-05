@@ -1,4 +1,4 @@
-package net.mcbbs.client.util;
+package net.mcbbs.client.fixer.util;
 
 public final class Tuple<V1,V2> {
 

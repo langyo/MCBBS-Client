@@ -1,4 +1,4 @@
-package net.mcbbs.client.util;
+package net.mcbbs.client.fixer.util;
 
 import java.io.IOException;
 import java.io.InputStream;

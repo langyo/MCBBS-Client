@@ -1,4 +1,4 @@
-package net.mcbbs.client;
+package net.mcbbs.client.lanuncher;
 
 public class Launcher {
     public static void main(String[] args){
