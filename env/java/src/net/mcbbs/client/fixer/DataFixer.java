@@ -51,6 +51,7 @@ public class DataFixer {
                 "scripts"
         );
         Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
+                .filter(path -> !Files.isDirectory(path))
                 .map(path -> {
                     try {
                         return Tuple.asTuple(path, MessageDigestUtils.md5(Files.newInputStream(path)));
