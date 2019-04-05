@@ -79,3 +79,12 @@ scripts/node_modules/
 
 yarn-error.log
 yarn.lock
+
+# idea & gradle project configuration
+.idea
+.gradle
+gradlew
+gradlew.bat
+gradle
+build
+*.jar
