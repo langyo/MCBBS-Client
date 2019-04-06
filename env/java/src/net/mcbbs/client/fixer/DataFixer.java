@@ -29,43 +29,43 @@ public class DataFixer {
     }
 
     public void fixUpData(String loc, String root, boolean fixUpCodes, boolean fixUpResources) throws IOException {
-        JsonReader jr = pullMD5Json(loc);
-        JsonParser jp = new JsonParser();
-        JsonElement je = jp.parse(jr);
-        JsonArray array = je.getAsJsonArray();
-        Iterator<JsonElement> iter = array.iterator();
-        Map<String, Tuple<String, Tuple<String, String>>> fileMD5 = Maps.newHashMap();
-        JsonObject kv;
-        while (iter.hasNext()) {
-            kv = iter.next().getAsJsonObject();
-            fileMD5.put(kv.get("file").getAsString(), Tuple.asTuple(kv.get("md5").getAsString(), Tuple.asTuple(kv.get("path").getAsString(), kv.get("dest").getAsString())));
-        }
-        Map<String, String> localFileMD5 = Maps.newHashMap();
-        Path rootPath = Paths.get(
-                Objects.requireNonNull(new File("..").getParentFile().listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
-                "scripts"
-        );
-        Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
-                .map(path -> {
-                    try {
-                        return Tuple.asTuple(path, MessageDigestUtils.md5(Files.newInputStream(path)));
-                    } catch (NoSuchAlgorithmException | IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }).filter(t -> fileMD5.values()
-                .stream()
-                .map(Tuple::getV1)
-                .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
-        ).forEach(t -> {
-            try {
-                IOUtils.bindStream(
-                        new FileOutputStream(t.getV1().toFile().getName()),
-                        IOUtils.from(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1())
-                ).transformAllAndClose();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        try(JsonReader jr = pullMD5Json(loc)){
+            JsonParser jp = new JsonParser();
+            JsonElement je = jp.parse(jr);
+            JsonArray array = je.getAsJsonArray();
+            Iterator<JsonElement> iter = array.iterator();
+            Map<String, Tuple<String, Tuple<String, String>>> fileMD5 = Maps.newHashMap();
+            JsonObject kv;
+            while (iter.hasNext()) {
+                kv = iter.next().getAsJsonObject();
+                fileMD5.put(kv.get("file").getAsString(), Tuple.asTuple(kv.get("md5").getAsString(), Tuple.asTuple(kv.get("path").getAsString(), kv.get("dest").getAsString())));
             }
-        });
-        jr.close();
+            Map<String, String> localFileMD5 = Maps.newHashMap();
+            Path rootPath = Paths.get(
+                    Objects.requireNonNull(new File("..").getParentFile().listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
+                    "scripts"
+            );
+            Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
+                    .map(path -> {
+                        try {
+                            return Tuple.asTuple(path, MessageDigestUtils.md5(Files.newInputStream(path)));
+                        } catch (NoSuchAlgorithmException | IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }).filter(t -> fileMD5.values()
+                    .stream()
+                    .map(Tuple::getV1)
+                    .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
+            ).forEach(t -> {
+                try {
+                    IOUtils.bindStream(
+                            new FileOutputStream(t.getV1().toFile().getName()),
+                            IOUtils.from(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1())
+                    ).transformAllAndClose();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
     }
 }

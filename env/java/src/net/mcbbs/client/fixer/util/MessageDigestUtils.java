@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class MessageDigestUtils {
     public static String md5(String plainText) {
-        byte[] secretBytes = null;
+        byte[] secretBytes;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(plainText.getBytes());
@@ -32,7 +32,7 @@ public final class MessageDigestUtils {
         while (digestInputStream.read(buffer) > 0) ;
         try {
             return new BigInteger(1, digestInputStream.getMessageDigest().digest()).toString(16);
-        }finally {
+        } finally {
             digestInputStream.close();
         }
     }

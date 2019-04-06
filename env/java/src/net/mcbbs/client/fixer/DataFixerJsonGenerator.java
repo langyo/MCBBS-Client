@@ -17,28 +17,27 @@ import java.util.stream.Collectors;
  */
 public class DataFixerJsonGenerator {
     public static void generate(String downloadURL) throws IOException {
-        StringWriter stringWriter = new StringWriter();
-        JsonWriter writer = new JsonWriter(stringWriter);
-        writer.beginArray();
-        try {
-            for (FileInfo info : generateFileInfos(downloadURL == null ? "http://langyo.github.io/MCBBS-Client/update.json" : downloadURL)) {
-                writer.beginObject();
-                writer.name(info.name);
-                writer.beginObject();
-                writer.name("md5");
-                writer.value(info.md5);
-                writer.name("path");
-                writer.value(info.path);
-                writer.name("dest");
-                writer.value(info.dest);
-                writer.endObject();
+        try (StringWriter stringWriter = new StringWriter(); JsonWriter writer = new JsonWriter(stringWriter)) {
+            writer.beginArray();
+            try {
+                for (FileInfo info : generateFileInfos(downloadURL == null ? "http://langyo.github.io/MCBBS-Client/update.json" : downloadURL)) {
+                    writer.beginObject();
+                    writer.name(info.name);
+                    writer.beginObject();
+                    writer.name("md5");
+                    writer.value(info.md5);
+                    writer.name("path");
+                    writer.value(info.path);
+                    writer.name("dest");
+                    writer.value(info.dest);
+                    writer.endObject();
+                }
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            writer.endArray();
+            System.out.println(stringWriter.toString());
         }
-        writer.endArray();
-        System.out.println(stringWriter.toString());
-        writer.close();
     }
 
     private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
