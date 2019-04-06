@@ -16,39 +16,51 @@ import java.util.stream.Collectors;
  * @author yinyangshi InitAuther97
  */
 public class DataFixerJsonGenerator {
+    /**
+     * Utility used to generate the file-info json.
+     *
+     * @param downloadURL where to download the new file
+     * @throws IOException when cannot write data.
+     */
     public static void generate(String downloadURL) throws IOException {
-        StringWriter stringWriter = new StringWriter();
-        JsonWriter writer = new JsonWriter(stringWriter);
-        writer.beginArray();
-        try {
-            for (FileInfo info : generateFileInfos(downloadURL == null ? "http://langyo.github.io/MCBBS-Client/update.json" : downloadURL)) {
-                writer.beginObject();
-                writer.name(info.name);
-                writer.beginObject();
-                writer.name("md5");
-                writer.value(info.md5);
-                writer.name("path");
-                writer.value(info.path);
-                writer.name("dest");
-                writer.value(info.dest);
-                writer.endObject();
+        try (StringWriter stringWriter = new StringWriter(); JsonWriter writer = new JsonWriter(stringWriter)) {
+            writer.beginArray();
+            try {
+                for (FileInfo info : generateFileInfos(downloadURL == null ? "http://langyo.github.io/MCBBS-Client/update.json" : downloadURL)) {
+                    writer.beginObject();
+                    writer.name(info.name);
+                    writer.beginObject();
+                    writer.name("md5");
+                    writer.value(info.md5);
+                    writer.name("path");
+                    writer.value(info.path);
+                    writer.name("dest");
+                    writer.value(info.dest);
+                    writer.endObject();
+                }
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            writer.endArray();
+            System.out.println(stringWriter.toString());
         }
-        writer.endArray();
-        System.out.println(stringWriter.toString());
-        writer.close();
     }
 
+    /**
+     * Utility to generate all file informations.
+     *
+     * @param downloadURL where to download the new file.
+     * @return a List with all the file infos
+     * @throws IOException              if failed to read file.
+     * @throws NoSuchAlgorithmException if unable to find md5.
+     */
     private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
         List<IOException> ioEs = new ArrayList<>();
         List<NoSuchAlgorithmException> noAlgorithmEs = new ArrayList<>();
-        var infos = Files.walk(Paths.get(".")).parallel()
+        List<FileInfo> infos = Files.walk(Paths.get(".")).parallel()
                 .map(f -> {
                     try {
-                        return new FileInfo(
-                                MessageDigestUtils.md5(Files.newInputStream(f)),
+                        return new FileInfo(MessageDigestUtils.md5(Files.newInputStream(f)),
                                 f.getFileName().toString(),
                                 downloadURL.endsWith("/") ? downloadURL.concat(f.getFileName().toString()) :
                                         downloadURL.concat("/").concat(f.getFileName().toString()),
@@ -75,6 +87,9 @@ public class DataFixerJsonGenerator {
         }
     }
 
+    /**
+     * Utility class used to collect the file info.
+     */
     private static class FileInfo {
         private final String name;
         private final String md5;
