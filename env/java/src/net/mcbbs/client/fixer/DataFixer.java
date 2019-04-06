@@ -6,13 +6,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import net.mcbbs.client.fixer.util.IoUtils;
+import net.mcbbs.client.fixer.util.IOUtils;
 import net.mcbbs.client.fixer.util.MessageDigestUtils;
 import net.mcbbs.client.fixer.util.Tuple;
 
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,10 +25,7 @@ import java.util.Objects;
  */
 public class DataFixer {
     private JsonReader pullMD5Json(String loc) throws IOException {
-        URL url = new URL(loc == null ? "http://langyo.github.io/MCBBS-Client/update.json" : loc);
-        URLConnection connection = url.openConnection();
-        byte[] string = connection.getInputStream().readAllBytes();
-        return new JsonReader(new BufferedReader(new InputStreamReader(new ByteArrayInputStream(string))));
+        return new JsonReader(new BufferedReader(new InputStreamReader(IOUtils.from(loc == null ? "http://langyo.github.io/MCBBS-Client/update.json" : loc))));
     }
 
     public void fixUpData(String loc, String root, boolean fixUpCodes, boolean fixUpResources) throws IOException {
@@ -63,7 +58,10 @@ public class DataFixer {
                 .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
         ).forEach(t -> {
             try {
-                IoUtils.writeFullyToAndClose(new FileOutputStream(t.getV1().toFile().getName()), IoUtils.readFullyFrom(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1()));
+                IOUtils.bindStream(
+                        new FileOutputStream(t.getV1().toFile().getName()),
+                        IOUtils.from(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1())
+                ).transformAllAndClose();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
