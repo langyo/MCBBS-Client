@@ -1,13 +1,11 @@
 package net.mcbbs.client.fixer.util;
 
-import jdk.internal.util.xml.impl.Input;
-
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * @author InitAuther97
+ * @author InitAuther97 yinyangshi
  */
 public final class IOUtils {
 
@@ -25,15 +23,15 @@ public final class IOUtils {
     }
 
     public static IOStream ioStream(String url) throws IOException {
-        return new IOStream(from(url),to(url));
+        return new IOStream(from(url), to(url));
     }
 
-    public static IOStream ioStream(String in,String out) throws IOException {
-        return new IOStream(from(in),to(out));
+    public static IOStream ioStream(String in, String out) throws IOException {
+        return new IOStream(from(in), to(out));
     }
 
     public static byte[] readFully(InputStream in) throws IOException {
-        try(ByteArrayOutputStream baos = new ByteArrayOutputStream();in) {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); in) {
             int n;
             while (-1 != (n = in.read())) {
                 baos.write(n);
@@ -58,16 +56,17 @@ public final class IOUtils {
     }
 
     public static IOStream bindStream(OutputStream out, InputStream in) throws IOException {
-        return new IOStream(in,out);
+        return new IOStream(in, out);
     }
 
-    public static final class IOStream implements Closeable,AutoCloseable {
-        private boolean eof = false;
+    public static final class IOStream implements Closeable, Flushable {
         private final InputStream in;
         private final OutputStream out;
-        public IOStream(final InputStream in,final OutputStream out){
-            this.in=in;
-            this.out=out;
+        private boolean eof = false;
+
+        public IOStream(final InputStream in, final OutputStream out) {
+            this.in = in;
+            this.out = out;
         }
 
         public int read() throws IOException {
@@ -85,13 +84,18 @@ public final class IOUtils {
             checkAccess();
             checkEOF();
             int result = in.read();
-            if(result!=-1){
+            if (result != -1) {
                 out.write(result);
                 return true;
             } else {
-                eof=true;
+                eof = true;
                 return false;
             }
+        }
+
+        @Override
+        public void flush() throws IOException {
+            out.flush();
         }
 
         public void reset() throws IOException {
@@ -102,21 +106,43 @@ public final class IOUtils {
         public void transformAll() throws IOException {
             checkAccess();
             checkEOF();
-            while(transformAByte());
+            //noinspection StatementWithEmptyBody
+            while (transformAByte()) ;
         }
 
         @Override
         public void close() throws IOException {
-            in.close();
-            out.close();
+            IOException error = null;
+            try {
+                in.close();
+            } catch (IOException e) {
+                error = e;
+            }
+            try {
+                out.close();
+            } catch (IOException e) {
+                if (error == null) {
+                    error = e;
+                } else {
+                    error.addSuppressed(e);
+                }
+                throw error;
+            }
+            if (error != null) {
+                throw error;
+            }
         }
 
-        private void checkAccess() {
-            if(in==null||out==null)throw new UnsupportedOperationException("Stream is not available.");
+        private void checkAccess() throws IOException {
+            if (in == null || out == null) {
+                throw new IOException("Stream is not available.");
+            }
         }
 
-        private void checkEOF() {
-            if(eof)throw new UnsupportedOperationException("InputStream reaches the end of the file.");
+        private void checkEOF() throws IOException {
+            if (eof) {
+                throw new IOException("InputStream reaches the end of the file.");
+            }
         }
 
         public void transformAllAndClose() throws IOException {

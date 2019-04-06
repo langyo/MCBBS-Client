@@ -29,6 +29,7 @@ public final class MessageDigestUtils {
         // 拿到一个MD5转换器（同样，这里可以换成SHA1）
         digestInputStream = new DigestInputStream(inputStream, MessageDigest.getInstance("MD5"));
         byte[] buffer = new byte[bufferSize];
+        //noinspection StatementWithEmptyBody
         while (digestInputStream.read(buffer) > 0) ;
         try {
             return new BigInteger(1, digestInputStream.getMessageDigest().digest()).toString(16);
