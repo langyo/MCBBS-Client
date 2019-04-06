@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
  * @author yinyangshi InitAuther97
  */
 public class DataFixerJsonGenerator {
+    /**
+     * Utility used to generate the file-info json.
+     * @param downloadURL where to download the new file
+     * @throws IOException when cannot write data.
+     */
     public static void generate(String downloadURL) throws IOException {
         try (StringWriter stringWriter = new StringWriter(); JsonWriter writer = new JsonWriter(stringWriter)) {
             writer.beginArray();
@@ -40,6 +45,13 @@ public class DataFixerJsonGenerator {
         }
     }
 
+    /**
+     * Utility to generate all file informations.
+     * @param downloadURL where to download the new file.
+     * @return a List with all the file infos
+     * @throws IOException if failed to read file.
+     * @throws NoSuchAlgorithmException if unable to find md5.
+     */
     private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
         List<IOException> ioEs = new ArrayList<>();
         List<NoSuchAlgorithmException> noAlgorithmEs = new ArrayList<>();
@@ -74,6 +86,9 @@ public class DataFixerJsonGenerator {
         }
     }
 
+    /**
+     * Utility class used to collect the file info.
+     */
     private static class FileInfo {
         private final String name;
         private final String md5;

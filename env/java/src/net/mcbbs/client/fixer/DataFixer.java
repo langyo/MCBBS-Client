@@ -38,7 +38,7 @@ public class DataFixer {
             JsonObject kv;
             while (iter.hasNext()) {
                 kv = iter.next().getAsJsonObject();
-                fileMD5.put(kv.get("file").getAsString(), Tuple.asTuple(kv.get("md5").getAsString(), Tuple.asTuple(kv.get("path").getAsString(), kv.get("dest").getAsString())));
+                fileMD5.put(kv.get("file").getAsString(), Tuple.of(kv.get("md5").getAsString(), Tuple.of(kv.get("path").getAsString(), kv.get("dest").getAsString())));
             }
 //            Map<String, String> localFileMD5 = Maps.newHashMap(); unused map, What does it do??
             Path rootPath = Paths.get(
@@ -48,7 +48,7 @@ public class DataFixer {
             Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
                     .map(path -> {
                         try {
-                            return Tuple.asTuple(path, MessageDigestUtils.md5(Files.newInputStream(path)));
+                            return Tuple.of(path, MessageDigestUtils.md5(Files.newInputStream(path)));
                         } catch (NoSuchAlgorithmException | IOException e) {
                             throw new RuntimeException(e);
                         }
