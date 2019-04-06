@@ -5,15 +5,27 @@ import javafx.fxml.FXML;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author InitAuther97
+ */
 public class MainPane {
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    /**
+     * ResourceBundle that was given to the FXMLLoader
+     */
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    /**
+     * URL location of the FXML file that was given to the FXMLLoader
+     */
+    @FXML
     private URL location;
 
+
+    /**
+     * This method is called by the FXMLLoader when initialization is complete
+     */
     @FXML
-        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
 
     }

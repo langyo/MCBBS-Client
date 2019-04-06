@@ -1,6 +1,5 @@
 package net.mcbbs.client.fixer.util;
 
-import javax.annotation.Nonnull;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,6 +10,7 @@ import java.net.URLConnection;
 public final class IOUtils {
     /**
      * Utility used to get a {@code java.net.URLConnection} to the specified address.
+     *
      * @param path target to connect
      * @return A connection to the specified address.
      * @throws IOException if giving a invalid path or failed to open a connection or connection timed out.
@@ -22,6 +22,7 @@ public final class IOUtils {
 
     /**
      * Utility used to get a {@code java.io.InputStream} linked to the specified address
+     *
      * @param url target to connect
      * @return A {@code java.io.InputStream} that reads the data from the specified address
      * @throws IOException if giving a invalid path or failed to open a connection or a stream or connection timed out.
@@ -32,6 +33,7 @@ public final class IOUtils {
 
     /**
      * Utility used to get a {@code java.io.OutputStream} linked to the specified address
+     *
      * @param url target to connect
      * @return A {@code java.io.InputStream} that reads the data from the specified address
      * @throws IOException if giving a invalid path or failed to open a connection or a stream or connection timed out.
@@ -42,6 +44,7 @@ public final class IOUtils {
 
     /**
      * Utility used to get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
+     *
      * @param url target to connect
      * @return A {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} that contains a {@code java.io.InputStream} and a {@code java.io.OutputStream} linked to the specified address
      * @throws IOException if giving a invalid path,failed to open a connection or a stream or connection timed out.
@@ -49,9 +52,11 @@ public final class IOUtils {
     public static IOStream ioStream(String url) throws IOException {
         return new IOStream(from(url), to(url));
     }
+
     /**
      * Utility used to get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
-     * @param in target that {@code java.io.InputStream} connects to
+     *
+     * @param in  target that {@code java.io.InputStream} connects to
      * @param out target that {@code java.io.OutputStream} connects to
      * @return A {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} that contains a {@code java.io.InputStream} and a {@code java.io.OutputStream} linked to the specified address
      * @throws IOException if giving a invalid path,failed to open a connection or a stream or connection timed out.
@@ -62,22 +67,25 @@ public final class IOUtils {
 
     /**
      * Utility used to read all datas from a stream synchronously.
+     *
      * @param in a {@code java.io.InputStream}
      * @return Data from the specified stream.
      * @throws IOException if failed to read data or the connection timed out
      */
     public static byte[] readFully(InputStream in) throws IOException {
-        try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); in) {
-            int n;
-            while (-1 != (n = in.read())) {
-                baos.write(n);
-            }
-            return baos.toByteArray();
+        ByteArrayOutputStream bytesOut = new ByteArrayOutputStream();
+        //max temp: 32kb
+        byte[] temp = new byte[32 * 1024];
+        int len;
+        while (-1 != (len = in.read(temp))) {
+            bytesOut.write(temp, 0, len);
         }
+        return bytesOut.toByteArray();
     }
 
     /**
      * Utility used to read all datas from a url synchronously.
+     *
      * @param url target to read data.
      * @return Data from the specified url.
      * @throws IOException if failed to open a stream,read data or the connection timed out
@@ -90,23 +98,27 @@ public final class IOUtils {
 
     /**
      * Utility used to write all data to a specified {@code java.io.OutputStream}
+     *
      * @param outputStream target to write to
-     * @param data Data to write
+     * @param data         Data to write
      * @return if write successfully
      * @throws IOException if failed to write data or the connection timed out
      */
     public static boolean writeFullyToAndClose(OutputStream outputStream, byte[] data) throws IOException {
-        try (outputStream) {
+        try {
             outputStream.write(data);
             outputStream.flush();
+        } finally {
+            outputStream.close();
         }
         return true;
     }
 
     /**
      * Utility used to bind a {@code java.io.InputStream} and a {@code java.io.OutputStream} to a utility {@code net.mcbbs.client.fixer.util.IOUtils.IOStream}.
+     *
      * @param out a {@code java.io.OutputStream}
-     * @param in a {@code java.io.InputStream}
+     * @param in  a {@code java.io.InputStream}
      * @return a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} with two streams bound together
      * @throws IOException if failed to write data or the connection timed out
      */
@@ -116,12 +128,14 @@ public final class IOUtils {
 
     /**
      * An utility class used to bind {@code java.io.InputStream} and {@code java.io.OutputStream}.
+     *
      * @author InitAuther97
      */
     public static final class IOStream implements Closeable, Flushable {
         private final InputStream in;
         private final OutputStream out;
         private boolean eof = false;
+
         public IOStream(final InputStream in, final OutputStream out) {
             this.in = in;
             this.out = out;
@@ -129,6 +143,7 @@ public final class IOUtils {
 
         /**
          * Read a byte from the stream.
+         *
          * @return a byte read from the stream.
          * @throws IOException if failed to read data or the connection timed out
          */
@@ -140,6 +155,7 @@ public final class IOUtils {
 
         /**
          * Write a byte to the stream.
+         *
          * @throws IOException if failed to write data or the connection timed out
          */
         public void write(int bt) throws IOException {
@@ -149,6 +165,7 @@ public final class IOUtils {
 
         /**
          * Transform a byte from the {@code java.io.InputStream} to the {@code java.io.OutputStream}.
+         *
          * @return if transform successfully
          * @throws IOException if failed to write data or the connection timed out
          */
@@ -167,14 +184,17 @@ public final class IOUtils {
 
         /**
          * Flush the stream.
+         *
          * @throws IOException if failed to write data or the connection timed out
          */
         @Override
         public void flush() throws IOException {
             out.flush();
         }
+
         /**
          * Reset the stream.
+         *
          * @throws IOException if failed to write data or the connection timed out
          */
         public void reset() throws IOException {
@@ -184,6 +204,7 @@ public final class IOUtils {
 
         /**
          * Transform all the data from the {@code java.io.InputStream} to the {@code java.io.OutputStream}.
+         *
          * @return if transform successfully
          * @throws IOException if failed to write data or the connection timed out
          */
@@ -196,6 +217,7 @@ public final class IOUtils {
 
         /**
          * Transform all the data from the {@code java.io.InputStream} to the {@code java.io.OutputStream} and close the stream.
+         *
          * @return if transform successfully
          * @throws IOException if failed to write data or the connection timed out or failed to close the stream.
          */
@@ -206,6 +228,7 @@ public final class IOUtils {
 
         /**
          * Close the stream
+         *
          * @throws IOException if failed to close the stream.
          */
         @Override

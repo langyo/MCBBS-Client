@@ -10,6 +10,7 @@ public final class CollectionUtils {
     /**
      * Always foreach the first one!
      * Utility used to remove the duplicate values from the specified collections.
+     *
      * @param first The first collection
      * @param last  The another collection
      * @param <E>   used to make sure that both of two collections uses the same generic parameter.
@@ -26,6 +27,7 @@ public final class CollectionUtils {
     /**
      * Always foreach the first one!
      * Utility used to remove the key-value pairs with the duplicate keys from the specified maps.
+     *
      * @param first The first map
      * @param last  The another map
      * @param <K>   used to make sure that both of two collections uses the same generic parameter.
@@ -43,6 +45,7 @@ public final class CollectionUtils {
     /**
      * Always foreach the first one!
      * Utility used to remove the key-value pairs with the duplicate values from the specified maps.
+     *
      * @param first The first map
      * @param last  The another map
      * @param <K>   used to make sure that both of two collections uses the same generic parameter.

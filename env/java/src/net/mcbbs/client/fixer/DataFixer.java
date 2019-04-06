@@ -36,36 +36,43 @@ public class DataFixer {
             Iterator<JsonElement> iter = array.iterator();
             Map<String, Tuple<String, Tuple<String, String>>> fileMD5 = Maps.newHashMap();
             JsonObject kv;
+            //fixme: What's the json format? I think the code is wrong @InitAuther97
             while (iter.hasNext()) {
                 kv = iter.next().getAsJsonObject();
-                fileMD5.put(kv.get("file").getAsString(), Tuple.of(kv.get("md5").getAsString(), Tuple.of(kv.get("path").getAsString(), kv.get("dest").getAsString())));
+                fileMD5.put(kv.get("file").getAsString(),
+                        Tuple.of(kv.get("md5").getAsString(),
+                                Tuple.of(kv.get("path").getAsString(), kv.get("dest").getAsString())));
             }
 //            Map<String, String> localFileMD5 = Maps.newHashMap(); unused map, What does it do??
             Path rootPath = Paths.get(
-                    Objects.requireNonNull(new File("..").getParentFile().listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
+                    Objects.requireNonNull(new File("..").getParentFile()
+                            .listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
                     "scripts"
             );
-            Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
+            Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS)
+                    .filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
                     .map(path -> {
                         try {
                             return Tuple.of(path, MessageDigestUtils.md5(Files.newInputStream(path)));
                         } catch (NoSuchAlgorithmException | IOException e) {
                             throw new RuntimeException(e);
                         }
-                    }).filter(t -> fileMD5.values()
-                    .stream()
-                    .map(Tuple::getV1)
-                    .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
-            ).forEach(t -> {
-                try {
-                    IOUtils.bindStream(
-                            new FileOutputStream(t.getV1().toFile().getName()),
-                            IOUtils.from(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1())
-                    ).transformAllAndClose();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+                    })
+                    .filter(t -> fileMD5.values()
+                            .stream()
+                            .map(Tuple::getV1)
+                            .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
+                    )
+                    .forEach(t -> {
+                        try {
+                            IOUtils.bindStream(
+                                    Files.newOutputStream(t.getV1()),
+                                    IOUtils.from(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1())
+                            ).transformAllAndClose();
+                        } catch (IOException e) {
+                            throw new IOError(e);
+                        }
+                    });
         }
     }
 }

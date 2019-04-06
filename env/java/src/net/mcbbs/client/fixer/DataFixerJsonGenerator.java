@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class DataFixerJsonGenerator {
     /**
      * Utility used to generate the file-info json.
+     *
      * @param downloadURL where to download the new file
      * @throws IOException when cannot write data.
      */
@@ -47,19 +48,19 @@ public class DataFixerJsonGenerator {
 
     /**
      * Utility to generate all file informations.
+     *
      * @param downloadURL where to download the new file.
      * @return a List with all the file infos
-     * @throws IOException if failed to read file.
+     * @throws IOException              if failed to read file.
      * @throws NoSuchAlgorithmException if unable to find md5.
      */
     private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
         List<IOException> ioEs = new ArrayList<>();
         List<NoSuchAlgorithmException> noAlgorithmEs = new ArrayList<>();
-        var infos = Files.walk(Paths.get(".")).parallel()
+        List<FileInfo> infos = Files.walk(Paths.get(".")).parallel()
                 .map(f -> {
                     try {
-                        return new FileInfo(
-                                MessageDigestUtils.md5(Files.newInputStream(f)),
+                        return new FileInfo(MessageDigestUtils.md5(Files.newInputStream(f)),
                                 f.getFileName().toString(),
                                 downloadURL.endsWith("/") ? downloadURL.concat(f.getFileName().toString()) :
                                         downloadURL.concat("/").concat(f.getFileName().toString()),
