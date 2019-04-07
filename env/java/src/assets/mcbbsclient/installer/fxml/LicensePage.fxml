@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.16834170854271358" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.mcbbs.client.installer.LicensePage">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="67.0" prefWidth="598.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="57.0" layoutY="14.0" prefHeight="31.0" prefWidth="309.0" text="第二步:条款">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <TextArea editable="false" layoutX="34.0" layoutY="56.0" prefHeight="204.0" prefWidth="512.0" wrapText="true" />
+            <Label layoutX="34.0" layoutY="10.0" prefHeight="31.0" prefWidth="512.0" text="请仔细阅读以下*全部*条款内容，并且承认条款内容，方可安装" />
+            <Button fx:id="buttonDecline" layoutX="124.0" layoutY="276.0" mnemonicParsing="false" onAction="#onDecline" prefHeight="31.0" prefWidth="88.0" text="不，我不同意" />
+            <Button fx:id="buttonAccept" layoutX="387.0" layoutY="276.0" mnemonicParsing="false" onAction="#onAccept" prefHeight="31.0" prefWidth="88.0" text="是的，我承认" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

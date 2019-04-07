@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author Yaossg
- * */
+ */
 public class ExceptionUtils {
     public static <T extends Throwable> void throwAll(List<T> throwables) throws T {
         if(throwables.isEmpty()) return;

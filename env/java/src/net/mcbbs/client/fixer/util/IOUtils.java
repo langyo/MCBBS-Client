@@ -9,7 +9,7 @@ import java.net.URLConnection;
  */
 public final class IOUtils {
     /**
-     * get a {@code java.net.URLConnection} to the specified address.
+     * get a {@link java.net.URLConnection} to the specified address.
      *
      * @param path target to connect
      * @return A connection to the specified address.
@@ -21,10 +21,10 @@ public final class IOUtils {
     }
 
     /**
-     * get a {@code java.io.InputStream} linked to the specified address
+     * get a {@link java.io.InputStream} linked to the specified address
      *
      * @param url target to connect
-     * @return A {@code java.io.InputStream} that reads the data from the specified address
+     * @return A {@link java.io.InputStream} that reads the data from the specified address
      * @throws IOException if giving a invalid path or failed to open a connection or a stream or connection timed out.
      */
     public static InputStream from(String url) throws IOException {
@@ -32,10 +32,10 @@ public final class IOUtils {
     }
 
     /**
-     * get a {@code java.io.OutputStream} linked to the specified address
+     * get a {@link java.io.OutputStream} linked to the specified address
      *
      * @param url target to connect
-     * @return A {@code java.io.InputStream} that reads the data from the specified address
+     * @return A {@link java.io.InputStream} that reads the data from the specified address
      * @throws IOException if giving a invalid path or failed to open a connection or a stream or connection timed out.
      */
     public static OutputStream to(String url) throws IOException {
@@ -43,10 +43,10 @@ public final class IOUtils {
     }
 
     /**
-     * get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
+     * get a {@link net.mcbbs.client.fixer.util.IOStream} from the specified address
      *
      * @param url target to connect
-     * @return A {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} that contains a {@code java.io.InputStream} and a {@code java.io.OutputStream} linked to the specified address
+     * @return A {@link net.mcbbs.client.fixer.util.IOStream} that contains a {@link java.io.InputStream} and a {@link java.io.OutputStream} linked to the specified address
      * @throws IOException if giving a invalid path,failed to open a connection or a stream or connection timed out.
      */
     public static IOStream ioStream(String url) throws IOException {
@@ -54,11 +54,11 @@ public final class IOUtils {
     }
 
     /**
-     * get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
+     * get a {@link net.mcbbs.client.fixer.util.IOStream} from the specified address
      *
-     * @param in  target that {@code java.io.InputStream} connects to
-     * @param out target that {@code java.io.OutputStream} connects to
-     * @return A {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} that contains a {@code java.io.InputStream} and a {@code java.io.OutputStream} linked to the specified address
+     * @param in  target that {@link java.io.InputStream} connects to
+     * @param out target that {@link java.io.OutputStream} connects to
+     * @return A {@link net.mcbbs.client.fixer.util.IOStream} that contains a {@link java.io.InputStream} and a {@link java.io.OutputStream} linked to the specified address
      * @throws IOException if giving a invalid path,failed to open a connection or a stream or connection timed out.
      */
     public static IOStream ioStream(String in, String out) throws IOException {
@@ -68,11 +68,11 @@ public final class IOUtils {
     /**
      * read all datas from a stream synchronously.
      *
-     * @param in a {@code java.io.InputStream}
+     * @param in a {@link java.io.InputStream}
      * @return Data from the specified stream.
      * @throws IOException if failed to read data or the connection timed out
      */
-    public static byte[] readFully(InputStream in) throws IOException {
+    public static byte[] readAll(InputStream in) throws IOException {
         ByteArrayOutputStream bytesOut = new ByteArrayOutputStream();
         //max temp: 32kb
         byte[] temp = new byte[32 * 1024];
@@ -90,21 +90,21 @@ public final class IOUtils {
      * @return Data from the specified url.
      * @throws IOException if failed to open a stream,read data or the connection timed out
      */
-    public static byte[] readFullyFrom(String url) throws IOException {
+    public static byte[] readAllFrom(String url) throws IOException {
         try (InputStream is = from(url)) {
-            return readFully(is);
+            return readAll(is);
         }
     }
 
     /**
-     * write all data to a specified {@code java.io.OutputStream}
+     * write all data to a specified {@link java.io.OutputStream}
      *
      * @param outputStream target to write to
      * @param data         Data to write
      * @return if write successfully
      * @throws IOException if failed to write data or the connection timed out
      */
-    public static boolean writeAllAndClose(OutputStream outputStream, byte[] data) throws IOException {
+    public static boolean writeAll(OutputStream outputStream, byte[] data) throws IOException {
         try (Closeable ignore = outputStream) {
             outputStream.write(data);
             outputStream.flush();
@@ -113,13 +113,13 @@ public final class IOUtils {
     }
 
     /**
-     * bind a {@code java.io.InputStream} and a {@code java.io.OutputStream} to a utility {@code net.mcbbs.client.fixer.util.IOUtils.IOStream}.
+     * combine a {@link java.io.InputStream} and a {@link java.io.OutputStream} to a utility {@link net.mcbbs.client.fixer.util.IOUtils.IOStream}.
      *
-     * @param out a {@code java.io.OutputStream}
-     * @param in  a {@code java.io.InputStream}
-     * @return a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} with two streams bound together
+     * @param out a {@link java.io.OutputStream}
+     * @param in  a {@link java.io.InputStream}
+     * @return a {@link net.mcbbs.client.fixer.util.IOStream} with two streams combined together
      */
-    public static IOStream bindStream(OutputStream out, InputStream in) {
+    public static IOStream combine(OutputStream out, InputStream in) {
         return new IOStream(in, out);
     }
 }
