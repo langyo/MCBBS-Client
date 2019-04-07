@@ -1,30 +1,29 @@
 package net.mcbbs.client.fixer;
 
 import com.google.common.collect.Maps;
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import net.mcbbs.client.fixer.util.FileInfo;
 import net.mcbbs.client.fixer.util.IOUtils;
+import net.mcbbs.client.fixer.util.MessageDigestUtils;
+import net.mcbbs.client.fixer.util.Tuple;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author yinyangshi InitAuther97 Yaossg
+ * @author yinyangshi InitAuther97
  */
 public class DataFixer {
-
-    private static final Gson GSON = new GsonBuilder().create();
-
     private JsonReader pullMD5Json(String loc) throws IOException {
         return new JsonReader(new BufferedReader(new InputStreamReader(IOUtils.from(loc == null ? "http://langyo.github.io/MCBBS-Client/update.json" : loc))));
     }
@@ -34,32 +33,46 @@ public class DataFixer {
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(jr);
             JsonArray array = je.getAsJsonArray();
-            Map<String, FileInfo> fileMD5 = Maps.newHashMap();
-            for (JsonElement element : array) {
-                FileInfo info = GSON.fromJson(element, FileInfo.class);
-                fileMD5.put(info.name, info);
+            Iterator<JsonElement> iter = array.iterator();
+            Map<String, Tuple<String, Tuple<String, String>>> fileMD5 = Maps.newHashMap();
+            JsonObject kv;
+            //fixme: What's the json format? I think the code is wrong @InitAuther97
+            while (iter.hasNext()) {
+                kv = iter.next().getAsJsonObject();
+                fileMD5.put(kv.get("file").getAsString(),
+                        Tuple.of(kv.get("md5").getAsString(),
+                                Tuple.of(kv.get("path").getAsString(), kv.get("dest").getAsString())));
             }
-            // TODO new File() loves you!
+//            Map<String, String> localFileMD5 = Maps.newHashMap(); unused map, What does it do??
             Path rootPath = Paths.get(
                     Objects.requireNonNull(new File("..").getParentFile()
                             .listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
                     "scripts"
             );
-
-            Iterator<Path> iterator = Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS)
+            Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS)
                     .filter(path -> fileMD5.keySet().contains(path.getFileName().toString()))
+                    .map(path -> {
+                        try {
+                            return Tuple.of(path, MessageDigestUtils.md5(Files.newInputStream(path)));
+                        } catch (NoSuchAlgorithmException | IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
                     .filter(t -> fileMD5.values()
                             .stream()
-                            .map(fileInfo -> fileInfo.md5)
-                            .noneMatch(p -> p.equals(t.toString()))
-                    ).iterator();
-            while (iterator.hasNext()) {
-                Path next = iterator.next();
-                IOUtils.bindStream(
-                        Files.newOutputStream(next),
-                        IOUtils.from(fileMD5.get(next.getFileName().toString()).path)
-                ).transformAllAndClose();
-            }
+                            .map(Tuple::getV1)
+                            .noneMatch(p -> p.contentEquals(t.getV1().toFile().getName()))
+                    )
+                    .forEach(t -> {
+                        try {
+                            IOUtils.bindStream(
+                                    Files.newOutputStream(t.getV1()),
+                                    IOUtils.from(fileMD5.get(t.getV1().toFile().getName()).getV2().getV1())
+                            ).transformAllAndClose();
+                        } catch (IOException e) {
+                            throw new IOError(e);
+                        }
+                    });
         }
     }
 }

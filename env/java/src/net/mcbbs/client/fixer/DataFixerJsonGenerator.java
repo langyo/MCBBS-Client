@@ -1,11 +1,10 @@
 package net.mcbbs.client.fixer;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import net.mcbbs.client.fixer.util.FileInfo;
+import com.google.gson.stream.JsonWriter;
 import net.mcbbs.client.fixer.util.MessageDigestUtils;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
@@ -14,12 +13,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author yinyangshi InitAuther97 Yaossg
+ * @author yinyangshi InitAuther97
  */
 public class DataFixerJsonGenerator {
-
-    private static final Gson GSON = new GsonBuilder().create();
-
     /**
      * Utility used to generate the file-info json.
      *
@@ -27,11 +23,26 @@ public class DataFixerJsonGenerator {
      * @throws IOException when cannot write data.
      */
     public static void generate(String downloadURL) throws IOException {
-        try {
-            System.out.println(GSON.toJson(
-                    generateFileInfos(downloadURL == null ? "http://langyo.github.io/MCBBS-Client/update.json" : downloadURL)));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        try (StringWriter stringWriter = new StringWriter(); JsonWriter writer = new JsonWriter(stringWriter)) {
+            writer.beginArray();
+            try {
+                for (FileInfo info : generateFileInfos(downloadURL == null ? "http://langyo.github.io/MCBBS-Client/update.json" : downloadURL)) {
+                    writer.beginObject();
+                    writer.name(info.name);
+                    writer.beginObject();
+                    writer.name("md5");
+                    writer.value(info.md5);
+                    writer.name("path");
+                    writer.value(info.path);
+                    writer.name("dest");
+                    writer.value(info.dest);
+                    writer.endObject();
+                }
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            writer.endArray();
+            System.out.println(stringWriter.toString());
         }
     }
 
@@ -44,8 +55,8 @@ public class DataFixerJsonGenerator {
      * @throws NoSuchAlgorithmException if unable to find md5.
      */
     private static List<FileInfo> generateFileInfos(String downloadURL) throws IOException, NoSuchAlgorithmException {
-        List<IOException> ioExceptions = new ArrayList<>();
-        List<NoSuchAlgorithmException> noSuchAlgorithmExceptions = new ArrayList<>();
+        List<IOException> ioEs = new ArrayList<>();
+        List<NoSuchAlgorithmException> noAlgorithmEs = new ArrayList<>();
         List<FileInfo> infos = Files.walk(Paths.get(".")).parallel()
                 .map(f -> {
                     try {
@@ -55,20 +66,20 @@ public class DataFixerJsonGenerator {
                                         downloadURL.concat("/").concat(f.getFileName().toString()),
                                 f.toAbsolutePath().toString());
                     } catch (NoSuchAlgorithmException e) {
-                        noSuchAlgorithmExceptions.add(e);
+                        noAlgorithmEs.add(e);
                     } catch (IOException e) {
-                        ioExceptions.add(e);
+                        ioEs.add(e);
                     }
                     return null;
                 })
                 .collect(Collectors.toList());
-        if (ioExceptions.isEmpty() && noSuchAlgorithmExceptions.isEmpty()) {
+        if (ioEs.isEmpty() && noAlgorithmEs.isEmpty()) {
             return infos;
         } else {
-            if (ioExceptions.isEmpty()) {
-                throw noSuchAlgorithmExceptions.get(0);
+            if (ioEs.isEmpty()) {
+                throw noAlgorithmEs.get(0);
             } else {
-                throw ioExceptions.stream().reduce((e, e2) -> {
+                throw ioEs.stream().reduce((e, e2) -> {
                     e.addSuppressed(e2);
                     return e;
                 }).get();
@@ -76,4 +87,20 @@ public class DataFixerJsonGenerator {
         }
     }
 
+    /**
+     * Utility class used to collect the file info.
+     */
+    private static class FileInfo {
+        private final String name;
+        private final String md5;
+        private final String path;
+        private final String dest;
+
+        private FileInfo(String md5, String filename, String s1, String dest) {
+            this.name = filename;
+            this.md5 = md5;
+            this.path = s1;
+            this.dest = dest;
+        }
+    }
 }

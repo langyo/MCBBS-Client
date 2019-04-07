@@ -4,50 +4,58 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * @author InitAuther97 Yaossg
+ * @author InitAuther97
  */
 public final class CollectionUtils {
     /**
-     * symmetric difference of 2 collections
+     * Always foreach the first one!
+     * Utility used to remove the duplicate values from the specified collections.
      *
-     * @param first  The first collection
-     * @param second The second collection
+     * @param first The first collection
+     * @param last  The another collection
+     * @param <E>   used to make sure that both of two collections uses the same generic parameter.
      */
-    public static <E> void removeDuplication(Collection<E> first, Collection<E> second) {
+    public static <E> void removeDuplication(Collection<E> first, Collection<E> last) {
         for (E var : first) {
-            if (second.contains(var)) {
+            if (last.contains(var)) {
                 first.remove(var);
-                second.remove(var);
+                last.remove(var);
             }
         }
     }
 
     /**
-     * symmetric difference of 2 maps: by keys
+     * Always foreach the first one!
+     * Utility used to remove the key-value pairs with the duplicate keys from the specified maps.
      *
-     * @param first  The first map
-     * @param second The second map
+     * @param first The first map
+     * @param last  The another map
+     * @param <K>   used to make sure that both of two collections uses the same generic parameter.
+     * @param <V>   used to make sure that both of two collections uses the same generic parameter.
      */
-    public static <K, V> void removeDuplicateKey(Map<K, V> first, Map<K, V> second) {
+    public static <K, V> void removeDuplicateKey(Map<K, V> first, Map<K, V> last) {
         for (K key : first.keySet()) {
-            if (second.containsKey(key)) {
+            if (last.containsKey(key)) {
                 first.remove(key);
-                second.remove(key);
+                last.remove(key);
             }
         }
     }
 
     /**
-     * symmetric difference of 2 maps: by key-value pairs
+     * Always foreach the first one!
+     * Utility used to remove the key-value pairs with the duplicate values from the specified maps.
      *
-     * @param first  The first map
-     * @param second The second map
+     * @param first The first map
+     * @param last  The another map
+     * @param <K>   used to make sure that both of two collections uses the same generic parameter.
+     * @param <V>   used to make sure that both of two collections uses the same generic parameter.
      */
-    public static <K, V> void removeDuplicateKeyValue(Map<K, V> first, Map<K, V> second) {
+    public static <K, V> void removeDuplicateValue(Map<K, V> first, Map<K, V> last) {
         for (K key : first.keySet()) {
-            if (second.containsKey(key) && first.get(key) != null && first.get(key).equals(second.get(key))) {
+            if (last.containsKey(key) && first.get(key) != null && first.get(key).equals(last.get(key))) {
                 first.remove(key);
-                second.remove(key);
+                last.remove(key);
             }
         }
     }

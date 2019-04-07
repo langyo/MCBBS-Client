@@ -5,7 +5,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * @author InitAuther97 yinyangshi Yaossg
+ * @author InitAuther97 yinyangshi
  */
 public final class IOUtils {
     /**
@@ -104,10 +104,12 @@ public final class IOUtils {
      * @return if write successfully
      * @throws IOException if failed to write data or the connection timed out
      */
-    public static boolean writeAllAndClose(OutputStream outputStream, byte[] data) throws IOException {
-        try (Closeable ignore = outputStream) {
+    public static boolean writeFullyToAndClose(OutputStream outputStream, byte[] data) throws IOException {
+        try {
             outputStream.write(data);
             outputStream.flush();
+        } finally {
+            outputStream.close();
         }
         return true;
     }
@@ -118,8 +120,151 @@ public final class IOUtils {
      * @param out a {@code java.io.OutputStream}
      * @param in  a {@code java.io.InputStream}
      * @return a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} with two streams bound together
+     * @throws IOException if failed to write data or the connection timed out
      */
-    public static IOStream bindStream(OutputStream out, InputStream in) {
+    public static IOStream bindStream(OutputStream out, InputStream in) throws IOException {
         return new IOStream(in, out);
+    }
+
+    /**
+     * An utility class used to bind {@code java.io.InputStream} and {@code java.io.OutputStream}.
+     *
+     * @author InitAuther97
+     */
+    public static final class IOStream implements Closeable, Flushable {
+        private final InputStream in;
+        private final OutputStream out;
+        private boolean eof = false;
+
+        public IOStream(final InputStream in, final OutputStream out) {
+            this.in = in;
+            this.out = out;
+        }
+
+        /**
+         * Read a byte from the stream.
+         *
+         * @return a byte read from the stream.
+         * @throws IOException if failed to read data or the connection timed out
+         */
+        public int read() throws IOException {
+            checkAccess();
+            checkEOF();
+            return in.read();
+        }
+
+        /**
+         * Write a byte to the stream.
+         *
+         * @throws IOException if failed to write data or the connection timed out
+         */
+        public void write(int bt) throws IOException {
+            checkAccess();
+            out.write(bt);
+        }
+
+        /**
+         * Transform a byte from the {@code java.io.InputStream} to the {@code java.io.OutputStream}.
+         *
+         * @return if transform successfully
+         * @throws IOException if failed to write data or the connection timed out
+         */
+        public boolean transformAByte() throws IOException {
+            checkAccess();
+            checkEOF();
+            int result = in.read();
+            if (result != -1) {
+                out.write(result);
+                return true;
+            } else {
+                eof = true;
+                return false;
+            }
+        }
+
+        /**
+         * Flush the stream.
+         *
+         * @throws IOException if failed to write data or the connection timed out
+         */
+        @Override
+        public void flush() throws IOException {
+            out.flush();
+        }
+
+        /**
+         * Reset the stream.
+         *
+         * @throws IOException if failed to write data or the connection timed out
+         */
+        public void reset() throws IOException {
+            checkAccess();
+            in.reset();
+        }
+
+        /**
+         * Transform all the data from the {@code java.io.InputStream} to the {@code java.io.OutputStream}.
+         *
+         * @return if transform successfully
+         * @throws IOException if failed to write data or the connection timed out
+         */
+        public void transformAll() throws IOException {
+            checkAccess();
+            checkEOF();
+            //noinspection StatementWithEmptyBody
+            while (transformAByte()) ;
+        }
+
+        /**
+         * Transform all the data from the {@code java.io.InputStream} to the {@code java.io.OutputStream} and close the stream.
+         *
+         * @return if transform successfully
+         * @throws IOException if failed to write data or the connection timed out or failed to close the stream.
+         */
+        public void transformAllAndClose() throws IOException {
+            transformAll();
+            close();
+        }
+
+        /**
+         * Close the stream
+         *
+         * @throws IOException if failed to close the stream.
+         */
+        @Override
+        public void close() throws IOException {
+            IOException error = null;
+            try {
+                in.close();
+            } catch (IOException e) {
+                error = e;
+            }
+            try {
+                out.close();
+            } catch (IOException e) {
+                if (error == null) {
+                    error = e;
+                } else {
+                    error.addSuppressed(e);
+                }
+                throw error;
+            }
+            if (error != null) {
+                throw error;
+            }
+        }
+
+        private void checkAccess() throws IOException {
+            if (in == null || out == null) {
+                throw new IOException("Stream is not available.");
+            }
+        }
+
+        private void checkEOF() throws IOException {
+            if (eof) {
+                throw new IOException("InputStream reaches the end of the file.");
+            }
+        }
+
     }
 }
