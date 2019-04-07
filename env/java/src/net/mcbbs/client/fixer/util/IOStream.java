@@ -12,7 +12,7 @@ public final class IOStream implements Closeable, Flushable {
     private final OutputStream out;
     private boolean eof = false;
 
-    public IOStream(final InputStream in, final OutputStream out) {
+    public IOStream(InputStream in, OutputStream out) {
         this.in = in;
         this.out = out;
     }

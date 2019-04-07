@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,7 +48,7 @@ public class DataFixer {
             );
             Stream<Path> files = Files.walk(rootPath);
             Iterator<Path> iterator = files.iterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 Path path = iterator.next();
                 try {
                     fileMD5Local.put(path.getFileName().toString(),
@@ -73,20 +72,20 @@ public class DataFixer {
                     ).iterator();
             while (iterator.hasNext()) {
                 Path next = iterator.next();
-                IOUtils.bindStream(
+                IOUtils.combine(
                         Files.newOutputStream(next),
                         IOUtils.from(fileMD5.get(next.getFileName().toString()).path)
                 ).transformAllAndClose();
             }
             System.gc();
-            CollectionUtils.removeDuplicateKey(fileMD5,fileMD5Local);
+            CollectionUtils.removeDuplicateKey(fileMD5, fileMD5Local);
             for (FileInfo value : fileMD5.values()) {
-                IOUtils.bindStream(
+                IOUtils.combine(
                         Files.newOutputStream(Paths.get(value.dest)),
                         IOUtils.from(value.path)
                 ).transformAllAndClose();
             }
-            for(LocalFileInfo value:fileMD5Local.values()){
+            for (LocalFileInfo value : fileMD5Local.values()) {
                 Files.delete(Paths.get(value.dest));
             }
         }
