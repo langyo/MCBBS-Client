@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class MessageDigestUtils {
     /**
-     * Utility used to encrypt data by MD5.
+     * encrypt data by MD5.
      *
      * @param plainText A text needed to encrypt.
      * @return A data encrypted by MD5.
@@ -30,7 +30,7 @@ public final class MessageDigestUtils {
     }
 
     /**
-     * Utility used to encrypt data in the specified stream by MD5.
+     * encrypt data in the specified stream by MD5.
      *
      * @param inputStream A stream with data needed to encrypt.
      * @return A data encrypted by MD5.

@@ -2,6 +2,7 @@ package net.mcbbs.client.fixer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.mcbbs.client.fixer.util.ExceptionUtils;
 import net.mcbbs.client.fixer.util.FileInfo;
 import net.mcbbs.client.fixer.util.MessageDigestUtils;
 
@@ -21,7 +22,7 @@ public class DataFixerJsonGenerator {
     private static final Gson GSON = new GsonBuilder().create();
 
     /**
-     * Utility used to generate the file-info json.
+     * generate the file-info json.
      *
      * @param downloadURL where to download the new file
      * @throws IOException when cannot write data.
@@ -36,7 +37,7 @@ public class DataFixerJsonGenerator {
     }
 
     /**
-     * Utility to generate all file informations.
+     * generate all file information.
      *
      * @param downloadURL where to download the new file.
      * @return a List with all the file infos
@@ -62,18 +63,9 @@ public class DataFixerJsonGenerator {
                     return null;
                 })
                 .collect(Collectors.toList());
-        if (ioExceptions.isEmpty() && noSuchAlgorithmExceptions.isEmpty()) {
-            return infos;
-        } else {
-            if (ioExceptions.isEmpty()) {
-                throw noSuchAlgorithmExceptions.get(0);
-            } else {
-                throw ioExceptions.stream().reduce((e, e2) -> {
-                    e.addSuppressed(e2);
-                    return e;
-                }).get();
-            }
-        }
+        ExceptionUtils.throwAll(ioExceptions);
+        ExceptionUtils.throwAll(noSuchAlgorithmExceptions);
+        return infos;
     }
 
 }

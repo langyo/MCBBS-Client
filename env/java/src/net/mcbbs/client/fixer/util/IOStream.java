@@ -3,7 +3,7 @@ package net.mcbbs.client.fixer.util;
 import java.io.*;
 
 /**
- * An utility class used to bind {@code java.io.InputStream} and {@code java.io.OutputStream}.
+ * Combine {@code java.io.InputStream} and {@code java.io.OutputStream}.
  *
  * @author InitAuther97 Yaossg
  */
