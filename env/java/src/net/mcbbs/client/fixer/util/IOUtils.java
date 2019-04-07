@@ -9,7 +9,7 @@ import java.net.URLConnection;
  */
 public final class IOUtils {
     /**
-     * Utility used to get a {@code java.net.URLConnection} to the specified address.
+     * get a {@code java.net.URLConnection} to the specified address.
      *
      * @param path target to connect
      * @return A connection to the specified address.
@@ -21,7 +21,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to get a {@code java.io.InputStream} linked to the specified address
+     * get a {@code java.io.InputStream} linked to the specified address
      *
      * @param url target to connect
      * @return A {@code java.io.InputStream} that reads the data from the specified address
@@ -32,7 +32,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to get a {@code java.io.OutputStream} linked to the specified address
+     * get a {@code java.io.OutputStream} linked to the specified address
      *
      * @param url target to connect
      * @return A {@code java.io.InputStream} that reads the data from the specified address
@@ -43,7 +43,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
+     * get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
      *
      * @param url target to connect
      * @return A {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} that contains a {@code java.io.InputStream} and a {@code java.io.OutputStream} linked to the specified address
@@ -54,7 +54,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
+     * get a {@code net.mcbbs.client.fixer.util.IOUtils.IOStream} from the specified address
      *
      * @param in  target that {@code java.io.InputStream} connects to
      * @param out target that {@code java.io.OutputStream} connects to
@@ -66,7 +66,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to read all datas from a stream synchronously.
+     * read all datas from a stream synchronously.
      *
      * @param in a {@code java.io.InputStream}
      * @return Data from the specified stream.
@@ -84,7 +84,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to read all datas from a url synchronously.
+     * read all datas from a url synchronously.
      *
      * @param url target to read data.
      * @return Data from the specified url.
@@ -97,7 +97,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to write all data to a specified {@code java.io.OutputStream}
+     * write all data to a specified {@code java.io.OutputStream}
      *
      * @param outputStream target to write to
      * @param data         Data to write
@@ -113,7 +113,7 @@ public final class IOUtils {
     }
 
     /**
-     * Utility used to bind a {@code java.io.InputStream} and a {@code java.io.OutputStream} to a utility {@code net.mcbbs.client.fixer.util.IOUtils.IOStream}.
+     * bind a {@code java.io.InputStream} and a {@code java.io.OutputStream} to a utility {@code net.mcbbs.client.fixer.util.IOUtils.IOStream}.
      *
      * @param out a {@code java.io.OutputStream}
      * @param in  a {@code java.io.InputStream}
