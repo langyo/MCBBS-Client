@@ -28,7 +28,7 @@ public final class CollectionUtils {
      * @param first  The first map
      * @param second The second map
      */
-    public static <K, V> void removeDuplicateKey(Map<K, V> first, Map<K, V> second) {
+    public static <K, V, V2> void removeDuplicateKey(Map<K, V> first, Map<K, V2> second) {
         for (K key : first.keySet()) {
             if (second.containsKey(key)) {
                 first.remove(key);
