@@ -41,6 +41,7 @@ public class DataFixer {
                 fileMD5.put(info.name, info);
             }
             // TODO new File() loves you!
+            // TODO Files hates you!
             Path rootPath = Paths.get(
                     Objects.requireNonNull(new File("..").getParentFile()
                             .listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),

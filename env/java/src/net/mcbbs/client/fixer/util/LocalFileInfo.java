@@ -1,5 +1,8 @@
 package net.mcbbs.client.fixer.util;
 
+/**
+ * @author yinyangshi Yaossg InitAuther97
+ */
 public class LocalFileInfo {
     public final String name;
     public final String md5;
