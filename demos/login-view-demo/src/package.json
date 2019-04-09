@@ -1,0 +1,13 @@
+{
+  "title": "Material demo",
+  "description": "https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/text-fields/OutlinedTextFields.js",
+  "dependencies": {
+    "react-dom": "latest",
+    "react": "latest",
+    "prop-types": "latest",
+    "classnames": "latest",
+    "@material-ui/core": "latest"
+  },
+  "keywords": [],
+  "name": "ui"
+}

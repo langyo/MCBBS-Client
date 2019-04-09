@@ -1,0 +1,11 @@
+{
+  "name": "react-live2d-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "langyo",
+  "license": "Apache-2.0"
+}
