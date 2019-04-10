@@ -306,8 +306,8 @@ class MainWindow extends Reflux.Component {
                                 in={this.state.leftBarType === "documents"}
                                 timeout={500}
                               >
-                                <IconButton>
-                                  <CloseIcon onClick={this.handleCreateTagDestoryer(n.key)} />
+                                <IconButton onClick={this.handleCreateTagDestoryer(n.key)}>
+                                  <CloseIcon />
                                 </IconButton>
                               </Fade>
                             </ListItemSecondaryAction>
