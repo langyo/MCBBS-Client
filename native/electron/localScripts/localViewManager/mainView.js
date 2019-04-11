@@ -40,6 +40,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import MenuIcon from "mdi-material-ui/Menu";
 import CloseIcon from "mdi-material-ui/Close";
@@ -78,6 +79,8 @@ import TestData from "../../../../scripts/srcJs/viewManager/testData";
 import pageBindScript from "../../../../scripts/srcJs/forumWorker/pageBindScript";
 import db from "../localDatabase/database";
 
+import TestDrawer from "../../../../scripts/srcJs/viewManager/utils/mainDrawer";
+
 const drawerWidth = 200;
 
 const styles = theme => ({
@@ -85,95 +88,95 @@ const styles = theme => ({
     display: "flex",
     overflow: "hidden"
   },
-  content: {
-    overflowX: "hidden",
-    overflowY: "auto",
-    maxHeight: "600px",
-    width: "752px"
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap"
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerClose: {
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    overflowX: "hidden",
-    width: 48
-  },
-  toolbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
-  },
-  toolbarDrawerClosing: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
-  }
+  // content: {
+  //   overflowX: "hidden",
+  //   overflowY: "auto",
+  //   maxHeight: "600px",
+  //   width: "752px"
+  // },
+  // hide: {
+  //   display: "none"
+  // },
+  // drawer: {
+  //   width: drawerWidth,
+  //   flexShrink: 0,
+  //   whiteSpace: "nowrap"
+  // },
+  // drawerOpen: {
+  //   width: drawerWidth,
+  //   transition: theme.transitions.create("width", {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.enteringScreen
+  //   })
+  // },
+  // drawerClose: {
+  //   transition: theme.transitions.create("width", {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.leavingScreen
+  //   }),
+  //   overflowX: "hidden",
+  //   width: 48
+  // },
+  // toolbar: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "flex-end",
+  //   padding: "0 8px",
+  //   ...theme.mixins.toolbar
+  // },
+  // toolbarDrawerClosing: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   padding: "0 8px",
+  //   ...theme.mixins.toolbar
+  // }
 });
 
-let tags = [];
+// let tags = [];
 
-// 构建新的标签实体
-class Tag {
-  constructor(object) {
-    this.key = shortid.generate();
+// // 构建新的标签实体
+// class Tag {
+//   constructor(object) {
+//     this.key = shortid.generate();
 
-    this.title = object.title == null ? "未知标题" : object.title;
-    this.subTitle = object.subTitle == null ? "" : object.subTitle;
-    this.icon = object.icon == null ? <DocumentIcon /> : object.icon;
-    this.content = object.content == null ? {} : object.content;
+//     this.title = object.title == null ? "未知标题" : object.title;
+//     this.subTitle = object.subTitle == null ? "" : object.subTitle;
+//     this.icon = object.icon == null ? <DocumentIcon /> : object.icon;
+//     this.content = object.content == null ? {} : object.content;
 
-    this.enableClose = object.enableClose == null ? true : object.enableClose;
-    this.enableSelect =
-      object.enableSelect == null ? true : object.enableSelect;
+//     this.enableClose = object.enableClose == null ? true : object.enableClose;
+//     this.enableSelect =
+//       object.enableSelect == null ? true : object.enableSelect;
 
-    this.titleBold = object.titleBold == null ? false : object.titleBold;
-    this.titleItalic = object.titleItalic == null ? false : object.titleItalic;
-    this.titleUnderline =
-      object.titleUnderline == null ? false : object.titleUnderline;
-    this.titleDeleteline =
-      object.titleDeleteline == null ? false : object.titleDeleteline;
-    this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
+//     this.titleBold = object.titleBold == null ? false : object.titleBold;
+//     this.titleItalic = object.titleItalic == null ? false : object.titleItalic;
+//     this.titleUnderline =
+//       object.titleUnderline == null ? false : object.titleUnderline;
+//     this.titleDeleteline =
+//       object.titleDeleteline == null ? false : object.titleDeleteline;
+//     this.titleColor = object.titleColor == null ? "#000" : object.titleColor;
 
-    if (object.render == null) throw Error("未定义标签的渲染器！");
-    this.render = object.render;
-  }
-}
+//     if (object.render == null) throw Error("未定义标签的渲染器！");
+//     this.render = object.render;
+//   }
+// }
 
-function newTag(object) {
-  tags.push(new Tag(object));
-}
+// function newTag(object) {
+//   tags.push(new Tag(object));
+// }
 
-// 测试数据
-newTag({
-  title: TestData.threads[825413].title,
-  subTitle: TestData.users[TestData.threads[825413].author].name,
-  render: <WatchThreadRender thread={825413} />
-});
-newTag({
-  title: TestData.forums["announcement-1"].name,
-  icon: <WidgetsIcon />,
-  render: <ForumRender forum="announcement-1" />
-});
+// // 测试数据
+// newTag({
+//   title: TestData.threads[825413].title,
+//   subTitle: TestData.users[TestData.threads[825413].author].name,
+//   render: <WatchThreadRender thread={825413} />
+// });
+// newTag({
+//   title: TestData.forums["announcement-1"].name,
+//   icon: <WidgetsIcon />,
+//   render: <ForumRender forum="announcement-1" />
+// });
 
 // 窗口主体
 class MainWindow extends Reflux.Component {
@@ -254,340 +257,7 @@ class MainWindow extends Reflux.Component {
     try {
       return (
         <div className={classes.root}>
-          {/* <TitleBar
-            app="MCBBS Client"
-          /> */}
-          <CssBaseline />
-          <Drawer
-            variant="permanent"
-            className={classNames(classes.drawer, {
-              [classes.drawerOpen]: this.state.leftBarType !== "main",
-              [classes.drawerClose]: this.state.leftBarType === "main"
-            })}
-            classes={{
-              paper: classNames({
-                [classes.drawerOpen]: this.state.leftBarType !== "main",
-                [classes.drawerClose]: this.state.leftBarType === "main"
-              })
-            }}
-            open={this.state.leftBarType !== "main"}
-          >
-            {
-              this.state.leftBarType === "documents" && (
-                <div>
-                  <div className={classes.toolbar}>
-                    <Fade
-                      in={this.state.leftBarType === "documents"}
-                      timeout={500}
-                    >
-                      <IconButton onClick={this.handleDrawerClose}>
-                        <ChevronLeftIcon />
-                      </IconButton>
-                    </Fade>
-                  </div>
-                  <Divider />
-                  <List>
-                    {tags.map((n) => {
-                      return (
-                        <ListItem
-                          key={n.key}
-                          button
-                          onClick={this.handleCreateTagSelector(n.key)}
-                          selected={this.state.tag === n.key}
-                        >
-                          {n.icon}
-                          <ListItemText
-                            primary={<Typography noWrap>{n.title}</Typography>}
-                            secondary={n.subTitle}
-                          />
-                          {n.enableClose && (
-                            <ListItemSecondaryAction>
-                              <Fade
-                                in={this.state.leftBarType === "documents"}
-                                timeout={500}
-                              >
-                                <IconButton onClick={this.handleCreateTagDestoryer(n.key)}>
-                                  <CloseIcon />
-                                </IconButton>
-                              </Fade>
-                            </ListItemSecondaryAction>
-                          )}
-                        </ListItem>
-                      );
-                    })
-                    }
-                    <ListSubheader>快速通道</ListSubheader>
-                    <ListItem
-                      button
-                      onClick={this.handleCreateTagSelector("mainPage")}
-                      selected={this.state.tag === 'mainPage'}
-                    >
-                      <HomeIcon />
-                      <ListItemText primary="主页" />
-                    </ListItem>
-                    <ListItem
-                      onClick={this.handleCreateTagSelector("forums")}
-                      selected={this.state.tag === 'forums'}
-                      button
-                    >
-                      <ListIcon />
-                      <ListItemText
-                        primary="所有板块"
-                      />
-                    </ListItem>
-                    <ListItem button>
-                      <SignInIcon />
-                      <ListItemText
-                        primary="签到"
-                        secondary={"您今日还未签到！"}
-                      />
-                    </ListItem>
-                    <ListItem button>
-                      <StarIcon />
-                      <ListItemText primary="收藏" />
-                    </ListItem>
-                    <ListItem button>
-                      <TaskIcon />
-                      <ListItemText primary="任务" />
-                    </ListItem>
-                  </List>
-                </div>
-              )}
-
-            {this.state.leftBarType === "navigation" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade
-                    in={this.state.leftBarType === "navigation"}
-                    timeout={500}
-                  >
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
-                </div>
-                <Divider />
-                <List>
-                  <ListSubheader>通知</ListSubheader>
-                  <ListItem button>
-                    <SendIcon />
-                    <ListItemText primary="消息" secondary={"没有新消息"} />
-                  </ListItem>
-                  <ListItem button>
-                    <NoticeIcon />
-                    <ListItemText primary="我的帖子" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListItem button>
-                    <SettingIcon />
-                    <ListItemText primary="系统提醒" secondary={"没有新通知"} />
-                  </ListItem>
-                  <ListItem button>
-                    <FaceIcon />
-                    <ListItemText primary="坛友互动" secondary={"没有新通知"} />
-                  </ListItem>
-                </List>
-              </div>
-            )}
-            {this.state.leftBarType === "settings" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade
-                    in={this.state.leftBarType === "settings"}
-                    timeout={500}
-                  >
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
-                </div>
-                <Divider />
-                <List>
-                  <ListSubheader>个性化</ListSubheader>
-                  <ListItem button>
-                    <SettingIcon />
-                    <ListItemText primary="本体设置" />
-                  </ListItem>
-                  <ListItem button>
-                    <PaintIcon />
-                    <ListItemText primary="主题" />
-                  </ListItem>
-                  <ListItem button onClick={this.handleOpenAboutDialog}>
-                    <InfoIcon />
-                    <ListItemText primary="关于" />
-                  </ListItem>
-                  <ListSubheader>插件控制</ListSubheader>
-                  <ListItem button>
-                    <StoreIcon />
-                    <ListItemText primary="插件中心" />
-                  </ListItem>
-                  <ListItem button onClick={this.handleOpenDevTools}>
-                    <SettingIcon />
-                    <ListItemText primary="开发者控制" />
-                  </ListItem>
-                  <ListItem button onClick={this.handleOpenDatabaseDebugDialog}>
-                    <DatabaseIcon />
-                    <ListItemText primary="数据库调试" />
-                  </ListItem>
-                  <ListItem button
-                    onClick={this.handleCreateTagSelector("test")}
-                    selected={this.state.tag === "test"} >
-                    <DatabaseIcon />
-                    <ListItemText primary="测试功能" />
-                  </ListItem>
-                </List>
-              </div>
-            )}
-
-            {this.state.leftBarType === "users" && (
-              <div>
-                <div className={classes.toolbar}>
-                  <Fade in={this.state.leftBarType === "users"} timeout={500}>
-                    <IconButton onClick={this.handleDrawerClose}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </Fade>
-                </div>
-                <Divider />
-                <List>
-                  <ListItem button
-                    onClick={this.handleCreateTagSelector("login")}
-                    selected={this.state.tag === "login"}>
-                    <AddIcon />
-                    <ListItemText primary="新增账户" />
-                  </ListItem>
-                </List>
-              </div>
-            )}
-
-            <div className={classes.toolbarDrawerClosing}>
-              <Fade in={this.state.leftBarType === "main"} timeout={500}>
-                <IconButton
-                  onClick={this.handleDrawerOpenUsers}
-                  className={
-                    this.state.leftBarType !== "main" ? " " + classes.hide : ""
-                  }
-                >
-                  <AccountCircleIcon />
-                </IconButton>
-              </Fade>
-            </div>
-            <Divider />
-            <Fade in={this.state.leftBarType === "main"} timeout={500}>
-              <IconButton
-                onClick={this.handleDrawerOpenDocuments}
-                className={
-                  this.state.leftBarType !== "main" ? " " + classes.hide : ""
-                }
-              >
-                <DocumentIcon />
-              </IconButton>
-            </Fade>
-            <Fade in={this.state.leftBarType === "main"} timeout={500}>
-              <IconButton
-                onClick={this.handleDrawerOpenNavigation}
-                className={
-                  this.state.leftBarType !== "main" ? " " + classes.hide : ""
-                }
-              >
-                <ListIcon />
-              </IconButton>
-            </Fade>
-            <Fade in={this.state.leftBarType === "main"} timeout={500}>
-              <IconButton
-                onClick={this.handleDrawerOpenSettings}
-                className={
-                  this.state.leftBarType !== "main" ? " " + classes.hide : ""
-                }
-              >
-                <WidgetsIcon />
-              </IconButton>
-            </Fade>
-            <Divider />
-          </Drawer>
-          <main className={classes.content} ref={this.mainRef}>
-            {/* <Router history={browserHistory}>
-              <IndexRoute component={() => <MainPageRender />} />
-              <Route path="/" component={() => <MainPageRender />} />
-              <Route path="forums" component={() => <ForumsRender />} />
-              <Route path="login" component={() => <LoginRender />} />
-              <Route path="test" component={() => <Test />} />
-            </Router> */}
-
-            {/* (
-                <div key={this.state.tag}>
-                  {tags.find(n => this.state.tag === n.key).render}
-                </div>
-              ) */}
-
-          </main>
-          <Dialog
-            open={this.state.aboutDialog}
-            onClose={this.handleCloseAboutDialog}
-          >
-            <DialogTitle>关于</DialogTitle>
-            <DialogContent>
-              <Typography paragraph variant="p">
-                {"贡献者"}
-              </Typography>
-              <Typography paragraph variant="body1">
-                {"@langyo "}
-                <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?1287472")}>MCBBS</Button>{" "}
-                <Button onClick={() => shell.openExternal("https://github.com/langyo")}>GitHub</Button>{" "}
-                <Button onClick={() => shell.openExternal("https://afdian.net/@langyo")}>爱发电</Button>
-              </Typography>
-              <Typography paragraph variant="body1">
-                {"@simon300000 "}
-                <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?155499")}>MCBBS</Button>{" "}
-                <Button onClick={() => shell.openExternal("https://github.com/simon300000")}>GitHub</Button>
-              </Typography>
-              <Typography paragraph variant="body1">
-                {"@纪华裕 "}
-                <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?2460223")}>MCBBS</Button>{" "}
-                <Button onClick={() => shell.openExternal("https://github.com/jihuayu")}>GitHub</Button>
-              </Typography>
-              <Typography paragraph variant="body1">
-                <Button
-                  className={classes.button}
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => shell.openExternal("https://github.com/langyo/MCBBS-Client")}
-                >
-                  {"该项目在 GitHub 的开源仓库地址"}
-                </Button>
-                <Button
-                  className={classes.button}
-                  variant="outlined"
-                  color="primary"
-                  disabled
-                  onClick={() => shell.openExternal("http://www.mcbbs.net/")}
-                >
-                  {"该项目在 MCBBS 的发布贴"}
-                </Button>
-              </Typography>
-              <Typography paragraph variant="p">
-                {"当前版本 0.2.5"}
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseAboutDialog} color="primary">
-                OK
-            </Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog
-            open={this.state.databaseDebugDialog}
-            onClose={this.handleCloseDatabaseDebugDialog}
-          >
-            <DialogTitle>数据库</DialogTitle>
-            <DialogContent>
-              <JsonView src={db.getState()} name="由页面返回的解析数据" />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseDatabaseDebugDialog} color="primary">
-                OjbK
-            </Button>
-            </DialogActions>
-          </Dialog>
+          <TestDrawer />
         </div>
       );
     } catch (e) {
