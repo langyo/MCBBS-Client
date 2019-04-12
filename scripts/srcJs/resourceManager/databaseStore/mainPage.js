@@ -1,6 +1,8 @@
 import Reflux from "reflux";
 import lowdb from "lowdb";
 
+import db from "../database";
+
 import Actions from "../actions";
 
 class MainPage extends Reflux.Store {
@@ -10,7 +12,7 @@ class MainPage extends Reflux.Store {
 		this.state = {
             mainPage: db.get("mainPage").value()
         };
-		this.listenToMany(Actions.global.mainPage);
+		this.listenToMany(Actions.database.global.mainPage);
 	}
 	
 	updateForumGroup(name, id, forums){

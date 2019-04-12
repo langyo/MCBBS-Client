@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-import db from "../../../../native/electron/localScripts/localDatabase/database";
+import db from "../database";
 
 import ActionManager from "../actionManager";
 
@@ -12,7 +12,7 @@ class Rate extends Reflux.Store {
 		this.state = {
             rates: db.get("rates["+ id + "]").value()
         };
-		this.listenToMany(ActionManager.createActions("rate", id));
+		this.listenToMany(ActionManager.database.single.createActions("rate", id));
 	}
 
 	updateRate(object){

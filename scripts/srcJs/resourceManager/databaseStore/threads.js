@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-import db from "../../../../native/electron/localScripts/localDatabase/database";
+import db from "../database";
 
 let ActionManager = require("../actionManager");
 
@@ -13,7 +13,7 @@ class Thread extends Reflux.Store {
             threads: db.get("threads["+ id + "]").value()
         };
         
-		this.listenToMany(ActionManager.createActions("thread", id));
+		this.listenToMany(ActionManager.database.single.createActions("thread", id));
 	}
 	
 	updateThread(object){

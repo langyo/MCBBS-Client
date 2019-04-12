@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-export let databaseStores = {
+export let database = {
     // 以下部分为单个的全局 Store
     global: {
         /* accounts: accounts, */
@@ -43,7 +43,7 @@ export let databaseStores = {
     }
 };
 
-export let viewStores = {
+export let view = {
     global: {
         tag: Reflux.createActions([
             'create',

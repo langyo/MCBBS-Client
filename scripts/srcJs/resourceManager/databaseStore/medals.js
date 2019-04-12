@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-import db from "../../../../native/electron/localScripts/localDatabase/database";
+import db from "../database";
 
 import Actions from "../actions";
 
@@ -11,7 +11,7 @@ class Medals extends Reflux.Store {
 		this.state = {
             medals: db.get("medals").value()
         };
-		this.listenToMany(Actions.global.medals);
+		this.listenToMany(Actions.database.global.medals);
 	}
 
 	updateMedal(id, object){
