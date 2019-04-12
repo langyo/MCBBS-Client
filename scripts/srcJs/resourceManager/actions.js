@@ -1,6 +1,6 @@
 import Reflux from "reflux";
 
-export let stores = {
+export let databaseStores = {
     // 以下部分为单个的全局 Store
     global: {
         /* accounts: accounts, */
@@ -40,5 +40,22 @@ export let stores = {
         user: [
             'updateUser'
         ]
+    }
+};
+
+export let viewStores = {
+    global: {
+        tag: Reflux.createActions([
+            'create',
+            'delete',
+            'toggleTo'
+        ]),
+        window: Reflux.createActions([
+            'toggleTo'
+        ]),
+        popupMessage: Reflux.createActions([
+            'sendNewMessage',
+            'popupNewMessage'
+        ])
     }
 };

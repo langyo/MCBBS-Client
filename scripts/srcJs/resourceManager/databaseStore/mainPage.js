@@ -1,6 +1,5 @@
 import Reflux from "reflux";
-
-import db from "../../../../native/electron/localScripts/localDatabase/database";
+import lowdb from "lowdb";
 
 import Actions from "../actions";
 
