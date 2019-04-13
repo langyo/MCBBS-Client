@@ -42,7 +42,7 @@ class MainWindowManager extends Reflux.Component {
       >
         <DialogTitle>关于</DialogTitle>
         <DialogContent>
-          <Typography paragraph variant="p">
+          <Typography paragraph variant="body1">
             {"贡献者"}
           </Typography>
           <Typography paragraph variant="body1">
@@ -60,6 +60,20 @@ class MainWindowManager extends Reflux.Component {
             {"@纪华裕 "}
             <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?2460223")}>MCBBS</Button>{" "}
             <Button onClick={() => shell.openExternal("https://github.com/jihuayu")}>GitHub</Button>
+          </Typography>
+          <Typography paragraph variant="body1">
+            {"@阴阳师元素祭祀 "}
+            <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?458143")}>MCBBS</Button>{" "}
+            <Button onClick={() => shell.openExternal("https://github.com/euOnmyoji")}>GitHub</Button>
+          </Typography>
+          <Typography paragraph variant="body1">
+            {"@姚氏帅哥 "}
+            <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?378563")}>MCBBS</Button>{" "}
+            <Button onClick={() => shell.openExternal("https://github.com/Yaossg")}>GitHub</Button>
+          </Typography>
+          <Typography paragraph variant="body1">
+            {"@InitAuther97 "}
+            <Button onClick={() => shell.openExternal("https://github.com/InitAuther97")}>GitHub</Button>
           </Typography>
           <Typography paragraph variant="body1">
             <Button
@@ -80,8 +94,8 @@ class MainWindowManager extends Reflux.Component {
               {"该项目在 MCBBS 的发布贴"}
             </Button>
           </Typography>
-          <Typography paragraph variant="p">
-            {"当前版本 0.2.5"}
+          <Typography paragraph variant="body1">
+            {"当前版本 0.2.6"}
           </Typography>
         </DialogContent>
         <DialogActions>

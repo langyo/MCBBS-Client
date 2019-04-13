@@ -6,6 +6,7 @@ import classNames from "classnames";
 import shortid from "shortid";
 
 import MainDrawer from "./utils/mainDrawer";
+import MainWindowManager from "./utils/mainWindowManager";
 
 const Home = () => (
   <div>
@@ -31,6 +32,7 @@ class RouterView extends Reflux.Component {
     return (
       <BrowserRouter>
         <MainDrawer />
+        <MainWindowManager />
 
         <Switch>
           <Route exact path='/index' component={Home} />
