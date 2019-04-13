@@ -14,7 +14,13 @@ class PopupMessage extends Reflux.Store {
 		this.listenToMany(Actions.view.global.popupMessage);
 	}
 
+    sendNewMessage(message){
 
+    }
+    
+    popupNewMessage(message){
+
+    }
 }
 
 export default new PopupMessage();

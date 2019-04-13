@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
 
-import MainDrawer from "./utils/mainDrawer";
-import MainWindowManager from "./utils/mainWindowManager";
+import Drawer from "./views/drawer";
+import WindowManager from "./views/windowManager";
 
 const Home = () => (
   <div>
@@ -31,8 +31,8 @@ class RouterView extends Reflux.Component {
   render() {
     return (
       <BrowserRouter>
-        <MainDrawer />
-        <MainWindowManager />
+        <Drawer />
+        <WindowManager />
 
         <Switch>
           <Route exact path='/index' component={Home} />

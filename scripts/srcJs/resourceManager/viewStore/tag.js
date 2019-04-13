@@ -18,11 +18,11 @@ class Tag extends Reflux.Store {
 
     }
 
-    delete(){
+    delete(id){
 
     }
 
-    toggleTo(){
+    toggleTo(id){
 
     }
 }

@@ -9,12 +9,14 @@ class Dialog extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            userGroups: db.get("userGroups").value()
+            show: ''
         };
 		this.listenToMany(Actions.view.global.dialog);
 	}
 
-
+    toggleTo(name){
+        this.setState({ show: name });
+    }
 }
 
 export default new Dialog();

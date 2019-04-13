@@ -2,7 +2,7 @@ import lowdb from 'lowdb';
 import LocalStorage from 'lowdb/adapters/LocalStorage'
 
 const adapter = new LocalStorage('db');
-const db = low(adapter);
+const db = lowdb(adapter);
 
 db.defaults({
     // 主页中的数据

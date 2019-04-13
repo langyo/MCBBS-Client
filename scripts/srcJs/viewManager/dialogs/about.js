@@ -21,22 +21,12 @@ const styles = theme => ({
 
 });
 
-class MainWindowManager extends Reflux.Component {
-  constructor() {
-    super();
-
-    // TODO: 套接 ViewStore.DialogStore
-  }
-
-  state = {
-    aboutDialog: true
-  }
-
+class MainWindowManager extends React.Component {
   render() {
     const { classes, theme } = this.props;
 
     return (
-      <div><Dialog
+      <Dialog
         open={this.state.aboutDialog}
         onClose={this.handleCloseAboutDialog}
       >
@@ -104,7 +94,7 @@ class MainWindowManager extends Reflux.Component {
             </Button>
         </DialogActions>
       </Dialog>
-    </div>);
+    );
   }
 }
 
