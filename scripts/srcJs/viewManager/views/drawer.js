@@ -47,6 +47,8 @@ import WebIcon from "mdi-material-ui/Web";
 import DatabaseIcon from "mdi-material-ui/Database";
 import MoreVertIcon from "mdi-material-ui/DotsVertical";
 
+import Actions from "../../resourceManager/actions";
+
 const styles = theme => ({
   list: {
     width: 250,
@@ -222,7 +224,7 @@ class SwipeableTemporaryDrawer extends Reflux.Component {
                 <PaintIcon />
                 <ListItemText primary="主题" />
               </ListItem>
-              <ListItem button onClick={this.handleOpenAboutDialog}>
+              <ListItem button onClick={() => Actions.view.global.dialog.toggleTo('about')}>
                 <InfoIcon />
                 <ListItemText primary="关于" />
               </ListItem>

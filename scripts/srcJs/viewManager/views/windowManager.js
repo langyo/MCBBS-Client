@@ -16,9 +16,9 @@ const styles = theme => ({
 });
 
 class MainWindowManager extends Reflux.Component {
-  constructor() {
-    super();
-    // this.stores = [Stores.view.dialog];
+  constructor(props) {
+    super(props);
+    this.store = Stores.view.global.dialog;
   }
 
   render() {
@@ -26,7 +26,7 @@ class MainWindowManager extends Reflux.Component {
 
     return (
       <div>
-        {/* {this.state.show == 'about' && <AboutDialog />} */}
+        <AboutDialog />
       </div>
     );
   }

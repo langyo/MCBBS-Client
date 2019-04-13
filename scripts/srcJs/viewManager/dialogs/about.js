@@ -17,18 +17,29 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+import Stores from '../../resourceManager/stores';
+
+import Actions from "../../resourceManager/actions";
+
 const styles = theme => ({
 
 });
 
-class MainWindowManager extends React.Component {
+class MainWindowManager extends Reflux.Component {
+  constructor(props) {
+    super(props);
+    this.store = Stores.view.global.dialog;
+  }
+
+  handleCloseDialog = () => Actions.view.global.dialog.toggleTo('');
+
   render() {
     const { classes, theme } = this.props;
 
     return (
       <Dialog
-        open={this.state.aboutDialog}
-        onClose={this.handleCloseAboutDialog}
+        open={this.state.show == 'about'}
+        onClose={this.handleCloseDialog}
       >
         <DialogTitle>关于</DialogTitle>
         <DialogContent>
@@ -89,7 +100,7 @@ class MainWindowManager extends React.Component {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleCloseAboutDialog} color="primary">
+          <Button onClick={this.handleCloseDialog} color="primary">
             OK
             </Button>
         </DialogActions>
