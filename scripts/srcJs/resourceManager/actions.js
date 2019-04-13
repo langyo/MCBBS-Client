@@ -50,7 +50,7 @@ export let view = {
             'delete',
             'toggleTo'
         ]),
-        window: Reflux.createActions([
+        dialog: Reflux.createActions([
             'toggleTo'
         ]),
         popupMessage: Reflux.createActions([

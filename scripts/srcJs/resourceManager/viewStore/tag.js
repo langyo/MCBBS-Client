@@ -4,7 +4,7 @@ import db from "../database";
 
 import Actions from "../actions";
 
-class UserGroups extends Reflux.Store {
+class Tag extends Reflux.Store {
 	constructor()
 	{
 		super();
@@ -27,4 +27,4 @@ class UserGroups extends Reflux.Store {
     }
 }
 
-export default new UserGroups();
+export default new Tag();
