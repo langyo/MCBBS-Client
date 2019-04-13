@@ -17,6 +17,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import TestDrawer from "../../../../scripts/srcJs/viewManager/utils/mainDrawer";
 import TestDialog from "../../../../scripts/srcJs/viewManager/utils/mainWindowManager";
+import TestMainView from "../../../../scripts/srcJs/viewManager/mainView";
 
 const drawerWidth = 200;
 
@@ -42,10 +43,9 @@ class MainWindow extends Reflux.Component {
 
     try {
       return (
-        <div className={classes.root}>
-          <TestDialog />
-          <TestDrawer />
-        </div>
+        
+          <TestMainView />
+        
       );
     } catch (e) {
       remote.getCurrentWebContents().openDevTools();
