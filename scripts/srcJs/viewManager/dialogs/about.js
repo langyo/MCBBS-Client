@@ -49,6 +49,7 @@ class MainWindowManager extends Reflux.Component {
             {"@langyo "}
             <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?1287472")}>MCBBS</Button>{" "}
             <Button onClick={() => shell.openExternal("https://github.com/langyo")}>GitHub</Button>{" "}
+            <Button onClick={() => shell.openExternal("https://space.bilibili.com/5741197")}>BiliBili</Button>{" "}
             <Button onClick={() => shell.openExternal("https://afdian.net/@langyo")}>爱发电</Button>
           </Typography>
           <Typography paragraph variant="body1">
@@ -64,16 +65,24 @@ class MainWindowManager extends Reflux.Component {
           <Typography paragraph variant="body1">
             {"@阴阳师元素祭祀 "}
             <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?458143")}>MCBBS</Button>{" "}
-            <Button onClick={() => shell.openExternal("https://github.com/euOnmyoji")}>GitHub</Button>
+            <Button onClick={() => shell.openExternal("https://github.com/euOnmyoji")}>GitHub</Button>{" "}
+            <Button onClick={() => shell.openExternal("https://space.bilibili.com/19550274/")}>BiliBili</Button>{" "}
+            <Button onClick={() => shell.openExternal("https://afdian.net/@euOnmyoji")}>爱发电</Button>
           </Typography>
           <Typography paragraph variant="body1">
             {"@姚氏帅哥 "}
             <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?378563")}>MCBBS</Button>{" "}
             <Button onClick={() => shell.openExternal("https://github.com/Yaossg")}>GitHub</Button>
+            <Button onClick={() => shell.openExternal("https://space.bilibili.com/282144386")}>BiliBili</Button>{" "}
           </Typography>
           <Typography paragraph variant="body1">
             {"@InitAuther97 "}
             <Button onClick={() => shell.openExternal("https://github.com/InitAuther97")}>GitHub</Button>
+          </Typography>
+          <Typography paragraph variant="body1">
+            {"@坑佑雷 "}
+            <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?197092")}>MCBBS</Button>{" "}
+            <Button onClick={() => shell.openExternal("https://space.bilibili.com/2975331")}>BiliBili</Button>
           </Typography>
           <Typography paragraph variant="body1">
             <Button
