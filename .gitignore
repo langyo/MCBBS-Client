@@ -89,3 +89,7 @@ gradle
 build
 *.jar
 *.iml
+
+# --- 针对 java ---
+
+*.class

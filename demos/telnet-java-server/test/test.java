@@ -7,7 +7,8 @@ public class test
     public static void main(String[] args)
     {
         System.out.println("Launch!");
-        try{
+        try
+        {
             ServerSocket s = new ServerSocket(9233);
             Socket server = s.accept();
 
@@ -21,7 +22,9 @@ public class test
             String line = in.nextLine();
             out.println(line);
             System.out.println(line);
+
             server.close();
+            s.close();
         }
         catch(IOException e){}
     }
