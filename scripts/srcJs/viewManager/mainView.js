@@ -18,7 +18,7 @@ const Home = () => (
   </div>
 )
 
-class RouterView extends Reflux.Component {
+class MainView extends Reflux.Component {
   render() {
     return (
       <BrowserRouter>
@@ -35,4 +35,4 @@ class RouterView extends Reflux.Component {
   }
 }
 
-export default RouterView;
+export default MainView;
