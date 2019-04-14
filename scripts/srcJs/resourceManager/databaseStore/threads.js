@@ -2,7 +2,7 @@ import Reflux from "reflux";
 
 import db from "../database";
 
-let ActionManager = require("../actionManager");
+import Actions from "../actions";
 
 class Thread extends Reflux.Store {
 	constructor(id)
@@ -13,7 +13,7 @@ class Thread extends Reflux.Store {
             threads: db.get("threads["+ id + "]").value()
         };
         
-		this.listenToMany(ActionManager.database.single.createActions("thread", id));
+		this.listenToMany(Actions.database.single.thread(id));
 	}
 	
 	updateThread(object){

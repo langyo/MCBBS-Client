@@ -1,5 +1,4 @@
 import Reflux from "reflux";
-import lowdb from "lowdb";
 
 import db from "../database";
 

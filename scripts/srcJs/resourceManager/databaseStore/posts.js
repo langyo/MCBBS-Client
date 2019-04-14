@@ -2,7 +2,7 @@ import Reflux from "reflux";
 
 import db from "../database";
 
-import ActionManager from "../actionManager";
+import Actions from "../actions";
 
 class Post extends Reflux.Store {
 	constructor(id)
@@ -12,7 +12,7 @@ class Post extends Reflux.Store {
 		this.state = {
             posts: db.get("posts[" + id + "]").value()
         };
-		this.listenToMany(ActionManager.database.single.createActions("post", id));
+		this.listenToMany(Actions.database.single.post(id));
 	}
 
 	updatePosts(object){

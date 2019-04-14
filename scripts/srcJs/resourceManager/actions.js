@@ -1,5 +1,23 @@
 import Reflux from "reflux";
 
+let singleList = {
+    database: {
+        single: {
+            post: {},
+            rate: {},
+            thread: {},
+            forum: {},
+            /* tool: tools, */
+            user: {}
+        }
+    }
+};
+
+const checkSingleStore = (id, path, actions) => {
+    if(path[id] === undefined) path[id] = Reflux.createActions(actions);
+    return path[id];
+};
+
 export default {
     database: {
         // 以下部分为单个的全局 Store
@@ -28,19 +46,23 @@ export default {
 
         // 以下部分为用于创建 Store 的类
         single: {
-            post: [
+            post: (id) => checkSingleStore(id, singleList.database.single.post,[
                 'updatePost'
-            ],
-            rate: [
+            ]),
+            rate: (id) => checkSingleStore(id, singleList.database.single.rate, [
                 'updateRate'
-            ],
-            thread: [
+            ]),
+            forum: (id) => checkSingleStore(id, singleList.database.single.forum, [
+                'updateThreadList',
+                'updateHeadInfo'
+            ]),
+            thread: (id) => checkSingleStore(id, singleList.database.single.thread, [
                 'updateThread'
-            ],
+            ]),
             /* tool: tools, */
-            user: [
+            user: (id) => checkSingleStore(id, singleList.database.single.user, [
                 'updateUser'
-            ]
+            ])
         }
     },
 

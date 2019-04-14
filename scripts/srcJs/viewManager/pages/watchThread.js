@@ -7,13 +7,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import WebviewRender from "../../../../native/electron/localScripts/localWebView/webviewRender";
-import Floor from "../utils/floor";
-
-import ThreadStore from "../../../../scripts/srcJs/resourceManager/refluxStore/threads";
-import db from "../../../../native/electron/localScripts/localDatabase/database";
-
-import testData from "../testData";
+import Stores from '../../resourceManager/stores';
+import Actions from "../../resourceManager/actions";
 
 const styles = theme => ({
   title: {
@@ -24,14 +19,7 @@ const styles = theme => ({
 class Thread extends Reflux.Component {
   constructor(props){
     super(props);
-    this.state = {
-      title: "加载中...",
-      author: "",
-      topIcons: [],
-      posts: [],
-      users: []
-    };
-    this.store = new ThreadStore(props.thread);
+    this.store = Stores.database.single.thread(props.id);
   }
 
   render() {

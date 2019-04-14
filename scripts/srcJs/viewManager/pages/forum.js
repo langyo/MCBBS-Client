@@ -12,9 +12,10 @@ import Paper from "@material-ui/core/Paper";
 
 import DocumentIcon from "mdi-material-ui/FileDocument";
 
-import db from "../../../../native/electron/localScripts/localDatabase/database";
-
 import testData from "../testData";
+
+import Stores from '../../resourceManager/stores';
+import Actions from "../../resourceManager/actions";
 
 const styles = theme => ({
   actions: {
@@ -40,7 +41,10 @@ const styles = theme => ({
 });
 
 class Forum extends Reflux.Component {
-  state = {};
+  constructor(props) {
+    super(props)
+
+  }
 
   render() {
     const { classes } = this.props;
