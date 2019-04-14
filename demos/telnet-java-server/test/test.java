@@ -26,6 +26,8 @@ public class test
             server.close();
             s.close();
         }
-        catch(IOException e){}
+        catch(IOException e){
+            System.out.println(e);
+        }
     }
 }

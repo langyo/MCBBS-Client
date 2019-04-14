@@ -1,6 +1,6 @@
 let net = require("net");
 
-let client = net.connect(9233, 'localhost');
+let client = net.connect(9234, 'localhost');
 
 client.setEncoding('utf-8');
 
