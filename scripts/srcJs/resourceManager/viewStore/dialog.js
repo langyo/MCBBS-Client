@@ -5,18 +5,21 @@ import db from "../database";
 import Actions from "../actions";
 
 class Dialog extends Reflux.Store {
-	constructor()
-	{
+	constructor() {
 		super();
 		this.state = {
-            show: ''
-        };
+			show: ''
+		};
 		this.listenToMany(Actions.view.global.dialog);
 	}
 
-    toggleTo(name){
-        this.setState({ show: name });
-    }
+	toggleTo(name) {
+		this.setState({ show: name });
+	}
+
+	reset() {
+		this.setState({ show: '' })
+	}
 }
 
 export default new Dialog();

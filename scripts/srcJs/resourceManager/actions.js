@@ -74,7 +74,12 @@ export default {
                 'toggleTo'
             ]),
             dialog: Reflux.createActions([
-                'toggleTo'
+                'toggleTo',
+                'reset'
+            ]),
+            fab: Reflux.createActions([
+                'toggleTo',
+                'reset'
             ]),
             popupMessage: Reflux.createActions([
                 'sendNewMessage',

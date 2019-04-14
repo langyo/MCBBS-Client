@@ -9,7 +9,7 @@ class PopupMessage extends Reflux.Store {
 	{
 		super();
 		this.state = {
-            userGroups: db.get("userGroups").value()
+            
         };
 		this.listenToMany(Actions.view.global.popupMessage);
 	}

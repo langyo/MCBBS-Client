@@ -8,21 +8,12 @@ import shortid from "shortid";
 import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
 
+import Forum from "./pages/forums";
+
 const Home = () => (
   <div>
     <ul>
-      <li><Link to='/schedule'>Schedule</Link></li>
-    </ul>
-  </div>
-)
-
-const Schedule = () => (
-  <div>
-    <ul>
-      <li>6/5 @ Evergreens</li>
-      <li>6/8 vs Kickers</li>
-      <li>6/14 @ United</li>
-      <li><Link to='/'>Home</Link></li>
+      <li><Link to='/forum'>Forum</Link></li>
     </ul>
   </div>
 )
@@ -36,7 +27,7 @@ class RouterView extends Reflux.Component {
 
         <Switch>
           <Route exact path='/index' component={Home} />
-          <Route path='/schedule' component={Schedule} />
+          <Route path='/forum' component={() => <Forum />} />
           <Redirect path="/" to={{pathname: '/index'}} />
         </Switch>
       </BrowserRouter>

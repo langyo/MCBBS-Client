@@ -30,7 +30,7 @@ class MainWindowManager extends Reflux.Component {
     this.store = Stores.view.global.dialog;
   }
 
-  handleCloseDialog = () => Actions.view.global.dialog.toggleTo('');
+  handleCloseDialog = Actions.view.global.dialog.reset;
 
   render() {
     const { classes, theme } = this.props;

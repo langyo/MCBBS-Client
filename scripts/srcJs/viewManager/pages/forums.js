@@ -6,8 +6,6 @@ import Typography from "@material-ui/core/Typography";
 
 import ForumPanel from "../utils/forumPanel";
 
-import db from "../../../../native/electron/localScripts/localDatabase/database";
-
 import TestData from "../testData";
 
 const styles = theme => ({
