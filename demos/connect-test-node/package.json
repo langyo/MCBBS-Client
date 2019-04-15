@@ -9,6 +9,7 @@
   "author": "langyo",
   "license": "Apache-2.0",
   "dependencies": {
+    "jsdom": "^14.0.0",
     "request": "^2.88.0"
   }
 }

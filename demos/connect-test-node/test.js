@@ -1,8 +1,11 @@
 const request = require('request');
 const fs = require('fs');
 
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 const options = {
-  url: 'http://www.mcbbs.net/forum-the_end-1.html',
+  url: 'http://www.mcbbs.net/thread-857907-1-1.html',
   headers: {
     'Host': 'www.mcbbs.net',
     'Proxy-Connection': 'keep-alive',
@@ -18,15 +21,22 @@ const options = {
   gzip: true
 };
 
-function callback(error, response, body) {
-  if (!error && response.statusCode == 200) {
-    console.log("准备写入文件");
-    fs.writeFile('input.txt', body, (err) => {
-      if (err) {
-        return console.error(err);
-      }
-    });
-  }
-}
+let data;
 
-request(options, callback);
+request(options, (error, response, body) => {
+  if (!error && response.statusCode == 200) {
+    data = body;
+    console.log(body);
+
+    console.log("---------------");
+
+    const dom = new JSDOM(data, {
+      // runScripts: "dangerously",
+      // resources: "usable"
+      runScripts: "outside-only"
+    });
+    console.log(dom.window.document.body.innerHTML);
+  }
+});
+
+
