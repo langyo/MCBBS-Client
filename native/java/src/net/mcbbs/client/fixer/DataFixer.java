@@ -43,7 +43,7 @@ public class DataFixer {
             // TODO new File() loves you!
             // TODO Files hates you!
             Path rootPath = Paths.get(
-                    Objects.requireNonNull(new File("..").getParentFile()
+                    Objects.requireNonNull(new File("native/java").getParentFile()
                             .listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
                     "scripts"
             );
