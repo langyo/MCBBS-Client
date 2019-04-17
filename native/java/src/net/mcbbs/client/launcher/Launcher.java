@@ -1,4 +1,4 @@
-package net.mcbbs.client.lanuncher;
+package net.mcbbs.client.launcher;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,12 +8,13 @@ import java.net.ServerSocket;
  */
 public class Launcher {
     public static void main(String[] args) {
-        //ProcessBuilder pBuilder = new ProcessBuilder("nodejs")
+        int port = 12345;
         ServerSocket server;
         try {
-            server = new ServerSocket();
+            server = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
     }
 }

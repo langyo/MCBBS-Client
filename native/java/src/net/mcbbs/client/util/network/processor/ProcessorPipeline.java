@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.ListIterator;
 
 public final class ProcessorPipeline<I> {
-    List<ProcessorChainline> order = Lists.newArrayList();
-    public<O,O2> void addChainline(ProcessorChainline chain){
+    List<ProcessorChainline<?,?,?>> order = Lists.newArrayList();
+    public void addChainline(ProcessorChainline<?,?,?> chain){
         if(order.isEmpty()) {
             order.add(chain);
         }else{
-            ListIterator<ProcessorChainline> iterator = order.listIterator();
+            ListIterator<ProcessorChainline<?,?,?>> iterator = order.listIterator();
             ProcessorChainline last;
             while(iterator.hasNext())iterator.next();
             last = iterator.previous();
@@ -27,11 +27,11 @@ public final class ProcessorPipeline<I> {
             return null;
         }
     }
-    public<O,O2> void removeChainline(ProcessorChainline<I,O,O2> chain){
+    public void removeChainline(ProcessorChainline<?,?,?> chain){
         order.remove(chain);
     }
     public void fire(I data){
-        ListIterator<ProcessorChainline> iter = order.listIterator();
+        ListIterator<ProcessorChainline<?,?,?>> iter = order.listIterator();
         if(iter.hasNext()){
             Object data2;
             ProcessorChainline chainline = iter.next();
@@ -44,5 +44,14 @@ public final class ProcessorPipeline<I> {
                 chainline.fire(data2);
             }
         }
+    }
+    public void register(IProcessorChainable<?,?> chainable){
+        ListIterator<ProcessorChainline<?,?,?>> iterator = order.listIterator();
+        ProcessorChainline last;
+        while(iterator.hasNext())iterator.next();
+        last = iterator.previous();
+        checkSubClass(chainable.getInputType(),last.last.getOutputType());
+        //noinspection unchecked
+        order.add(new ProcessorChainline<>(last.last,chainable));
     }
 }
