@@ -1,4 +1,4 @@
-package net.mcbbs.client.fixer.util;
+package net.mcbbs.client.util;
 
 import java.io.*;
 import java.net.URL;
@@ -43,10 +43,10 @@ public final class IOUtils {
     }
 
     /**
-     * get a {@link net.mcbbs.client.fixer.util.IOStream} from the specified address
+     * get a {@link net.mcbbs.client.util.IOStream} from the specified address
      *
      * @param url target to connect
-     * @return A {@link net.mcbbs.client.fixer.util.IOStream} that contains a {@link java.io.InputStream} and a {@link java.io.OutputStream} linked to the specified address
+     * @return A {@link net.mcbbs.client.util.IOStream} that contains a {@link java.io.InputStream} and a {@link java.io.OutputStream} linked to the specified address
      * @throws IOException if giving a invalid path,failed to open a connection or a stream or connection timed out.
      */
     public static IOStream ioStream(String url) throws IOException {
@@ -54,11 +54,11 @@ public final class IOUtils {
     }
 
     /**
-     * get a {@link net.mcbbs.client.fixer.util.IOStream} from the specified address
+     * get a {@link net.mcbbs.client.util.IOStream} from the specified address
      *
      * @param in  target that {@link java.io.InputStream} connects to
      * @param out target that {@link java.io.OutputStream} connects to
-     * @return A {@link net.mcbbs.client.fixer.util.IOStream} that contains a {@link java.io.InputStream} and a {@link java.io.OutputStream} linked to the specified address
+     * @return A {@link net.mcbbs.client.util.IOStream} that contains a {@link java.io.InputStream} and a {@link java.io.OutputStream} linked to the specified address
      * @throws IOException if giving a invalid path,failed to open a connection or a stream or connection timed out.
      */
     public static IOStream ioStream(String in, String out) throws IOException {
@@ -113,11 +113,11 @@ public final class IOUtils {
     }
 
     /**
-     * combine a {@link java.io.InputStream} and a {@link java.io.OutputStream} to a utility {@link net.mcbbs.client.fixer.util.IOUtils.IOStream}.
+     * combine a {@link java.io.InputStream} and a {@link java.io.OutputStream} to a utility {@link net.mcbbs.client.util.IOUtils.IOStream}.
      *
      * @param out a {@link java.io.OutputStream}
      * @param in  a {@link java.io.InputStream}
-     * @return a {@link net.mcbbs.client.fixer.util.IOStream} with two streams combined together
+     * @return a {@link net.mcbbs.client.util.IOStream} with two streams combined together
      */
     public static IOStream combine(OutputStream out, InputStream in) {
         return new IOStream(in, out);

@@ -1,4 +1,4 @@
-package net.mcbbs.client.fixer.util;
+package net.mcbbs.client.util;
 
 import java.io.*;
 
