@@ -4,12 +4,9 @@
   "description": "A BBS client for MCBBS.",
   "main": "index.js",
   "scripts": {
-    "start": "electron ./index.js --inspect=5858",
+    "start": "node ./index.js",
     "watch": "watchify ../../scripts/srcJs/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
     "build": "browserify ../../scripts/srcJs/viewManager/mainViewRender.js -o public/bundle.js -t babelify",
-    "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
-    "package:mac": "electron-builder build --mac --config electron-builder.json --publish never",
     "test": "jest --watch"
   },
   "author": "langyo",
@@ -38,9 +35,6 @@
   "devDependencies": {
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
-    "electron": "^3.0.10",
-    "electron-builder": "^20.39.0",
-    "electron-packager": "^13.0.1",
     "jest": "^24.1.0"
   },
   "babel": {

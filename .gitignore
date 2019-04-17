@@ -1,10 +1,18 @@
-# --- 针对 native/electron 的部分 ---
+# --- 全局生效部分 ---
 
 # Node.js
 
 package-lock.json
-
 node_modules/
+
+# yarn
+
+yarn-error.log
+yarn.lock
+
+# --- 针对 scripts 的部分 ---
+
+scripts/node_modules/
 
 # --- 针对 native/electron 的部分 ---
 
@@ -30,6 +38,7 @@ native/electron/mock/test_less
 native/electron/mock/release
 
 # electron 打包文件
+
 native/electron/packaged/
 
 # --- 针对 native/ionic 的部分 ---
@@ -68,17 +77,7 @@ native/ionic/.DS_Store
 native/ionic/Thumbs.db
 native/ionic/UserInterfaceState.xcuserstate
 
-# --- 针对 scripts 的部分 ---
-
-# // 有关 scripts：这些都是经过 Babel 转译后得到的 ES5 代码，其实本没有留下的必要，但仍留下来
-# // 具体原因，请见：https://github.com/langyo/MCBBS-Client/issues/4
-
-scripts/node_modules/
-
-# yarn
-
-yarn-error.log
-yarn.lock
+# --- 针对 native/javaDesktopServer ---
 
 # idea & gradle project configuration
 .idea
@@ -90,6 +89,8 @@ build
 *.jar
 *.iml
 
-# --- 针对 java ---
-
 *.class
+
+# --- 针对 native/nodeServer ---
+
+native/nodeServer/public/bundle.js
