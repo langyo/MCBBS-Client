@@ -2,9 +2,9 @@ package net.mcbbs.client.fixer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.mcbbs.client.fixer.util.ExceptionUtils;
-import net.mcbbs.client.fixer.util.FileInfo;
-import net.mcbbs.client.fixer.util.MessageDigestUtils;
+import net.mcbbs.client.util.ExceptionUtils;
+import net.mcbbs.client.util.FileInfo;
+import net.mcbbs.client.util.MessageDigestUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -3,7 +3,7 @@ package net.mcbbs.client.fixer;
 import com.google.common.collect.Maps;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
-import net.mcbbs.client.fixer.util.*;
+import net.mcbbs.client.util.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +43,7 @@ public class DataFixer {
             // TODO new File() loves you!
             // TODO Files hates you!
             Path rootPath = Paths.get(
-                    Objects.requireNonNull(new File("..").getParentFile()
+                    Objects.requireNonNull(new File("native/java").getParentFile()
                             .listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
                     "scripts"
             );
