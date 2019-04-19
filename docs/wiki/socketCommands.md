@@ -1,10 +1,8 @@
 # Socket 多元通信协议说明
 
-## Node - Java
+Node 进程与 Java 进程均启动一个 socket server，分别开放端口 9233 与 9234。Node 进程与 HTML5 渲染进程则启用一个 Web Socket Server，由 Node 作为服务端，端口为 9235。 
 
-Node 进程与 Java 进程均启动一个 socket server，分别开放端口 9233 与 9234。
-
-它们之间的通讯采用发送类似 minecraft 指令的形式，并且指令十分少。
+不同端之间的通讯采用发送类似 minecraft 指令的形式，并且指令十分少。
 
 下面是所有指令的列表：
 
