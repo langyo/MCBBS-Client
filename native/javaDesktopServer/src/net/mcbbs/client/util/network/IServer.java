@@ -1,13 +1,10 @@
 package net.mcbbs.client.util.network;
 
-import net.mcbbs.client.util.network.processor.IProcessorChainable;
-import net.mcbbs.client.util.network.processor.ProcessorPipeline;
+import net.mcbbs.client.util.network.processor.ImmutableProcessorPipeline;
+import net.mcbbs.client.util.thread.ThrowableRunnable;
 
-public interface IServer {
-    void addPipe(String id,ProcessorPipeline p);
+public interface IServer extends ThrowableRunnable {
+    void addPipe(String id, ImmutableProcessorPipeline<?> p);
     void enablePipe(String id);
-    <I>ProcessorPipeline<I> getPipe(String id);
-    default<T,T1> void registerProcessor(String id, IProcessorChainable<T,T1> processor){
-        getPipe(id).register(processor);
-    }
+    ImmutableProcessorPipeline<?> getPipe(String id);
 }

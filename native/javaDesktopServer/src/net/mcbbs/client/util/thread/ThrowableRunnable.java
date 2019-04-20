@@ -11,7 +11,7 @@ public interface ThrowableRunnable extends Runnable{
         try{
             active();
         }catch(Throwable t){
-            new Thread(()->processors.stream().forEach((itp)->itp.process(t))).start();
+            new Thread(()-> processors.forEach((itp)->itp.process(t))).start();
         }
     }
     void active() throws Throwable;
