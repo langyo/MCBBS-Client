@@ -11,4 +11,12 @@ public final class ProcessorChainline<I,O,O2> {
         first.proc(data);
         last.proc(first.value());
     }
+
+    public IProcessorChainable<I, O> getFirst() {
+        return first;
+    }
+
+    public IProcessorChainable<O, O2> getLast() {
+        return last;
+    }
 }
