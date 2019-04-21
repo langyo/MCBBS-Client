@@ -27,7 +27,6 @@ public class CommandRoute
             second = str.substring(str.indexOf("<-") + 2);
         }
         else throw new CommandRouteException();
-
         // 判断是否为合法的源
         CommandSource[] enums = CommandSource.values();
         boolean hasLeft = false;
@@ -39,7 +38,7 @@ public class CommandRoute
             if(Objects.equals(second, n.getSourceName())) hasRight = true;
             if(hasLeft && hasRight) break;
         }
-        if(!(hasLeft && hasRight)) throw new CommandRouteException();
+        if (!(hasLeft && hasRight)) throw new CommandRouteException();
 
         this.first = CommandSource.valueOf(first.toUpperCase());
         this.second = CommandSource.valueOf(second.toUpperCase());

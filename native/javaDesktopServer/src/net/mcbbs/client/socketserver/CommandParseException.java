@@ -11,8 +11,7 @@ public class CommandParseException extends IOException
         this.obj = obj;
     }
 
-    public String generateFailCommand()
-    {
+    public String generateFailCommand() {
         CommandBuilder str = new CommandBuilder();
         str.append("callback").append("fail").append(this.obj.route.toString());
         return str.toString();

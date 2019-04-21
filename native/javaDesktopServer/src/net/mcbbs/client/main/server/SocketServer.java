@@ -17,14 +17,15 @@ import java.util.Map;
 
 public class SocketServer implements IServer {
     public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
+    ReferenceQueue<?> finalizer = new ReferenceQueue();
     private int time = 0;
     private List<Connection> connections = Lists.newArrayList();
     private Thread server;
-    ReferenceQueue<?> finalizer = new ReferenceQueue();
     private ThreadGroup childThread;
     private ServerSocket ss = new ServerSocket();
     private ImmutableProcessorPipeline pipeline = null;
     private Map<String, ImmutableProcessorPipeline<?>> pipelines = Maps.newHashMap();
+
     public SocketServer(int port, String threadPrefix) throws IOException {
         childThread = new ThreadGroup(threadPrefix);
         ss.bind(new InetSocketAddress("localhost", port));
@@ -50,14 +51,17 @@ public class SocketServer implements IServer {
     public ImmutableProcessorPipeline<?> getActivated() {
         return pipeline;
     }
-    public void start(){
-        server = new Thread(childThread,this,"main");
+
+    public void start() {
+        server = new Thread(childThread, this, "main");
         server.start();
     }
-    public void stop(){
+
+    public void stop() {
         server.interrupt();
         server = null;
     }
+
     @Override
     public void active() {
         Thread buf2;
@@ -79,12 +83,14 @@ public class SocketServer implements IServer {
         }
     }
 
-    static class Connection extends IServer.Connection{
+    static class Connection extends IServer.Connection {
         final Socket connection;
+
         Connection(Socket connection, Thread processor) {
             super(processor);
             this.connection = connection;
         }
+
         @Override
         public void shutdown() {
             try {

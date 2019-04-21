@@ -1,5 +1,6 @@
 package net.mcbbs.client.socketserver;
 
+import java.io.IOException;
 import java.util.*;
 
 public class SystemCommandDashboard
@@ -8,10 +9,8 @@ public class SystemCommandDashboard
 
     private static Set<String> registed = new HashSet<>();
 
-    public static void eval(SystemCommandType command, String[] extraArgs, CommandRoute route) throws CommandExecuteException
-    {
-        switch(command)
-        {
+    public static void eval(SystemCommandType command, String[] extraArgs, CommandRoute route) throws IOException {
+        switch (command) {
             case CALL:
                 PluginDashboard.system(route.reverse(), SystemCommandType.RECEIVE.getType(), nativeVersionInfo);
                 registed.add(extraArgs[0]);
@@ -20,13 +19,10 @@ public class SystemCommandDashboard
                 registed.add(extraArgs[0]);
                 break;
             case EXIT:
-                if(registed.contains(extraArgs[0]))
-                {
+                if (registed.contains(extraArgs[0])) {
                     PluginDashboard.callback(route.reverse(), "got", "system", "exit");
                     System.exit(0);
-                }
-                else
-                {
+                } else {
                     PluginDashboard.callback(route.reverse(), "fail", "system", "exit");
                 }
                 break;

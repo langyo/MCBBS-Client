@@ -31,26 +31,26 @@ sourceSets {
 }
 
 //make jar
-task fixerJar(type: Jar){
+task fixerJar(type: Jar) {
     classifier = 'fixer'
     from sourceSets.main.output
     include 'net/mcbbs/client/fixer/**'
     include 'assets/mcbbs_client/fixer/**'
 }
-task launcherJar(type: Jar){
+task launcherJar(type: Jar) {
     classifier = 'launcher'
     from sourceSets.main.output
     include 'net/mcbbs/client/launcher/**'
     include 'assets/mcbbs_client/launcher/**'
 }
-task installerJar(type: Jar){
+task installerJar(type: Jar) {
     classifier = 'installer'
     from sourceSets.main.output
     include 'net/mcbbs/client/installer/**'
     include 'assets/mcbbs_client/installer/**'
 }
 
-artifacts{
+artifacts {
     archives fixerJar
     archives launcherJar
     archives installerJar

@@ -7,8 +7,7 @@ import java.net.*;
 import java.util.Arrays;
 import java.util.Map;
 
-public class PackageManager
-{
+public class PackageManager {
     public static Map<String, PluginDesigner> packages;
 
     public static void loadPackageFile(URL url, String classPath) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {

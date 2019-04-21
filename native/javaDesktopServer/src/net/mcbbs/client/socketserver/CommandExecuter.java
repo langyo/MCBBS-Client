@@ -1,5 +1,9 @@
 package net.mcbbs.client.socketserver;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+
 public class CommandExecuter
 {
     private Command command;
@@ -9,92 +13,86 @@ public class CommandExecuter
         command = parsed;
     }
 
-    private void doExecute() throws CommandExecuteException
-    {
-        if(!(PackageManager.packages.containsKey(command.package) 
-         && PackageManager.pacakges.get(command.package).commands.containsKey(command.subCommand)))
-         throw new CommandExecuteException(command);
-        
-        evalCommand(PackageManager.packages.get(command.package).commands.get(command.subCommand));
+    private void doExecute() throws CommandExecuteException {
+        if (!(PackageManager.packages.containsKey(command.pkg)
+         &&PackageManager.packages.get(command.pkg).commands.containsKey(command.subCommand)))
+        throw new CommandExecuteException(command);
+
+        evalCommand(PackageManager.packages.get(command.pkg).commands.get(command.subCommand));
     }
 
-    private void doData() throws CommandExecuteException
-    {
-        if(!(PackageManager.packages.containsKey(command.package) 
-         && PackageManager.pacakges.get(command.package).dataListeners.containsKey(command.subCommand)))
-         throw new CommandExecuteException(command);
-        
-        evalCommand(PackageManager.packages.get(command.package).dataListeners.get(command.subCommand));
+    private void doData() throws CommandExecuteException {
+        if (!(PackageManager.packages.containsKey(command.pkg)
+         &&PackageManager.packages.get(command.pkg).dataListeners.containsKey(command.subCommand)))
+        throw new CommandExecuteException(command);
+
+        evalCommand(PackageManager.packages.get(command.pkg).dataListeners.get(command.subCommand));
     }
 
-    private void doLog() throws CommandExecuteException
-    {
+    private void doLog() throws CommandExecuteException {
         // 转交给专用类处理
-        try
-        {
-            Logger.eval(command.arguments[0], command.route.getFrom(), command.arguments[1]);
-        }
-        catch(IOException e)
-        {
-            throw new CommandExecuteException(command);
-        }
+        Logger.eval(command.arguments.get(0), (command.route.direction.getDirection().contentEquals("->")?command.route.first:command.route.second).getSourceName(), command.arguments.get(1));
     }
 
-    private void doSystem() throws CommandExecuteException
-    {
+    private void doSystem() throws CommandExecuteException {
         // 转交给专用类处理
-        SystemCommandDashboard.eval(command.subCommand, command.arguments, command.route);
+        SystemCommandDashboard.eval(SystemCommandType.valueOf(command.subCommand.toUpperCase()),(String[])command.arguments.toArray(), command.route);
     }
 
     private void doCallback()
     {
-        Command equaling = new Command(command.type, command.route, command.package, command.subCommand);
+        Command equaling = new Command(command.type, command.route, command.pkg, command.subCommand);
         PluginDashboard.tasks.remove(equaling);
     }
 
-    public void execute() throws CommandExecuteException
-    {
-        if(command.route.getTo() == SystemCommandDashboard.nativeVersionInfo)
-        {
-            switch(command.command)
-            {
-                case CommandType.EXECUTE:
+    public void execute() throws CommandExecuteException {
+        if (Objects.equals(command.route.getTo().getSourceName(), SystemCommandDashboard.nativeVersionInfo)) {
+            switch (command.type) {
+                case EXECUTE:
                     doExecute();
                     break;
-                case CommandType.DATA:
+                case DATA:
                     doData();
                     break;
-                case CommandType.LOG:
+                case LOG:
                     doLog();
                     break;
-                case CommandType.SYSTEM:
+                case SYSTEM:
                     doSystem();
                     break;
-                case CommandType.CALLBACK:
+                case CALLBACK:
                     doCallback();
                     break;
                 default:
                     throw new CommandExecuteException(command);
             }
-        }
-        else
-        {
+        } else {
+            var ToStringUtil = new Object(){
+                public String stringList2String(char separator, List<String> stringList){
+                    StringBuilder sb = new StringBuilder();
+                    for(String s:stringList){
+                        sb.append(s);
+                        sb.append(separator);
+                    }
+                    String res = sb.toString();
+                    return res.substring(0,res.length()-1);
+                }
+            };
             // 转发到别的平台
-            switch(command.command)
-            {
-                case CommandType.EXECUTE:
-                    PluginDashboard.execute(command.route, command.package, command.command, command.arguments);
+            switch (command.type) {
+                case EXECUTE:
+                    PluginDashboard.execute(command.route, command.pkg,command.type.getTypeName(), (String[])command.arguments.toArray());
                     break;
-                case CommandType.DATA:
-                    PluginDashboard.data(command.route, command.package, command.command, command.arguments);
+                case DATA:
+                    PluginDashboard.data(command.route, command.pkg,command.type.getTypeName(), (String[])command.arguments.toArray());
                     break;
-                case CommandType.SYSTEM:
-                    PluginDashboard.system(command.route, command.command, command.arguments);
-                case CommandType.LOG:
-                    PluginDashboard.log(command.route, command.arguments[0], command.arguments[1]);
-                case CommandType.CALLBACK:
-                    if(command.package != null) PluginDashboard.callback(command.route, command.arguments[0], command.package, command.subCommand);
-                    else PluginDashboard.callback(command.route, command.arguments[0], command.subCommand);
+                case SYSTEM:
+                    PluginDashboard.system(command.route, command.type.getTypeName(), ToStringUtil.stringList2String(' ',command.arguments));
+                case LOG:
+                    PluginDashboard.log(command.route, command.arguments.get(0), command.arguments.get(1));
+                case CALLBACK:
+                    if (command.pkg !=null)PluginDashboard.callback(command.route, command.arguments.get(0), command.pkg,command.subCommand);
+                    else PluginDashboard.callback(command.route, command.arguments.get(0), command.subCommand);
                 default:
                     throw new CommandExecuteException(command);
             }

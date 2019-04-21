@@ -37,7 +37,7 @@
 			var controls, camera, scene, renderer;
 			var cameraCube, sceneCube;
 			var textureEquirec, textureCube;
-			var cubeMesh, sphereMesh;
+			var cubeMesh;
 			var sphereMaterial;
 
 			init();
@@ -134,16 +134,6 @@
 				cubeMesh = new THREE.Mesh( new THREE.BoxBufferGeometry( 100, 100, 100 ), cubeMaterial );
 				sceneCube.add( cubeMesh );
 
-				//
-
-				var geometry = new THREE.SphereBufferGeometry( 400.0, 48, 24 );
-				sphereMaterial = new THREE.MeshLambertMaterial( { envMap: textureCube } );
-				sphereMesh = new THREE.Mesh( geometry, sphereMaterial );
-
-				scene.add( sphereMesh );
-
-				//
-
 				renderer = new THREE.WebGLRenderer();
 				renderer.autoClear = false;
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -152,23 +142,17 @@
 
 				renderer.gammaOutput = true;
 
-				//
-
 				var params = {
 					Cube: function () {
 
 						cubeMesh.material = cubeMaterial;
 						cubeMesh.visible = true;
-						sphereMaterial.envMap = textureCube;
-						sphereMaterial.needsUpdate = true;
 
 					},
 					Equirectangular: function () {
 
 						cubeMesh.material = equirectMaterial;
 						cubeMesh.visible = true;
-						sphereMaterial.envMap = textureEquirec;
-						sphereMaterial.needsUpdate = true;
 
 					},
 					Refraction: false
