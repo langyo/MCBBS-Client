@@ -68,7 +68,7 @@ public class CommandExecuter
             }
         } else {
             var ToStringUtil = new Object(){
-                public String stringList2String(char separator, List<String> stringList){
+                String stringList2String(char separator, List<String> stringList){
                     StringBuilder sb = new StringBuilder();
                     for(String s:stringList){
                         sb.append(s);
