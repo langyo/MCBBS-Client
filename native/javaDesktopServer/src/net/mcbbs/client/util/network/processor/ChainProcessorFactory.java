@@ -4,7 +4,7 @@ import net.mcbbs.client.util.network.processor.user.IDataUser;
 import net.mcbbs.client.util.thread.SingleArgumentRunnable;
 
 public final class ChainProcessorFactory {
-    public static <A>IDataUser<A> newSimpleDataUser(Class<A> aClass, SingleArgumentRunnable<A> runnable) {
+    public static <A> IDataUser<A> newSimpleDataUser(Class<A> aClass, SingleArgumentRunnable<A> runnable) {
         return new IDataUser<>() {
             @Override
             public void onReceived(A data) {
@@ -22,7 +22,8 @@ public final class ChainProcessorFactory {
             }
 
             @Override
-            public void setValue(Object value) {}
+            public void setValue(Object value) {
+            }
 
             @Override
             public A value() {

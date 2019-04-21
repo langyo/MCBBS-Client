@@ -5,7 +5,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity"
+          minHeight="-Infinity" minWidth="-Infinity"
           vgap="20.0" xmlns="http://javafx.com/javafx/8"
           fx:controller="net.mcbbs.client.installer.ExitDialog">
     <children>
