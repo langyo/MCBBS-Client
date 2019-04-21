@@ -30,7 +30,8 @@ public class InstallPage {
 
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert buttonChooseLoc != null : "fx:id=\"buttonChooseLoc\" was not injected: check your FXML file 'InstallPage.fxml'.";
         assert buttonInstall != null : "fx:id=\"buttonInstall\" was not injected: check your FXML file 'InstallPage.fxml'.";

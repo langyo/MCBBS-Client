@@ -2,13 +2,12 @@ package net.mcbbs.client.socketserver;
 
 import java.utils.*;
 
-public class CommandParser
-{
+public class CommandParser {
     public String sourceCommand;
 
     public CommandType command;
     public CommandRoute route;
-    public String package;
+    public String package
     public String subCommand;
     public ArrayList<String> arguments = new ArrayList<>();
 
@@ -19,8 +18,7 @@ public class CommandParser
         try
         {
             String[] paths = str.split(" ");
-            switch(paths[0])
-            {
+            switch (paths[0]) {
                 case CommandType.EXECUTE:
                     this.command = CommandType.EXECUTE;
                     if(paths.length < 3) throw new CommandParseException(this);
