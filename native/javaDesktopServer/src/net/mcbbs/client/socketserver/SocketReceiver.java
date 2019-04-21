@@ -18,7 +18,7 @@ public class SocketReceiver implements Runnable {
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(s.getOutputStream(), StandardCharsets.UTF_8), true)
         ) {
             String command = in.nextLine();
-            CommandParser parsed = new CommandParser(command);
+            Command parsed = new Command(command);
             CommandExecuter executer = new CommandExecuter(parsed);
             executer.execute();
             out.println(executer.generateGotMessage());

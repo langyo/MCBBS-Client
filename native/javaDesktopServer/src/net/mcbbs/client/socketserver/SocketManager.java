@@ -6,14 +6,15 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class SocketManager {
-    public static String sendMessage(String msg) {
+    public static String sendMessage(String msg) throws IOException {
         try (
                 Socket s = new Socket("localhost", 9234);
                 Scanner in = new Scanner(s.getInputStream(), "UTF-8");
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(s.getOutputStream(), StandardCharsets.UTF_8), true)
-        ) {
+        ){
             out.print(msg);
             out.flush();
             s.shutdownOutput();

@@ -4,5 +4,15 @@ public enum SystemCommandType
 {
     CALL("call"),
     RECEIVE("receive"),
-    EXIT("exit")
+    EXIT("exit");
+
+    SystemCommandType(String typ) {
+        type=typ;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    private final String type;
 }

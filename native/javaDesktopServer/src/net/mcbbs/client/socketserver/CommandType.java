@@ -5,5 +5,15 @@ public enum CommandType {
     DATA("data"),
     LOG("log"),
     SYSTEM("system"),
-    CALLBACK("callback")
+    CALLBACK("callback");
+
+    CommandType(String typename) {
+        typeName=typename;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    private final String typeName;
 }

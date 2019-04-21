@@ -2,24 +2,24 @@ package net.mcbbs.client.socketserver;
 
 import java.util.*;
 
-public SystemCommandDashboard
+public class SystemCommandDashboard
 {
     public static final String nativeVersionInfo = "java";
 
-    private static Set<String> registed = new Set<>();
+    private static Set<String> registed = new HashSet<>();
 
-    public static void eval(String command, String[] extraArgs, CommandRoute route) throws CommandExecuteException
+    public static void eval(SystemCommandType command, String[] extraArgs, CommandRoute route) throws CommandExecuteException
     {
         switch(command)
         {
-            case SystemCommandType.CALL:
-                PluginDashboard.system(route.reverse(), SystemCommandType.RECEIVE, nativeVersionInfo);
+            case CALL:
+                PluginDashboard.system(route.reverse(), SystemCommandType.RECEIVE.getType(), nativeVersionInfo);
                 registed.add(extraArgs[0]);
                 break;
-            case SystemCommandType.RECEIVE:
+            case RECEIVE:
                 registed.add(extraArgs[0]);
                 break;
-            case SystemCommandType.EXIT:
+            case EXIT:
                 if(registed.contains(extraArgs[0]))
                 {
                     PluginDashboard.callback(route.reverse(), "got", "system", "exit");

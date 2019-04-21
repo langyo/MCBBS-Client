@@ -1,41 +1,41 @@
 package net.mcbbs.client.socketserver;
 
-import java.utils.*;
+import java.util.*;
 
 public class PluginDashboard
 {
-    public static Set<CommandParser> tasks = new Set<>();
+    public static Set<Command> tasks = new HashSet<>();
 
-    public static void execute(CommandRoute route, String package, String command, String[] args)
+    public static void execute(CommandRoute route, String pkg, String command, String[] args)
     {
         CommandBuilder argStr = new CommandBuilder();
         for(String n : args) argStr.append(n);
-        this.execute(route. package, command, argStr.toString());
+        execute(route, pkg, command, argStr.toString());
     }
 
-    public static void execute(CommandRoute route, String package, String command, String args)
+    public static void execute(CommandRoute route, String pkg, String command, String args)
     {
         CommandBuilder str = new CommandBuilder();
-        str.append("execute").append(route.toString()).append(package).append(command).append(args);
+        str.append("execute").append(route.toString()).append(pkg).append(command).append(args);
         SocketManager.sendMessage(str.toString());
-        CommandParser p = new CommandParser(CommandType.EXECUTE, router, package, command, args);
-        this.tasks.add(p);
+        Command p = new Command(CommandType.EXECUTE, route, pkg, command, new String[]{args});
+        tasks.add(p);
     }
 
-    public static void data(CommandRoute route, String package, String command, String[] args)
+    public static void data(CommandRoute route, String pkg, String command, String[] args)
     {
         CommandBuilder argStr = new CommandBuilder();
         for(String n : args) argStr.append(n);
-        this.execute(route. package, command, argStr.toString());
+        execute(route, pkg, command, argStr.toString());
     }
 
-    public static void data(CommandRoute route, String package, String command, String args)
+    public static void data(CommandRoute route, String pkg, String command, String args)
     {
         CommandBuilder str = new CommandBuilder();
-        str.append("data").append(route.toString()).append(package).append(command).append(args);
+        str.append("data").append(route.toString()).append(pkg).append(command).append(args);
         SocketManager.sendMessage(str.toString());
-        CommandParser p = new CommandParser(CommandType.DATA, router, package, command, args);
-        this.tasks.add(p);
+        Command p = new Command(CommandType.DATA, route, pkg, command, new String[]{args});
+        tasks.add(p);
     }
 
     public static void system(CommandRoute route, String command, String args) 
@@ -52,11 +52,11 @@ public class PluginDashboard
         SocketManager.sendMessage(str.toString());
     }
 
-    public static void callback(CommandRoute route, String type, String package, String command)
+    public static void callback(CommandRoute route, String type, String pkg, String command)
     {
         // type 只有 got/fail 两种
         CommandBuilder str = new CommandBuilder();
-        str.append("callback").append(type).append(route.toString()).append(package).append(command);
+        str.append("callback").append(type).append(route.toString()).append(pkg).append(command);
         SocketManager.sendMessage(str.toString());
     }
 

@@ -2,9 +2,9 @@ package net.mcbbs.client.socketserver;
 
 public class CommandExecuter
 {
-    private CommandParser command;
+    private Command command;
 
-    public CommandExecuter(CommandParser parsed)
+    public CommandExecuter(Command parsed)
     {
         command = parsed;
     }
@@ -48,7 +48,7 @@ public class CommandExecuter
 
     private void doCallback()
     {
-        CommandParser equaling = new CommandParser(command.type, command.route, command.package, command.subCommand);
+        Command equaling = new Command(command.type, command.route, command.package, command.subCommand);
         PluginDashboard.tasks.remove(equaling);
     }
 

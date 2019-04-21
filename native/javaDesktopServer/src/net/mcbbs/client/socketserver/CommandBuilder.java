@@ -1,12 +1,12 @@
 package net.mcbbs.client.socketserver;
 
-import java.utils.*;
+import java.util.*;
 
 public class CommandBuilder {
     private ArrayList<String> commands = new ArrayList<>();
 
     public CommandBuilder append(String s) {
-        command.add(s);
+        commands.add(s);
         return this;
     }
 
