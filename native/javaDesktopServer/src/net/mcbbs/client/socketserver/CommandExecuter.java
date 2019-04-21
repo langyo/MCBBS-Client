@@ -29,12 +29,12 @@ public class CommandExecuter
         evalCommand(PackageManager.packages.get(command.pkg).dataListeners.get(command.subCommand));
     }
 
-    private void doLog() throws CommandExecuteException {
+    private void doLog() {
         // 转交给专用类处理
         Logger.eval(command.arguments.get(0), (command.route.direction.getDirection().contentEquals("->")?command.route.first:command.route.second).getSourceName(), command.arguments.get(1));
     }
 
-    private void doSystem() throws CommandExecuteException {
+    private void doSystem() throws IOException {
         // 转交给专用类处理
         SystemCommandDashboard.eval(SystemCommandType.valueOf(command.subCommand.toUpperCase()),(String[])command.arguments.toArray(), command.route);
     }
@@ -45,7 +45,7 @@ public class CommandExecuter
         PluginDashboard.tasks.remove(equaling);
     }
 
-    public void execute() throws CommandExecuteException {
+    public void execute() throws IOException {
         if (Objects.equals(command.route.getTo().getSourceName(), SystemCommandDashboard.nativeVersionInfo)) {
             switch (command.type) {
                 case EXECUTE:
