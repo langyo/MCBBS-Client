@@ -13,10 +13,12 @@ public class Main extends Application {
     public final Scene WELCOME;
     public final Scene EXIT_DIALOG;
     public final Scene LICENSE;
-    public Main(){
+    public Stage PRIMARY_STAGE;
+
+    public Main() {
         Scene VAR;
         try {
-            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/WelcomePage.fxml")),600,400);
+            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/WelcomePage.fxml")), 600, 400);
         } catch (IOException e) {
             e.printStackTrace();
             VAR = null;
@@ -25,25 +27,25 @@ public class Main extends Application {
         WELCOME = VAR;
 
         try {
-            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/ExitDialog.fxml")),503,102);
+            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/ExitDialog.fxml")), 503, 102);
         } catch (IOException e) {
             VAR = null;
             e.printStackTrace();
             System.exit(-1);
         }
-        EXIT_DIALOG=VAR;
+        EXIT_DIALOG = VAR;
 
-        try{
-            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/LicensePage.fxml")),600,400);
+        try {
+            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/LicensePage.fxml")), 600, 400);
         } catch (IOException e) {
             VAR = null;
             e.printStackTrace();
             System.exit(-1);
         }
-        LICENSE=VAR;
+        LICENSE = VAR;
 
-        try{
-            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/InstallPage.fxml")),600,400);
+        try {
+            VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/InstallPage.fxml")), 600, 400);
         } catch (IOException e) {
             VAR = null;
             e.printStackTrace();
@@ -74,11 +76,9 @@ public class Main extends Application {
         PRIMARY_STAGE.show();
     }
 
-    public void changeScene(Scene scene){
+    public void changeScene(Scene scene) {
         PRIMARY_STAGE.close();
         PRIMARY_STAGE.setScene(scene);
         PRIMARY_STAGE.show();
     }
-
-    public Stage PRIMARY_STAGE;
 }

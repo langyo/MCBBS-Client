@@ -1,6 +1,5 @@
 package net.mcbbs.client.socketserver;
 
-public class CommandRoute
-{
-    
+public class CommandRoute {
+
 }

@@ -1,6 +1,6 @@
 package net.mcbbs.client.util.network.processor.coder;
 
-public abstract class AbstractDECoder<E,D> implements IDEcoder<E,D> {
+public abstract class AbstractDECoder<E, D> implements IDEcoder<E, D> {
     @Override
     public Class getInputType() {
         return null;

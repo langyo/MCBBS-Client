@@ -9,47 +9,54 @@ import java.util.List;
 import java.util.ListIterator;
 
 public final class MutableProcessorPipeline<I> {
-    List<ProcessorChainline<?,?,?>> order;
-    public MutableProcessorPipeline(){
+    List<ProcessorChainline<?, ?, ?>> order;
+
+    public MutableProcessorPipeline() {
         order = Lists.newArrayList();
     }
-    protected MutableProcessorPipeline(@Nonnull List<ProcessorChainline<?,?,?>> order) {
-        this.order=order;
+
+    protected MutableProcessorPipeline(@Nonnull List<ProcessorChainline<?, ?, ?>> order) {
+        this.order = order;
     }
-    public void addChainline(ProcessorChainline<?,?,?> chain){
-        if(order.isEmpty()) {
+
+    public void addChainline(ProcessorChainline<?, ?, ?> chain) {
+        if (order.isEmpty()) {
             order.add(chain);
-        }else{
-            ListIterator<ProcessorChainline<?,?,?>> iterator = order.listIterator();
+        } else {
+            ListIterator<ProcessorChainline<?, ?, ?>> iterator = order.listIterator();
             ProcessorChainline last;
-            while(iterator.hasNext())iterator.next();
+            while (iterator.hasNext()) iterator.next();
             last = iterator.previous();
-            if(last.last != null &&checkSubClass(last.last.getOutputType(),chain.first.getInputType())!=null){
+            if (last.last != null && checkSubClass(last.last.getOutputType(), chain.first.getInputType()) != null) {
                 order.add(chain);
             }
         }
     }
-    private Class<?> checkSubClass(Class<?> f,Class<?> l){
+
+    private Class<?> checkSubClass(Class<?> f, Class<?> l) {
         try {
             return f.asSubclass(l);
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
             return null;
         }
     }
-    public void removeChainline(ProcessorChainline<?,?,?> chain){
+
+    public void removeChainline(ProcessorChainline<?, ?, ?> chain) {
         order.remove(chain);
     }
-    public void fire(I data){
+
+    public void fire(I data) {
         ProcessorUtils.fire(data, ImmutableList.copyOf(order.iterator()));
     }
-    public void register(IProcessorChainable<?,?> chainable){
-        ListIterator<ProcessorChainline<?,?,?>> iterator = order.listIterator();
+
+    public void register(IProcessorChainable<?, ?> chainable) {
+        ListIterator<ProcessorChainline<?, ?, ?>> iterator = order.listIterator();
         ProcessorChainline last;
-        while(iterator.hasNext())iterator.next();
+        while (iterator.hasNext()) iterator.next();
         last = iterator.previous();
-        checkSubClass(chainable.getInputType(),last.last.getOutputType());
+        checkSubClass(chainable.getInputType(), last.last.getOutputType());
         //noinspection unchecked
-        order.add(new ProcessorChainline<>(last.last,chainable));
+        order.add(new ProcessorChainline<>(last.last, chainable));
     }
 
     public ImmutableProcessorPipeline<I> asImmutable() {

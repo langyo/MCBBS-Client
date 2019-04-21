@@ -16,34 +16,28 @@ import java.util.List;
 import java.util.Map;
 
 public class SocketServer implements IServer {
-    static class Connection{
-        final Socket connection;
-        final Thread processor;
-
-        Connection(Socket connection, Thread processor) {
-            this.connection = connection;
-            this.processor = processor;
-        }
-    }
+    public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
     int time = 0;
     List<Connection> threads = Lists.newArrayList();
     ThreadGroup childThread;
     ServerSocket ss = new ServerSocket();
-    public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
     ImmutableProcessorPipeline pipeline = null;
     Map<String, ImmutableProcessorPipeline<?>> pipelines = Maps.newHashMap();
-    public SocketServer(int port,String threadPrefix) throws IOException {
+
+    public SocketServer(int port, String threadPrefix) throws IOException {
         childThread = new ThreadGroup(threadPrefix);
-        ss.bind(new InetSocketAddress("localhost",port));
+        ss.bind(new InetSocketAddress("localhost", port));
     }
+
     @Override
     public void addPipe(String id, ImmutableProcessorPipeline<?> p) {
-        if(!pipelines.containsValue(p)&&!pipelines.containsKey(id))
-            pipelines.put(id,p);
+        if (!pipelines.containsValue(p) && !pipelines.containsKey(id))
+            pipelines.put(id, p);
     }
+
     @Override
     public void enablePipe(String id) {
-        pipeline = pipelines.getOrDefault(id,pipeline==null?DEFAULT_PIPE:pipeline);
+        pipeline = pipelines.getOrDefault(id, pipeline == null ? DEFAULT_PIPE : pipeline);
     }
 
     @Override
@@ -57,22 +51,32 @@ public class SocketServer implements IServer {
         var ref = new Object() {
             Socket buf;
         };
-        while(true){
+        while (true) {
             try {
                 ref.buf = ss.accept();
-                buf2 = new Thread(childThread,()->{
+                buf2 = new Thread(childThread, () -> {
                     try {
                         BufferedReader br = new BufferedReader(new InputStreamReader(ref.buf.getInputStream()));
                         String cmd = br.readLine();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                },"client-"+(time++));
-                threads.add(new Connection(ref.buf,buf2));
+                }, "client-" + (time++));
+                threads.add(new Connection(ref.buf, buf2));
                 buf2.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    static class Connection {
+        final Socket connection;
+        final Thread processor;
+
+        Connection(Socket connection, Thread processor) {
+            this.connection = connection;
+            this.processor = processor;
         }
     }
 }
