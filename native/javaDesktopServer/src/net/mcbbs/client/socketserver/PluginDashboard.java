@@ -8,29 +8,29 @@ public class PluginDashboard {
     public static void execute(CommandRoute route, String package, String command, String[] args) {
         CommandBuilder argStr = new CommandBuilder();
         for (String n : args) argStr.append(n);
-        this.execute(route. package,command, argStr.toString());
+        this.execute(route. package,command, argStr.toString())
     }
 
     public static void execute(CommandRoute route, String package, String command, String args) {
         CommandBuilder str = new CommandBuilder();
         str.append("execute").append(route.toString()).append(package).append(command).append(args);
         SocketManager.sendMessage(str.toString());
-        CommandParser p = new CommandParser(CommandType.EXECUTE, router, package,command, args);
-        this.tasks.add(p);
+        CommandParser p = new CommandParser(CommandType.EXECUTE, router, package,command, args)
+        tasks.add(p);
     }
 
     public static void data(CommandRoute route, String package, String command, String[] args) {
         CommandBuilder argStr = new CommandBuilder();
         for (String n : args) argStr.append(n);
-        this.execute(route. package,command, argStr.toString());
+        this.execute(route. package,command, argStr.toString())
     }
 
     public static void data(CommandRoute route, String package, String command, String args) {
         CommandBuilder str = new CommandBuilder();
         str.append("data").append(route.toString()).append(package).append(command).append(args);
         SocketManager.sendMessage(str.toString());
-        CommandParser p = new CommandParser(CommandType.DATA, router, package,command, args);
-        this.tasks.add(p);
+        CommandParser p = new CommandParser(CommandType.DATA, router, package,command, args)
+        tasks.add(p);
     }
 
     public static void system(CommandRoute route, String command, String args) {

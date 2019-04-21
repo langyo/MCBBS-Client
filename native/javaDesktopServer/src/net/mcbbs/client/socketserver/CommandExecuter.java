@@ -12,7 +12,7 @@ public class CommandExecuter {
          &&PackageManager.pacakges.get(command.package).commands.containsKey(command.subCommand)))
         throw new CommandExecuteException(command);
 
-        evalCommand(PackageManager.packages.get(command.package).commands.get(command.subCommand));
+        evalCommand(PackageManager.packages.get(command.package).commands.get(command.subCommand))
     }
 
     private void doData() throws CommandExecuteException {
@@ -20,7 +20,7 @@ public class CommandExecuter {
          &&PackageManager.pacakges.get(command.package).dataListeners.containsKey(command.subCommand)))
         throw new CommandExecuteException(command);
 
-        evalCommand(PackageManager.packages.get(command.package).dataListeners.get(command.subCommand));
+        evalCommand(PackageManager.packages.get(command.package).dataListeners.get(command.subCommand))
     }
 
     private void doLog() throws CommandExecuteException {
@@ -38,7 +38,7 @@ public class CommandExecuter {
     }
 
     private void doCallback() {
-        CommandParser equaling = new CommandParser(command.type, command.route, command.package,command.subCommand);
+        CommandParser equaling = new CommandParser(command.type, command.route, command.package,command.subCommand)
         PluginDashboard.tasks.remove(equaling);
     }
 
@@ -67,17 +67,17 @@ public class CommandExecuter {
             // 转发到别的平台
             switch (command.command) {
                 case CommandType.EXECUTE:
-                    PluginDashboard.execute(command.route, command.package,command.command, command.arguments);
+                    PluginDashboard.execute(command.route, command.package,command.command, command.arguments)
                     break;
                 case CommandType.DATA:
-                    PluginDashboard.data(command.route, command.package,command.command, command.arguments);
+                    PluginDashboard.data(command.route, command.package,command.command, command.arguments)
                     break;
                 case CommandType.SYSTEM:
                     PluginDashboard.system(command.route, command.command, command.arguments);
                 case CommandType.LOG:
                     PluginDashboard.log(command.route, command.arguments[0], command.arguments[1]);
                 case CommandType.CALLBACK:
-                    if (command.package !=null)PluginDashboard.callback(command.route, command.arguments[0], command.package,command.subCommand);
+                    if (command.package !=null)PluginDashboard.callback(command.route, command.arguments[0], command.package,command.subCommand)
                     else PluginDashboard.callback(command.route, command.arguments[0], command.subCommand);
                 default:
                     throw new CommandExecuteException(command);

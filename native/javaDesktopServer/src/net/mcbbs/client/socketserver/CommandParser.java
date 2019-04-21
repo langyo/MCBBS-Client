@@ -1,84 +1,84 @@
 package net.mcbbs.client.socketserver;
 
-import java.utils.*;
+import java.util.ArrayList;
+import java.util.Objects;
+
+import static net.mcbbs.client.socketserver.CommandType.*;
 
 public class CommandParser {
+    public CommandType type;
     public String sourceCommand;
 
     public CommandType command;
     public CommandRoute route;
-    public String package
+    public String pkg;
     public String subCommand;
     public ArrayList<String> arguments = new ArrayList<>();
 
 
-    public CommandParser(String str) throws COmmandParseException {
+    public CommandParser(String str) throws CommandParseException {
         this.sourceCommand = str;
         try {
             String[] paths = str.split(" ");
             switch (paths[0]) {
-                case CommandType.EXECUTE:
-                    this.command = CommandType.EXECUTE;
+                case EXECUTE:
+                    this.command = EXECUTE;
                     if (paths.length < 3) throw new CommandParseException(this);
-                    this.route = new CommandRoute(path[1]);
-                    this.pacakge = paths[2];
+                    this.route = new CommandRoute(paths[1]);
+                    this.pkg = paths[2];
                     this.subCommand = paths[3];
                     if (paths.length > 3)
-                        for (int i = 4; i < path; ++i)
+                        for (int i = 4; i < paths.length; ++i)
                             this.arguments.add(paths[i]);
                     break;
-                case CommandType.DATA:
-                    this.command = CommandType.DATA;
+                case DATA:
+                    this.command = DATA;
                     if (paths.length < 3) throw new CommandParseException(this);
-                    this.route = new CommandRoute(path[1]);
-                    this.pacakge = paths[2];
+                    this.route = new CommandRoute(paths[1]);
+                    this.pkg = paths[2];
                     this.subCommand = paths[3];
                     if (paths.length > 3)
-                        for (int i = 4; i < path; ++i)
+                        for (int i = 4; i < paths.length; ++i)
                             this.arguments.add(paths[i]);
                     break;
-                case CommandType.LOG:
-                    this.command = CommandType.LOG;
-                    if (paths.length < 3) throw new COmmandParseException(this);
-                    this.route = new CommandRoute(path[1], CommandRoute.BROADCAST_FLAG);
+                case LOG:
+                    this.command = LOG;
+                    if (paths.length < 3) throw new CommandParseException(this);
+                    this.route = new CommandRoute(paths[1], CommandRoute.BROADCAST_FLAG);
                     this.arguments.add(paths[2]);   // 时间
                     this.arguments.add(paths[3]);   // 内容
                     break;
-                case CommandType.SYSTEM:
-                    this.command = CommandType.SYSTEM;
+                case SYSTEM:
+                    this.command = SYSTEM;
                     if (paths.length < 2) throw new CommandParseException(this);
-                    this.route = new CommandRoute(path[1]);
+                    this.route = new CommandRoute(paths[1]);
                     this.subCommand = paths[3];
                     if (paths.length > 2)
-                        for (int i = 3; i < path; ++i)
+                        for (int i = 3; i < paths.length; ++i)
                             this.arguments.add(paths[i]);
                     break;
-                case CommandType.CALLBACK:
-                    this.command = CommandType.CALLBACK;
+                case CALLBACK:
+                    this.command = CALLBACK;
                     if (paths.length < 4) throw new CommandParseException(this);
-                    this.route = new CommandRoute(path[2], CommandRoute.BROADCAST_FLAG);
-                    this.pacakge = paths[4];    // 实际保存的是源命令名（command）
+                    this.route = new CommandRoute(paths[2], CommandRoute.BROADCAST_FLAG);
+                    this.pkg = paths[4];    // 实际保存的是源命令名（command）
                     this.subCommand = paths[3]; // 实际保存的是源命令下的子命令（subCommand）
                     this.arguments.add(paths[1]);   // 实际保存的是 got/fail
                     break;
                 default:
                     throw new CommandParseException(this);
             }
-            catch(CommandParseException e)
-            {
-                throw e;
-            }
-            catch(CommandRouteException e)
-            {
-                throw new CommandParseException(this);
-            }
+        } catch (CommandRouteException e) {
+            throw new CommandParseException(this);
         }
     }
 
-    public CommandParser(CommandType type, CommandRoute route, String package, String subCommand) {
+}
+
+    public CommandParser(CommandType type, CommandRoute route, String pkg, String subCommand) {
         this.type = type;
         this.route = route;
-        this.package = package;
+        this.pkg = pkg;
         this.subCommand = subCommand;
     }
 
@@ -86,19 +86,31 @@ public class CommandParser {
         this(type, route, "", subCommand);
     }
 
-    public bool equals(CommandParser n) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
         // 这里的 equals 比较智能，因为它能根据不同的指令类型选择比较需要比较的内容，而不是盲目地全部比较一遍
+        CommandParser that = ((CommandParser) o);
         switch (this.command) {
-            case CommandType.EXECUTE:
-            case CommandType.DATA:
-            case CommandType.CALLBACK:
-                return this.package ==n.package &&this.route.equals(n.route) && this.subCommand == n.subCommand;
-            case CommandType.SYSTEM:
-                return this.route.equals(n.route) && this.subCommand == n.subCommand;
-            case CommandType.LOG:
+            case EXECUTE:
+            case DATA:
+            case CALLBACK:
+                return this.pkg.equals(that.pkg) && this.route.equals(that.route) && this.subCommand.equals(that.subCommand);
+            case SYSTEM:
+                return this.route.equals(that.route) && this.subCommand.equals(that.subCommand);
+            case LOG: {
                 return true;
-            default:
+            }
+            default: {
                 return false;
+            }
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.pkg, this.command, this.route, this.subCommand);
     }
 }

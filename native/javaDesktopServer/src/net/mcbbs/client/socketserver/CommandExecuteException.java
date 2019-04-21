@@ -3,7 +3,7 @@ package net.mcbbs.client.socketserver;
 import java.io.IOException;
 
 public class CommandExecuteException extends IOException {
-    public String obj;
+    public CommandParser obj;
 
     public CommandExecuteException() {
     }

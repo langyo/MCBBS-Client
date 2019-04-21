@@ -3,10 +3,10 @@ package net.mcbbs.client.plugin.clipboard;
 import net.mcbbs.client.socketserver.PluginDesigner;
 import net.mcbbs.client.socketserver.PluginInterface;
 
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
-import java.awt.toolkit.*;
 
 public class TestPlugin implements PluginInterface {
     public PluginDesigner initializer() {
@@ -20,7 +20,7 @@ public class TestPlugin implements PluginInterface {
         d.appendCommand("get", (str, source) -> this.get());
         d.appendCommand("set", (str, source) -> this.set(str));
 
-        return p;
+        return d;
     }
 
     public String get() {
