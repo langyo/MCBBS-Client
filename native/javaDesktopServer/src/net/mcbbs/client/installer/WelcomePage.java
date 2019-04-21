@@ -11,17 +11,24 @@ import java.util.ResourceBundle;
  * @author yinyangshi InitAuther97
  */
 public class WelcomePage {
-    @FXML // ResourceBundle that was given to the FXMLLoader
+
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
-
-    @FXML // fx:id="buttonCancel"
-    private Button buttonCancel; // Value injected by FXMLLoader
-
-    @FXML // fx:id="buttonContinue"
-    private Button buttonContinue; // Value injected by FXMLLoader
+    /**
+     * fx:id="buttonCancel"
+     * Value injected by FXMLLoader
+     */
+    @FXML
+    private Button buttonCancel;
+    /**
+     * fx:id="buttonContinue"
+     * Value injected by FXMLLoader
+     */
+    @FXML
+    private Button buttonContinue;
 
     @FXML
     void onCancel(ActionEvent event) {
@@ -33,10 +40,12 @@ public class WelcomePage {
 
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    /**
+     * This method is called by the FXMLLoader when initialization is complete
+     */
+    @FXML
     void initialize() {
         assert buttonCancel != null : "fx:id=\"buttonCancel\" was not injected: check your FXML file 'Untitled'.";
         assert buttonContinue != null : "fx:id=\"buttonContinue\" was not injected: check your FXML file 'Untitled'.";
-
     }
 }
