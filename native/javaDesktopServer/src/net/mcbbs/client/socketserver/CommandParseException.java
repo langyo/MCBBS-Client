@@ -2,11 +2,17 @@ package net.mcbbs.client.socketserver;
 
 public class CommandParseException extends IOException
 {
-    private String callbackCommand;
+    public String obj;
+
     public CommandParseException(CommandParser obj)
     {
-        CommandBuilder str = new COmmandBuilder();
-        str.append("callback").append("fail");
-        // 正在编写
+        this.obj = obj;
+    }
+
+    public String generateFailCommand()
+    {
+        CommandBuilder str = new CommandBuilder();
+        str.append("callback").append("fail").append(this.obj.route.toString());
+        return str.toString();
     }
 }
