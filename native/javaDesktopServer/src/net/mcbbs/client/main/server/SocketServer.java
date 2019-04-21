@@ -6,9 +6,9 @@ import net.mcbbs.client.util.network.IServer;
 import net.mcbbs.client.util.network.processor.ImmutableProcessorPipeline;
 import net.mcbbs.client.util.network.processor.MutableProcessorPipeline;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,13 +17,14 @@ import java.util.Map;
 
 public class SocketServer implements IServer {
     public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
-    int time = 0;
-    List<Connection> threads = Lists.newArrayList();
-    ThreadGroup childThread;
-    ServerSocket ss = new ServerSocket();
-    ImmutableProcessorPipeline pipeline = null;
-    Map<String, ImmutableProcessorPipeline<?>> pipelines = Maps.newHashMap();
-
+    private int time = 0;
+    private List<Connection> connections = Lists.newArrayList();
+    private Thread server;
+    ReferenceQueue<?> finalizer = new ReferenceQueue();
+    private ThreadGroup childThread;
+    private ServerSocket ss = new ServerSocket();
+    private ImmutableProcessorPipeline pipeline = null;
+    private Map<String, ImmutableProcessorPipeline<?>> pipelines = Maps.newHashMap();
     public SocketServer(int port, String threadPrefix) throws IOException {
         childThread = new ThreadGroup(threadPrefix);
         ss.bind(new InetSocketAddress("localhost", port));
@@ -46,6 +47,18 @@ public class SocketServer implements IServer {
     }
 
     @Override
+    public ImmutableProcessorPipeline<?> getActivated() {
+        return pipeline;
+    }
+    public void start(){
+        server = new Thread(childThread,this,"main");
+        server.start();
+    }
+    public void stop(){
+        server.interrupt();
+        server = null;
+    }
+    @Override
     public void active() {
         Thread buf2;
         var ref = new Object() {
@@ -55,14 +68,10 @@ public class SocketServer implements IServer {
             try {
                 ref.buf = ss.accept();
                 buf2 = new Thread(childThread, () -> {
-                    try {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(ref.buf.getInputStream()));
-                        String cmd = br.readLine();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }, "client-" + (time++));
-                threads.add(new Connection(ref.buf, buf2));
+                Connection connection = new Connection(ref.buf, buf2);
+                new PhantomReference<>(connection, (ReferenceQueue<? super Connection>) finalizer);
+                connections.add(connection);
                 buf2.start();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -70,13 +79,19 @@ public class SocketServer implements IServer {
         }
     }
 
-    static class Connection {
+    static class Connection extends IServer.Connection{
         final Socket connection;
-        final Thread processor;
-
         Connection(Socket connection, Thread processor) {
+            super(processor);
             this.connection = connection;
-            this.processor = processor;
+        }
+        @Override
+        public void shutdown() {
+            try {
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

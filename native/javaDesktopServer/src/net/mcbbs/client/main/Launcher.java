@@ -26,7 +26,7 @@ public class Launcher {
             }
 
             @Override
-            public void setArugment(String arg) {
+            public void setArgument(String arg) {
                 string = arg;
             }
 
