@@ -99,4 +99,17 @@ public class CommandExecuter
         }
     }
 
+    private void evalCommand(PluginCommandListener method)
+    {
+        if(method.isArrayArguments())
+        {
+            method.trigger(command.arguments);
+        }
+        else
+        {
+            CommandBuilder str = new CommandBuilder();
+            for(String s : command.arguments) str.append(s);
+            method.trigger(str.toString());
+        }
+    }
 }
