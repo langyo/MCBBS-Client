@@ -77,6 +77,7 @@ class MainWindowManager extends Reflux.Component {
           </Typography>
           <Typography paragraph variant="body1">
             {"@InitAuther97 "}
+            <Button onClick={() => shell.openExternal("http://www.mcbbs.net/?2683706")}>MCBBS</Button>{" "}
             <Button onClick={() => shell.openExternal("https://github.com/InitAuther97")}>GitHub</Button>
           </Typography>
           <Typography paragraph variant="body1">
