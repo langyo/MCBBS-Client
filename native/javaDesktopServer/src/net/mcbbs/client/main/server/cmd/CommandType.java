@@ -7,13 +7,13 @@ public enum CommandType {
     SYSTEM("system"),
     CALLBACK("callback");
 
+    private final String typeName;
+
     CommandType(String typename) {
-        typeName=typename;
+        typeName = typename;
     }
 
     public String getTypeName() {
         return typeName;
     }
-
-    private final String typeName;
 }

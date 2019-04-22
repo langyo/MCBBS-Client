@@ -1,10 +1,10 @@
 package net.mcbbs.client.main.server.cmd;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class SystemCommandDashboard
-{
+public class SystemCommandDashboard {
     public static final String nativeVersionInfo = "java";
 
     private static Set<String> registed = new HashSet<>();

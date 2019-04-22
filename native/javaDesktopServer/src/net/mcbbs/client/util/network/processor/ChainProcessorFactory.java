@@ -5,7 +5,16 @@ import net.mcbbs.client.util.thread.SingleArgumentRunnable;
 
 public final class ChainProcessorFactory {
     public static <A> IDataUser<A> newSimpleDataUser(Class<A> aClass, SingleArgumentRunnable<A> runnable) {
-        return new IDataUser<>() {
+        return new IDataUser<A>() {
+            @Override
+            public void setValue(A value) {
+            }
+
+            @Override
+            public A value() {
+                return null;
+            }
+
             @Override
             public void onReceived(A data) {
                 runnable.runWithArg(data);
@@ -19,15 +28,6 @@ public final class ChainProcessorFactory {
             @Override
             public Class<A> getOutputType() {
                 return aClass;
-            }
-
-            @Override
-            public void setValue(Object value) {
-            }
-
-            @Override
-            public A value() {
-                return null;
             }
 
             @Override
