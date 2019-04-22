@@ -6,18 +6,13 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
-				background:#000;
+				background:#66ccff;
 				color:#fff;
 				padding:0;
 				margin:0;
 				overflow:hidden;
 				font-family:georgia;
 				text-align:center;
-			}
-			a { color:skyblue; text-decoration:none }
-			#info {
-				position: absolute;
-				width: 100%;
 			}
 		</style>
 	</head>
@@ -39,6 +34,9 @@
 			var textureEquirec, textureCube;
 			var cubeMesh;
 			var sphereMaterial;
+			var mouseX = 0, mouseY = 0;
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
 
 			init();
 			animate();
@@ -47,13 +45,13 @@
 
 				// CAMERAS
 
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
+				camera = new THREE.PerspectiveCamera( 160, window.innerWidth / window.innerHeight, 1, 100000 );
 				camera.position.set( 0, 0, 1000 );
 				cameraCube = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
 
-				controls = new THREE.OrbitControls( camera );
-				controls.minDistance = 500;
-				controls.maxDistance = 2500;
+				controls = new THREE.OrbitControls(camera);
+				controls.minDistance = 1200;
+				controls.maxDistance = 2000;
 
 				// SCENE
 
@@ -154,34 +152,22 @@
 						cubeMesh.material = equirectMaterial;
 						cubeMesh.visible = true;
 
-					},
-					Refraction: false
+					}
 				};
 
 				var gui = new dat.GUI();
 				gui.add( params, 'Cube' );
 				gui.add( params, 'Equirectangular' );
-				gui.add( params, 'Refraction' ).onChange( function ( value ) {
-
-					if ( value ) {
-
-						textureEquirec.mapping = THREE.EquirectangularRefractionMapping;
-						textureCube.mapping = THREE.CubeRefractionMapping;
-
-					} else {
-
-						textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
-						textureCube.mapping = THREE.CubeReflectionMapping;
-
-					}
-
-					sphereMaterial.needsUpdate = true;
-
-				} );
 				gui.open();
 
 				window.addEventListener( 'resize', onWindowResize, false );
+				
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			}
 
+			function onDocumentMouseMove( event ) {
+				mouseX = ( event.clientX - windowHalfX ) * 0.75;
+				mouseY = ( event.clientY - windowHalfY ) * 0.75;
 			}
 
 			function onWindowResize() {
@@ -207,8 +193,11 @@
 			}
 
 			function render() {
+				camera.position.x += ( mouseX - camera.position.x ) * .05;
+				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 
 				camera.lookAt( scene.position );
+
 				cameraCube.rotation.copy( camera.rotation );
 
 				renderer.render( sceneCube, cameraCube );
