@@ -5,11 +5,11 @@ import net.mcbbs.client.util.CollectionUtils;
 import java.io.IOException;
 import java.util.Objects;
 
-public class CommandExecuter
+public class CommandExecutor
 {
     private Command command;
 
-    public CommandExecuter(Command parsed)
+    public CommandExecutor(Command parsed)
     {
         command = parsed;
     }
@@ -103,7 +103,8 @@ public class CommandExecuter
             }
         }
     }
+
     public String generateGotCommand() {
-        return "callback got ".concat(command.pkg).concat(" ").concat(command.subCommand);
+        return "callback got";
     }
 }
