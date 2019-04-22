@@ -14,7 +14,7 @@ public class SocketManager {
                 Socket s = new Socket("localhost", 9234);
                 Scanner in = new Scanner(s.getInputStream(), "UTF-8");
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(s.getOutputStream(), StandardCharsets.UTF_8), true)
-        ){
+        ) {
             out.print(msg);
             out.flush();
             s.shutdownOutput();

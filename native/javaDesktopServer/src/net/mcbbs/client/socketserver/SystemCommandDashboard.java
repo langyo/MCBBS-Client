@@ -1,10 +1,10 @@
 package net.mcbbs.client.socketserver;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class SystemCommandDashboard
-{
+public class SystemCommandDashboard {
     public static final String nativeVersionInfo = "java";
 
     private static Set<String> registed = new HashSet<>();
@@ -26,8 +26,10 @@ public class SystemCommandDashboard
                     PluginDashboard.callback(route.reverse(), "fail", "system", "exit");
                 }
                 break;
-            default:
+            default: {
+                //fixme: there is no command!
                 throw new CommandExecuteException();
+            }
         }
     }
 }

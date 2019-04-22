@@ -27,7 +27,7 @@ public class SocketReceiver implements Runnable {
         ) {
             String command = in.nextLine();
             Command parsed = new Command(command);
-            CommandExecuter executer = new CommandExecuter(parsed);
+            CommandExecutor executer = new CommandExecutor(parsed);
             executer.execute();
             out.println(executer.generateGotCommand());
         } catch (CommandParseException e) {

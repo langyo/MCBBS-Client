@@ -1,6 +1,7 @@
 package net.mcbbs.client.socketserver;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Command {
     public String sourceCommand;
@@ -12,8 +13,7 @@ public class Command {
     public ArrayList<String> arguments = new ArrayList<>();
 
 
-    public Command(String str) throws CommandParseException
-    {
+    public Command(String str) throws CommandParseException {
         this.sourceCommand = str;
         try {
             String[] paths = str.split(" ");
@@ -65,43 +65,35 @@ public class Command {
                 default:
                     throw new CommandParseException(this);
             }
-        }
-        catch(CommandParseException e)
-        {
+        } catch (CommandParseException e) {
             throw e;
-        }
-        catch(CommandRouteException e)
-        {
+        } catch (CommandRouteException e) {
             throw new CommandParseException(this);
         }
     }
-    public Command(CommandType type, CommandRoute route, String pkg, String subCommand)
-    {
+
+    public Command(CommandType type, CommandRoute route, String pkg, String subCommand) {
         this.type = type;
         this.route = route;
         this.pkg = pkg;
         this.subCommand = subCommand;
     }
 
-    public Command(CommandType type, CommandRoute route, String pkg, String subCommand, String[] args)
-    {
+    public Command(CommandType type, CommandRoute route, String pkg, String subCommand, String[] args) {
         this.type = type;
         this.route = route;
         this.pkg = pkg;
         this.subCommand = subCommand;
-        Collections.addAll(arguments,args);
+        Collections.addAll(arguments, args);
     }
 
-    public Command(CommandType type, CommandRoute route, String subCommand)
-    {
+    public Command(CommandType type, CommandRoute route, String subCommand) {
         this(type, route, "", subCommand);
     }
 
-    public boolean equals(Command n)
-    {
+    public boolean equals(Command n) {
         // 这里的 equals 比较智能，因为它能根据不同的指令类型选择比较需要比较的内容，而不是盲目地全部比较一遍
-        switch(this.type)
-        {
+        switch (this.type) {
             case EXECUTE:
             case DATA:
             case CALLBACK:

@@ -1,12 +1,11 @@
 package net.mcbbs.client.socketserver;
 
-import java.time.*;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Logger
-{
-    public static void eval(String time, String source, String value)
-    {
+public class Logger {
+    public static void eval(String time, String source, String value) {
         System.out.println("[ " + time + " ] [" + source + " ] " + value);
         // TODO: 不是输出到控制台，而是存进文件
     }
@@ -16,8 +15,8 @@ public class Logger
         String time = DateTimeFormatter.ISO_LOCAL_TIME.format(LocalDate.now());
         eval(time, SystemCommandDashboard.nativeVersionInfo, str);
         try {
-            PluginDashboard.log(new CommandRoute("java->node"),time,"[".concat(SystemCommandDashboard.nativeVersionInfo).concat("]").concat(str));
-        } catch (CommandRouteException e) {
+            PluginDashboard.log(new CommandRoute("java->node"), time, "[".concat(SystemCommandDashboard.nativeVersionInfo).concat("]").concat(str));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

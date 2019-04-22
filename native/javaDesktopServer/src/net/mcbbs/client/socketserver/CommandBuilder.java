@@ -1,6 +1,7 @@
 package net.mcbbs.client.socketserver;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CommandBuilder {
     private ArrayList<String> commands = new ArrayList<>();
@@ -10,6 +11,7 @@ public class CommandBuilder {
         return this;
     }
 
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         Iterator iter = commands.iterator();

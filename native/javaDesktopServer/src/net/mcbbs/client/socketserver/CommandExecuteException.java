@@ -2,11 +2,10 @@ package net.mcbbs.client.socketserver;
 
 import java.io.IOException;
 
-public class CommandExecuteException extends IOException
-{
+public class CommandExecuteException extends IOException {
     public Command obj;
-    public CommandExecuteException(Command obj)
-    {
+
+    public CommandExecuteException(Command obj) {
         this.obj = obj;
     }
 

@@ -5,13 +5,13 @@ public enum SystemCommandType {
     RECEIVE("receive"),
     EXIT("exit");
 
+    private final String type;
+
     SystemCommandType(String typ) {
-        type=typ;
+        type = typ;
     }
 
     public String getType() {
         return type;
     }
-
-    private final String type;
 }

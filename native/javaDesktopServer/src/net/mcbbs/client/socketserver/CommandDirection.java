@@ -1,21 +1,20 @@
 package net.mcbbs.client.socketserver;
 
-public enum CommandDirection
-{
+public enum CommandDirection {
     RESPONSE("<-"), REQUEST("->");
 
-    CommandDirection(String s) {
-        direction=s;
-    }
     private final String direction;
+
+    CommandDirection(String s) {
+        direction = s;
+    }
 
     public String getDirection() {
         return direction;
     }
 
-    public CommandDirection reverse()
-    {
-        if(this == RESPONSE) return REQUEST;
+    public CommandDirection reverse() {
+        if (this == RESPONSE) return REQUEST;
         else return RESPONSE;
     }
 }
