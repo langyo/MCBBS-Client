@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Launcher {
     public static void main(String[] args) throws IOException {
-        int port = 9234;
+        int port = 9233;
         SocketServer ss = new SocketServer(port, "desktop-");
         MutableProcessorPipeline<String> mutable = new MutableProcessorPipeline<>();
         mutable.register(ChainProcessorFactory.newSimpleDataUser(String.class, new SingleArgumentRunnable<>() {

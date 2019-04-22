@@ -1,4 +1,4 @@
-package net.mcbbs.client.socketserver;
+package net.mcbbs.client.main.server.cmd;
 
 import java.io.IOException;
 import java.util.*;
@@ -27,7 +27,8 @@ public class SystemCommandDashboard
                 }
                 break;
             default:
-                throw new CommandExecuteException();
+                //throw new CommandExecuteException();
+                // TODO: 这里抛出的异常需要参数，以后找时间根据 command 的类型现场构造一个 Command 对象传进异常类里
         }
     }
 }

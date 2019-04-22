@@ -1,4 +1,4 @@
-package net.mcbbs.client.socketserver;
+package net.mcbbs.client.main.server.cmd;
 
 public interface PluginInterface {
     PluginDesigner initializer();

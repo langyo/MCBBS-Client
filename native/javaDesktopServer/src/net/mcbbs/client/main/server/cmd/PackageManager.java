@@ -1,4 +1,4 @@
-package net.mcbbs.client.socketserver;
+package net.mcbbs.client.main.server.cmd;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -16,7 +16,7 @@ public class PackageManager {
         if(Arrays.binarySearch(cl.getInterfaces(),PluginInterface.class)==-1)
             throw new IOException("遇到了一个无法装载为插件的 jar 文件，请检查位于 " + url.toString() + " 的类 " + classPath + " 是否符合插件的编写要求！");
         Method m = cl.getMethod("initializer");
-        PluginDesigner ret = (PluginDesigner) m.invoke(cl.getClass());
+        PluginDesigner ret = (PluginDesigner) m.invoke(null);
         packages.put(ret.pkg, ret);
     }
 

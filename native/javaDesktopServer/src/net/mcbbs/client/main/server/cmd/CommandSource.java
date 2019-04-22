@@ -1,4 +1,4 @@
-package net.mcbbs.client.socketserver;
+package net.mcbbs.client.main.server.cmd;
 
 public enum CommandSource {
     HTML5("H5"), JAVA("java"), NODE("node");

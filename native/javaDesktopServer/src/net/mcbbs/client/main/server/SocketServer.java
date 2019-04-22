@@ -12,11 +12,13 @@ import java.lang.ref.ReferenceQueue;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class SocketServer implements IServer {
     public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
+    List<PhantomReference<?>> phantomReferences = new ArrayList<>();
     ReferenceQueue<?> finalizer = new ReferenceQueue();
     private int time = 0;
     private List<Connection> connections = Lists.newArrayList();
@@ -74,7 +76,7 @@ public class SocketServer implements IServer {
                 buf2 = new Thread(childThread, () -> {
                 }, "client-" + (time++));
                 Connection connection = new Connection(ref.buf, buf2);
-                new PhantomReference<>(connection, (ReferenceQueue<? super Connection>) finalizer);
+                phantomReferences.add(new PhantomReference<>(connection, (ReferenceQueue<? super Connection>) finalizer));
                 connections.add(connection);
                 buf2.start();
             } catch (IOException e) {

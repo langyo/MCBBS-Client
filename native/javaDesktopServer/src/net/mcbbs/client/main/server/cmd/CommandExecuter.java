@@ -1,7 +1,8 @@
-package net.mcbbs.client.socketserver;
+package net.mcbbs.client.main.server.cmd;
+
+import net.mcbbs.client.util.CollectionUtils;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 public class CommandExecuter
@@ -19,6 +20,20 @@ public class CommandExecuter
         throw new CommandExecuteException(command);
 
         evalCommand(PackageManager.packages.get(command.pkg).commands.get(command.subCommand));
+    }
+
+    private void evalCommand(PluginCommandListener method)
+    {
+        if(method.isArrayArguments())
+        {
+            method.trigger(command.arguments,command.route);
+        }
+        else
+        {
+            CommandBuilder str = new CommandBuilder();
+            for(String s : command.arguments) str.append(s);
+            method.trigger(str.toString(),command.route);
+        }
     }
 
     private void doData() throws CommandExecuteException {
@@ -67,17 +82,7 @@ public class CommandExecuter
                     throw new CommandExecuteException(command);
             }
         } else {
-            var ToStringUtil = new Object(){
-                String stringList2String(char separator, List<String> stringList){
-                    StringBuilder sb = new StringBuilder();
-                    for(String s:stringList){
-                        sb.append(s);
-                        sb.append(separator);
-                    }
-                    String res = sb.toString();
-                    return res.substring(0,res.length()-1);
-                }
-            };
+
             // 转发到别的平台
             switch (command.type) {
                 case EXECUTE:
@@ -87,7 +92,7 @@ public class CommandExecuter
                     PluginDashboard.data(command.route, command.pkg,command.type.getTypeName(), (String[])command.arguments.toArray());
                     break;
                 case SYSTEM:
-                    PluginDashboard.system(command.route, command.type.getTypeName(), ToStringUtil.stringList2String(' ',command.arguments));
+                    PluginDashboard.system(command.route, command.type.getTypeName(), CollectionUtils.stringList2String(' ',command.arguments));
                 case LOG:
                     PluginDashboard.log(command.route, command.arguments.get(0), command.arguments.get(1));
                 case CALLBACK:
@@ -98,5 +103,7 @@ public class CommandExecuter
             }
         }
     }
-
+    public String generateGotCommand() {
+        return "callback got ".concat(command.pkg).concat(" ").concat(command.subCommand);
+    }
 }
