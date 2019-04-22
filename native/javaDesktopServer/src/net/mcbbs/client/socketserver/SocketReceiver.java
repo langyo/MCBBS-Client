@@ -23,13 +23,13 @@ public class SocketReceiver implements Runnable {
             return;
         }
         try (
-                Scanner in = new Scanner(s.getInputStream(), "UTF-8");
+                Scanner in = new Scanner(s.getInputStream(), "UTF-8")
         ) {
             String command = in.nextLine();
             Command parsed = new Command(command);
-            CommandExecutor executer = new CommandExecutor(parsed);
-            executer.execute();
-            out.println(executer.generateGotCommand());
+            CommandExecutor executor = new CommandExecutor(parsed);
+            executor.execute();
+            out.println(executor.generateGotCommand());
         } catch (CommandParseException e) {
             out.println(e.generateFailCommand());
         } catch (CommandExecuteException e) {
