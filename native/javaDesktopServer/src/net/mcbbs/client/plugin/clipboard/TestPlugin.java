@@ -1,6 +1,5 @@
 package net.mcbbs.client.plugin.clipboard;
 
-import net.mcbbs.client.main.server.cmd.CommandRoute;
 import net.mcbbs.client.main.server.cmd.PluginCommandListener;
 import net.mcbbs.client.main.server.cmd.PluginDesigner;
 import net.mcbbs.client.main.server.cmd.PluginInterface;
@@ -25,23 +24,23 @@ public class TestPlugin implements PluginInterface {
         d.appendCommand("get", new PluginCommandListener() {
 
             @Override
-            public String trigger(String args, CommandRoute route) {
+            public String trigger(String args) {
                 return get();
             }
 
             @Override
-            public String trigger(List<String> args, CommandRoute route) {
+            public String trigger(List<String> args) {
                 return get();
             }
         });
         d.appendCommand("set", new PluginCommandListener() {
             @Override
-            public String trigger(String args, CommandRoute route) {
+            public String trigger(String args) {
                 return set(args);
             }
 
             @Override
-            public String trigger(List<String> args, CommandRoute route) {
+            public String trigger(List<String> args) {
                 throw new UnsupportedOperationException();
             }
         });
