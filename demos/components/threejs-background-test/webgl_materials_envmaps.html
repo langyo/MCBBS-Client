@@ -45,9 +45,9 @@
 
 				// CAMERAS
 
-				camera = new THREE.PerspectiveCamera( 160, window.innerWidth / window.innerHeight, 1, 100000 );
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
 				camera.position.set( 0, 0, 1000 );
-				cameraCube = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
+				cameraCube = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 100000 );
 
 				controls = new THREE.OrbitControls(camera);
 				controls.minDistance = 1200;
@@ -65,10 +65,10 @@
 
 				// Textures
 
-				var r = "textures/cube/Sky/";
-				var urls = [ r + "px.jpg", r + "nx.jpg",
-							 r + "py.jpg", r + "ny.jpg",
-							 r + "pz.jpg", r + "nz.jpg" ];
+				var r = "textures/cube/minecraft/";
+				var urls = [ r + "px.png", r + "nx.png",
+							 r + "py.png", r + "ny.png",
+							 r + "pz.png", r + "nz.png" ];
 
 				textureCube = new THREE.CubeTextureLoader().load( urls );
 				textureCube.format = THREE.RGBFormat;
