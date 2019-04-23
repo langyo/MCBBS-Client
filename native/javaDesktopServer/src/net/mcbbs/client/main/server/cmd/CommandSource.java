@@ -1,7 +1,18 @@
 package net.mcbbs.client.main.server.cmd;
 
 public enum CommandSource {
-    HTML5("H5"), JAVA("java"), NODE("node");
+    /**
+     * from HTML5
+     */
+    HTML5("H5"),
+    /**
+     * from JAVA
+     */
+    JAVA("java"),
+    /**
+     * from NODE
+     */
+    NODE("node");
 
     private final String sourceName;
 

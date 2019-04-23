@@ -17,8 +17,8 @@ public class Launcher {
         int port = 9233;
         SocketServer ss = new SocketServer(port, "desktop-");
         MutableProcessorPipeline<String> mutable = new MutableProcessorPipeline<>();
-        mutable.register(ChainProcessorFactory.newSimpleDataUser(String.class, new SingleArgumentRunnable<>() {
-            String string;
+        mutable.register(ChainProcessorFactory.newSimpleDataUser(String.class, new SingleArgumentRunnable<String>() {
+            private String string;
 
             @Override
             public String argument() {

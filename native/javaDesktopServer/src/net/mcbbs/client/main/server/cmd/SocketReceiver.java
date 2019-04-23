@@ -14,6 +14,7 @@ public class SocketReceiver implements Runnable {
         s = incoming;
     }
 
+    @Override
     public void run() {
         PrintWriter out;
         try {

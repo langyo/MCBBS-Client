@@ -1,12 +1,13 @@
 package net.mcbbs.client.util.throwable;
 
-import com.sun.istack.internal.NotNull;
+
+import javax.annotation.Nonnull;
 
 public interface IExceptionProcessor extends IThrowableProcessor {
-    void process(@NotNull Exception e);
+    void process(@Nonnull Exception e);
 
     @Override
-    default void process(Throwable t) {
+    default void process(@Nonnull Throwable t) {
         if (t instanceof Exception) {
             process((Exception) t);
         }
