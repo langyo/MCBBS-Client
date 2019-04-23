@@ -67,15 +67,13 @@ public class SocketServer implements IServer {
     @Override
     public void active() {
         Thread buf2;
-        var ref = new Object() {
-            Socket buf;
-        };
+        Socket buf;
         while (true) {
             try {
-                ref.buf = ss.accept();
+                buf = ss.accept();
                 buf2 = new Thread(childThread, () -> {
                 }, "client-" + (time++));
-                Connection connection = new Connection(ref.buf, buf2);
+                Connection connection = new Connection(buf, buf2);
                 phantomReferences.add(new PhantomReference<>(connection, (ReferenceQueue<? super Connection>) finalizer));
                 connections.add(connection);
                 buf2.start();
