@@ -1,6 +1,8 @@
 package net.mcbbs.client.util;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author InitAuther97 Yaossg
@@ -68,11 +70,5 @@ public final class CollectionUtils {
     }
     public static<A> A[] list2Obj(List<A> list){
         return (A[])list.toArray();
-    }
-    public static void main(String[] args){
-        ArrayList<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        System.out.println((String[])list.toArray());
     }
 }
