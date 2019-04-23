@@ -6,6 +6,7 @@ import net.mcbbs.client.util.network.IServer;
 import net.mcbbs.client.util.network.processor.ImmutableProcessorPipeline;
 import net.mcbbs.client.util.network.processor.MutableProcessorPipeline;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
@@ -16,9 +17,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
-public class SocketServer implements IServer {
-    public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
+public class SocketServer implements IServer<String> {
+    public static final ImmutableProcessorPipeline<String> DEFAULT_PIPE = new MutableProcessorPipeline<String>().asImmutable();
     List<PhantomReference<?>> phantomReferences = new ArrayList<>();
     ReferenceQueue finalizer = new ReferenceQueue();
     private int time = 0;
@@ -27,60 +29,80 @@ public class SocketServer implements IServer {
     private Thread finalizeController;
     private ThreadGroup childThread;
     private ServerSocket ss = new ServerSocket();
-    private ImmutableProcessorPipeline pipeline = null;
-    private Map<String, ImmutableProcessorPipeline<?>> pipelines = Maps.newHashMap();
+    private ImmutableProcessorPipeline<String> pipeline;
+    private Map<String, ImmutableProcessorPipeline<String>> pipelines = Maps.newHashMap();
 
     public SocketServer(int port, String threadPrefix) throws IOException {
         childThread = new ThreadGroup(threadPrefix);
         ss.bind(new InetSocketAddress("localhost", port));
         server = new Thread(childThread, this, "main");
         finalizeController = new Thread(childThread,()->{
-            Reference<?> finalizing = finalizer.poll();
-            System.out.println("Running finalization of Object "+finalizing.);
+            Reference<?> finalizing;
+            while(true) {
+                if(Thread.currentThread().isInterrupted())break;
+                finalizing = finalizer.poll();
+                if(finalizing==null)continue;
+                System.out.println("Running finalization of Object " + finalizing);
+            }
         },"finalizer");
         finalizeController.setDaemon(true);
     }
 
     @Override
-    public void addPipe(String id, ImmutableProcessorPipeline<?> p) {
+    public void addPipe(String id, ImmutableProcessorPipeline<String> p) {
         if (!pipelines.containsValue(p) && !pipelines.containsKey(id))
             pipelines.put(id, p);
     }
 
     @Override
     public void enablePipe(String id) {
-        pipeline = pipelines.getOrDefault(id, pipeline == null ? DEFAULT_PIPE : pipeline);
+        ImmutableProcessorPipeline<String> buf = pipelines.get(id);
+        if(buf==null)return;
+        if(server.getState().equals(Thread.State.RUNNABLE))server.interrupt();
+        pipeline = buf;
+        new Thread(childThread,()->{
+            //noinspection StatementWithEmptyBody
+            while(!server.getState().equals(Thread.State.RUNNABLE));
+            server.start();
+        }).start();
     }
 
     @Override
-    public ImmutableProcessorPipeline getPipe(String id) {
+    public ImmutableProcessorPipeline<String> getPipe(String id) {
         return pipelines.get(id);
     }
 
     @Override
-    public ImmutableProcessorPipeline<?> getActivated() {
+    public ImmutableProcessorPipeline<String> getActivated() {
         return pipeline;
     }
 
     public void start() {
-
+        finalizeController.start();
         server.start();
     }
 
     public void stop() {
+        finalizeController.interrupt();
         server.interrupt();
-        server = null;
     }
 
     @Override
     public void active() {
+        if(pipeline==null)throw new RuntimeException("Starting server without enable a pipeline!",new NullPointerException("pipeline = null"));
         Thread buf2;
-        Socket buf;
         while (true) {
-            if(Thread.currentThread().isInterrupted())continue;
+            if(Thread.currentThread().isInterrupted())break;
             try {
-                buf = ss.accept();
+                Socket buf = ss.accept();
                 buf2 = new Thread(childThread, () -> {
+                    try(Scanner scanner = new Scanner(new BufferedInputStream(buf.getInputStream()))) {
+                        while(scanner.hasNextLine()){
+                            pipeline.fire(scanner.nextLine());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }, "client-" + (time++));
                 Connection connection = new Connection(buf, buf2);
                 phantomReferences.add(new PhantomReference<>(connection, finalizer));
