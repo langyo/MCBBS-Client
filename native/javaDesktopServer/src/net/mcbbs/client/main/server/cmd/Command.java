@@ -2,6 +2,7 @@ package net.mcbbs.client.main.server.cmd;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class Command {
     public String sourceCommand;
@@ -65,8 +66,6 @@ public class Command {
                 default:
                     throw new CommandParseException(this);
             }
-        } catch (CommandParseException e) {
-            throw e;
         } catch (CommandRouteException e) {
             throw new CommandParseException(this);
         }
@@ -91,19 +90,27 @@ public class Command {
         this(type, route, "", subCommand);
     }
 
-    public boolean equals(Command n) {
-        // 这里的 equals 比较智能，因为它能根据不同的指令类型选择比较需要比较的内容，而不是盲目地全部比较一遍
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Command that = (Command) o;
         switch (this.type) {
             case EXECUTE:
             case DATA:
             case CALLBACK:
-                return this.pkg == n.pkg && this.route.equals(n.route) && this.subCommand == n.subCommand;
+                return this.pkg.equals(that.pkg) && this.route.equals(that.route) && this.subCommand.equals(that.subCommand);
             case SYSTEM:
-                return this.route.equals(n.route) && this.subCommand == n.subCommand;
+                return this.route.equals(that.route) && this.subCommand.equals(that.subCommand);
             case LOG:
                 return true;
             default:
                 return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceCommand, type, route, pkg, subCommand, arguments);
     }
 }

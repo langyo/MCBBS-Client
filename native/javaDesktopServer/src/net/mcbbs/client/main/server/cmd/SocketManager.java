@@ -22,7 +22,9 @@ public class SocketManager {
         }
     }
 
-    // Java 端的 main 在处理完其它杂事后，执行此方法，让主线程死循环
+    /**
+     * Java 端的 main 在处理完其它杂事后，执行此方法，让主线程死循环
+     */
     public static void receiveMessage() {
         try (
                 ServerSocket s = new ServerSocket(9233)

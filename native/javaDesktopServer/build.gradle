@@ -54,7 +54,7 @@ task mainJar(type: Jar) {
 artifacts {
     archives fixerJar
     archives launcherJar
-    archives installerJar
+    archives mainJar
 }
 
 //end make jar

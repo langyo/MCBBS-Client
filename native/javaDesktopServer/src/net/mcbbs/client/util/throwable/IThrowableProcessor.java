@@ -1,7 +1,7 @@
 package net.mcbbs.client.util.throwable;
 
-import com.sun.istack.internal.NotNull;
+import javax.annotation.Nonnull;
 
 public interface IThrowableProcessor {
-    void process(@NotNull Throwable t);
+    void process(@Nonnull Throwable t);
 }

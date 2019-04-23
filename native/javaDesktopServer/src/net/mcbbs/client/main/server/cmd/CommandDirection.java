@@ -1,7 +1,14 @@
 package net.mcbbs.client.main.server.cmd;
 
 public enum CommandDirection {
-    RESPONSE("<-"), REQUEST("->");
+    /**
+     * RESPONSE
+     */
+    RESPONSE("<-"),
+    /**
+     * REQUEST
+     */
+    REQUEST("->");
 
     private final String direction;
 
