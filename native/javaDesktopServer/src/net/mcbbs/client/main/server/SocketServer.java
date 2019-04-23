@@ -8,6 +8,7 @@ import net.mcbbs.client.util.network.processor.MutableProcessorPipeline;
 
 import java.io.IOException;
 import java.lang.ref.PhantomReference;
+import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -19,10 +20,11 @@ import java.util.Map;
 public class SocketServer implements IServer {
     public static final ImmutableProcessorPipeline<?> DEFAULT_PIPE = new MutableProcessorPipeline<>().asImmutable();
     List<PhantomReference<?>> phantomReferences = new ArrayList<>();
-    ReferenceQueue<?> finalizer = new ReferenceQueue();
+    ReferenceQueue finalizer = new ReferenceQueue();
     private int time = 0;
     private List<Connection> connections = Lists.newArrayList();
     private Thread server;
+    private Thread finalizeController;
     private ThreadGroup childThread;
     private ServerSocket ss = new ServerSocket();
     private ImmutableProcessorPipeline pipeline = null;
@@ -31,6 +33,12 @@ public class SocketServer implements IServer {
     public SocketServer(int port, String threadPrefix) throws IOException {
         childThread = new ThreadGroup(threadPrefix);
         ss.bind(new InetSocketAddress("localhost", port));
+        server = new Thread(childThread, this, "main");
+        finalizeController = new Thread(childThread,()->{
+            Reference<?> finalizing = finalizer.poll();
+            System.out.println("Running finalization of Object "+finalizing.);
+        },"finalizer");
+        finalizeController.setDaemon(true);
     }
 
     @Override
@@ -55,7 +63,7 @@ public class SocketServer implements IServer {
     }
 
     public void start() {
-        server = new Thread(childThread, this, "main");
+
         server.start();
     }
 
@@ -69,12 +77,13 @@ public class SocketServer implements IServer {
         Thread buf2;
         Socket buf;
         while (true) {
+            if(Thread.currentThread().isInterrupted())continue;
             try {
                 buf = ss.accept();
                 buf2 = new Thread(childThread, () -> {
                 }, "client-" + (time++));
                 Connection connection = new Connection(buf, buf2);
-                phantomReferences.add(new PhantomReference<>(connection, (ReferenceQueue<? super Connection>) finalizer));
+                phantomReferences.add(new PhantomReference<>(connection, finalizer));
                 connections.add(connection);
                 buf2.start();
             } catch (IOException e) {

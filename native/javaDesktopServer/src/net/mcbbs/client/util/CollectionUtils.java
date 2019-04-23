@@ -1,7 +1,6 @@
 package net.mcbbs.client.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,24 +50,5 @@ public final class CollectionUtils {
                 second.remove(key);
             }
         }
-    }
-
-    /**
-     * Concat strings.
-     * @param separator Separator between strings
-     * @param stringList strings
-     * @return a string concat by strings and separators between strings
-     */
-    public static String stringList2String(char separator, List<String> stringList){
-        StringBuilder sb = new StringBuilder();
-        for(String s:stringList){
-            sb.append(s);
-            sb.append(separator);
-        }
-        String res = sb.toString();
-        return res.substring(0,res.length()-1);
-    }
-    public static<A> A[] list2Obj(List<A> list){
-        return (A[])list.toArray();
     }
 }
