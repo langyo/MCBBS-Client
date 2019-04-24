@@ -31,3 +31,6 @@ Node 进程作为所有其它端的 WebSocket 服务端，端口号 9233。
 - H5 —— HTML5 UI 客户端，可直接在网页上运行，也可以以 Electron 等框架运行，它们不会使用本地方法，只会试图与本地平台进行通讯（例如使用 WebSocket 或部分平台提供可用的 window.postMessage 等）。
 - java —— java 客户端端。
 - node —— node 服务端。
+
+设计的时候遵循下图所述的结构：
+![MCBBSClientServerSocketa0da9.png](https://miao.su/images/2019/04/24/MCBBSClientServerSocketa0da9.png)
