@@ -18,10 +18,3 @@ class PluginDesigner{
 
 
 let packages = {};
-
-export let createPlugin = (infoObj, commandsObj, dataListenersObj) => {
-    if(infoObj.package === undefined) throw new Error("未指定包名！");
-    package[infoObj.package] = new PluginDesigner(infoObj, commandsObj, dataListenersObj);
-}
-
-export let evalCommand;
