@@ -49,9 +49,9 @@
 				camera.position.set( 0, 0, 1000 );
 				cameraCube = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 100000 );
 
-				controls = new THREE.OrbitControls(camera);
-				controls.minDistance = 1200;
-				controls.maxDistance = 2000;
+				// controls = new THREE.OrbitControls(camera);
+				// controls.minDistance = 1200;
+				// controls.maxDistance = 2000;
 
 				// SCENE
 
@@ -65,12 +65,12 @@
 
 				// Textures
 
-				var r = "textures/cube/minecraft/";
-				var urls = [ r + "panorama_0.png", r + "panorama_1.png",
-							 r + "panorama_2.png", r + "panorama_3.png",
-							 r + "panorama_4.png", r + "panorama_5.png" ];
+				var r = "textures/cube/minecraftSea/";
+				var urls = [ r + "panorama_3.png", r + "panorama_1.png",
+							 r + "panorama_4.png", r + "panorama_5.png",
+							 r + "panorama_2.png", r + "panorama_0.png" ];
 
-				textureCube = new THREE.CubeTextureLoader().load( urls );
+				textureCube = new THREE.CubeTextureLoader().load(urls);
 				textureCube.format = THREE.RGBFormat;
 				textureCube.mapping = THREE.CubeReflectionMapping;
 				textureCube.encoding = THREE.sRGBEncoding;
