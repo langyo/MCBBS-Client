@@ -31,7 +31,7 @@
 
 			var controls, camera, scene, renderer;
 			var cameraCube, sceneCube;
-			var textureEquirec, textureCube;
+			var textureCube;
 			var cubeMesh;
 			var sphereMaterial;
 			var mouseX = 0, mouseY = 0;
@@ -42,16 +42,11 @@
 			animate();
 
 			function init() {
-
 				// CAMERAS
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 100000 );
 				camera.position.set( 0, 0, 1000 );
 				cameraCube = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 100000 );
-
-				// controls = new THREE.OrbitControls(camera);
-				// controls.minDistance = 1200;
-				// controls.maxDistance = 2000;
 
 				// SCENE
 
@@ -75,37 +70,7 @@
 				textureCube.mapping = THREE.CubeReflectionMapping;
 				textureCube.encoding = THREE.sRGBEncoding;
 
-				var textureLoader = new THREE.TextureLoader();
-
-				textureEquirec = textureLoader.load( "textures/360degrees.jpg" );
-				textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
-				textureEquirec.magFilter = THREE.LinearFilter;
-				textureEquirec.minFilter = THREE.LinearMipMapLinearFilter;
-				textureEquirec.encoding = THREE.sRGBEncoding;
-
 				// Materials
-
-				var equirectShader = THREE.ShaderLib[ "equirect" ];
-
-				var equirectMaterial = new THREE.ShaderMaterial( {
-					fragmentShader: equirectShader.fragmentShader,
-					vertexShader: equirectShader.vertexShader,
-					uniforms: equirectShader.uniforms,
-					depthWrite: false,
-					side: THREE.BackSide
-				} );
-
-				equirectMaterial.uniforms[ "tEquirect" ].value = textureEquirec;
-				// enable code injection for non-built-in material
-				Object.defineProperty( equirectMaterial, 'map', {
-
-					get: function () {
-
-						return this.uniforms.tEquirect.value;
-
-					}
-
-				} );
 
 				var cubeShader = THREE.ShaderLib[ "cube" ];
 				var cubeMaterial = new THREE.ShaderMaterial( {
@@ -140,34 +105,14 @@
 
 				renderer.gammaOutput = true;
 
-				var params = {
-					Cube: function () {
-
-						cubeMesh.material = cubeMaterial;
-						cubeMesh.visible = true;
-
-					},
-					Equirectangular: function () {
-
-						cubeMesh.material = equirectMaterial;
-						cubeMesh.visible = true;
-
-					}
-				};
-
-				var gui = new dat.GUI();
-				gui.add( params, 'Cube' );
-				gui.add( params, 'Equirectangular' );
-				gui.open();
-
 				window.addEventListener( 'resize', onWindowResize, false );
 				
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 			}
 
 			function onDocumentMouseMove( event ) {
-				mouseX = ( event.clientX - windowHalfX ) * 0.75;
-				mouseY = ( event.clientY - windowHalfY ) * 0.75;
+				mouseX = ( event.clientX - windowHalfX ) * 0.25;
+				mouseY = ( event.clientY - windowHalfY ) * 0.25;
 			}
 
 			function onWindowResize() {
