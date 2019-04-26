@@ -1,5 +1,6 @@
 package net.mcbbs.client.util;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -50,5 +51,9 @@ public final class CollectionUtils {
                 second.remove(key);
             }
         }
+    }
+
+    public static<A,B extends A> B[] cast(A[] arr) throws ClassCastException{
+        return (B[])Arrays.asList(arr).toArray();
     }
 }

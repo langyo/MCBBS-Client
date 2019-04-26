@@ -10,9 +10,11 @@ import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import javax.script.Bindings;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import javax.script.SimpleScriptContext;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +27,7 @@ import java.util.stream.Stream;
 
 public class FBPluginLoader extends PluginLoader {
     protected final List<JarFile> plugins = Lists.newArrayList();
+    protected final ClassLoader thread_classloader = Thread.currentThread().getContextClassLoader();
     protected NashornScriptEngine js_engine;
     @Override
     public JarFile getPluginJar(String pluginId) {
@@ -39,21 +42,23 @@ public class FBPluginLoader extends PluginLoader {
     @Override
     protected void loadPlugin(String baseLocation) {
         try {
-            Stream<JarFile> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile).map(file -> {
+            Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
+            plugins.addAll(files.map(file-> {
                 try {
                     return new JarFile(file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 return null;
-            }).filter(Objects::nonNull);
-            plugins.addAll(files.collect(Collectors.toList()));
+            }).filter(Objects::nonNull).collect(Collectors.toList()));
             Map<PluginMetadata, IPlugin> plugins = Maps.newHashMap();
-            files.forEach(file-> {
+            files.filter(File::isFile)
+                    .filter(file -> file.toPath().getFileName().endsWith(".jar"))
+                    .forEach(file-> {
                 try {
                     initializeNashorn();
                     loadPlugin(plugins,file);
-                } catch (IOException | ScriptException | NoSuchMethodException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
@@ -67,12 +72,15 @@ public class FBPluginLoader extends PluginLoader {
         js_engine.eval(new InputStreamReader(getClass().getResourceAsStream("assets/mcbbsclient/main/config.js")));
     }
 
-    private void loadPlugin(Map<PluginMetadata, IPlugin> plugins, JarFile file) throws IOException, ScriptException {
-        PluginMetadata meta;
+    private void loadPlugin(Map<PluginMetadata, IPlugin> plugins, File f) throws Exception {
+        JarFile file = new JarFile(f);
+        URLClassLoader ucl = new URLClassLoader(new URL[]{f.toURI().toURL()});
         Bindings bindings = js_engine.createBindings();
         js_engine.eval(new InputStreamReader(file.getInputStream(file.getJarEntry("plugin.js"))),bindings);
-        bindings.get()
-        js_engine.setContext(new SimpleScriptContext());
-
+        PluginMetadata meta = PluginMetadata.deserializeFrom(this,bindings);
+        String mainClassLocation = (String) bindings.get("plugin");
+        Class<? extends IPlugin> pluginClz = ucl.loadClass(mainClassLocation).asSubclass(IPlugin.class);
+        IPlugin instance = pluginClz.getConstructor().newInstance();
+        plugins.put(meta,instance);
     }
 }

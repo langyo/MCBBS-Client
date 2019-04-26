@@ -4,8 +4,8 @@ let name;
 let plugin;
 let description;
 let url;
-let updateUrl;
-let serverUrl;
+let update_url;
+let server_url;
 let author;
 function setName(name:string):void {
     this.name = name;
@@ -22,18 +22,22 @@ function setId(id:string):void {
 function setPluginMainclass(mainClassLoc:string):void {
     this.plugin = mainClassLoc;
 }
+
 function setDescription(descr:string):void {
     this.description = descr;
 }
 
-function setUrl(url:string) {
+function setUrl(url:string):void {
     this.url = url;
 }
 
-function setUpdateUrl(update:string) {
-    this.updateUrl = update;
+function setUpdateUrl(update:string):void {
+    this.update_url = update;
 }
 
-function setAuthor(author:string) {
+function setServerUrl(server:string):void {
+    this.server_url = server;
+}
+function setAuthor(author:string):void {
     this.author = author;
 }
