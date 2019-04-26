@@ -1,9 +1,9 @@
 package net.mcbbs.client.plugin.clipboard;
 
-import net.mcbbs.client.main.server.cmd.CommandRoute;
-import net.mcbbs.client.main.server.cmd.PluginCommandListener;
-import net.mcbbs.client.main.server.cmd.PluginDesigner;
-import net.mcbbs.client.main.server.cmd.PluginInterface;
+import net.mcbbs.client.main.client.cmd.CommandRoute;
+import net.mcbbs.client.main.client.cmd.PluginCommandListener;
+import net.mcbbs.client.main.client.cmd.PluginDesigner;
+import net.mcbbs.client.main.client.cmd.PluginInterface;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
