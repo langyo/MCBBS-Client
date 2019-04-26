@@ -11,8 +11,29 @@
 </head>
 
 <body>
+  <script>
+    window.commandManager = {
+      tasks: [],
+      sendCommand: str => {
+        if ("WebSocket" in window) {
+          let ws = new WebSocket("ws://localhost:9235");
+          ws.onopen = () => ws.send(str);
+
+          let chunks = "";
+          ws.onmessage = event => chunks += event.data;
+          ws.onclose = () => window.commandManager.receiveCommand(null, chunks);
+          ws.onerror = err => window.commandManager.receiveCommand(err);
+        } else {
+          window.commandManager.receiveCommand(new Error("不支持 WebSocket！"));
+        }
+      },
+      receiveCommand = (err, msg) => { }
+    }
+  </script>
+
   <div id="content">
   </div>
+
   <script src="./bundle.js"></script>
 </body>
 

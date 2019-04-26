@@ -20,11 +20,11 @@ public class CommandExecutor {
 
     private void evalCommand(PluginCommandListener method) {
         if (method.isArrayArguments()) {
-            method.trigger(command.arguments, command.route);
+            method.trigger(command.arguments);
         } else {
             CommandBuilder str = new CommandBuilder();
             for (String s : command.arguments) str.append(s);
-            method.trigger(str.toString(), command.route);
+            method.trigger(str.toString());
         }
     }
 
@@ -36,68 +36,16 @@ public class CommandExecutor {
         evalCommand(PackageManager.packages.get(command.pkg).dataListeners.get(command.subCommand));
     }
 
-    private void doLog() {
-        // 转交给专用类处理
-        Logger.eval(command.arguments.get(0), (command.route.direction.getDirection().contentEquals("->") ? command.route.first : command.route.second).getSourceName(), command.arguments.get(1));
-    }
-
-    private void doSystem() throws IOException {
-        // 转交给专用类处理
-        SystemCommandDashboard.eval(SystemCommandType.valueOf(command.subCommand.toUpperCase()), (String[]) command.arguments.toArray(), command.route);
-    }
-
-    private void doCallback() {
-        Command equaling = new Command(command.type, command.route, command.pkg, command.subCommand);
-        PluginDashboard.tasks.remove(equaling);
-    }
-
     public void execute() throws IOException {
-        if (Objects.equals(command.route.getTo().getSourceName(), SystemCommandDashboard.nativeVersionInfo)) {
-            switch (command.type) {
-                case EXECUTE:
-                    doExecute();
-                    break;
-                case DATA:
-                    doData();
-                    break;
-                case LOG:
-                    doLog();
-                    break;
-                case SYSTEM:
-                    doSystem();
-                    break;
-                case CALLBACK:
-                    doCallback();
-                    break;
-                default:
-                    throw new CommandExecuteException(command);
-            }
-        } else {
-            // 转发到别的平台
-            switch (command.type) {
-                case EXECUTE:
-                    PluginDashboard.execute(command.route, command.pkg, command.type.getTypeName(), command.arguments.toArray(new String[0]));
-                    break;
-                case DATA:
-                    PluginDashboard.data(command.route, command.pkg, command.type.getTypeName(), command.arguments.toArray(new String[0]));
-                    break;
-                case SYSTEM:
-                    //command arguments join with " " by yys
-                    PluginDashboard.system(command.route, command.type.getTypeName(), String.join(" ", command.arguments));
-                    break;
-                case LOG:
-                    PluginDashboard.log(command.route, command.arguments.get(0), command.arguments.get(1));
-                    break;
-                case CALLBACK:
-                    if (command.pkg != null) {
-                        PluginDashboard.callback(command.route, command.arguments.get(0), command.pkg, command.subCommand);
-                    } else {
-                        PluginDashboard.callback(command.route, command.arguments.get(0), command.subCommand);
-                    }
-                    break;
-                default:
-                    throw new CommandExecuteException(command);
-            }
+        switch (command.type) {
+            case EXECUTE:
+                doExecute();
+                break;
+            case DATA:
+                doData();
+                break;
+            default:
+                throw new CommandExecuteException(command);
         }
     }
 
