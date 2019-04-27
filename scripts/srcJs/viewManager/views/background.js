@@ -87,7 +87,7 @@ class CoolBackground extends React.Component {
             // 渲染部分
 
             camera.position.x += (mouseX - camera.position.x) * .05;
-            camera.position.y += (- mouseY - camera.position.y) * .05;
+            camera.position.y += (mouseY - camera.position.y) * .05;
 
             camera.lookAt(scene.position);
 
@@ -113,7 +113,7 @@ class CoolBackground extends React.Component {
     }
 
     render() {
-        return (<div ref="three" style={{width: '100%', height: '100%', zIndex: -1000}} />);
+        return (<div ref="three" style={{width: '100%', height: '100%', zIndex: -1000, position: 'absolute'}} />);
     }
 }
 

@@ -7,8 +7,8 @@ class Secretary extends React.Component {
     }
 
     render() {
-        return <canvas width="400" height="600" id="live2d" styles={{
-            bottom: 0,
+        return <canvas width="300" height="450" id="live2d" style={{
+            bottom: -100,
             right: 0,
             position: 'absolute'
         }}/>;
