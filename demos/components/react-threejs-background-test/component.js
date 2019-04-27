@@ -29,10 +29,10 @@ class CoolBackground extends React.Component {
 
         // 材质
 
-        let resLocation = "/img/textures/cube/minecraftSea/";
-        let urls = [resLocation + "panorama_3.png", resLocation + "panorama_1.png",
-        resLocation + "panorama_4.png", resLocation + "panorama_5.png",
-        resLocation + "panorama_2.png", resLocation + "panorama_0.png"];
+        let r = "textures/cube/minecraftSea/";
+        let urls = [r + "panorama_3.png", r + "panorama_1.png",
+        r + "panorama_4.png", r + "panorama_5.png",
+        r + "panorama_2.png", r + "panorama_0.png"];
 
         textureCube = new THREE.CubeTextureLoader().load(urls);
         textureCube.format = THREE.RGBFormat;
@@ -87,7 +87,7 @@ class CoolBackground extends React.Component {
             // 渲染部分
 
             camera.position.x += (mouseX - camera.position.x) * .05;
-            camera.position.y += (mouseY - camera.position.y) * .05;
+            camera.position.y += (- mouseY - camera.position.y) * .05;
 
             camera.lookAt(scene.position);
 
@@ -113,7 +113,7 @@ class CoolBackground extends React.Component {
     }
 
     render() {
-        return (<div ref="three" style={{width: '100%', height: '100%', zIndex: -1000, position: 'absolute'}} />);
+        return (<div ref="three" />);
     }
 }
 
