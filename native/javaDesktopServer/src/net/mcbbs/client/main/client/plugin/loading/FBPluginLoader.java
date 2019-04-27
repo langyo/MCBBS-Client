@@ -2,11 +2,22 @@ package net.mcbbs.client.main.client.plugin.loading;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
+import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
+import net.mcbbs.client.api.plugin.mapper.Mapper;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
+import net.mcbbs.client.api.plugin.service.ServiceManager;
+import net.mcbbs.client.main.client.plugin.service.CobbleServiceManager;
 import org.yaml.snakeyaml.Yaml;
 
+import javax.naming.Name;
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -20,6 +31,7 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -32,7 +44,15 @@ import java.util.stream.Stream;
  */
 public class FBPluginLoader extends PluginLoader {
     protected final List<JarFile> plugins = Lists.newArrayList();
+    protected final Map<String,JarFile> pluginJar = Maps.newHashMap();
+    protected final Map<String,BoxedPlugin<? extends IPlugin>> pluginBoxed = Maps.newHashMap();
     protected final ClassLoader thread_classloader = Thread.currentThread().getContextClassLoader();
+    protected final Injector injector = Guice.createInjector((Module) binder ->{
+        binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).toInstance(new CobbleServiceManager());
+        binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
+
+        binder.requestStaticInjection(Client.class);
+    });
     private URLClassLoader final_classpathLoader;
     protected ScriptEngine js_engine;
     @Override
@@ -41,7 +61,7 @@ public class FBPluginLoader extends PluginLoader {
     }
 
     @Override
-    public BoxedPlugin getPlugin(String pluginId) {
+    public BoxedPlugin<? extends IPlugin> getPlugin(String pluginId) {
         return null;
     }
 
@@ -101,5 +121,7 @@ public class FBPluginLoader extends PluginLoader {
         Class<? extends IPlugin> pluginClz = ucl.loadClass(mainClassLocation).asSubclass(IPlugin.class);
         IPlugin instance = pluginClz.getConstructor().newInstance();
         plugins.put(meta, instance);
+        pluginJar.put(meta.id,file);
+        
     }
 }
