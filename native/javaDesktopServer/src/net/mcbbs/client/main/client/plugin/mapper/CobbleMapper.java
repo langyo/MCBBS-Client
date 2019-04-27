@@ -17,23 +17,23 @@ import java.util.function.Function;
 
 public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
 
-    private static final List<String> METHOD_WITHOUT_CHECKING_INSTANCE = Arrays.asList("setInstance","setInvocationHandlerFactory");
+    private static final List<String> METHOD_WITHOUT_CHECKING_INSTANCE = Arrays.asList("setInvocationHandlerFactory");
 
     protected final Map<Method,Method> method_mapping = Maps.newHashMap();
     protected final Map<Method,Function<Object[],Object[]>> arg_mapping = Maps.newHashMap();
     protected final Map<Method,Object> instance_mapping = Maps.newHashMap();
     private InvocationHandler invocationHandler;
-    protected I instance;
 
 
     public static final<T extends IPlugin> CobbleMapper<T> createInstance(InvocationHandlerFactory factory){
         //noinspection unchecked
-        CobbleMapper<T> cobbleMapper = (CobbleMapper<T>)Proxy.newProxyInstance(CobbleMapper.class.getClassLoader(), CobbleMapper.class.getInterfaces(),
+        CobbleMapper<T> cobbleMapper = new CobbleMapper<>();
+        /*(CobbleMapper<T>)Proxy.newProxyInstance(CobbleMapper.class.getClassLoader(), CobbleMapper.class.getInterfaces(),
                 factory.create(new InvocationHandlerFactory.AroundAdviceAdapter(){
                     boolean instanceSet = false;
                     @Override
                     public String before(Object instance, Method method, Object[] args) {
-                        if (method.getName().equals("setInstance")){
+                        if (method.getName().equals("setInvocationHandlerFactory")){
                             if(args[0]!=null)instanceSet=true;
                             else instanceSet=false;
                         }
@@ -43,7 +43,7 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
                         return "";
                     }
                 })
-        );
+        );*/
         cobbleMapper.setInvocationHandlerFactory(factory);
         return cobbleMapper;
     }
@@ -60,10 +60,7 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
             }
         });
     }
-    @Override
-    public void setInstance(I bfr) {
-        instance=bfr;
-    }
+
 
     @Override
     public void mapMethod(@Nonnull Method raw,@Nonnull Method mapped, @Nonnull Function<Object[], Object[]> argumentMapper,Object instance) {
