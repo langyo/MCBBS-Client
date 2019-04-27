@@ -7,6 +7,7 @@ import shortid from "shortid";
 
 import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
+import Background from "./views/background";
 
 import Forum from "./pages/forums";
 
@@ -24,6 +25,7 @@ class MainView extends Reflux.Component {
       <BrowserRouter>
         <Drawer />
         <WindowManager />
+        <Background />
 
         <Switch>
           <Route exact path='/index' component={Home} />

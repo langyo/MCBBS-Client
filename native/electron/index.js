@@ -19,7 +19,7 @@ function createMainWnd() {
         // titleBarStyle: 'hidden'
     });
 
-    mainWnd.loadURL(`file://${__dirname}/public/index.html`);
+    mainWnd.loadURL(`http://127.0.0.1:9232`);
 
     mainWnd.on('ready-to-show', ()=>{
         // TODO: 未来可能会让菜单重新回归以支持一些新奇功能，不过绝对不是以原生菜单的形式
