@@ -20,9 +20,7 @@ public class PluginMetadata {
                 (String)bindings.get("updateUrl"),
                 (String)bindings.get("serverUrl"),
                 (String)bindings.get("author"),
-                CollectionUtils.cast(
-                        (Object[])bindings.get("collaborators")
-                )
+                (String[])bindings.get("collaborators")
         );
     }
     public PluginMetadata(PluginLoader invoker,String id, String version, String name, String description, String url, String updateUrl, String serverUrl, String author, String... collaborators) {

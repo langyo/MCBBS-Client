@@ -55,10 +55,4 @@ public final class CollectionUtils {
             }
         }
     }
-
-    public static<A,B extends A> B[] cast(A[] arr) throws ClassCastException{
-        List<B> list = Arrays.asList();
-        for (A a : arr) list.add((B) a);
-        return (B[])list.toArray();
-    }
 }

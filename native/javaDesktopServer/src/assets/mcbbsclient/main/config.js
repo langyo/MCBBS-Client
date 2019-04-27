@@ -1,12 +1,13 @@
-let version;
-let id;
-let name;
-let plugin;
-let description;
-let url;
-let update_url;
-let server_url;
-let author;
+let version:string;
+let id:string;
+let name:string;
+let plugin:string;
+let description:string;
+let url:string;
+let update_url:string;
+let server_url:string;
+let author:string;
+let collaborators:string[];
 function setName(name:string):void {
     this.name = name;
 }
@@ -38,6 +39,11 @@ function setUpdateUrl(update:string):void {
 function setServerUrl(server:string):void {
     this.server_url = server;
 }
+
 function setAuthor(author:string):void {
     this.author = author;
+}
+
+function setCollaborators(collaborators:string[]):void {
+    this.collaborators = collaborators;
 }

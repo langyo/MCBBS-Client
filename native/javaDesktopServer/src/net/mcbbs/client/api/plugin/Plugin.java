@@ -1,14 +1,11 @@
 package net.mcbbs.client.api.plugin;
 
-import com.google.common.eventbus.Subscribe;
-
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.*;
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public interface Plugin {
     @Retention(RUNTIME)
     @Target({TYPE,METHOD})
@@ -18,16 +15,8 @@ public interface Plugin {
         String value();
     }
     @Retention(RUNTIME)
-    @Target(TYPE)
-    @interface EventHandler {}
-    @Retention(RUNTIME)
     @Target(METHOD)
     @interface SubscribeEvent{
         Class<?> value();
-    }
-    @Retention(RUNTIME)
-    @Target({TYPE,PARAMETER,METHOD})
-    @interface Named{
-        String value();
     }
 }

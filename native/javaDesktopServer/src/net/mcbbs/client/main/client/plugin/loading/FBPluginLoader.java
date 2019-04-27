@@ -85,7 +85,7 @@ public class FBPluginLoader extends PluginLoader {
         PluginMetadata meta;
         if(ucl.getResource("plugin.js")!=null) {
             Bindings bindings = js_engine.createBindings();
-            js_engine.eval(new InputStreamReader(file.getInputStream(file.getJarEntry("plugin.js"))), bindings);
+            js_engine.eval(new InputStreamReader(file.getInputStream(file.getJarEntry("config.js"))), bindings);
             meta = PluginMetadata.deserializeFrom(this, bindings);
             mainClassLocation = (String) bindings.get("plugin");
         }else if(ucl.getResource("plugin.yml")!=null){
