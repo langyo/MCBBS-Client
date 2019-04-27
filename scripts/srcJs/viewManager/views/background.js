@@ -113,7 +113,7 @@ class CoolBackground extends React.Component {
     }
 
     render() {
-        return (<div ref="three" style={{width: '100%', height: '100%'}} />);
+        return (<div ref="three" style={{width: '100%', height: '100%', zIndex: -1000}} />);
     }
 }
 
