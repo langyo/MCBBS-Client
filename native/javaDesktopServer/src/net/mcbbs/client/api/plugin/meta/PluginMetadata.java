@@ -1,18 +1,18 @@
 package net.mcbbs.client.api.plugin.meta;
 
-import net.mcbbs.client.main.client.pluginloading.PluginLoader;
+import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
 import net.mcbbs.client.util.CollectionUtils;
 
-import javax.script.Bindings;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class PluginMetadata {
     public final String id,version,name,description,url,updateUrl,serverUrl,author;
-    public static PluginMetadata deserializeFrom(PluginLoader invoker,Bindings bindings){
+    public static PluginMetadata deserializeFrom(PluginLoader invoker, Map<String,Object> bindings){
         return new PluginMetadata(invoker,
-                (String) bindings.get("id"),
+                (String)bindings.get("id"),
                 (String)bindings.get("version"),
                 (String)bindings.get("name"),
                 (String)bindings.get("description"),

@@ -1,17 +1,19 @@
-package net.mcbbs.client.main.client.pluginloading;
+package net.mcbbs.client.main.client.plugin.loading;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import jdk.nashorn.api.scripting.NashornScriptEngine;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
+import org.yaml.snakeyaml.Yaml;
 
 import javax.script.Bindings;
+import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -25,10 +27,14 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Only able to be ran in the same thread as Launcher
+ */
 public class FBPluginLoader extends PluginLoader {
     protected final List<JarFile> plugins = Lists.newArrayList();
     protected final ClassLoader thread_classloader = Thread.currentThread().getContextClassLoader();
-    protected NashornScriptEngine js_engine;
+    private URLClassLoader final_classpathLoader;
+    protected ScriptEngine js_engine;
     @Override
     public JarFile getPluginJar(String pluginId) {
         return null;
@@ -68,19 +74,32 @@ public class FBPluginLoader extends PluginLoader {
     }
 
     private void initializeNashorn() throws ScriptException {
-        js_engine = (NashornScriptEngine)new ScriptEngineManager().getEngineByName("nashorn");
+        js_engine = new ScriptEngineManager().getEngineByName("nashorn");
         js_engine.eval(new InputStreamReader(getClass().getResourceAsStream("assets/mcbbsclient/main/config.js")));
     }
 
     private void loadPlugin(Map<PluginMetadata, IPlugin> plugins, File f) throws Exception {
         JarFile file = new JarFile(f);
-        URLClassLoader ucl = new URLClassLoader(new URL[]{f.toURI().toURL()});
-        Bindings bindings = js_engine.createBindings();
-        js_engine.eval(new InputStreamReader(file.getInputStream(file.getJarEntry("plugin.js"))),bindings);
-        PluginMetadata meta = PluginMetadata.deserializeFrom(this,bindings);
-        String mainClassLocation = (String) bindings.get("plugin");
+        URLClassLoader ucl = new URLClassLoader(new URL[]{f.toURI().toURL()},Thread.currentThread().getContextClassLoader());
+        String mainClassLocation;
+        PluginMetadata meta;
+        if(ucl.getResource("plugin.js")!=null) {
+            Bindings bindings = js_engine.createBindings();
+            js_engine.eval(new InputStreamReader(file.getInputStream(file.getJarEntry("plugin.js"))), bindings);
+            meta = PluginMetadata.deserializeFrom(this, bindings);
+            mainClassLocation = (String) bindings.get("plugin");
+        }else if(ucl.getResource("plugin.yml")!=null){
+            InputStream is = ucl.getResourceAsStream("plugin.yml");
+            Yaml yaml = new Yaml();
+            Map<String,Object> bindings = yaml.loadAs(is,Map.class);
+            meta = PluginMetadata.deserializeFrom(this,bindings);
+            mainClassLocation = (String) bindings.get("plugin");
+        }else{
+            System.out.println("Unable to instantiate plugin '"+file.getName()+"'.It may be a non-plugin file.Injecting into classpath....");
+            return;
+        }
         Class<? extends IPlugin> pluginClz = ucl.loadClass(mainClassLocation).asSubclass(IPlugin.class);
         IPlugin instance = pluginClz.getConstructor().newInstance();
-        plugins.put(meta,instance);
+        plugins.put(meta, instance);
     }
 }

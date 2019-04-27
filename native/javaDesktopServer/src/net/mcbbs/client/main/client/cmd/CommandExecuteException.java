@@ -12,7 +12,7 @@ public class CommandExecuteException extends IOException {
     public String generateFailCommand() {
         if (obj != null) {
             CommandBuilder str = new CommandBuilder();
-            str.append("callback").append("fail").append(this.obj.route.toString());
+            str.append("callback").append("fail");
             str.append(this.obj.type.getTypeName()).append(this.obj.pkg).append(this.obj.subCommand);
             return str.toString();
         }

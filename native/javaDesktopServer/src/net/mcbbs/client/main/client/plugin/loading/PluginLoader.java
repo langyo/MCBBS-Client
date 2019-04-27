@@ -1,4 +1,4 @@
-package net.mcbbs.client.main.client.pluginloading;
+package net.mcbbs.client.main.client.plugin.loading;
 
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 
