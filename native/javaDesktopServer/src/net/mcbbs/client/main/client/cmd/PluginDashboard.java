@@ -1,6 +1,7 @@
 package net.mcbbs.client.main.client.cmd;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,5 +34,17 @@ public class PluginDashboard {
         SocketManager.sendMessage(str.toString());
         Command p = new Command(CommandType.DATA, pkg, command, new String[]{args});
         tasks.add(p);
+    }
+
+    public static void callback(String pkg, String command, String args) throws IOException {
+        CommandBuilder str = new CommandBuilder();
+        str.append("callback").append(pkg).append(command).append(args);
+        SocketManager.sendMessage(str.toString());
+        Command p = new Command(CommandType.CALLBACK,pkg,command,new String[]{args});
+        tasks.add(p);
+    }
+
+    public static void system(String type, String nativeVersionInfo) {
+
     }
 }

@@ -1,7 +1,10 @@
 package net.mcbbs.client.util;
 
+import com.google.common.collect.Lists;
+
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +57,8 @@ public final class CollectionUtils {
     }
 
     public static<A,B extends A> B[] cast(A[] arr) throws ClassCastException{
-        return (B[])Arrays.asList(arr).toArray();
+        List<B> list = Arrays.asList();
+        for (A a : arr) list.add((B) a);
+        return (B[])list.toArray();
     }
 }

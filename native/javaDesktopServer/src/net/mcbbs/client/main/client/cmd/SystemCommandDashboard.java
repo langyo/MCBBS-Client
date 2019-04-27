@@ -9,10 +9,10 @@ public class SystemCommandDashboard {
 
     private static Set<String> registered = new HashSet<>();
 
-    public static void eval(SystemCommandType command, String[] extraArgs, CommandRoute route) throws IOException {
+    public static void eval(SystemCommandType command, String[] extraArgs) throws IOException {
         switch (command) {
             case CALL:
-                PluginDashboard.system(route.reverse(), SystemCommandType.RECEIVE.getType(), nativeVersionInfo);
+                PluginDashboard.system(SystemCommandType.RECEIVE.getType(), nativeVersionInfo);
                 registered.add(extraArgs[0]);
                 break;
             case RECEIVE:
@@ -20,10 +20,10 @@ public class SystemCommandDashboard {
                 break;
             case EXIT:
                 if (registered.contains(extraArgs[0])) {
-                    PluginDashboard.callback(route.reverse(), "got", "system", "exit");
+                    PluginDashboard.callback("got", "system", "exit");
                     System.exit(0);
                 } else {
-                    PluginDashboard.callback(route.reverse(), "fail", "system", "exit");
+                    PluginDashboard.callback("fail", "system", "exit");
                 }
                 break;
             default:

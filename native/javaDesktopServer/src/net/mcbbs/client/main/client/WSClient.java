@@ -21,7 +21,9 @@ public class WSClient extends WebSocketClient {
 
     @Override
     public void onMessage(String s) {
-
+        Command command = receiver.commandParse(s);
+        String result = receiver.commandExecute(command);
+        send(result);
     }
 
     @Override
