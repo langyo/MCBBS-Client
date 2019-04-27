@@ -5,11 +5,23 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
 
+import { withStyles } from "@material-ui/core/styles";
+
 import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
 import Background from "./views/background";
 
 import Forum from "./pages/forums";
+
+const styles = theme => ({
+  root: {
+    height: '100%',
+    width: '100%',
+    margin: 0,
+    padding: 0,
+    border: 0
+  }
+});
 
 const Home = () => (
   <div>
@@ -21,20 +33,24 @@ const Home = () => (
 
 class MainView extends Reflux.Component {
   render() {
-    return (
-      <BrowserRouter>
-        <Drawer />
-        <WindowManager />
-        <Background />
+    const { classes } = this.props;
 
-        <Switch>
-          <Route exact path='/index' component={Home} />
-          <Route path='/forum' component={() => <Forum />} />
-          <Redirect path="/" to={{pathname: '/index'}} />
-        </Switch>
-      </BrowserRouter>
+    return (
+      <div className={classes.root}>
+        <BrowserRouter>
+          <Drawer />
+          <WindowManager />
+          <Background />
+
+          <Switch>
+            <Route exact path='/index' component={Home} />
+            <Route path='/forum' component={() => <Forum />} />
+            <Redirect path="/" to={{ pathname: '/index' }} />
+          </Switch>
+        </BrowserRouter>
+      </div>
     )
   }
 }
 
-export default MainView;
+export default withStyles(styles)(MainView);

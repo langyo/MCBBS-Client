@@ -15,11 +15,14 @@ function createMainWnd() {
         backgroundColor:'#fbf2db',
         useContentSize: true,
         show: false,
+        webPreferences: {
+          webSecurity: false
+        }
         // frame: false,
         // titleBarStyle: 'hidden'
     });
 
-    mainWnd.loadURL(`http://127.0.0.1:9232`);
+    mainWnd.loadURL(`http://127.0.0.1:9232/index.html`);
 
     mainWnd.on('ready-to-show', ()=>{
         // TODO: 未来可能会让菜单重新回归以支持一些新奇功能，不过绝对不是以原生菜单的形式
