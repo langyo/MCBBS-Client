@@ -6,6 +6,8 @@ import classNames from "classnames";
 import shortid from "shortid";
 
 import { withStyles } from "@material-ui/core/styles";
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
@@ -24,6 +26,16 @@ const styles = theme => ({
   }
 });
 
+const palette = {
+  primary: { main: '#00C853', contrastText: '#ffffff' },
+  secondary: { main: '#2E7D32', contrastText: '#ffffff' }
+};
+
+const theme = createMuiTheme({ 
+  palette: palette, 
+  themeName: "默认主题" 
+});
+
 const Home = () => (
   <div>
     <ul>
@@ -38,18 +50,20 @@ class MainView extends Reflux.Component {
 
     return (
       <div className={classes.root}>
-        <BrowserRouter>
-          <Drawer />
-          <WindowManager />
-          <Background />
-          <Secretary />
+        <MuiThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Drawer />
+            <WindowManager />
+            <Background />
+            <Secretary />
 
-          <Switch>
-            <Route exact path='/index' component={Home} />
-            <Route path='/forum' component={() => <Forum />} />
-            <Redirect path="/" to={{ pathname: '/index' }} />
-          </Switch>
-        </BrowserRouter>
+            <Switch>
+              <Route exact path='/index' component={Home} />
+              <Route path='/forum' component={() => <Forum />} />
+              <Redirect path="/" to={{ pathname: '/index' }} />
+            </Switch>
+          </BrowserRouter>
+        </MuiThemeProvider>
       </div>
     )
   }
