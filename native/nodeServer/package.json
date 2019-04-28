@@ -2,11 +2,10 @@
   "name": "mcbbs-client-electron",
   "version": "0.2.6",
   "description": "A BBS client for MCBBS.",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
-    "start": "node ./index.js",
-    "watch": "watchify ../../scripts/srcJs/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
-    "build": "browserify ../../scripts/srcJs/viewManager/mainViewRender.js -o public/bundle.js -t babelify",
+    "start": "node ./bundle.js",
+    "build": "babel ./index.js -o ./bundle.js",
     "test": "jest --watch"
   },
   "author": "langyo",
