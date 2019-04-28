@@ -1,23 +1,21 @@
 package net.mcbbs.client.main.client.plugin.loading;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.name.Named;
+import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
-import net.mcbbs.client.api.plugin.mapper.Mapper;
+import net.mcbbs.client.api.plugin.mapper.MapperFactory;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
+import net.mcbbs.client.main.client.plugin.mapper.CobbleMapperFactory;
 import net.mcbbs.client.main.client.plugin.service.CobbleServiceManager;
 import org.yaml.snakeyaml.Yaml;
 
-import javax.naming.Name;
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -36,61 +34,68 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.jar.JarFile;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Only able to be ran in the same thread as Launcher
  */
 public class FBPluginLoader extends PluginLoader {
-    protected final List<JarFile> plugins = Lists.newArrayList();
-    protected final Map<String,JarFile> pluginJar = Maps.newHashMap();
-    protected final Map<String,BoxedPlugin<? extends IPlugin>> pluginBoxed = Maps.newHashMap();
-    protected final ClassLoader thread_classloader = Thread.currentThread().getContextClassLoader();
-    protected final Injector injector = Guice.createInjector((Module) binder ->{
-        binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).toInstance(new CobbleServiceManager());
-        binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
+    private final Map<String,JarFile> pluginJar = Maps.newHashMap();
+    private final Map<String,BoxedPlugin<? extends IPlugin>> pluginBoxed = Maps.newHashMap();
+    private final ClassLoader thread_classloader = Thread.currentThread().getContextClassLoader();
+    private Injector injector;
+    private ScriptEngine js_engine;
+    private State state = State.NON_STARTING;
 
-        binder.requestStaticInjection(Client.class);
-    });
-    private URLClassLoader final_classpathLoader;
-    protected ScriptEngine js_engine;
     @Override
     public JarFile getPluginJar(String pluginId) {
-        return null;
+        if(state.compareTo(State.CONSTRUCTING_PLUGIN)>=0)return pluginJar.get(pluginId);
+        else throw new IllegalStateException("Trying to get a plugin jar before loading the plugin jars!");
     }
 
     @Override
     public BoxedPlugin<? extends IPlugin> getPlugin(String pluginId) {
-        return null;
+        if(state.compareTo(State.LOADED)<0)throw new IllegalStateException("Trying to get a plugin class before completely loading plugins!");
+        return pluginBoxed.get(pluginId);
     }
 
     @Override
     protected void loadPlugin(String baseLocation) {
         try {
             Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
-            plugins.addAll(files.map(file-> {
-                try {
-                    return new JarFile(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }).filter(Objects::nonNull).collect(Collectors.toList()));
-            Map<PluginMetadata, IPlugin> plugins = Maps.newHashMap();
-            files.filter(File::isFile)
+            Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
+            Stream<IPlugin> plugins = files.filter(File::isFile)
                     .filter(file -> file.toPath().getFileName().endsWith(".jar"))
-                    .forEach(file-> {
+                    .map(file-> {
                 try {
                     initializeNashorn();
-                    loadPlugin(plugins,file);
+                    return loadPlugin(plugin,file);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            });
+                return null;
+            }).filter(Objects::nonNull);
+            state = State.INJECTING_MAPPING;
+            plugins.forEach(IPlugin::onEnabled);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        injector = Guice.createInjector((Module) binder ->{
+            binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).to(CobbleServiceManager.class).in(Scopes.SINGLETON);
+            binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
+            binder.bind(MapperFactory.class).annotatedWith(Names.named("mapper_factory")).to(CobbleMapperFactory.class).in(Scopes.SINGLETON);
+            binder.requestStaticInjection(Client.class);
+        });
+    }
+
+    @Override
+    public State getState() {
+        return state;
+    }
+
+    public Injector getInjector() {
+        return injector;
     }
 
     private void initializeNashorn() throws ScriptException {
@@ -98,9 +103,9 @@ public class FBPluginLoader extends PluginLoader {
         js_engine.eval(new InputStreamReader(getClass().getResourceAsStream("assets/mcbbsclient/main/config.js")));
     }
 
-    private void loadPlugin(Map<PluginMetadata, IPlugin> plugins, File f) throws Exception {
+    private IPlugin loadPlugin(Map<PluginMetadata, IPlugin> plugins, File f) throws Exception {
         JarFile file = new JarFile(f);
-        URLClassLoader ucl = new URLClassLoader(new URL[]{f.toURI().toURL()},Thread.currentThread().getContextClassLoader());
+        URLClassLoader ucl = new URLClassLoader(new URL[]{f.toURI().toURL()},thread_classloader);
         String mainClassLocation;
         PluginMetadata meta;
         if(ucl.getResource("plugin.js")!=null) {
@@ -116,12 +121,12 @@ public class FBPluginLoader extends PluginLoader {
             mainClassLocation = (String) bindings.get("plugin");
         }else{
             System.out.println("Unable to instantiate plugin '"+file.getName()+"'.It may be a non-plugin file.Injecting into classpath....");
-            return;
+            return null;
         }
         Class<? extends IPlugin> pluginClz = ucl.loadClass(mainClassLocation).asSubclass(IPlugin.class);
         IPlugin instance = pluginClz.getConstructor().newInstance();
         plugins.put(meta, instance);
         pluginJar.put(meta.id,file);
-        
+        return instance;
     }
 }

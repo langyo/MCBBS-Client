@@ -1,6 +1,8 @@
 package net.mcbbs.client.main.client.plugin.loading;
 
-public enum State {
+public enum State implements Comparable<State> {
+    NON_STARTING,
+
     /**Pre construction*/
     LOADING_FILE,
     CONSTRUCTING_PLUGIN,
@@ -11,5 +13,5 @@ public enum State {
 
     /**Post construction*/
     INJECTING_PLUGIN_API,
-    LOADED
+    LOADED;
 }
