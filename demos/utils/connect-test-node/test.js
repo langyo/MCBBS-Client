@@ -5,7 +5,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
 const options = {
-  url: 'http://www.mcbbs.net/thread-857907-1-1.html',
+  url: 'http://www.mcbbs.net/member.php?mod=logging&action=login',
   headers: {
     'Host': 'www.mcbbs.net',
     'Proxy-Connection': 'keep-alive',
@@ -26,17 +26,17 @@ let data;
 request(options, (error, response, body) => {
   if (!error && response.statusCode == 200) {
     data = body;
-    console.log(body);
+    // console.log(body);
 
     console.log("---------------");
 
     const dom = new JSDOM(data, {
-      // runScripts: "dangerously",
-      // resources: "usable"
+      runScripts: "dangerously",
+      resources: "usable",
       runScripts: "outside-only"
     });
-    console.log(dom.window.document.body.innerHTML);
+    dom.virtualConsole.sendTo(console);
+    // console.log(dom.window.document.body.innerHTML);
   }
 });
-
 
