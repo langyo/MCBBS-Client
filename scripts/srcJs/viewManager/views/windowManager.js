@@ -10,6 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Stores from '../../resourceManager/stores';
 
 import AboutDialog from '../dialogs/about';
+import ColorChoseDialog from "../dialogs/colorChoser";
 
 const styles = theme => ({
 
@@ -27,6 +28,7 @@ class MainWindowManager extends Reflux.Component {
     return (
       <div>
         <AboutDialog />
+        <ColorChoseDialog />
       </div>
     );
   }
