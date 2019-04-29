@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,12 +41,8 @@ public class DataFixer {
                 FileInfo info = GSON.fromJson(element, FileInfo.class);
                 fileMD5.put(info.name, info);
             }
-            // TODO new File() loves you!
-            // TODO Files hates you!
             Path rootPath = Paths.get(
-                    Objects.requireNonNull(new File("native/java").getParentFile()
-                            .listFiles((dir, name) -> name.contentEquals("scripts")))[0].getAbsolutePath(),
-                    "scripts"
+                    Objects.requireNonNull(Paths.get("..")).getParent().resolve("scripts").toUri()
             );
             Stream<Path> files = Files.walk(rootPath);
             Iterator<Path> iterator = files.iterator();
@@ -86,8 +83,13 @@ public class DataFixer {
                         IOUtils.from(value.path)
                 ).transformAllAndClose();
             }
+            System.gc();
             for (LocalFileInfo value : fileMD5Local.values()) {
                 Files.delete(Paths.get(value.dest));
+                IOUtils.combine(
+                        Files.newOutputStream(Paths.get(value.dest)),
+                        IOUtils.from(fileMD5.get(value.name).path)
+                ).transformAllAndClose();
             }
         }
     }
