@@ -9,6 +9,7 @@ public interface Mapper<I extends IPlugin> {
     void mapMethod(Method raw, Method mapped, Function<Object[],Object[]> argumentMapper,Object instance);
     void unmapMethod(Method raw);
     I mapped(Class<I> clz);
+    String name();
     enum Type{
         METHOD,VARIABLE
     }

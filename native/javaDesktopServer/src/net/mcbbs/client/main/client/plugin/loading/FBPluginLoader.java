@@ -1,6 +1,7 @@
 package net.mcbbs.client.main.client.plugin.loading;
 
 import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -9,10 +10,10 @@ import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
-import net.mcbbs.client.api.plugin.mapper.MapperFactory;
+import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
-import net.mcbbs.client.main.client.plugin.mapper.CobbleMapperFactory;
+import net.mcbbs.client.main.client.plugin.mapper.CobbleMapperManager;
 import net.mcbbs.client.main.client.plugin.service.CobbleServiceManager;
 import org.yaml.snakeyaml.Yaml;
 
@@ -37,7 +38,8 @@ import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
 /**
- * Only able to be ran in the same thread as Launcher
+ * Only able to be ran in the same thread as Launcher!
+ * Or there will be a ClassCastException while injecting plugins!
  */
 public class FBPluginLoader extends PluginLoader {
     private final Map<String,JarFile> pluginJar = Maps.newHashMap();
@@ -49,8 +51,8 @@ public class FBPluginLoader extends PluginLoader {
 
     @Override
     public JarFile getPluginJar(String pluginId) {
-        if(state.compareTo(State.CONSTRUCTING_PLUGIN)>=0)return pluginJar.get(pluginId);
-        else throw new IllegalStateException("Trying to get a plugin jar before loading the plugin jars!");
+        if(state.compareTo(State.CONSTRUCTING_PLUGIN)<0)throw new IllegalStateException("Trying to get a plugin jar before loading the plugin jars!");
+        return pluginJar.get(pluginId);
     }
 
     @Override
@@ -64,27 +66,28 @@ public class FBPluginLoader extends PluginLoader {
         try {
             Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
             Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
+            initializeNashorn();
+            state=State.LOADING_FILE;
             Stream<IPlugin> plugins = files.filter(File::isFile)
                     .filter(file -> file.toPath().getFileName().endsWith(".jar"))
                     .map(file-> {
                 try {
-                    initializeNashorn();
                     return loadPlugin(plugin,file);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
             }).filter(Objects::nonNull);
-            state = State.INJECTING_MAPPING;
+            state = State.CONSTRUCTING_PLUGIN;
             plugins.forEach(IPlugin::onEnabled);
-        } catch (IOException e) {
+        } catch (IOException | ScriptException e) {
             e.printStackTrace();
         }
 
         injector = Guice.createInjector((Module) binder ->{
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).to(CobbleServiceManager.class).in(Scopes.SINGLETON);
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
-            binder.bind(MapperFactory.class).annotatedWith(Names.named("mapper_factory")).to(CobbleMapperFactory.class).in(Scopes.SINGLETON);
+            binder.bind(MapperManager.class).annotatedWith(Names.named("mapper_factory")).to(CobbleMapperManager.class).in(Scopes.SINGLETON);
             binder.requestStaticInjection(Client.class);
         });
     }
@@ -120,7 +123,7 @@ public class FBPluginLoader extends PluginLoader {
             meta = PluginMetadata.deserializeFrom(this,bindings);
             mainClassLocation = (String) bindings.get("plugin");
         }else{
-            System.out.println("Unable to instantiate plugin '"+file.getName()+"'.It may be a non-plugin file.Injecting into classpath....");
+            System.out.println("Unable to instantiate plugin '"+file.getName()+"'.It may be a non-plugin file.");
             return null;
         }
         Class<? extends IPlugin> pluginClz = ucl.loadClass(mainClassLocation).asSubclass(IPlugin.class);

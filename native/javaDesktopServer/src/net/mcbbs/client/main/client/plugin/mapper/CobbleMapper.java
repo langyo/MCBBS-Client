@@ -13,6 +13,7 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
@@ -25,9 +26,9 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
     private InvocationHandler invocationHandler;
 
 
-    public static final<T extends IPlugin> CobbleMapper<T> createInstance(InvocationHandlerFactory factory){
+    public static final<T extends IPlugin> CobbleMapper<T> createInstance(InvocationHandlerFactory factory,String name){
         //noinspection unchecked
-        CobbleMapper<T> cobbleMapper = new CobbleMapper<>();
+        CobbleMapper<T> cobbleMapper = new CobbleMapper<>(name);
         /*(CobbleMapper<T>)Proxy.newProxyInstance(CobbleMapper.class.getClassLoader(), CobbleMapper.class.getInterfaces(),
                 factory.create(new InvocationHandlerFactory.AroundAdviceAdapter(){
                     boolean instanceSet = false;
@@ -47,6 +48,12 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
         cobbleMapper.setInvocationHandlerFactory(factory);
         return cobbleMapper;
     }
+    private String name;
+
+    private CobbleMapper(@Nonnull String name){
+        this.name= Objects.requireNonNull(name);
+    }
+
     private void setInvocationHandlerFactory(InvocationHandlerFactory f){
         invocationHandler = f.create(new InvocationHandlerFactory.AroundAdviceAdapter(){
             @Override
@@ -80,5 +87,11 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
     public I mapped(Class<I> clz) {
         //noinspection unchecked
         return (I)Proxy.newProxyInstance(clz.getClassLoader(),clz.getInterfaces(),invocationHandler);
+    }
+
+    @Override
+    @Nonnull
+    public String name() {
+        return name;
     }
 }
