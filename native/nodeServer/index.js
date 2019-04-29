@@ -64,6 +64,11 @@ const shakehandReg = /^execute system shakehand ([0-9a-zA-Z]+)\s*$/;
 function createSocket(conn) {
     let chunks = "";
     let listener = conn.on('message', n => {
+        let hasReceived = false;
+        if(hasReceived){
+            if(listener) conn.removeListener(listener);
+            return;
+        }
         chunks += n;
         if (chunks.indexOf('\n') != -1) {
             // 换行代表握手指令发送完毕
@@ -71,22 +76,22 @@ function createSocket(conn) {
             if (match) {
                 // 识别正确，创建新 Socket
                 let src = match[1];
-                console.log("已与 " + src + "建立连接！");
+                console.log("已与 " + src + " 建立连接！");
                 conn.send("data system shakehand success\n");
-                conn.removeListener(listener);
-                socket[src] = new Socket(conn, src);
+                sockets[src] = new Socket(conn, src);
             } else {
                 // 识别错误，拒绝连接
                 console.log("检测到一个连接，但由于无法识别握手内容而失败：" + chunks);
                 conn.close();
             }
         }
+        hasReceived = true;
     })
 }
 
 function sendMessage(src, cmd) {
     if (!src in sockets) throw new Error("没有名为 " + src + " 的 socket 连接！");
-    sockets[src].socket.send(cmd);
+    sockets[src].socket.send(cmd + '\n');
 }
 
 function receiveMessage(src, cmd) {
@@ -117,8 +122,8 @@ class Socket {
             }
         });
         conn.on('close', () => {
-            console.log("连接 " + name + " 已关闭。");
-            delete sockets[name];
+            console.log("连接 " + src + " 已关闭。");
+            delete sockets[src];
         })
     }
 }
