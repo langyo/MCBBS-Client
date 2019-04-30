@@ -13,6 +13,7 @@ import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
 import Background from "./views/background";
 import Secretary from "./views/secretary";
+import FabView from "./views/fab";
 
 import Forum from "./pages/forums";
 
@@ -59,6 +60,7 @@ class MainView extends Reflux.Component {
             <WindowManager />
             <Background />
             <Secretary />
+            <FabView />
 
             <Switch>
               <Route exact path='/index' component={Home} />
