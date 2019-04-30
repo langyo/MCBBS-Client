@@ -46,6 +46,7 @@ import TaskIcon from "mdi-material-ui/CalendarText";
 import WebIcon from "mdi-material-ui/Web";
 import DatabaseIcon from "mdi-material-ui/Database";
 import MoreVertIcon from "mdi-material-ui/DotsVertical";
+import EarthIcon from "mdi-material-ui/Earth";
 
 import Actions from "../../resourceManager/actions";
 
@@ -228,16 +229,20 @@ class SwipeableTemporaryDrawer extends Reflux.Component {
                 <InfoIcon />
                 <ListItemText primary="关于" />
               </ListItem>
+              <ListItem button>
+                <EarthIcon />
+                <ListItemText primary="语言 / Language" />
+              </ListItem>
               <ListSubheader disableSticky>调试区</ListSubheader>
               <ListItem button>
                 <StoreIcon />
                 <ListItemText primary="插件中心" />
               </ListItem>
-              <ListItem button onClick={this.handleOpenDevTools}>
+              <ListItem button>
                 <SettingIcon />
                 <ListItemText primary="开发者控制" />
               </ListItem>
-              <ListItem button onClick={this.handleOpenDatabaseDebugDialog}>
+              <ListItem button>
                 <DatabaseIcon />
                 <ListItemText primary="数据库调试" />
               </ListItem>
