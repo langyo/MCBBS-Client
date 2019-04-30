@@ -11,12 +11,11 @@ import net.mcbbs.client.api.plugin.event.Event;
 import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public abstract class Client {
@@ -56,20 +55,44 @@ public abstract class Client {
     private static EventBus internal_event_bus;
 
     public static final class EventBusController{
+        public static void post(Event event,EventBusController.Type type) {
+            switch (type){
+                case NET:
+                    net_event_bus.post(event);
+                    break;
+                case MAIN:
+                    main_event_bus.post(event);
+                    break;
+                case INTERNAL:
+                    internal_event_bus.post(event);
+                    break;
+            }
+        }
+
+        public enum Type {
+            INTERNAL,NET,MAIN
+        }
+
         protected static final class BoxedHandler<T extends Event> {
             protected static final Map<Class<? extends Event>,Multimap<Class<?>,Method>> cache = Maps.newHashMap();
-            private Collection<Method> methods;
+            private final Collection<Method> methods;
+            private final Object instance;
             public BoxedHandler(Object target,Class<? extends Event> eventClz){
+                Multimap<Class<?>,Method> var0;
                 if(!cache.containsKey(eventClz)) {
                     cache.put(eventClz,MultimapBuilder.hashKeys().hashSetValues().build());
-                    List<Method> methods = Arrays.asList(eventClz.getMethods());
-                    methods.stream().filter(method -> method.getParameterCount()==1&&method.getParameterTypes()[0].isAssignableFrom(Event.class)).forEach(method -> {
-                       method
-                    });
-                }else methods=
+                    methods = Arrays.stream(eventClz.getMethods()).filter(method -> method.getParameterCount()==1&&method.getParameterTypes()[0].isAssignableFrom(eventClz)).collect(Collectors.toList());
+                    cache.get(eventClz).putAll(target.getClass(),methods);
+                }else if(!cache.get(eventClz).containsKey(target.getClass())){
+                    methods = Arrays.stream(eventClz.getMethods()).filter(method -> method.getParameterCount()==1&&method.getParameterTypes()[0].isAssignableFrom(eventClz)).collect(Collectors.toList());
+                    cache.get(eventClz).putAll(target.getClass(),methods);
+                }else methods = cache.get(eventClz).get(target.getClass());
+                instance=target;
             }
             @Subscribe
-
+            public void handle(T event) throws InvocationTargetException, IllegalAccessException {
+                for(Method m:methods)m.invoke(instance,event);
+            }
         }
         protected static final class Identifier{
             final Class<?> targetClz;
@@ -89,11 +112,19 @@ public abstract class Client {
                 return targetClz.hashCode()-eventClz.hashCode();
             }
         }
-        public static<T extends Event> void registerHandlerInMain(Object target){
-            main_event_bus.register(target);
-        }
-        public static<T extends Event> void registerHandlerInNet(Object target){
-            net_event_bus.register(target);
+
+        public static<T extends Event> void register(Object target,Class<T> eventClz,EventBusController.Type type){
+            switch (type){
+                case NET:
+                    net_event_bus.register(new BoxedHandler<T>(target,eventClz));
+                    break;
+                case MAIN:
+                    main_event_bus.register(new BoxedHandler<T>(target,eventClz));
+                    break;
+                case INTERNAL:
+                    internal_event_bus.register(new BoxedHandler<T>(target,eventClz));
+                    break;
+            }
         }
     }
 }
