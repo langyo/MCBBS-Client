@@ -7,9 +7,11 @@ import java.net.URI;
 
 public class WSClient extends WebSocketClient {
     private final WSSocketReceiver receiver = new WSSocketReceiver();
-    public WSClient(){
+
+    public WSClient() {
         super(URI.create("localhost:2033"));
     }
+
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
 

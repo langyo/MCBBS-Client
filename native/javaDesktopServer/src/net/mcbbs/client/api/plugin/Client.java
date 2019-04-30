@@ -21,44 +21,45 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class Client {
-    private Client(){}
-
     @Inject
     @Named("service_manager")
     private static ServiceManager smImpl;
-    public static ServiceManager getServiceManager(){
-        return smImpl;
-    }
-
     @Inject
     @Named("plugin_list")
     private static List<BoxedPlugin<? extends IPlugin>> plugins;
-    public static BoxedPlugin<?> getPlugin(String pluginId){
-        return plugins.stream().filter(plugin->plugin.metadata.id.contentEquals(pluginId)).findAny().orElse(null);
-    }
-
     @Inject
     @Named("mapper_factory")
     private static MapperManager mapper_factory;
-    public static MapperManager getMapperFactory() {
-        return mapper_factory;
-    }
-
     @Inject
     @Named("main_event_bus")
     private static EventBus main_event_bus;
-
     @Inject
     @Named("net_event_bus")
     private static EventBus net_event_bus;
-
     @Inject
     @Named("internal_event_bus")
     private static EventBus internal_event_bus;
 
-    public static final class EventBusController{
-        public static<T extends Event> T post(T event,EventBusController.Type type) {
-            switch (type){
+    private Client() {
+    }
+
+    public static ServiceManager getServiceManager() {
+        return smImpl;
+    }
+
+    public static BoxedPlugin<?> getPlugin(String pluginId) {
+        return plugins.stream().filter(plugin -> plugin.metadata.id.contentEquals(pluginId)).findAny().orElse(null);
+    }
+
+    public static MapperManager getMapperFactory() {
+        return mapper_factory;
+    }
+
+    public static final class EventBusController {
+        protected static final Multimap<Type, BoxedHandler<? extends Event>> handler = MultimapBuilder.hashKeys().hashSetValues().build();
+
+        public static <T extends Event> T post(T event, EventBusController.Type type) {
+            switch (type) {
                 case NET:
                     net_event_bus.post(event);
                     break;
@@ -72,68 +73,10 @@ public abstract class Client {
             return event;
         }
 
-        public enum Type {
-            INTERNAL,NET,MAIN
-        }
-
-        protected static final class BoxedHandler<T extends Event> {
-            protected static final Map<Class<? extends Event>,Multimap<Class<?>,Method>> cache = Maps.newHashMap();
-            private final Collection<Method> methods;
-            private final Object instance;
-            private final Class<? extends Event> eventClass;
-            public BoxedHandler(Object target,Class<? extends Event> eventClz){
-                Multimap<Class<?>,Method> var0;
-                if(!cache.containsKey(eventClz)) {
-                    cache.put(eventClz,MultimapBuilder.hashKeys().hashSetValues().build());
-                    methods = Arrays.stream(eventClz.getMethods()).filter(method ->
-                            method.isAnnotationPresent(Plugin.SubscribeEvent.class)&&
-                                    method.getParameterCount()==1&&
-                                    method.getParameterTypes()[0].isAssignableFrom(eventClz)&&
-                                    Modifier.isPublic(method.getModifiers())&&
-                                    !Modifier.isStatic(method.getModifiers())
-                    ).collect(Collectors.toList());
-                    cache.get(eventClz).putAll(target.getClass(),methods);
-                }else if(!cache.get(eventClz).containsKey(target.getClass())){
-                    methods = Arrays.stream(eventClz.getMethods()).filter(method ->
-                            method.isAnnotationPresent(Plugin.SubscribeEvent.class)&&
-                                    method.getParameterCount()==1&&
-                                    method.getParameterTypes()[0].isAssignableFrom(eventClz)&&
-                                    Modifier.isPublic(method.getModifiers())&&
-                                    !Modifier.isStatic(method.getModifiers())
-                    ).collect(Collectors.toList());
-                    cache.get(eventClz).putAll(target.getClass(),methods);
-                }else methods = cache.get(eventClz).get(target.getClass());
-                instance=target;
-                eventClass = eventClz;
-            }
-            @Subscribe
-            public void handle(T event) throws InvocationTargetException, IllegalAccessException {
-                for(Method m:methods)m.invoke(instance,event);
-            }
-        }
-        protected static final class Identifier{
-            final Class<?> targetClz;
-            final Class<? extends Event> eventClz;
-            public Identifier(Class<?> targetClz, Class<? extends Event> eventClz){
-                this.targetClz = targetClz;
-                this.eventClz = eventClz;
-            }
-
-            @Override
-            public boolean equals(Object o) {
-                return o instanceof Identifier&&((Identifier) o).eventClz.equals(eventClz)&&((Identifier) o).targetClz.equals(targetClz);
-            }
-
-            @Override
-            public int hashCode() {
-                return targetClz.hashCode()-eventClz.hashCode();
-            }
-        }
-
-        public static<T extends Event> void register(Object target,Class<T> eventClz,EventBusController.Type type){
+        public static <T extends Event> void register(Object target, Class<T> eventClz, EventBusController.Type type) {
             BoxedHandler<T> var = new BoxedHandler<>(target, eventClz);
-            handler.put(type,var);
-            switch (type){
+            handler.put(type, var);
+            switch (type) {
                 case NET:
                     net_event_bus.register(var);
                     break;
@@ -146,13 +89,13 @@ public abstract class Client {
             }
         }
 
-        public static<T extends Event> void unregister(Object target,Class<T> eventClz,EventBusController.Type type){
+        public static <T extends Event> void unregister(Object target, Class<T> eventClz, EventBusController.Type type) {
             //noinspection unchecked
             BoxedHandler<T> var = (BoxedHandler<T>) handler.get(type).stream()
-                    .filter(handler->handler.instance.equals(target)&&handler.eventClass.equals(eventClz))
+                    .filter(handler -> handler.instance.equals(target) && handler.eventClass.equals(eventClz))
                     .findFirst()
-                    .orElseThrow(()->new UnsupportedOperationException("Cannot delete an undefined handler!"));
-            switch (type){
+                    .orElseThrow(() -> new UnsupportedOperationException("Cannot delete an undefined handler!"));
+            switch (type) {
                 case NET:
                     net_event_bus.unregister(var);
                     break;
@@ -165,6 +108,66 @@ public abstract class Client {
             }
         }
 
-        protected static final Multimap<Type,BoxedHandler<? extends Event>> handler = MultimapBuilder.hashKeys().hashSetValues().build();
+        public enum Type {
+            INTERNAL, NET, MAIN
+        }
+
+        protected static final class BoxedHandler<T extends Event> {
+            protected static final Map<Class<? extends Event>, Multimap<Class<?>, Method>> cache = Maps.newHashMap();
+            private final Collection<Method> methods;
+            private final Object instance;
+            private final Class<? extends Event> eventClass;
+
+            public BoxedHandler(Object target, Class<? extends Event> eventClz) {
+                Multimap<Class<?>, Method> var0;
+                if (!cache.containsKey(eventClz)) {
+                    cache.put(eventClz, MultimapBuilder.hashKeys().hashSetValues().build());
+                    methods = Arrays.stream(eventClz.getMethods()).filter(method ->
+                            method.isAnnotationPresent(Plugin.SubscribeEvent.class) &&
+                                    method.getParameterCount() == 1 &&
+                                    method.getParameterTypes()[0].isAssignableFrom(eventClz) &&
+                                    Modifier.isPublic(method.getModifiers()) &&
+                                    !Modifier.isStatic(method.getModifiers())
+                    ).collect(Collectors.toList());
+                    cache.get(eventClz).putAll(target.getClass(), methods);
+                } else if (!cache.get(eventClz).containsKey(target.getClass())) {
+                    methods = Arrays.stream(eventClz.getMethods()).filter(method ->
+                            method.isAnnotationPresent(Plugin.SubscribeEvent.class) &&
+                                    method.getParameterCount() == 1 &&
+                                    method.getParameterTypes()[0].isAssignableFrom(eventClz) &&
+                                    Modifier.isPublic(method.getModifiers()) &&
+                                    !Modifier.isStatic(method.getModifiers())
+                    ).collect(Collectors.toList());
+                    cache.get(eventClz).putAll(target.getClass(), methods);
+                } else methods = cache.get(eventClz).get(target.getClass());
+                instance = target;
+                eventClass = eventClz;
+            }
+
+            @Subscribe
+            public void handle(T event) throws InvocationTargetException, IllegalAccessException {
+                for (Method m : methods) m.invoke(instance, event);
+            }
+        }
+
+        protected static final class Identifier {
+            final Class<?> targetClz;
+            final Class<? extends Event> eventClz;
+
+            public Identifier(Class<?> targetClz, Class<? extends Event> eventClz) {
+                this.targetClz = targetClz;
+                this.eventClz = eventClz;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                return o instanceof Identifier && ((Identifier) o).eventClz.equals(eventClz) && ((Identifier) o).targetClz.equals(targetClz);
+            }
+
+            @Override
+            public int hashCode() {
+                return targetClz.hashCode() - eventClz.hashCode();
+            }
+        }
     }
 }

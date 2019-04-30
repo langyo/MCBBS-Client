@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 public final class BoxedPlugin<T extends IPlugin> {
-    protected final List<Service<?,?>> services;
-    protected final Map<String,IPluginCommand<?,?>> commands;
+    protected final List<Service<?, ?>> services;
+    protected final Map<String, IPluginCommand<?, ?>> commands;
     protected final T plugin;
     protected final PluginMetadata metadata;
-    public BoxedPlugin(T base,PluginMetadata meta,Service<?,?>[] services,Map<String,IPluginCommand<?,?>> commands){
+
+    public BoxedPlugin(T base, PluginMetadata meta, Service<?, ?>[] services, Map<String, IPluginCommand<?, ?>> commands) {
         plugin = base;
         metadata = meta;
         this.commands = Collections.unmodifiableMap(commands);
@@ -22,12 +23,12 @@ public final class BoxedPlugin<T extends IPlugin> {
     }
 
     @Nullable
-    public Service<?,?> getService(String id){
+    public Service<?, ?> getService(String id) {
         return services.stream().filter(service -> service.name().contentEquals(id)).findAny().orElse(null);
     }
 
     @Nullable
-    public IPluginCommand<?,?> getCommand(String id){
+    public IPluginCommand<?, ?> getCommand(String id) {
         return commands.get(id);
     }
 }

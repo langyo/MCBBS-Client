@@ -16,19 +16,23 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class CobbleMapper<I extends IPlugin,T> implements Mapper<T> {
+public class CobbleMapper<I extends IPlugin, T> implements Mapper<T> {
 
     private static final List<String> METHOD_WITHOUT_CHECKING_INSTANCE = Arrays.asList("setInvocationHandlerFactory");
 
-    protected final Map<Method,Method> method_mapping = Maps.newHashMap();
-    protected final Map<Method,Function<Object[],Object[]>> arg_mapping = Maps.newHashMap();
-    protected final Map<Method,Object> instance_mapping = Maps.newHashMap();
+    protected final Map<Method, Method> method_mapping = Maps.newHashMap();
+    protected final Map<Method, Function<Object[], Object[]>> arg_mapping = Maps.newHashMap();
+    protected final Map<Method, Object> instance_mapping = Maps.newHashMap();
     private InvocationHandler invocationHandler;
+    private String name;
 
+    private CobbleMapper(@Nonnull String name) {
+        this.name = Objects.requireNonNull(name);
+    }
 
-    public static final<I extends IPlugin,T> CobbleMapper<I,T> createInstance(InvocationHandlerFactory factory,String name){
+    public static final <I extends IPlugin, T> CobbleMapper<I, T> createInstance(InvocationHandlerFactory factory, String name) {
         //noinspection unchecked
-        CobbleMapper<I,T> cobbleMapper = new CobbleMapper<>(name);
+        CobbleMapper<I, T> cobbleMapper = new CobbleMapper<>(name);
         /*(CobbleMapper<T>)Proxy.newProxyInstance(CobbleMapper.class.getClassLoader(), CobbleMapper.class.getInterfaces(),
                 factory.create(new InvocationHandlerFactory.AroundAdviceAdapter(){
                     boolean instanceSet = false;
@@ -48,32 +52,27 @@ public class CobbleMapper<I extends IPlugin,T> implements Mapper<T> {
         cobbleMapper.setInvocationHandlerFactory(factory);
         return cobbleMapper;
     }
-    private String name;
 
-    private CobbleMapper(@Nonnull String name){
-        this.name= Objects.requireNonNull(name);
-    }
-
-    private void setInvocationHandlerFactory(InvocationHandlerFactory f){
-        invocationHandler = f.create(new InvocationHandlerFactory.AroundAdviceAdapter(){
+    private void setInvocationHandlerFactory(InvocationHandlerFactory f) {
+        invocationHandler = f.create(new InvocationHandlerFactory.AroundAdviceAdapter() {
             @Override
-            public Object exec(Object proxy,Method method,Object[] args) throws InvocationTargetException, IllegalAccessException {
-                if(method_mapping.containsKey(method)){
-                    Function<Object[],Object[]> args_mapper = arg_mapping.get(method);
+            public Object exec(Object proxy, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
+                if (method_mapping.containsKey(method)) {
+                    Function<Object[], Object[]> args_mapper = arg_mapping.get(method);
                     Method mapped = method_mapping.get(method);
-                    return mapped.invoke(instance_mapping.get(mapped),args_mapper.apply(args));
+                    return mapped.invoke(instance_mapping.get(mapped), args_mapper.apply(args));
                 }
-                return method.invoke(proxy,args);
+                return method.invoke(proxy, args);
             }
         });
     }
 
 
     @Override
-    public Mapper<T> mapMethod(@Nonnull Method raw,@Nonnull Method mapped, @Nonnull Function<Object[], Object[]> argumentMapper,Object instance) {
-        method_mapping.put(raw,mapped);
-        arg_mapping.put(raw,argumentMapper);
-        instance_mapping.put(mapped,instance);
+    public Mapper<T> mapMethod(@Nonnull Method raw, @Nonnull Method mapped, @Nonnull Function<Object[], Object[]> argumentMapper, Object instance) {
+        method_mapping.put(raw, mapped);
+        arg_mapping.put(raw, argumentMapper);
+        instance_mapping.put(mapped, instance);
         return this;
     }
 
@@ -88,7 +87,7 @@ public class CobbleMapper<I extends IPlugin,T> implements Mapper<T> {
     @Override
     public T mapped(Class<T> clz) {
         //noinspection unchecked
-        return (T)Proxy.newProxyInstance(clz.getClassLoader(),clz.getInterfaces(),invocationHandler);
+        return (T) Proxy.newProxyInstance(clz.getClassLoader(), clz.getInterfaces(), invocationHandler);
     }
 
     @Override

@@ -10,14 +10,18 @@ import net.mcbbs.client.util.InvocationHandlerFactory;
 
 public abstract class MappingEvent implements Event {
     public abstract PluginLoader source();
+
     public abstract MapperManager data();
+
     public static class Methods extends MappingEvent {
         private final PluginLoader source;
         private final MapperManager data;
-        public Methods(PluginLoaderVirtualRef source, MapperManager data){
+
+        public Methods(PluginLoaderVirtualRef source, MapperManager data) {
             this.source = source;
             this.data = data;
         }
+
         @Override
         public PluginLoader source() {
             return source;
@@ -28,11 +32,11 @@ public abstract class MappingEvent implements Event {
             return data;
         }
 
-        public <I extends IPlugin,T> Mapper<T> registerMapper(Class<I> pluginClz, String name, InvocationHandlerFactory factory){
-            return data.createMapper(pluginClz,name,factory);
+        public <I extends IPlugin, T> Mapper<T> registerMapper(Class<I> pluginClz, String name, InvocationHandlerFactory factory) {
+            return data.createMapper(pluginClz, name, factory);
         }
 
-        public <I extends IPlugin,T> Mapper<T> getMapper(Class<I> pluginClz, String name){
+        public <I extends IPlugin, T> Mapper<T> getMapper(Class<I> pluginClz, String name) {
             return data.getMapper(pluginClz, name);
         }
     }

@@ -36,15 +36,15 @@ public class SocketServer implements IServer<String> {
         childThread = new ThreadGroup(threadPrefix);
         ss.bind(new InetSocketAddress("localhost", port));
         server = new Thread(childThread, this, "main");
-        finalizeController = new Thread(childThread,()->{
+        finalizeController = new Thread(childThread, () -> {
             Reference<?> finalizing;
-            while(true) {
-                if(Thread.currentThread().isInterrupted())break;
+            while (true) {
+                if (Thread.currentThread().isInterrupted()) break;
                 finalizing = finalizer.poll();
-                if(finalizing==null)continue;
+                if (finalizing == null) continue;
                 System.out.println("Running finalization of Object " + finalizing);
             }
-        },"finalizer");
+        }, "finalizer");
         finalizeController.setDaemon(true);
     }
 
@@ -57,12 +57,12 @@ public class SocketServer implements IServer<String> {
     @Override
     public void enablePipe(String id) {
         ImmutableProcessorPipeline<String> buf = pipelines.get(id);
-        if(buf==null)return;
-        if(server.getState().equals(Thread.State.RUNNABLE))server.interrupt();
+        if (buf == null) return;
+        if (server.getState().equals(Thread.State.RUNNABLE)) server.interrupt();
         pipeline = buf;
-        new Thread(childThread,()->{
+        new Thread(childThread, () -> {
             //noinspection StatementWithEmptyBody
-            while(!server.getState().equals(Thread.State.RUNNABLE));
+            while (!server.getState().equals(Thread.State.RUNNABLE)) ;
             server.start();
         }).start();
     }
@@ -89,15 +89,16 @@ public class SocketServer implements IServer<String> {
 
     @Override
     public void active() {
-        if(pipeline==null)throw new RuntimeException("Starting server without enable a pipeline!",new NullPointerException("pipeline = null"));
+        if (pipeline == null)
+            throw new RuntimeException("Starting server without enable a pipeline!", new NullPointerException("pipeline = null"));
         Thread buf2;
         while (true) {
-            if(Thread.currentThread().isInterrupted())break;
+            if (Thread.currentThread().isInterrupted()) break;
             try {
                 Socket buf = ss.accept();
                 buf2 = new Thread(childThread, () -> {
-                    try(Scanner scanner = new Scanner(new BufferedInputStream(buf.getInputStream()))) {
-                        while(scanner.hasNextLine()){
+                    try (Scanner scanner = new Scanner(new BufferedInputStream(buf.getInputStream()))) {
+                        while (scanner.hasNextLine()) {
                             pipeline.fire(scanner.nextLine());
                         }
                     } catch (IOException e) {

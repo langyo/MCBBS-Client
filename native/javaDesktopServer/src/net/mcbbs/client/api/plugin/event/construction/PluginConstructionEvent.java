@@ -1,8 +1,6 @@
 package net.mcbbs.client.api.plugin.event.construction;
 
-import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.event.Event;
-import net.mcbbs.client.api.plugin.service.ServiceManager;
 import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
 import net.mcbbs.client.main.client.plugin.loading.PluginLoaderVirtualRef;
 
@@ -10,9 +8,11 @@ import javax.annotation.Nonnull;
 
 public abstract class PluginConstructionEvent implements Event {
     private final PluginLoader source;
-    public PluginConstructionEvent(@Nonnull PluginLoaderVirtualRef source){
-        this.source=source;
+
+    public PluginConstructionEvent(@Nonnull PluginLoaderVirtualRef source) {
+        this.source = source;
     }
+
     @Override
     public PluginLoader source() {
         return source;
