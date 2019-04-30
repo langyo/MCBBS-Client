@@ -57,6 +57,7 @@ class MainWindowManager extends Reflux.Component {
                             <CirclePicker
                                 width="300px"
                                 colors={['#39C5BB', '#FFA500', '#FFE211', '#FAAFBE', '#66CCFF', '#99FFFF', '#EE0000']}
+                                onChange={(color, event) => Actions.view.global.theme.togglePrimary(color.hex)}
                             />
                         </CardContent>
                     </Card>
@@ -68,6 +69,7 @@ class MainWindowManager extends Reflux.Component {
                             <CirclePicker
                                 width="300px"
                                 colors={['#39C5BB', '#FFA500', '#FFE211', '#FAAFBE', '#66CCFF', '#99FFFF', '#EE0000']}
+                                onChange={(color, event) => Actions.view.global.theme.toggleSecondary(color.hex)}
                             />
                         </CardContent>
                     </Card>
