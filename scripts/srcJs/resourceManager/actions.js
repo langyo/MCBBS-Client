@@ -84,6 +84,10 @@ export default {
             popupMessage: Reflux.createActions([
                 'sendNewMessage',
                 'popupNewMessage'
+            ]),
+            theme: Reflux.createActions([
+                'togglePrimary',
+                'toggleSecondary'
             ])
         }
     }

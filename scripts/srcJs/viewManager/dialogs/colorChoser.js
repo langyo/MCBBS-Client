@@ -34,7 +34,7 @@ const styles = theme => ({
 class MainWindowManager extends Reflux.Component {
     constructor(props) {
         super(props);
-        this.store = Stores.view.global.dialog;
+        this.stores = [Stores.view.global.dialog, Stores.view.global.theme];
     }
 
     handleCloseDialog = Actions.view.global.dialog.reset;
@@ -52,9 +52,23 @@ class MainWindowManager extends Reflux.Component {
                     <Card>
                         <CardContent>
                             <Typography variant="subtitle1" className={classes.subTitle}>
-                                颜色选择
+                                主色
                             </Typography>
-                            <CirclePicker />
+                            <CirclePicker
+                                width="300px"
+                                colors={['#39C5BB', '#FFA500', '#FFE211', '#FAAFBE', '#66CCFF', '#99FFFF', '#EE0000']}
+                            />
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="subtitle1" className={classes.subTitle}>
+                                副色
+                            </Typography>
+                            <CirclePicker
+                                width="300px"
+                                colors={['#39C5BB', '#FFA500', '#FFE211', '#FAAFBE', '#66CCFF', '#99FFFF', '#EE0000']}
+                            />
                         </CardContent>
                     </Card>
                 </DialogContent>

@@ -16,6 +16,9 @@ import Secretary from "./views/secretary";
 
 import Forum from "./pages/forums";
 
+import Stores from "../resourceManager/stores";
+import Actions from "../resourceManager/actions";
+
 const styles = theme => ({
   root: {
     height: '100%',
@@ -24,16 +27,6 @@ const styles = theme => ({
     padding: 0,
     border: 0
   }
-});
-
-const palette = {
-  primary: { main: '#00C853', contrastText: '#ffffff' },
-  secondary: { main: '#2E7D32', contrastText: '#ffffff' }
-};
-
-const theme = createMuiTheme({ 
-  palette: palette, 
-  themeName: "默认主题" 
 });
 
 const Home = () => (
@@ -45,12 +38,22 @@ const Home = () => (
 )
 
 class MainView extends Reflux.Component {
+  constructor(props) {
+    super(props);
+    this.store = Stores.view.global.theme;
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <MuiThemeProvider theme={theme}>
+        <MuiThemeProvider theme={createMuiTheme({
+          palette: {
+            primary: { main: this.state.primaryColor, contrastText: '#ffffff' },
+            secondary: { main: this.state.secondaryColor, contrastText: '#ffffff' }
+          }
+        })}>
           <BrowserRouter>
             <Drawer />
             <WindowManager />

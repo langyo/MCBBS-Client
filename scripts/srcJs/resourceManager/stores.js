@@ -15,6 +15,8 @@ import user from "./databaseStore/users";
 import tag from "./viewStore/tag";
 import dialog from "./viewStore/dialog";
 import popupMessage from "./viewStore/popupMessage";
+import theme from "./viewStore/theme";
+import fab from "./viewStore/fab";
 
 export default {
     database: {
@@ -43,7 +45,9 @@ export default {
         global: {
             tag: tag,
             dialog: dialog,
-            popupMessage: popupMessage
+            popupMessage: popupMessage,
+            theme: theme,
+            fab: fab
         }
     }
 }
