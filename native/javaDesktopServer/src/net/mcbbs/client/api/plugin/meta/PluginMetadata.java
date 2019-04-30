@@ -2,11 +2,11 @@ package net.mcbbs.client.api.plugin.meta;
 
 import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * @author yinyangshi InitAuther97
+ */
 public class PluginMetadata {
     public final String id, version, name, description, url, updateUrl, serverUrl, author;
     public final List<String> collaborators;
@@ -37,5 +37,26 @@ public class PluginMetadata {
                 (String) bindings.get("author"),
                 (String[]) bindings.get("collaborators")
         );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PluginMetadata that = (PluginMetadata) o;
+        return id.equals(that.id) &&
+                version.equals(that.version) &&
+                name.equals(that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(url, that.url) &&
+                Objects.equals(updateUrl, that.updateUrl) &&
+                Objects.equals(serverUrl, that.serverUrl) &&
+                Objects.equals(author, that.author) &&
+                Objects.equals(collaborators, that.collaborators);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, version, name, description, url, updateUrl, serverUrl, author, collaborators);
     }
 }
