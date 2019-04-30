@@ -5,13 +5,12 @@ public enum State implements Comparable<State> {
 
     /**Pre construction*/
     LOADING_FILE,
-    CONSTRUCTING_PLUGIN,
+    INJECTING_PLUGIN_API,
 
     /**Construction*/
-    INJECTING_SERVICE,
-    INJECTING_MAPPING,
+    CONSTRUCTING_PLUGIN,
 
     /**Post construction*/
-    INJECTING_PLUGIN_API,
+    INJECTING_MAPPING,
     LOADED;
 }

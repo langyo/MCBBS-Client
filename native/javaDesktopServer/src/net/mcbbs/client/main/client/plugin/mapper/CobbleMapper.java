@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
+public class CobbleMapper<I extends IPlugin,T> implements Mapper<T> {
 
     private static final List<String> METHOD_WITHOUT_CHECKING_INSTANCE = Arrays.asList("setInvocationHandlerFactory");
 
@@ -26,9 +26,9 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
     private InvocationHandler invocationHandler;
 
 
-    public static final<T extends IPlugin> CobbleMapper<T> createInstance(InvocationHandlerFactory factory,String name){
+    public static final<I extends IPlugin,T> CobbleMapper<I,T> createInstance(InvocationHandlerFactory factory,String name){
         //noinspection unchecked
-        CobbleMapper<T> cobbleMapper = new CobbleMapper<>(name);
+        CobbleMapper<I,T> cobbleMapper = new CobbleMapper<>(name);
         /*(CobbleMapper<T>)Proxy.newProxyInstance(CobbleMapper.class.getClassLoader(), CobbleMapper.class.getInterfaces(),
                 factory.create(new InvocationHandlerFactory.AroundAdviceAdapter(){
                     boolean instanceSet = false;
@@ -70,23 +70,25 @@ public class CobbleMapper<I extends IPlugin> implements Mapper<I> {
 
 
     @Override
-    public void mapMethod(@Nonnull Method raw,@Nonnull Method mapped, @Nonnull Function<Object[], Object[]> argumentMapper,Object instance) {
+    public Mapper<T> mapMethod(@Nonnull Method raw,@Nonnull Method mapped, @Nonnull Function<Object[], Object[]> argumentMapper,Object instance) {
         method_mapping.put(raw,mapped);
         arg_mapping.put(raw,argumentMapper);
         instance_mapping.put(mapped,instance);
+        return this;
     }
 
     @Override
-    public void unmapMethod(Method raw) {
+    public Mapper<T> unmapMethod(Method raw) {
         method_mapping.remove(raw);
         arg_mapping.remove(raw);
+        return this;
     }
 
 
     @Override
-    public I mapped(Class<I> clz) {
+    public T mapped(Class<T> clz) {
         //noinspection unchecked
-        return (I)Proxy.newProxyInstance(clz.getClassLoader(),clz.getInterfaces(),invocationHandler);
+        return (T)Proxy.newProxyInstance(clz.getClassLoader(),clz.getInterfaces(),invocationHandler);
     }
 
     @Override

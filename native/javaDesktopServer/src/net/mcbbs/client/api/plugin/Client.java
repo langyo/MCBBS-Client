@@ -14,9 +14,11 @@ import net.mcbbs.client.api.plugin.service.ServiceManager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public abstract class Client {
     private Client(){}
@@ -55,7 +57,7 @@ public abstract class Client {
     private static EventBus internal_event_bus;
 
     public static final class EventBusController{
-        public static void post(Event event,EventBusController.Type type) {
+        public static<T extends Event> T post(T event,EventBusController.Type type) {
             switch (type){
                 case NET:
                     net_event_bus.post(event);
@@ -67,6 +69,7 @@ public abstract class Client {
                     internal_event_bus.post(event);
                     break;
             }
+            return event;
         }
 
         public enum Type {
@@ -77,17 +80,31 @@ public abstract class Client {
             protected static final Map<Class<? extends Event>,Multimap<Class<?>,Method>> cache = Maps.newHashMap();
             private final Collection<Method> methods;
             private final Object instance;
+            private final Class<? extends Event> eventClass;
             public BoxedHandler(Object target,Class<? extends Event> eventClz){
                 Multimap<Class<?>,Method> var0;
                 if(!cache.containsKey(eventClz)) {
                     cache.put(eventClz,MultimapBuilder.hashKeys().hashSetValues().build());
-                    methods = Arrays.stream(eventClz.getMethods()).filter(method -> method.getParameterCount()==1&&method.getParameterTypes()[0].isAssignableFrom(eventClz)).collect(Collectors.toList());
+                    methods = Arrays.stream(eventClz.getMethods()).filter(method ->
+                            method.isAnnotationPresent(Plugin.SubscribeEvent.class)&&
+                                    method.getParameterCount()==1&&
+                                    method.getParameterTypes()[0].isAssignableFrom(eventClz)&&
+                                    Modifier.isPublic(method.getModifiers())&&
+                                    !Modifier.isStatic(method.getModifiers())
+                    ).collect(Collectors.toList());
                     cache.get(eventClz).putAll(target.getClass(),methods);
                 }else if(!cache.get(eventClz).containsKey(target.getClass())){
-                    methods = Arrays.stream(eventClz.getMethods()).filter(method -> method.getParameterCount()==1&&method.getParameterTypes()[0].isAssignableFrom(eventClz)).collect(Collectors.toList());
+                    methods = Arrays.stream(eventClz.getMethods()).filter(method ->
+                            method.isAnnotationPresent(Plugin.SubscribeEvent.class)&&
+                                    method.getParameterCount()==1&&
+                                    method.getParameterTypes()[0].isAssignableFrom(eventClz)&&
+                                    Modifier.isPublic(method.getModifiers())&&
+                                    !Modifier.isStatic(method.getModifiers())
+                    ).collect(Collectors.toList());
                     cache.get(eventClz).putAll(target.getClass(),methods);
                 }else methods = cache.get(eventClz).get(target.getClass());
                 instance=target;
+                eventClass = eventClz;
             }
             @Subscribe
             public void handle(T event) throws InvocationTargetException, IllegalAccessException {
@@ -114,17 +131,40 @@ public abstract class Client {
         }
 
         public static<T extends Event> void register(Object target,Class<T> eventClz,EventBusController.Type type){
+            BoxedHandler<T> var = new BoxedHandler<>(target, eventClz);
+            handler.put(type,var);
             switch (type){
                 case NET:
-                    net_event_bus.register(new BoxedHandler<T>(target,eventClz));
+                    net_event_bus.register(var);
                     break;
                 case MAIN:
-                    main_event_bus.register(new BoxedHandler<T>(target,eventClz));
+                    main_event_bus.register(var);
                     break;
                 case INTERNAL:
-                    internal_event_bus.register(new BoxedHandler<T>(target,eventClz));
+                    internal_event_bus.register(var);
                     break;
             }
         }
+
+        public static<T extends Event> void unregister(Object target,Class<T> eventClz,EventBusController.Type type){
+            //noinspection unchecked
+            BoxedHandler<T> var = (BoxedHandler<T>) handler.get(type).stream()
+                    .filter(handler->handler.instance.equals(target)&&handler.eventClass.equals(eventClz))
+                    .findFirst()
+                    .orElseThrow(()->new UnsupportedOperationException("Cannot delete an undefined handler!"));
+            switch (type){
+                case NET:
+                    net_event_bus.unregister(var);
+                    break;
+                case MAIN:
+                    main_event_bus.unregister(var);
+                    break;
+                case INTERNAL:
+                    internal_event_bus.unregister(var);
+                    break;
+            }
+        }
+
+        protected static final Multimap<Type,BoxedHandler<? extends Event>> handler = MultimapBuilder.hashKeys().hashSetValues().build();
     }
 }

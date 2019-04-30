@@ -1,12 +1,8 @@
 package net.mcbbs.client.main.client;
 
-import net.mcbbs.client.main.client.cmd.Command;
-import net.mcbbs.client.main.client.cmd.CommandExecutor;
-import net.mcbbs.client.main.client.cmd.CommandParseException;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
-import java.io.IOException;
 import java.net.URI;
 
 public class WSClient extends WebSocketClient {
@@ -21,9 +17,6 @@ public class WSClient extends WebSocketClient {
 
     @Override
     public void onMessage(String s) {
-        Command command = receiver.commandParse(s);
-        String result = receiver.commandExecute(command);
-        send(result);
     }
 
     @Override

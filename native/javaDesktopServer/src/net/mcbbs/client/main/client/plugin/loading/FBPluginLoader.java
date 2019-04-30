@@ -11,6 +11,7 @@ import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
+import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
 import net.mcbbs.client.api.plugin.event.construction.PluginConstructionEvent;
 import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
@@ -90,7 +91,6 @@ public class FBPluginLoader extends PluginLoader {
         injector = Guice.createInjector((Module) binder ->{
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).to(CobbleServiceManager.class).in(Scopes.SINGLETON);
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
-            binder.bind(MapperManager.class).annotatedWith(Names.named("mapper_factory")).to(CobbleMapperManager.class).in(Scopes.SINGLETON);
             binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newFixedThreadPool(5)));
             binder.bind(EventBus.class).annotatedWith(Names.named("net_event_bus")).toInstance(new AsyncEventBus(Executors.newCachedThreadPool()));
             binder.bind(EventBus.class).annotatedWith(Names.named("main_event_bus")).toInstance(new EventBus());
@@ -98,6 +98,8 @@ public class FBPluginLoader extends PluginLoader {
         });
         state = State.CONSTRUCTING_PLUGIN;
         pluginStream.forEach(IPlugin::onEnabled);
+        state = State.INJECTING_MAPPING;
+        Client.EventBusController.post(new MappingEvent.Methods(ref,new CobbleMapperManager()), Client.EventBusController.Type.MAIN);
     }
 
     @Override
