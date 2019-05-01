@@ -1,0 +1,8 @@
+{
+	"type": "Live2D Model Setting",
+	"name": "creeper",
+	"model": "creeper.moc",
+	"textures": [
+		"texture/texture_00.png"
+	]
+}
