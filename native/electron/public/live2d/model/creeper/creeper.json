@@ -4,5 +4,13 @@
 	"model": "creeper.moc",
 	"textures": [
 		"texture/texture_00.png"
-	]
+	],
+	"motions": {
+		"Scene1": [
+			{"file": "Scene1.mtn"}
+		],
+		"zyScene1": [
+			{"file": "zyScene1.mtn"}
+		]
+	}
 }
