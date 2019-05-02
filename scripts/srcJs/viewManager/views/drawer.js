@@ -229,7 +229,7 @@ class SwipeableTemporaryDrawer extends Reflux.Component {
                 <InfoIcon />
                 <ListItemText primary="关于" />
               </ListItem>
-              <ListItem button>
+              <ListItem button onClick={() => Actions.view.global.dialog.toggleTo('language')}>
                 <EarthIcon />
                 <ListItemText primary="语言 / Language" />
               </ListItem>

@@ -24,7 +24,7 @@ const styles = theme => ({
 
 });
 
-class MainWindowManager extends Reflux.Component {
+class About extends Reflux.Component {
   constructor(props) {
     super(props);
     this.store = Stores.view.global.dialog;
@@ -118,4 +118,4 @@ class MainWindowManager extends Reflux.Component {
   }
 }
 
-export default withStyles(styles)(MainWindowManager);
+export default withStyles(styles)(About);

@@ -17,6 +17,7 @@ import dialog from "./viewStore/dialog";
 import popupMessage from "./viewStore/popupMessage";
 import theme from "./viewStore/theme";
 import fab from "./viewStore/fab";
+import language from "./viewStore/language";
 
 export default {
     database: {
@@ -47,7 +48,8 @@ export default {
             dialog: dialog,
             popupMessage: popupMessage,
             theme: theme,
-            fab: fab
+            fab: fab,
+            language: language
         }
     }
 }

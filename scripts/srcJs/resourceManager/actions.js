@@ -88,6 +88,9 @@ export default {
             theme: Reflux.createActions([
                 'togglePrimary',
                 'toggleSecondary'
+            ]),
+            language: Reflux.createActions([
+                'toggleTo',
             ])
         }
     }
