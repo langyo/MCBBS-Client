@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "electron ./index.js",
-    "watch": "concurrently \"watchify ../../scripts/srcJs/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose\" \"http-server -p 9232\"",
+    "watch": "concurrently \"npm run watch:code\" \"npm run watch:server\"",
+    "watch:code": "watchify ../../scripts/srcJs/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
+    "watch:server": "http-server -p 9232",
     "build": "browserify ../../scripts/srcJs/viewManager/mainViewRender.js -o public/bundle.js -t babelify",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
