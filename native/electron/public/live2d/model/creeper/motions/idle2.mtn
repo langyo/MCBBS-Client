@@ -1,0 +1,9 @@
+# Live2D Animator Motion Data
+$fps=30.0
+
+$fadein=10000
+
+$fadeout=10000
+
+PARAM_EYE_L_OPEN=1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+PARAM_EYE_R_OPEN=1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
