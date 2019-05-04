@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 class Secretary extends React.Component {
     componentDidMount() {
-        loadlive2d("live2d", "./live2d/model/creeper/creeper.json");
+        loadlive2d("live2d", "./live2d/model/creeper/model.json");
     }
 
     render() {
