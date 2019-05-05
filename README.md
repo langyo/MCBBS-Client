@@ -9,7 +9,7 @@
 <div align="center">
 <a href="https://travis-ci.com/langyo/MCBBS-Client">
 <img src="https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master">
-</a>
+<img src="https://badges.depfu.com/badges/dbdc735d3c1f776180e36eb3fbc572fd/overview.svg">
 </div>
 
 正在全速开发中，请耐心等待……
