@@ -1,5 +1,5 @@
 /*
-  Copyright 2019  <langyo.china@gmail.com> and contributors
+  Copyright 2019 [name] <langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client;
-
-public class WSSocketReceiver {
-}
+/**
+ * Minecraft launching,logging-in&plugging-in APIs.
+ */
+package net.mcbbs.client.main.client.game;

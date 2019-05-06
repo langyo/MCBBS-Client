@@ -14,7 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client;
+package net.mcbbs.client.main.client.game.launch;
 
-public class WSSocketReceiver {
+public interface IGameRoot {
 }

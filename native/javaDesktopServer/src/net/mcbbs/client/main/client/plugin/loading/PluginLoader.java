@@ -9,7 +9,7 @@ public abstract class PluginLoader {
 
     public abstract BoxedPlugin getPlugin(String pluginId);
 
-    protected abstract void loadPlugin(String baseLoc);
+    public abstract void loadPlugin(String baseLoc);
 
     public abstract State getState();
 }

@@ -43,10 +43,11 @@ import java.util.stream.Stream;
  * Only able to be ran in the same thread as Launcher and Client!
  * Or there will be a ClassCastException while injecting plugins!
  */
-public class FBPluginLoader extends PluginLoader {
+public class FileBasedPluginLoader extends PluginLoader {
     private final Map<String, JarFile> pluginJar = Maps.newHashMap();
     private final Map<String, BoxedPlugin<? extends IPlugin>> pluginBoxed = Maps.newHashMap();
     private final ClassLoader thread_classloader = Thread.currentThread().getContextClassLoader();
+    private final PluginLoaderVirtualRef ref = new PluginLoaderVirtualRef(this);
     private Injector injector;
     private ScriptEngine js_engine;
     private State state = State.NON_STARTING;
@@ -66,9 +67,8 @@ public class FBPluginLoader extends PluginLoader {
     }
 
     @Override
-    protected void loadPlugin(String baseLocation) {
+    public void loadPlugin(String baseLocation) {
         Stream<IPlugin> pluginStream = null;
-        PluginLoaderVirtualRef ref = new PluginLoaderVirtualRef(this);
         try {
             Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
             Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
@@ -142,5 +142,9 @@ public class FBPluginLoader extends PluginLoader {
         plugins.put(meta, instance);
         pluginJar.put(meta.id, file);
         return instance;
+    }
+
+    public PluginLoaderVirtualRef getRef() {
+        return ref;
     }
 }

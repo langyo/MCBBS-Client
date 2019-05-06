@@ -22,8 +22,8 @@ public class PluginLoaderVirtualRef extends PluginLoader {
     }
 
     @Override
-    protected void loadPlugin(String baseLoc) {
-
+    public void loadPlugin(String baseLoc) {
+        throw new UnsupportedOperationException();
     }
 
     @Override

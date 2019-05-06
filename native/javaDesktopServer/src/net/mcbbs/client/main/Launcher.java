@@ -1,37 +1,34 @@
+/*
+  Copyright 2019  <langyo.china@gmail.com> and contributors
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
+
 package net.mcbbs.client.main;
 
-import java.io.IOException;
+import net.mcbbs.client.main.client.WSClient;
+import net.mcbbs.client.main.client.plugin.loading.FileBasedPluginLoader;
+import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
+import org.java_websocket.client.WebSocketClient;
 
 /**
  * @author yinyangshi InitAuther97
  */
 public class Launcher {
-    public static void main(String[] args) throws IOException {
-        /*int port = 9233;
-        SocketServer ss = new SocketServer(port, "desktop-");
-        MutableProcessorPipeline<String> mutable = new MutableProcessorPipeline<>();
-        mutable.register(ChainProcessorFactory.newSimpleDataUser(String.class, new SingleArgumentRunnable<String>() {
-            private String string;
-
-            @Override
-            public String argument() {
-                return string;
-            }
-
-            @Override
-            public void setArgument(String arg) {
-                string = arg;
-            }
-
-            @Override
-            public void runWithArg(String arg) {
-                CommandDispatcher.dispatch(arg);
-            }
-        }));
-        ss.addPipe("default", mutable.asImmutable());
-        ss.enablePipe("default");
-        ss.addThrowableProcessor((IExceptionProcessor) Throwable::printStackTrace);
-        new Thread(ss).start();*/
-
+    public static void main(String[] args) {
+        PluginLoader loader = new FileBasedPluginLoader();
+        loader.loadPlugin("../../plugin");
+        WebSocketClient wsclient = new WSClient();
+        wsclient.connect();
     }
 }
