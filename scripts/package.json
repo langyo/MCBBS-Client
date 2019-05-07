@@ -1,7 +1,7 @@
 {
   "name": "mcbbs-client-scripts",
   "version": "0.2.6",
-  "description": "MCBBS 客户端的平台无关程序库支持；现不再向 NPM 上传，请注意",
+  "description": "MCBBS 客户端的平台无关程序库支持",
   "author": "langyo",
   "license": "Apache-2.0",
   "homepage": "https://github.com/langyo/MCBBS-Client",
