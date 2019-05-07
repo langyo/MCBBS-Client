@@ -1,5 +1,5 @@
 {
-  "name": "mcbbs-client-electron",
+  "name": "mcbbs-client-desktop-server",
   "version": "0.2.6",
   "description": "A BBS client for MCBBS.",
   "main": "bundle.js",
