@@ -27,7 +27,10 @@ import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
+import net.mcbbs.client.api.plugin.event.Event;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
+import net.mcbbs.client.api.plugin.mapper.Mapper;
+import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
 import net.mcbbs.client.main.client.plugin.mapper.CobbleMapperManager;
@@ -105,18 +108,21 @@ public class FileBasedPluginLoader extends PluginLoader {
             return;
         }
         state = State.INJECTING_PLUGIN_API;
+
+        state = State.CONSTRUCTING_PLUGIN;
+        pluginStream.forEach(IPlugin::onEnabled);
+        state = State.INJECTING_MAPPING;
+        MappingEvent.Methods event = new MappingEvent.Methods(ref,new CobbleMapperManager(""));
+        Client.EventBusController.post(event, Client.EventBusController.Type.MAIN);
         injector = Guice.createInjector((Module) binder -> {
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).to(CobbleServiceManager.class).in(Scopes.SINGLETON);
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
             binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newFixedThreadPool(5)));
             binder.bind(EventBus.class).annotatedWith(Names.named("net_event_bus")).toInstance(new AsyncEventBus(Executors.newCachedThreadPool()));
             binder.bind(EventBus.class).annotatedWith(Names.named("main_event_bus")).toInstance(new EventBus());
+            binder.bind(MapperManager.class).annotatedWith(Names.named("mapper_manager")).toInstance(event.data());
             binder.requestStaticInjection(Client.class);
         });
-        state = State.CONSTRUCTING_PLUGIN;
-        pluginStream.forEach(IPlugin::onEnabled);
-        state = State.INJECTING_MAPPING;
-        Client.EventBusController.post(new MappingEvent.Methods(ref, new CobbleMapperManager()), Client.EventBusController.Type.MAIN);
     }
 
     @Override
