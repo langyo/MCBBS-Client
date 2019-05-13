@@ -31,7 +31,6 @@ class Thread extends Reflux.Component {
         <Typography variant="h6" color="inherit" className={classes.title}>
           {this.state.title}
         </Typography>
-        <WebviewRender url={"http://www.mcbbs.net/thread-" + this.props.thread + "-1-1.html"} />
         {
           this.state.posts.forEach((n, id) => (
           <Floor

@@ -5,9 +5,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import shortid from "shortid";
 
-import { withStyles } from "@material-ui/core/styles";
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
