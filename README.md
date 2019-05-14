@@ -39,7 +39,7 @@
 
 ```
 git clone https://github.com/langyo/MCBBS-Client.git
-npm i
+npm run autoinstall
 ```
 
 ## 源码结构说明
