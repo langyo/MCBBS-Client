@@ -4,7 +4,6 @@
 
 package-lock.json
 node_modules/
-bundle.js
 
 # yarn
 
@@ -13,70 +12,70 @@ yarn.lock
 
 # --- 针对 scripts 的部分 ---
 
-scripts/node_modules/
+src/node_modules/
 
-# --- 针对 native/electron 的部分 ---
+# --- 针对 native/desktop 的部分 ---
 
-native/electron/node_modules/
-native/electron/scripts/
+native/desktop/node_modules/
+native/desktop/scripts/
 
-native/electron/public/bundle.js
+native/desktop/public/bundle.js
 
-native/electron/.idea
-native/electron/dist
-native/electron/scripts
-native/electron/dist/*
-native/electron/*/.DS_Store
-native/electron/.DS_Store
-native/electron/npm-debug.log
-native/electron/*.swp
-native/electron/local.json
-native/electron/mock/data_origin
-native/electron/mock/data1
-native/electron/mock/data2
-native/electron/mock/dist
-native/electron/mock/test_less
-native/electron/mock/release
+native/desktop/.idea
+native/desktop/dist
+native/desktop/scripts
+native/desktop/dist/*
+native/desktop/*/.DS_Store
+native/desktop/.DS_Store
+native/desktop/npm-debug.log
+native/desktop/*.swp
+native/desktop/local.json
+native/desktop/mock/data_origin
+native/desktop/mock/data1
+native/desktop/mock/data2
+native/desktop/mock/dist
+native/desktop/mock/test_less
+native/desktop/mock/release
 
-# electron 打包文件
+# desktop 打包文件
 
-native/electron/packaged/
+native/desktop/packaged/
 
-# --- 针对 native/ionic 的部分 ---
+# --- 针对 native/mobile 的部分 ---
 
-native/ionic/*~
-native/ionic/*.sw[mnpcod]
-native/ionic/*.log
-native/ionic/*.tmp
-native/ionic/*.tmp.*
-native/ionic/log.txt
-native/ionic/*.sublime-project
-native/ionic/*.sublime-workspace
-native/ionic/.vscode/
-native/ionic/npm-debug.log*
+native/mobile/*~
+native/mobile/*.sw[mnpcod]
+native/mobile/*.log
+native/mobile/*.tmp
+native/mobile/*.tmp.*
+native/mobile/log.txt
+native/mobile/*.sublime-project
+native/mobile/*.sublime-workspace
+native/mobile/.vscode/
+native/mobile/npm-debug.log*
 
-native/ionic/.idea/
-native/ionic/.ionic/
-native/ionic/.sourcemaps/
-native/ionic/.sass-cache/
-native/ionic/.tmp/
-native/ionic/.versions/
-native/ionic/coverage/
-native/ionic/www/
-native/ionic/tmp/
-native/ionic/temp/
-native/ionic/platforms/
-native/ionic/plugins/
-native/ionic/plugins/android.json
-native/ionic/plugins/ios.json
-native/ionic/$RECYCLE.BIN/
+native/mobile/.idea/
+native/mobile/.ionic/
+native/mobile/.sourcemaps/
+native/mobile/.sass-cache/
+native/mobile/.tmp/
+native/mobile/.versions/
+native/mobile/coverage/
+native/mobile/www/
+native/mobile/tmp/
+native/mobile/temp/
+native/mobile/platforms/
+native/mobile/plugins/
+native/mobile/plugins/android.json
+native/mobile/plugins/ios.json
+native/mobile/$RECYCLE.BIN/
 
-native/ionic/node_modules/
-native/ionic/scripts/
+native/mobile/node_modules/
+native/mobile/scripts/
 
-native/ionic/.DS_Store
-native/ionic/Thumbs.db
-native/ionic/UserInterfaceState.xcuserstate
+native/mobile/.DS_Store
+native/mobile/Thumbs.db
+native/mobile/UserInterfaceState.xcuserstate
 
 # --- 针对 native/javaDesktopServer ---
 
@@ -94,4 +93,4 @@ build
 
 # --- 针对 native/nodeServer ---
 
-native/nodeServer/public/bundle.js
+native/desktop/server/public/bundle.js

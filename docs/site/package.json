@@ -1,11 +1,10 @@
 {
   "name": "mcbbs-client-site",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.3.0",
+  "description": "MCBBS 客户端下载站点页面前端",
   "scripts": {
-    "watch": "watchify ./localScripts/localViewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
-    "build": "browserify ./localScripts/localViewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
+    "watch": "watchify ./src/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
+    "build": "browserify ./src/viewManager/mainViewRender.js -o public/js/bundle.js -t babelify",
     "test": "jest --watch"
   },
   "author": "langyo",

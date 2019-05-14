@@ -1,33 +1,48 @@
 {
-  "name": "mcbbs-client",
+  "name": "mcbbs-client-scripts",
+  "version": "0.3.0",
+  "description": "MCBBS 客户端",
   "author": "langyo",
-  "version": "0.2.6",
-  "description": "A BBS client for MCBBS.",
+  "main": "index.js",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/langyo/MCBBS-Client/issues"
-  },
   "homepage": "https://github.com/langyo/MCBBS-Client",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/langyo/MCBBS-Client.git"
-  },
   "scripts": {
-    "electron:start": "cd native/electron/ && npm run start",
-    "electron:watch": "cd native/electron/ && npm run watch",
-    "electron:build": "cd native/electron/ && npm run build",
-    "electron:package": "cd native/electron/ && npm run package",
-    "electron:package:windows": "cd native/electron/ && npm run package:windows",
-    "electron:package:mac": "cd native/electron/ && npm run package:mac",
-    "electron:test": "cd native/electron/ && npm run test",
-    "ionic:ng": "cd native/ionic/ && npm run ng",
-    "ionic:start": "cd native/ionic/ && npm run start",
-    "ionic:build": "cd native/ionic/ && npm run build",
-    "ionic:test": "cd native/ionic/ && npm run test",
-    "ionic:lint": "cd native/ionic/ && npm run lint",
-    "ionic:e2e": "cd native/ionic/ && npm run e2e",
-    "install": "cd native/electron/ && npm i && cd ../../native/ionic && npm i && cd ../../scripts && npm i",
-    "install:cnpm": "cd native/electron/ && cnpm i && cd ../../native/ionic && cnpm i && cd ../../scripts && cnpm i",
-    "install:fix": "cd native/electron/ && npm audit fix --force && cd ../../native/ionic && npm audit fix --force && cd ../../scripts && npm audit fix --force"
+    "preinstall": "echo \"安装进程： 准备 yarn 安装器\" && npm i yarn -g && echo \"安装进程： 解决平台无关程序依赖\" &&  yarn",
+    "install": "npm run install:desktop && npm run install:mobile",
+    "install:desktop": "echo \"安装进程： 解决桌面端依赖 - Electron 本体部分\" && cd native/desktop && yarn && npm run install:desktop:nodeServer && npm run install:desktop:javaServer && cd ../..",
+    "install:desktop:nodeServer": "echo \"安装进程： 解决桌面端依赖 - Node 服务端部分\" && cd server && yarn && cd ..",
+    "install:desktop:javaServer": "echo \"安装进程： 解决桌面端依赖 - Java 服务端部分\" && echo 暂不支持以 Node 解决 Java 依赖，请自行安装 Gardle、JRE 与 IDEA",
+    "install:mobile": "echo \"安装进程： 解决移动端依赖 - Ionic 本体部分\" && cd native/mobile && yarn && cd ../..",
+    "install:shower": "echo \"安装进程： 解决客户端下载站点前端 \" && cd docs/site && yarn && cd ../.."
+  },
+  "dependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^3.6.1",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "classnames": "^2.2.6",
+    "firebase": "^5.6.0",
+    "jsdom": "^13.2.0",
+    "lowdb": "^1.0.0",
+    "mdi-material-ui": "^5.8.0",
+    "npm-run-all": "^4.1.5",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-color": "^2.17.2",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^5.0.0",
+    "react-swipeable-views": "^0.13.0",
+    "react-swipeable-views-utils": "^0.13.0",
+    "reflux": "^6.4.1",
+    "regenerator-runtime": "^0.13.1",
+    "shortid": "^2.2.14",
+    "three": "^0.104.0"
+  },
+  "devDependencies": {
+    "babelify": "^10.0.0"
   }
 }

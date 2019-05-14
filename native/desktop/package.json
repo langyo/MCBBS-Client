@@ -1,14 +1,14 @@
 {
   "name": "mcbbs-client-electron",
-  "version": "0.2.6",
-  "description": "A BBS client for MCBBS.",
+  "version": "0.3.0",
+  "description": "MCBBS 客户端",
   "main": "index.js",
   "scripts": {
     "start": "electron ./index.js",
     "watch": "concurrently \"npm run watch:code\" \"npm run watch:server\"",
-    "watch:code": "watchify ../../scripts/srcJs/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
+    "watch:code": "watchify ../../src/viewManager/mainViewRender.js -t babelify -o public/bundle.js --release --verbose",
     "watch:server": "http-server -p 9232",
-    "build": "browserify ../../scripts/srcJs/viewManager/mainViewRender.js -o public/bundle.js -t babelify",
+    "build": "browserify ../../src/viewManager/mainViewRender.js -o public/bundle.js -t babelify",
     "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
     "package:mac": "electron-builder build --mac --config electron-builder.json --publish never",

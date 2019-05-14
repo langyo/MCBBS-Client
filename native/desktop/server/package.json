@@ -1,7 +1,7 @@
 {
   "name": "mcbbs-client-desktop-server",
-  "version": "0.2.6",
-  "description": "A BBS client for MCBBS.",
+  "version": "0.3.0",
+  "description": "MCBBS 客户端",
   "main": "bundle.js",
   "scripts": {
     "start": "node ./bundle.js",
