@@ -1,5 +1,5 @@
 /*
-  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,17 +14,8 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client.main.client.game.launch;
 
-public class AuthenticationException extends Exception {
-    public AuthenticationException(){}
-    public AuthenticationException(String message){
-        super(message);
-    }
-    public AuthenticationException(String message, Throwable cause) {
-        super(message,cause);
-    }
-    public AuthenticationException(Throwable cause){
-        super(cause);
-    }
+public class LaunchOffline implements Launch{
+    
 }

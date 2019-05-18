@@ -16,5 +16,13 @@
 
 package net.mcbbs.client.main.client.game;
 
+import javax.annotation.Nullable;
+import java.nio.file.Path;
+
 public interface IGameRoot {
+    Path assetsIndex();
+    Path libraryIndex();
+    @Nullable
+    Path nativeIndex();
+    Path gameJar();
 }

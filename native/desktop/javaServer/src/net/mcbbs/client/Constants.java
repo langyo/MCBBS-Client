@@ -14,17 +14,16 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client;
 
-public class AuthenticationException extends Exception {
-    public AuthenticationException(){}
-    public AuthenticationException(String message){
-        super(message);
-    }
-    public AuthenticationException(String message, Throwable cause) {
-        super(message,cause);
-    }
-    public AuthenticationException(Throwable cause){
-        super(cause);
-    }
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
+
+public interface Constants {
+    Gson DEFAULT_GSON = new GsonBuilder()
+            .serializeNulls()
+            .setPrettyPrinting()
+            .create();
+    JsonParser DEFAULT_PARSER = new JsonParser();
 }

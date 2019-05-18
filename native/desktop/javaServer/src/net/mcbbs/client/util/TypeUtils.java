@@ -14,24 +14,22 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client.util;
 
 import java.util.UUID;
+import java.util.regex.Pattern;
 
-/**
- * Entity class for logging-in information
- * @author InitAuther97
- */
-public interface Account {
+public enum TypeUtils {
+    UUID(){
+        public final Pattern JSON_PATTERN = Pattern.compile("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})");
+        public String asToken(UUID uuid){
+            return uuid.toString().replace("-","");
+        }
+        public UUID asUUID(String tokenized){
+            if(Pattern.matches(tokenized,"(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})"))
+            return java.util.UUID.fromString(tokenized.replaceFirst("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5"));
+            return null;
+        }
+    };
 
-    String account();
-
-    UUID uuid();
-
-    /**
-     * Authenticate with info in Account.
-     * @return Authentication result.
-     * @throws AuthenticationException when Authenticating failed.
-     */
-    AuthenticationInfo authenticate() throws AuthenticationException;
 }
