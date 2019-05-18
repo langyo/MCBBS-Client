@@ -14,7 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.launch;
+package net.mcbbs.client.main.client.game;
 
 public interface IGameRoot {
 }
