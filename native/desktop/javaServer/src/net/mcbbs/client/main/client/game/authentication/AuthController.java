@@ -42,7 +42,7 @@ public enum AuthController implements IAuthController{
             return parsed;
         }
         @Override
-        public JsonObject authenticate(String name,String version,String username,String password,String clientToken,boolean requestUser) throws AuthenticationException {
+        public JsonObject authenticate(String name,int version,String username,String password,String clientToken,boolean requestUser) throws AuthenticationException {
             try {
                 StringWriter stringWriter = new StringWriter();
                 JsonWriter jsonWriter = new JsonWriter(stringWriter);
@@ -153,7 +153,7 @@ public enum AuthController implements IAuthController{
     },
     AUTHLIB_AUTH_CONTROLLER(""){
         @Override
-        public JsonObject authenticate(String name, String version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
+        public JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
             return null;
         }
 
@@ -179,7 +179,7 @@ public enum AuthController implements IAuthController{
     },
     OFFLINE_AUTH_CONTROLLER(""){
         @Override
-        public JsonObject authenticate(String name, String version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
+        public JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
             return null;
         }
 
