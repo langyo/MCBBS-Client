@@ -16,6 +16,6 @@
 
 package net.mcbbs.client.main.client.game.launch;
 
-public class LaunchOffline implements Launch{
-    
+public class LaunchOffline implements Launch {
+
 }

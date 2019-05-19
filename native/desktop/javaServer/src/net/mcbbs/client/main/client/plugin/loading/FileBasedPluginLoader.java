@@ -27,9 +27,7 @@ import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
-import net.mcbbs.client.api.plugin.event.Event;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
-import net.mcbbs.client.api.plugin.mapper.Mapper;
 import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
@@ -112,7 +110,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         state = State.CONSTRUCTING_PLUGIN;
         pluginStream.forEach(IPlugin::onEnabled);
         state = State.INJECTING_MAPPING;
-        MappingEvent.Methods event = new MappingEvent.Methods(ref,new CobbleMapperManager(""));
+        MappingEvent.Methods event = new MappingEvent.Methods(ref, new CobbleMapperManager(""));
         Client.EventBusController.post(event, Client.EventBusController.Type.MAIN);
         injector = Guice.createInjector((Module) binder -> {
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).to(CobbleServiceManager.class).in(Scopes.SINGLETON);

@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 @Deprecated
 public class Main extends Application {
     public static final Main INSTANCE = new Main();

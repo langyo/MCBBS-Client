@@ -25,14 +25,19 @@ import javax.annotation.Nullable;
 public interface MapperManager extends Cloneable {
     @Nonnull
     String id();
+
     @Nullable
     <I extends IPlugin, T> Mapper<T> createMapper(Class<I> plugin, String name, InvocationHandlerFactory factory);
+
     @Nullable
     <I extends IPlugin, T> Mapper<T> getMapper(Class<I> plugin, String name);
+
     @Nonnull
     MapperManager createChildManager(String id);
+
     @Nullable
     MapperManager getChildManager(String id);
+
     @Nullable
     MapperManager getParent();
 }

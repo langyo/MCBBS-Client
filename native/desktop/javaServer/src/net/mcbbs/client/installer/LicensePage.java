@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Supplier;
+
 @Deprecated
 public class LicensePage {
     public static final int FAQ = ((Supplier<Integer>) () -> {

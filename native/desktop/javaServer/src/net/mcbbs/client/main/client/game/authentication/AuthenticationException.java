@@ -17,14 +17,18 @@
 package net.mcbbs.client.main.client.game.authentication;
 
 public class AuthenticationException extends Exception {
-    public AuthenticationException(){}
-    public AuthenticationException(String message){
+    public AuthenticationException() {
+    }
+
+    public AuthenticationException(String message) {
         super(message);
     }
+
     public AuthenticationException(String message, Throwable cause) {
-        super(message,cause);
+        super(message, cause);
     }
-    public AuthenticationException(Throwable cause){
+
+    public AuthenticationException(Throwable cause) {
         super(cause);
     }
 }

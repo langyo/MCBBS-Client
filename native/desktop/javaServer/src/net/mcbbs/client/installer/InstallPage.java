@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 @Deprecated
 public class InstallPage {
     @FXML // ResourceBundle that was given to the FXMLLoader

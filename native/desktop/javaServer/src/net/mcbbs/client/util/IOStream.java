@@ -87,7 +87,7 @@ public final class IOStream implements Closeable, Flushable {
         checkAccess();
         checkEOF();
         //noinspection StatementWithEmptyBody
-        IOUtils.writeAll(out,IOUtils.readAll(in));
+        IOUtils.writeAll(out, IOUtils.readAll(in));
     }
 
     /**

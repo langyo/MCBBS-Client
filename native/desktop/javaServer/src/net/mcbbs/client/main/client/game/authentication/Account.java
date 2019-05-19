@@ -20,6 +20,7 @@ import java.util.UUID;
 
 /**
  * Entity class for logging-in information
+ *
  * @author InitAuther97
  */
 public interface Account {
@@ -30,6 +31,7 @@ public interface Account {
 
     /**
      * Authenticate with info in Account.
+     *
      * @return Authentication result.
      * @throws AuthenticationException when Authenticating failed.
      */

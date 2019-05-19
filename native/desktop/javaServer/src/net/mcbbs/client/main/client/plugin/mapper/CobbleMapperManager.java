@@ -37,13 +37,16 @@ public class CobbleMapperManager implements MapperManager {
     private CobbleMapperManager parent;
     private List<MapperManager> childManagers = Lists.newArrayList();
     private Multimap<Class<?>, Mapper<?>> mappers = MultimapBuilder.hashKeys().hashSetValues(1).build();
-    public CobbleMapperManager(@Nonnull String id){
-        this.id=id;
+
+    public CobbleMapperManager(@Nonnull String id) {
+        this.id = id;
     }
-    public CobbleMapperManager(PluginLoaderVirtualRef verifier,CobbleMapperManager parent,String id) throws IllegalArgumentException{
-        if(Objects.isNull(verifier))throw new IllegalArgumentException("verifier == null !!!");
+
+    public CobbleMapperManager(PluginLoaderVirtualRef verifier, CobbleMapperManager parent, String id) throws IllegalArgumentException {
+        if (Objects.isNull(verifier)) throw new IllegalArgumentException("verifier == null !!!");
 
     }
+
     @Nonnull
     @Override
     public String id() {
@@ -54,10 +57,11 @@ public class CobbleMapperManager implements MapperManager {
     @Override
     public <I extends IPlugin, T> Mapper<T> createMapper(Class<I> plugin, String name, InvocationHandlerFactory factory) {
         Mapper<T> mapper;
-        if(parent!=null){
-            if((mapper = parent.createMapper(plugin, name, factory))==null||!mappers.put(plugin,mapper))return null;
-        }else{
-            mappers.put(plugin,(mapper=CobbleMapper.createInstance(factory, name)));
+        if (parent != null) {
+            if ((mapper = parent.createMapper(plugin, name, factory)) == null || !mappers.put(plugin, mapper))
+                return null;
+        } else {
+            mappers.put(plugin, (mapper = CobbleMapper.createInstance(factory, name)));
         }
         return mapper;
     }
@@ -66,7 +70,7 @@ public class CobbleMapperManager implements MapperManager {
     public <I extends IPlugin, T> Mapper<T> getMapper(Class<I> plugin, String name) {
         //noinspection unchecked
         Mapper<T> result = (Mapper<T>) mappers.get(plugin).stream().filter(mapper -> mapper.name().contentEquals(name)).findAny().orElse(null);
-        if(parent!=null&&result==null)result = parent.getMapper(plugin,name);
+        if (parent != null && result == null) result = parent.getMapper(plugin, name);
         return result;
     }
 
@@ -81,7 +85,7 @@ public class CobbleMapperManager implements MapperManager {
     @Nullable
     @Override
     public MapperManager getChildManager(String id) {
-        return childManagers.stream().filter(manager->manager.id().contentEquals(id())).findFirst().orElse(null);
+        return childManagers.stream().filter(manager -> manager.id().contentEquals(id())).findFirst().orElse(null);
     }
 
     @Nullable
@@ -91,15 +95,15 @@ public class CobbleMapperManager implements MapperManager {
     }
 
     @Override
-    public int hashCode(){
-        return id.hashCode()+((parent==null)?0:parent.hashCode())*(childManagers.size()/mappers.size());
+    public int hashCode() {
+        return id.hashCode() + ((parent == null) ? 0 : parent.hashCode()) * (childManagers.size() / mappers.size());
     }
 
     @Override
-    public boolean equals(Object o){
-        if(Objects.nonNull(o)){
-            if(o instanceof CobbleMapperManager){
-                return o.hashCode()==hashCode()&&id.contentEquals(((CobbleMapperManager) o).id);
+    public boolean equals(Object o) {
+        if (Objects.nonNull(o)) {
+            if (o instanceof CobbleMapperManager) {
+                return o.hashCode() == hashCode() && id.contentEquals(((CobbleMapperManager) o).id);
             }
         }
         return false;

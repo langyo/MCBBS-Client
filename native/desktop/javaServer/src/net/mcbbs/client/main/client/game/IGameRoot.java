@@ -21,8 +21,11 @@ import java.nio.file.Path;
 
 public interface IGameRoot {
     Path assetsIndex();
+
     Path libraryIndex();
+
     @Nullable
     Path nativeIndex();
+
     Path gameJar();
 }

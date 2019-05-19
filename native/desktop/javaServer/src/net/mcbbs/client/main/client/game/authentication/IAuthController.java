@@ -19,9 +19,13 @@ package net.mcbbs.client.main.client.game.authentication;
 import com.google.gson.JsonObject;
 
 public interface IAuthController {
-    JsonObject authenticate(String name,int version,String username,String password,String clientToken,boolean requestUser) throws AuthenticationException;
-    JsonObject refresh(String accessToken,String clientToken,String id,String name,boolean requestUser) throws AuthenticationException;
-    boolean validate(String accessToken,String clientToken) throws AuthenticationException;
-    void signout(String username,String password) throws AuthenticationException;
-    void invalidate(String accessToken,String clientToken) throws AuthenticationException;
+    JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException;
+
+    JsonObject refresh(String accessToken, String clientToken, String id, String name, boolean requestUser) throws AuthenticationException;
+
+    boolean validate(String accessToken, String clientToken) throws AuthenticationException;
+
+    void signout(String username, String password) throws AuthenticationException;
+
+    void invalidate(String accessToken, String clientToken) throws AuthenticationException;
 }
