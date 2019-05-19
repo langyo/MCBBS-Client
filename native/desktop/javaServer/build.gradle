@@ -41,18 +41,21 @@ task fixerJar(type: Jar) {
     from sourceSets.main.output
     include 'net/mcbbs/client/fixer/**'
     include 'assets/mcbbs_client/fixer/**'
+    include 'net/mcbbs/client/Constants'
 }
 task launcherJar(type: Jar) {
     classifier = 'launcher'
     from sourceSets.main.output
     include 'net/mcbbs/client/launcher/**'
     include 'assets/mcbbs_client/launcher/**'
+    include 'net/mcbbs/client/Constants'
 }
 task mainJar(type: Jar) {
     classifier = 'installer'
     from sourceSets.main.output
     include 'net/mcbbs/client/main/**'
     include 'assets/mcbbs_client/main/**'
+    include 'net/mcbbs/client/Constants'
 }
 
 artifacts {

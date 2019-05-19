@@ -22,7 +22,6 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 
 public class WSClient extends WebSocketClient {
-    private final WSSocketReceiver receiver = new WSSocketReceiver();
 
     public WSClient() {
         super(URI.create("localhost:2033"));

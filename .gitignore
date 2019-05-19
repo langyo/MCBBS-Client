@@ -1,4 +1,4 @@
-# --- 全局生效部分 ---
+﻿# --- 全局生效部分 ---
 
 # Node.js
 
@@ -90,6 +90,8 @@ build
 *.iml
 
 *.class
+
+gradle_cache
 
 # --- 针对 native/nodeServer ---
 
