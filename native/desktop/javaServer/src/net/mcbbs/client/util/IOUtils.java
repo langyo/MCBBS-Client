@@ -3,13 +3,15 @@ package net.mcbbs.client.util;
 import com.google.gson.JsonElement;
 import net.mcbbs.client.Constants;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author InitAuther97 yinyangshi Yaossg
@@ -22,10 +24,10 @@ public final class IOUtils {
      * @return A connection to the specified address.
      * @throws IOException if giving a invalid path or failed to open a connection or connection timed out.
      */
-    public static URLConnection connect(String path,String method) throws IOException {
+    public static URLConnection connect(String path, String method) throws IOException {
         URL url = new URL(path);
         URLConnection connection = url.openConnection();
-        if(connection instanceof HttpURLConnection){
+        if (connection instanceof HttpURLConnection) {
             ((HttpURLConnection) connection).setRequestMethod(method);
         }
         connection.setUseCaches(false);
@@ -44,7 +46,7 @@ public final class IOUtils {
      * @throws IOException if giving a invalid path or failed to open a connection or a stream or connection timed out.
      */
     public static InputStream from(String url) throws IOException {
-        return connect(url,"").getInputStream();
+        return connect(url, "").getInputStream();
     }
 
     /**
@@ -55,7 +57,7 @@ public final class IOUtils {
      * @throws IOException if giving a invalid path or failed to open a connection or a stream or connection timed out.
      */
     public static OutputStream to(String url) throws IOException {
-        return connect(url,"").getOutputStream();
+        return connect(url, "").getOutputStream();
     }
 
     /**
@@ -93,7 +95,6 @@ public final class IOUtils {
         //max temp: 32kb
         byte[] temp = new byte[32 * 1024];
         int len;
-        for(int i = 0;i<=3;i++)//Try for three times to make sure that no data is still in the stream.
         while (-1 != (len = in.read(temp))) {
             bytesOut.write(temp, 0, len);
         }
@@ -122,10 +123,8 @@ public final class IOUtils {
      * @throws IOException if failed to write data or the connection timed out
      */
     public static boolean writeAll(OutputStream outputStream, byte[] data) throws IOException {
-        try (Closeable ignore = outputStream) {
-            outputStream.write(data);
-            outputStream.flush();
-        }
+        outputStream.write(data);
+        outputStream.flush();
         return true;
     }
 
@@ -140,14 +139,14 @@ public final class IOUtils {
         return new IOStream(in, out);
     }
 
-    public static<T> T doGET(String url,Class<T> type) throws IOException {
-        URLConnection connection = connect(url,"GET");
+    public static <T> T doGET(String url, Class<T> type) throws IOException {
+        URLConnection connection = connect(url, "GET");
         String result = new String(readAll(connection.getInputStream()), Charset.forName("UTF-8"));
-        if(type.isAssignableFrom(String.class)){
+        if (type.isAssignableFrom(String.class)) {
             //stupid,shut up!
             //noinspection unchecked
-            return (T)result;
-        }else if(type.isAssignableFrom(JsonElement.class)){
+            return (T) result;
+        } else if (type.isAssignableFrom(JsonElement.class)) {
             //stupid,shut up!
             //noinspection unchecked
             return (T) Constants.DEFAULT_PARSER.parse(result);
@@ -155,30 +154,31 @@ public final class IOUtils {
         throw new IOException("Unexpected data type found!");
     }
 
-    public static<T> T doPOST(String url, Map<String,String> params, String contentType, Class<T> type) throws IOException {
+    public static <T> T doPOST(String url, Map<String, String> params, String contentType, Class<T> type) throws IOException {
         StringBuilder sb = new StringBuilder();
         if (params != null) {
             for (Map.Entry<String, String> e : params.entrySet())
                 sb.append(e.getKey()).append("=").append(e.getValue()).append("&");
             sb.deleteCharAt(sb.length() - 1);
         }
-        return doPOST(url,sb.toString(),contentType,type);
+        return doPOST(url, sb.toString(), contentType, type);
     }
-    public static<T> T doPOST(String url, String params, String contentType, Class<T> type) throws IOException {
-        URLConnection connection = connect(url,"POST");
+
+    public static <T> T doPOST(String url, String params, String contentType, Class<T> type) throws IOException {
+        URLConnection connection = connect(url, "POST");
         byte[] bytes = params.getBytes(Charset.forName("UTF-8"));
         connection.setRequestProperty("Content-Type", contentType + "; charset=utf-8");
         connection.setRequestProperty("Content-Length", "" + bytes.length);
-        try(OutputStream os = connection.getOutputStream()){
-            writeAll(os,bytes);
+        try (OutputStream os = connection.getOutputStream()) {
+            writeAll(os, bytes);
         }
         String result = new String(readAll(connection.getInputStream()), Charset.forName("UTF-8"));
-        if(result.isEmpty() || result.replaceAll(" ", "").isEmpty())result="{}";
-        if(type.isAssignableFrom(String.class)){
+        if (result.isEmpty() || result.replaceAll(" ", "").isEmpty()) result = "{}";
+        if (type.isAssignableFrom(String.class)) {
             //stupid,shut up!
             //noinspection unchecked
-            return (T)result;
-        }else if(type.isAssignableFrom(JsonElement.class)){
+            return (T) result;
+        } else if (type.isAssignableFrom(JsonElement.class)) {
             //stupid,shut up!
             //noinspection unchecked
             return (T) Constants.DEFAULT_PARSER.parse(result);
