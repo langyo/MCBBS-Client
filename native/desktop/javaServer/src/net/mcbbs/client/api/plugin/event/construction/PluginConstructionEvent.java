@@ -16,7 +16,9 @@
 
 package net.mcbbs.client.api.plugin.event.construction;
 
+import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.event.Event;
+import net.mcbbs.client.api.plugin.service.ServiceManager;
 import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
 import net.mcbbs.client.main.client.plugin.loading.PluginLoaderVirtualRef;
 
@@ -33,7 +35,7 @@ public abstract class PluginConstructionEvent implements Event {
     public PluginLoader source() {
         return source;
     }
-    /*public static class ServiceMapping extends PluginConstructionEvent{
+    public static class ServiceMapping extends PluginConstructionEvent{
         private final ServiceManager manager;
         public ServiceMapping(PluginLoaderVirtualRef source, @Nonnull ServiceManager serviceManager) {
             super(source);
@@ -48,5 +50,5 @@ public abstract class PluginConstructionEvent implements Event {
         public <T>void provides(IPlugin plugin, Class<T> serviceClass, T serviceImpl){
             manager.provides(plugin,serviceClass,serviceImpl);
         }
-    }*/
+    }
 }

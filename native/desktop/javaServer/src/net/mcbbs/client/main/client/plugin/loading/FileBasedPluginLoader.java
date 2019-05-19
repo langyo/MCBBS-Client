@@ -28,6 +28,7 @@ import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
+import net.mcbbs.client.api.plugin.event.construction.PluginConstructionEvent;
 import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
@@ -71,7 +72,7 @@ public class FileBasedPluginLoader extends PluginLoader {
 
     @Override
     public JarFile getPluginJar(String pluginId) {
-        if (state.compareTo(State.CONSTRUCTING_PLUGIN) < 0)
+        if (state.compareTo(State.CONSTRUCTION_PLUGIN) < 0)
             throw new IllegalStateException("Trying to get a plugin jar before loading the plugin jars!");
         return pluginJar.get(pluginId);
     }
@@ -90,6 +91,7 @@ public class FileBasedPluginLoader extends PluginLoader {
             Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
             Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
             initializeNashorn();
+
             state = State.LOADING_FILE;
             pluginStream = files.filter(File::isFile)
                     .filter(file -> file.toPath().getFileName().endsWith(".jar"))
@@ -105,15 +107,22 @@ public class FileBasedPluginLoader extends PluginLoader {
             e.printStackTrace();
             return;
         }
-        state = State.INJECTING_PLUGIN_API;
 
-        state = State.CONSTRUCTING_PLUGIN;
+        state = State.CONSTRUCTION_PLUGIN;
         pluginStream.forEach(IPlugin::onEnabled);
-        state = State.INJECTING_MAPPING;
-        MappingEvent.Methods event = new MappingEvent.Methods(ref, new CobbleMapperManager(""));
-        Client.EventBusController.post(event, Client.EventBusController.Type.MAIN);
+
+        state = State.COLLECTING_MAPPING;
+        MappingEvent.Methods event = Client.EventBusController.post(
+                new MappingEvent.Methods(ref, new CobbleMapperManager("")),
+                Client.EventBusController.Type.MAIN
+        );
+
+        state = State.COLLECTING_SERVICE;
+        PluginConstructionEvent.ServiceMapping mapping_event = new PluginConstructionEvent.ServiceMapping(getRef(),new CobbleServiceManager());
+
+        state = State.INJECTING_PLUGIN_API;
         injector = Guice.createInjector((Module) binder -> {
-            binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).to(CobbleServiceManager.class).in(Scopes.SINGLETON);
+            binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).toInstance(mapping_event.data());
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
             binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newFixedThreadPool(5)));
             binder.bind(EventBus.class).annotatedWith(Names.named("net_event_bus")).toInstance(new AsyncEventBus(Executors.newCachedThreadPool()));
