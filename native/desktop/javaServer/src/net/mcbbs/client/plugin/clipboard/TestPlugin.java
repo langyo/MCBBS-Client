@@ -41,10 +41,12 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
 
     @Plugin.SubscribeEvent(MappingEvent.Methods.class)
     public void onMapMethod(MappingEvent.Methods event) throws NoSuchMethodException {
-        event.<TestPlugin, Util>registerMapper(TestPlugin.class, "testplugin_mapper", InvocationHandlerFactory.createDefault())
+        Util.INSTANCE=event.<TestPlugin, Util>registerMapper(TestPlugin.class, "testplugin_mapper", InvocationHandlerFactory.createDefault())
                 .mapMethod(Util.class.getDeclaredMethod("setClipboardContent", String.class), getClass().getDeclaredMethod("set", String.class), Function.identity(), this)
-                .mapMethod(Util.class.getDeclaredMethod("getClipboardContent", String.class), getClass().getDeclaredMethod("get", String.class), Function.identity(), this)
+                .mapMethod(Util.class.getDeclaredMethod("getClipboardContent"), getClass().getDeclaredMethod("get", String.class), Function.identity(), this)
                 .mapped(Util.class);
+
+        System.out.println(Util.INSTANCE.getClipboardContent());
     }
 
     @Override
@@ -68,11 +70,14 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
     }
 
     public static final class Util {
-        public static final Util INSTANCE = new Util();
-
-        private Util() {
+        private static Util INSTANCE = new Util();
+        private static boolean initialized = false;
+        private static void init(Util INSTANCE){
+            Util.INSTANCE=INSTANCE;
         }
-
+        public static final Util get(){
+            return INSTANCE;
+        }
         public String setClipboardContent(String str) {
             return "";
         }
