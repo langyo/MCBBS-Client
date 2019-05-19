@@ -4,6 +4,7 @@ import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.Plugin;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
+import net.mcbbs.client.api.plugin.event.construction.PluginConstructionEvent;
 import net.mcbbs.client.api.plugin.service.Service;
 import net.mcbbs.client.util.InvocationHandlerFactory;
 
@@ -40,7 +41,7 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
     }
 
     @Plugin.SubscribeEvent(MappingEvent.Methods.class)
-    public void onMapMethod(MappingEvent.Methods event) throws NoSuchMethodException {
+    public void onMappingMethod(MappingEvent.Methods event) throws NoSuchMethodException {
         Util.INSTANCE=event.<TestPlugin, Util>registerMapper(TestPlugin.class, "testplugin_mapper", InvocationHandlerFactory.createDefault())
                 .mapMethod(Util.class.getDeclaredMethod("setClipboardContent", String.class), getClass().getDeclaredMethod("set", String.class), Function.identity(), this)
                 .mapMethod(Util.class.getDeclaredMethod("getClipboardContent"), getClass().getDeclaredMethod("get", String.class), Function.identity(), this)
@@ -49,9 +50,14 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
         System.out.println(Util.INSTANCE.getClipboardContent());
     }
 
+    @Plugin.SubscribeEvent(PluginConstructionEvent.ServiceMapping.class)
+    public void onServiceMapping(PluginConstructionEvent.ServiceMapping event){
+        event.provides(this, TestPlugin.class, this);
+    }
+
+
     @Override
     public void onEnabled() {
-        Client.getServiceManager().provides(this, TestPlugin.class, this);
         //Client.getPlugin("clipboard").getCommand()
     }
 

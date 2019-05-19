@@ -25,10 +25,15 @@ import org.java_websocket.client.WebSocketClient;
  * @author yinyangshi InitAuther97
  */
 public class Launcher {
+    final static PluginLoader loader = new FileBasedPluginLoader();
     public static void main(String[] args) {
         PluginLoader loader = new FileBasedPluginLoader();
         loader.loadPlugin("../../plugin");
         WebSocketClient wsclient = new WSClient();
         wsclient.connect();
+    }
+
+    public static PluginLoader getLoader() {
+        return loader;
     }
 }

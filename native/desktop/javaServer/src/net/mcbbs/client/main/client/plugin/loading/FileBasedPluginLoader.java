@@ -22,7 +22,6 @@ import com.google.common.eventbus.EventBus;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
@@ -84,9 +83,10 @@ public class FileBasedPluginLoader extends PluginLoader {
         return pluginBoxed.get(pluginId);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
     public void loadPlugin(String baseLocation) {
-        Stream<IPlugin> pluginStream = null;
+        Stream<IPlugin> pluginStream;
         try {
             Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
             Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
@@ -103,6 +103,7 @@ public class FileBasedPluginLoader extends PluginLoader {
                         }
                         return null;
                     }).filter(Objects::nonNull);
+            plugin.forEach((meta,plug)->pluginBoxed.put(meta.id,new BoxedPlugin<>(plug,meta)));
         } catch (IOException | ScriptException e) {
             e.printStackTrace();
             return;
@@ -124,6 +125,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         injector = Guice.createInjector((Module) binder -> {
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).toInstance(mapping_event.data());
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
+
             binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newFixedThreadPool(5)));
             binder.bind(EventBus.class).annotatedWith(Names.named("net_event_bus")).toInstance(new AsyncEventBus(Executors.newCachedThreadPool()));
             binder.bind(EventBus.class).annotatedWith(Names.named("main_event_bus")).toInstance(new EventBus());
@@ -135,6 +137,11 @@ public class FileBasedPluginLoader extends PluginLoader {
     @Override
     public State getState() {
         return state;
+    }
+
+    @Override
+    public boolean isPluginLoaded(IPlugin plugin) {
+        return pluginBoxed.values().stream().map(BoxedPlugin::getPlugin).anyMatch(plug-> plug.equals(plugin));
     }
 
     public Injector getInjector() {
@@ -159,6 +166,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         } else if (ucl.getResource("plugin.yml") != null) {
             InputStream is = ucl.getResourceAsStream("plugin.yml");
             Yaml yaml = new Yaml();
+            //noinspection unchecked
             Map<String, Object> bindings = yaml.loadAs(is, Map.class);
             meta = PluginMetadata.deserializeFrom(this, bindings);
             mainClassLocation = (String) bindings.get("plugin");

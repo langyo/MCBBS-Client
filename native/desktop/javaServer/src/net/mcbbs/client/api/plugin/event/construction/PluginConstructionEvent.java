@@ -35,7 +35,7 @@ public abstract class PluginConstructionEvent implements Event {
     public PluginLoader source() {
         return source;
     }
-    public static class ServiceMapping extends PluginConstructionEvent{
+    public static class ServiceMapping extends PluginConstructionEvent {
         private final ServiceManager manager;
         public ServiceMapping(PluginLoaderVirtualRef source, @Nonnull ServiceManager serviceManager) {
             super(source);
@@ -49,6 +49,17 @@ public abstract class PluginConstructionEvent implements Event {
 
         public <T>void provides(IPlugin plugin, Class<T> serviceClass, T serviceImpl){
             manager.provides(plugin,serviceClass,serviceImpl);
+        }
+    }
+    public static class CommandRegistring extends PluginConstructionEvent {
+
+        public CommandRegistring(@Nonnull PluginLoaderVirtualRef source) {
+            super(source);
+        }
+
+        @Override
+        public Object data() {
+            return null;
         }
     }
 }
