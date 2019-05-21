@@ -14,8 +14,29 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.launch;
+package net.mcbbs.client.api.launch;
 
-public interface Launch {
-    ProcessBuilder generateLaunchCommand();
+import net.mcbbs.client.main.client.game.launch.Launcher;
+
+import javax.annotation.Nonnull;
+
+public abstract class LaunchWrapper implements Launcher {
+
+    private final Launcher launcher;
+    private final Class<? extends Tweaker> tweakClass;
+
+    public LaunchWrapper(@Nonnull Launcher launcher,Class<? extends Tweaker> tweakClass){
+        this.launcher=launcher;
+        this.tweakClass=tweakClass;
+    }
+
+    @Override
+    public ProcessBuilder generateLaunchCommand() {
+        return null;
+    }
+
+    @Override
+    public Process launch() {
+        return null;
+    }
 }

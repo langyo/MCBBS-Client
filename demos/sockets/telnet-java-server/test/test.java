@@ -6,7 +6,7 @@ public class test
 {
     public static void main(String[] args)
     {
-        System.out.println("Launch!");
+        System.out.println("Launcher!");
         try
         {
             ServerSocket s = new ServerSocket(9233);

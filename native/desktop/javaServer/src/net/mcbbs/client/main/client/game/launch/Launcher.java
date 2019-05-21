@@ -16,5 +16,7 @@
 
 package net.mcbbs.client.main.client.game.launch;
 
-public class LaunchOnline implements Launch {
+public interface Launcher {
+    ProcessBuilder generateLaunchCommand();
+    Process launch();
 }
