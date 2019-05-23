@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./bundle.js",
     "build": "babel ./index.js -o ./bundle.js",
+    "watch": "watchify ./index.js -t babelify -o ./bundle.js --release --verbose",
     "test": "jest --watch"
   },
   "author": "langyo",
