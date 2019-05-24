@@ -19,6 +19,27 @@ import theme from "./viewStore/theme";
 import fab from "./viewStore/fab";
 import language from "./viewStore/language";
 
+import chattingPage from "./pageStore/chatting";
+import chattingListPage from "./pageStore/chattingList";
+import chooseAccountPage from "./pageStore/chooseAccount";
+import forumPage from "./pageStore/forum";
+import forumsPage from "./pageStore/forums";
+import loginPage from "./pageStore/login";
+import mainMakeNewThreadPage from "./pageStore/mainMakeNewThread";
+import mainPagePage from "./pageStore/mainPage";
+import newThreadPage from "./pageStore/newThread";
+import noticesPage from "./pageStore/notices";
+import recentNewsPage from "./pageStore/recentNews";
+import registerPage from "./pageStore/register";
+import replyPage from "./pageStore/reply";
+import reportPage from "./pageStore/report";
+import reviewPage from "./pageStore/review";
+import searchPage from "./pageStore/search";
+import settingPage from "./pageStore/settings";
+import userCenterPage from "./pageStore/userCenter";
+import userInfoPage from "./pageStore/userInfo";
+import watchThreadPage from "./pageStore/watchThread";
+
 export default {
     database: {
         accounts: accounts,
@@ -42,5 +63,28 @@ export default {
         theme: theme,
         fab: fab,
         language: language
+    },
+
+    page: {
+        chatting: chattingPage,
+        chattingList: chattingListPage,
+        chooseAccount: chooseAccountPage,
+        forum: forumPage,
+        forums: forumsPage,
+        login: loginPage,
+        mainMakeNewThread: mainMakeNewThreadPage,
+        mainPage: mainPagePage,
+        newThread: newThreadPage,
+        notices: noticesPage,
+        recentNews: recentNews,
+        register: registerPage,
+        reply: replyPage,
+        report: reportPage,
+        review: reviewPage,
+        search: searchPage,
+        setting: settingPage,
+        userCenter: userCenterPage,
+        userInfo: userInfoPage,
+        watchThread: watchThreadPage
     }
 }

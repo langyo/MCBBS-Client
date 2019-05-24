@@ -4,25 +4,20 @@ import db from "../database";
 
 import Actions from "../actions";
 
-class Thread extends Reflux.Store {
-	constructor(id)
+class Threads extends Reflux.Store {
+	constructor()
 	{
         super();
-        this.id = id;
 		this.state = {
-            threads: db.get("threads["+ id + "]").value()
+            threads: db.get("threads").value()
         };
         
-		this.listenToMany(Actions.database.single.thread(id));
+		this.listenToMany(Actions.database.thread);
 	}
 	
 	updateThread(object){
-        db.set("threads[" + this.id + "]", object).write();
-
-        this.setState({
-            threads: object
-        });
+        
     }
 }
 
-export default Thread;
+export default Threads;

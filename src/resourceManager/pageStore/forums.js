@@ -9,14 +9,10 @@ class Forums extends Reflux.Store {
 	{
         super();
 		this.state = {
-            forums: db.get("forums").value()
+
         };
-		this.listenToMany(Actions.database.forums);
+		this.listenToMany(Actions.page.forums);
 	}
-
-	updateForum(object){
-
-    }
 }
 
-export default new Forums;
+export default Forums;

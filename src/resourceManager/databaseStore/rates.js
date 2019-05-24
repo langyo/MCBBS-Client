@@ -4,24 +4,19 @@ import db from "../database";
 
 import Actions from "../actions";
 
-class Rate extends Reflux.Store {
-	constructor(id)
+class Rates extends Reflux.Store {
+	constructor()
 	{
         super();
-        this.id = id;
 		this.state = {
-            rates: db.get("rates["+ id + "]").value()
+            rates: db.get("rates").value()
         };
-		this.listenToMany(Actions.database.single.rate(id));
+		this.listenToMany(Actions.database.rate);
 	}
 
 	updateRate(object){
-        db.set("rates[" + this.id + "]", object).write();
 
-        this.setState({
-            rates: object
-        });
     }
 }
 
-export default Rate;
+export default Rates;

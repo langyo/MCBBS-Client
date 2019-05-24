@@ -4,24 +4,19 @@ import db from "../database";
 
 import Actions from "../actions";
 
-class Post extends Reflux.Store {
-	constructor(id)
+class Posts extends Reflux.Store {
+	constructor()
 	{
         super();
-        this.id = id;
 		this.state = {
-            posts: db.get("posts[" + id + "]").value()
+            posts: db.get("posts").value()
         };
-		this.listenToMany(Actions.database.single.post(id));
+		this.listenToMany(Actions.database.posts);
 	}
 
 	updatePosts(object){
-        db.set("posts[" + this.id + "]", object).write();
 
-        this.setState({
-            posts: object
-        });
     }
 }
 
-export default Post;
+export default Posts;

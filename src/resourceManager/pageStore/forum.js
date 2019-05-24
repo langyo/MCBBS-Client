@@ -8,13 +8,11 @@ class Forum extends Reflux.Store {
 	constructor()
 	{
         super();
-		this.store = Store.database.forums;
-		this.listenToMany(Actions.database.forum);
+		this.state = {
+
+        };
+		this.listenToMany(Actions.page.forum);
 	}
-
-	updateUserGroup(object){
-
-    }
 }
 
 export default Forum;
