@@ -36,10 +36,10 @@ const styles = theme => ({
 class MainWindowManager extends Reflux.Component {
     constructor(props) {
         super(props);
-        this.stores = [Stores.view.global.dialog, Stores.view.global.theme];
+        this.stores = [Stores.view.dialog, Stores.view.theme];
     }
 
-    handleCloseDialog = Actions.view.global.dialog.reset;
+    handleCloseDialog = Actions.view.dialog.reset;
 
     render() {
         const { classes, theme } = this.props;
@@ -87,7 +87,7 @@ class MainWindowManager extends Reflux.Component {
                                         color: '#EE0000',
                                         name: "正绫红"
                                     }].map(n => (
-                                    <ListItem button onClick={() => Actions.view.global.theme.togglePrimary(n.color)} key={n.color}>
+                                    <ListItem button onClick={() => Actions.view.theme.togglePrimary(n.color)} key={n.color}>
                                         <Avatar style={{backgroundColor: n.color}} />
                                         <ListItemText primary={n.name} secondary={this.state.primaryColor == n.color ? "已选中" : ""}/>
                                     </ListItem>
@@ -130,7 +130,7 @@ class MainWindowManager extends Reflux.Component {
                                         color: '#EE0000',
                                         name: "正绫红"
                                     }].map(n => (
-                                    <ListItem button onClick={() => Actions.view.global.theme.toggleSecondary(n.color)} key={n.color}>
+                                    <ListItem button onClick={() => Actions.view.theme.toggleSecondary(n.color)} key={n.color}>
                                         <Avatar style={{backgroundColor: n.color}} />
                                         <ListItemText primary={n.name} secondary={this.state.secondaryColor == n.color ? "已选中" : ""}/>
                                     </ListItem>

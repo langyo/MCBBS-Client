@@ -11,7 +11,7 @@ class Theme extends Reflux.Store {
             primaryColor: '#39C5BB',
             secondaryColor: '#66CCFF'
 		};
-		this.listenToMany(Actions.view.global.theme);
+		this.listenToMany(Actions.view.theme);
 	}
 
 	togglePrimary(color) {

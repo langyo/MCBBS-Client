@@ -10,7 +10,7 @@ class Dialog extends Reflux.Store {
 		this.state = {
 			show: ''
 		};
-		this.listenToMany(Actions.view.global.dialog);
+		this.listenToMany(Actions.view.dialog);
 	}
 
 	toggleTo(name) {

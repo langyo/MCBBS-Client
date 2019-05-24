@@ -11,7 +11,7 @@ class Medals extends Reflux.Store {
 		this.state = {
             medals: db.get("medals").value()
         };
-		this.listenToMany(Actions.database.global.medals);
+		this.listenToMany(Actions.database.medals);
 	}
 
 	updateMedal(id, object){

@@ -11,7 +11,7 @@ class Language extends Reflux.Store {
             language: 'zh-chs',
             pack: {}
 		};
-		this.listenToMany(Actions.view.global.language);
+		this.listenToMany(Actions.view.language);
 	}
 
 	toggleTo(name) {

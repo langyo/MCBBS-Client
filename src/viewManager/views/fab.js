@@ -36,7 +36,7 @@ const styles = theme => ({
 class FabView extends Reflux.Component {
     constructor(props) {
         super(props);
-        this.store = Stores.view.global.fab;
+        this.store = Stores.view.fab;
     }
 
     render() {

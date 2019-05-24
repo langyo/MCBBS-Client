@@ -1,14 +1,13 @@
 {
     "nativeVersion": {
         "electron": {
-            "windowsNT": "0.2.4",
-            "GNULinuxXWindow": "0.2.4",
-            "macOSX": "0.2.4"
+            "windowsNT": "0.3.1",
+            "GNULinuxXWindow": "0.3.1",
+            "macOSX": "0.3.1"
         },
         "ionic":{
-            "android": "0.2.4",
-            "iOS": "0.2.4",
-            "windowsPhone": "0.2.4"
+            "android": "0.3.1",
+            "iOS": "0.3.1"
         }
     },
     "nativeDownloadUrl":{
@@ -23,7 +22,7 @@
             "windowsPhone": ""
         }
     },
-    "scriptVersion": "0.2.4",
+    "scriptVersion": "0.3.1",
     "scriptDownloadUrl": "",
     "specialConfig": {
         "theme":{

@@ -27,10 +27,10 @@ const styles = theme => ({
 class About extends Reflux.Component {
   constructor(props) {
     super(props);
-    this.store = Stores.view.global.dialog;
+    this.store = Stores.view.dialog;
   }
 
-  handleCloseDialog = Actions.view.global.dialog.reset;
+  handleCloseDialog = Actions.view.dialog.reset;
 
   render() {
     const { classes, theme } = this.props;
@@ -105,7 +105,7 @@ class About extends Reflux.Component {
             </Button>
           </Typography>
           <Typography paragraph variant="body1">
-            {"当前版本 0.2.6"}
+            {"当前版本 0.3.1"}
           </Typography>
         </DialogContent>
         <DialogActions>

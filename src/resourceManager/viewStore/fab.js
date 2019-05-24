@@ -10,7 +10,7 @@ class Fab extends Reflux.Store {
         this.state = {
             toggleTo: ''
         };
-        this.listenToMany(Actions.view.global.fab);
+        this.listenToMany(Actions.view.fab);
     }
 
     toggleTo(id) {

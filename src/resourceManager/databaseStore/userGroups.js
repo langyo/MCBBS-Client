@@ -11,7 +11,7 @@ class UserGroups extends Reflux.Store {
 		this.state = {
             userGroups: db.get("userGroups").value()
         };
-		this.listenToMany(Actions.database.global.userGroups);
+		this.listenToMany(Actions.database.userGroups);
 	}
 
 	updateUserGroup(id, object){

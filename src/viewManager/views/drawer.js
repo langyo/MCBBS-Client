@@ -221,15 +221,15 @@ class SwipeableTemporaryDrawer extends Reflux.Component {
                 <SettingIcon />
                 <ListItemText primary="本体设置" />
               </ListItem>
-              <ListItem button onClick={() => Actions.view.global.dialog.toggleTo('colorChoser')}>
+              <ListItem button onClick={() => Actions.view.dialog.toggleTo('colorChoser')}>
                 <PaintIcon />
                 <ListItemText primary="主题" />
               </ListItem>
-              <ListItem button onClick={() => Actions.view.global.dialog.toggleTo('about')}>
+              <ListItem button onClick={() => Actions.view.dialog.toggleTo('about')}>
                 <InfoIcon />
                 <ListItemText primary="关于" />
               </ListItem>
-              <ListItem button onClick={() => Actions.view.global.dialog.toggleTo('language')}>
+              <ListItem button onClick={() => Actions.view.dialog.toggleTo('language')}>
                 <EarthIcon />
                 <ListItemText primary="语言 / Language" />
               </ListItem>

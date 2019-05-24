@@ -11,7 +11,7 @@ class Tag extends Reflux.Store {
 		this.state = {
             
         };
-		this.listenToMany(Actions.view.global.tag);
+		this.listenToMany(Actions.view.tag);
 	}
 
 	create(){

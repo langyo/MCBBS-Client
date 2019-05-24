@@ -1,6 +1,6 @@
 {
   "name": "mcbbs-client-scripts",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MCBBS 客户端",
   "author": "langyo",
   "main": "index.js",

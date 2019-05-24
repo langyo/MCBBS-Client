@@ -16,7 +16,7 @@ import LanguageDialog from "../dialogs/languages";
 class MainWindowManager extends Reflux.Component {
   constructor(props) {
     super(props);
-    this.store = Stores.view.global.dialog;
+    this.store = Stores.view.dialog;
   }
 
   render() {

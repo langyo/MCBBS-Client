@@ -12,7 +12,7 @@ class Forums extends Reflux.Store {
 		this.state = {
             forums: db.get("forums[" + id + "]").value()
         };
-		this.listenToMany(Actions.database.global.forums);
+		this.listenToMany(Actions.database.forums);
 	}
 
 	updateForum(object){

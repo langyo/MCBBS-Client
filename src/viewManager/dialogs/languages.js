@@ -33,12 +33,12 @@ const styles = theme => ({
 class LanguageChoser extends Reflux.Component {
   constructor(props) {
     super(props);
-    this.stores = [Stores.view.global.dialog, Stores.view.global.language];
+    this.stores = [Stores.view.dialog, Stores.view.language];
   }
 
-  handleCloseDialog = Actions.view.global.dialog.reset;
+  handleCloseDialog = Actions.view.dialog.reset;
 
-  handleChangeLanguage = event => Actions.view.global.language.toggleTo(event.target.value);
+  handleChangeLanguage = event => Actions.view.language.toggleTo(event.target.value);
 
   render() {
     const { classes } = this.props;

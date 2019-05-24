@@ -11,7 +11,7 @@ class MainPage extends Reflux.Store {
 		this.state = {
             mainPage: db.get("mainPage").value()
         };
-		this.listenToMany(Actions.database.global.mainPage);
+		this.listenToMany(Actions.database.mainPage);
 	}
 	
 	updateForumGroup(name, id, forums){

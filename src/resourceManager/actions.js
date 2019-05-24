@@ -14,84 +14,138 @@ let singleList = {
 };
 
 const checkSingleStore = (id, path, actions) => {
-    if(path[id] === undefined) path[id] = Reflux.createActions(actions);
+    if (path[id] === undefined) path[id] = Reflux.createActions(actions);
     return path[id];
 };
 
 export default {
     database: {
-        // 以下部分为单个的全局 Store
-        global: {
-            /* accounts: accounts, */
-            forums: Reflux.createActions([
-                'updateForum'
-            ]),
-            /* local: local, */
-            mainPage: Reflux.createActions([
-                'updateForumGroup',
-                'updateHeadImages',
-                'updateHeadThreads',
-                'pushNewPublishedThread',
-                'pushNewPublishedReply',
-                'pushNewPublishedStarThread',
-                'pushNewPublishedHotThread'
-            ]),
-            medals: Reflux.createActions([
-                'updateMedal'
-            ]),
-            userGroups: Reflux.createActions([
-                'updateUserGroup'
-            ])
-        },
-
-        // 以下部分为用于创建 Store 的类
-        single: {
-            post: (id) => checkSingleStore(id, singleList.database.single.post,[
-                'updatePost'
-            ]),
-            rate: (id) => checkSingleStore(id, singleList.database.single.rate, [
-                'updateRate'
-            ]),
-            forum: (id) => checkSingleStore(id, singleList.database.single.forum, [
-                'updateThreadList',
-                'updateHeadInfo'
-            ]),
-            thread: (id) => checkSingleStore(id, singleList.database.single.thread, [
-                'updateThread'
-            ]),
-            /* tool: tools, */
-            user: (id) => checkSingleStore(id, singleList.database.single.user, [
-                'updateUser'
-            ])
-        }
+        /* accounts: accounts, */
+        forums: Reflux.createActions([
+            'updateForum'
+        ]),
+        /* local: local, */
+        mainPage: Reflux.createActions([
+            'updateForumGroup',
+            'updateHeadImages',
+            'updateHeadThreads',
+            'pushNewPublishedThread',
+            'pushNewPublishedReply',
+            'pushNewPublishedStarThread',
+            'pushNewPublishedHotThread'
+        ]),
+        medals: Reflux.createActions([
+            'updateMedal'
+        ]),
+        userGroups: Reflux.createActions([
+            'updateUserGroup'
+        ]),
+        posts: Reflux.createActions([
+            'updatePost'
+        ]),
+        rates: Reflux.createActions([
+            'updateRate'
+        ]),
+        forums: Reflux.createActions([
+            'updateThreadList',
+            'updateHeadInfo'
+        ]),
+        threads: Reflux.createActions([
+            'updateThread'
+        ]),
+        /* tool: tools, */
+        users: Reflux.createActions([
+            'updateUser'
+        ])
     },
 
     view: {
-        global: {
-            tag: Reflux.createActions([
-                'create',
-                'delete',
-                'toggleTo'
-            ]),
-            dialog: Reflux.createActions([
-                'toggleTo',
-                'reset'
-            ]),
-            fab: Reflux.createActions([
-                'toggleTo',
-                'reset'
-            ]),
-            popupMessage: Reflux.createActions([
-                'sendNewMessage',
-                'popupNewMessage'
-            ]),
-            theme: Reflux.createActions([
-                'togglePrimary',
-                'toggleSecondary'
-            ]),
-            language: Reflux.createActions([
-                'toggleTo',
-            ])
-        }
+        tag: Reflux.createActions([
+            'create',
+            'delete',
+            'toggleTo'
+        ]),
+        dialog: Reflux.createActions([
+            'toggleTo',
+            'reset'
+        ]),
+        fab: Reflux.createActions([
+            'toggleTo',
+            'reset'
+        ]),
+        popupMessage: Reflux.createActions([
+            'sendNewMessage',
+            'popupNewMessage'
+        ]),
+        theme: Reflux.createActions([
+            'togglePrimary',
+            'toggleSecondary'
+        ]),
+        language: Reflux.createActions([
+            'toggleTo',
+        ])
+    },
+
+    page: {
+        chatting: Reflux.createActions([
+
+        ]),
+        chattingList: Reflux.createActions([
+
+        ]),
+        chooseAccount: Reflux.createActions([
+
+        ]),
+        forum: Reflux.createActions([
+
+        ]),
+        forums: Reflux.createActions([
+
+        ]),
+        login: Reflux.createActions([
+
+        ]),
+        mainMakeNewThread: Reflux.createActions([
+
+        ]),
+        mainPage: Reflux.createActions([
+
+        ]),
+        newThread: Reflux.createActions([
+
+        ]),
+        notices: Reflux.createActions([
+
+        ]),
+        recentNews: Reflux.createActions([
+
+        ]),
+        register: Reflux.createActions([
+
+        ]),
+        reply: Reflux.createActions([
+
+        ]),
+        report: Reflux.createActions([
+
+        ]),
+        review: Reflux.createActions([
+
+        ]),
+        search: Reflux.createActions([
+
+        ]),
+        settings: Reflux.createActions([
+
+        ]),
+        userCenter: Reflux.createActions([
+
+        ]),
+        userInfo: Reflux.createActions([
+
+        ]),
+        watchThread: Reflux.createActions([
+
+        ])
     }
 }
