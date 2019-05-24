@@ -23,13 +23,14 @@ const styles = theme => ({
         bottom: theme.spacing.unit * 3
     },
     fab: {
-        margin: theme.spacing.unit
+        margin: theme.spacing.unit,
+        paddingRight: theme.spacing.unit * 8
     },
     extendedIcon: {
         marginRight: theme.spacing.unit
     },
     extendedButton: {
-        marginLeft: theme.spacing.unit
+        transform: "translateX(-64px)"
     }
 });
 
@@ -45,12 +46,12 @@ class FabView extends Reflux.Component {
         return (
             <div className={classes.root}>
                 <Fab variant="extended" color="primary" className={classes.fab} onClick={() => console.log(1)}>
-                    <CubeSendIcon className={classes.extendedIcon}/>
+                    <CubeSendIcon className={classes.extendedIcon} />
                     开始游戏
-                    <IconButton className={classes.extendedButton}  onClick={() => console.log(2)}>
-                        <MenuUpIcon />
-                    </IconButton>
                 </Fab>
+                <IconButton className={classes.extendedButton} onClick={() => console.log(2)}>
+                    <MenuUpIcon />
+                </IconButton>
             </div>
         );
     }
