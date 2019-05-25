@@ -24,7 +24,7 @@
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.0-beta.0",
     "classnames": "^2.2.6",
-    "firebase": "^5.6.0",
+    "firebase": "^6.0.4",
     "jsdom": "^13.2.0",
     "lowdb": "^1.0.0",
     "mdi-material-ui": "^5.8.0",
