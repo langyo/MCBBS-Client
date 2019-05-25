@@ -558,7 +558,7 @@ const diff = (from, to) => {
 
 class ExecuterContext {
   constructor(cmds, conn) {
-    _defineProperty(this, "callback", (...args) => {
+    _defineProperty(this, "send", (...args) => {
       let arr = this.cmdHead.concat(args);
 
       this.conn._sendMessage(arr);

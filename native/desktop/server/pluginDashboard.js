@@ -16,7 +16,7 @@ class ExecuterContext {
         this.userId = conn.userId;
     }
 
-    callback = (...args) => {
+    send = (...args) => {
         let arr = this.cmdHead.concat(args);
         this.conn._sendMessage(arr);
     };
