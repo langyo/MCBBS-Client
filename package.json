@@ -7,12 +7,12 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/langyo/MCBBS-Client",
   "scripts": {
-    "autoinstall": "echo \"安装进程： 准备 yarn 安装器\" && npm i yarn -g && echo \"安装进程： 解决平台无关程序依赖\" &&  yarn && npm run install:desktop && npm run install:mobile && npm run install:desktop:nodeServer && npm run install:desktop:javaServer",
-    "install:desktop": "echo \"安装进程： 解决桌面端依赖 - Electron 本体部分\" && cd native/desktop && yarn && cd ../..",
-    "install:desktop:nodeServer": "echo \"安装进程： 解决桌面端依赖 - Node 服务端部分\" && cd native/desktop/server && yarn && cd ../../..",
+    "autoinstall": "echo \"安装进程： 准备 yarn 安装器\" && npm i yarn -g && echo \"安装进程： 解决平台无关程序依赖\" && yarn install --network-timeout 1000000  && npm run install:desktop && npm run install:mobile && npm run install:desktop:nodeServer && npm run install:desktop:javaServer",
+    "install:desktop": "echo \"安装进程： 解决桌面端依赖 - Electron 本体部分\" && cd native/desktop && yarn install --network-timeout 1000000  && cd ../..",
+    "install:desktop:nodeServer": "echo \"安装进程： 解决桌面端依赖 - Node 服务端部分\" && cd native/desktop/server && yarn install --network-timeout 1000000  && cd ../../..",
     "install:desktop:javaServer": "echo \"安装进程： 解决桌面端依赖 - Java 服务端部分\" && echo 暂不支持以 Node 解决 Java 依赖，请自行安装 Gardle、JRE 与 IDEA",
-    "install:mobile": "echo \"安装进程： 解决移动端依赖 - Ionic 本体部分\" && cd native/mobile && yarn && cd ../..",
-    "install:shower": "echo \"安装进程： 解决客户端下载站点前端 \" && cd docs/site && yarn && cd ../.."
+    "install:mobile": "echo \"安装进程： 解决移动端依赖 - Ionic 本体部分\" && cd native/mobile && yarn install --network-timeout 1000000  && cd ../..",
+    "install:shower": "echo \"安装进程： 解决客户端下载站点前端 \" && cd docs/site && yarn install --network-timeout 1000000  && cd ../.."
   },
   "dependencies": {
     "@babel/cli": "^7.2.0",
