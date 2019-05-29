@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\GitHub\\MCBBS-Client\\native\\desktop\\csServer\\MCBBS Client CS Server\\MCBBS Client CS Server.csproj": {}
+  },
+  "projects": {
+    "D:\\GitHub\\MCBBS-Client\\native\\desktop\\csServer\\MCBBS Client CS Server\\MCBBS Client CS Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\GitHub\\MCBBS-Client\\native\\desktop\\csServer\\MCBBS Client CS Server\\MCBBS Client CS Server.csproj",
+        "projectName": "MCBBS Client CS Server",
+        "projectPath": "D:\\GitHub\\MCBBS-Client\\native\\desktop\\csServer\\MCBBS Client CS Server\\MCBBS Client CS Server.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\MCBBS-Client\\native\\desktop\\csServer\\MCBBS Client CS Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
