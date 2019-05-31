@@ -22,15 +22,18 @@ import com.google.common.eventbus.EventBus;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 import net.mcbbs.client.api.plugin.BoxedPlugin;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
+import net.mcbbs.client.api.plugin.command.ICommandManager;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
 import net.mcbbs.client.api.plugin.event.construction.PluginConstructionEvent;
 import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
+import net.mcbbs.client.main.client.plugin.command.CobbleCommandManager;
 import net.mcbbs.client.main.client.plugin.mapper.CobbleMapperManager;
 import net.mcbbs.client.main.client.plugin.service.CobbleServiceManager;
 import org.yaml.snakeyaml.Yaml;
@@ -125,7 +128,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         injector = Guice.createInjector((Module) binder -> {
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).toInstance(mapping_event.data());
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
-
+            binder.bind(ICommandManager.class).annotatedWith(Names.named("command_manager")).to(CobbleCommandManager.class).in(Scopes.SINGLETON);
             binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newFixedThreadPool(5)));
             binder.bind(EventBus.class).annotatedWith(Names.named("net_event_bus")).toInstance(new AsyncEventBus(Executors.newCachedThreadPool()));
             binder.bind(EventBus.class).annotatedWith(Names.named("main_event_bus")).toInstance(new EventBus());
@@ -171,7 +174,7 @@ public class FileBasedPluginLoader extends PluginLoader {
             meta = PluginMetadata.deserializeFrom(this, bindings);
             mainClassLocation = (String) bindings.get("plugin");
         } else {
-            System.out.println("Unable to instantiate plugin '" + file.getName() + "'.It may be a non-plugin file.");
+            System.out.println("Unable to instantiate plugin '" + file.getName() + "'.It may be a non-plugin file.Skipping");
             return null;
         }
         Class<? extends IPlugin> pluginClz = ucl.loadClass(mainClassLocation).asSubclass(IPlugin.class);

@@ -14,21 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.api.launch;
+package net.mcbbs.client.main.client.command;
 
-import net.mcbbs.client.main.client.game.launch.Launcher;
-
-import javax.annotation.Nonnull;
-
-public abstract class LaunchWrapper implements Launcher {
-
-    private final Launcher launcher;
-    private final Class<? extends Tweaker> tweakClass;
-
-    public LaunchWrapper(@Nonnull Launcher launcher,Class<? extends Tweaker> tweakClass){
-        this.launcher=launcher;
-        this.tweakClass=tweakClass;
-    }
-
-    public abstract String wrapGenerateCommand(String command);
+public interface ICommand {
 }

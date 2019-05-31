@@ -24,10 +24,13 @@ import net.mcbbs.client.util.IOUtils;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public enum AuthController implements IAuthController {
-    YGGDRASIL_AUTH_CONTROLLER("https://authserver.mojang.com/") {
+public enum AuthController {
+    INSTANCE;
+    public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = INSTANCE.new YggdrasilAuthentication();
+    public final class YggdrasilAuthentication implements IMojangAuthController{
+        public static final String SERVER_ADDRESS = "authserver.mojang.com/";
         private JsonObject did(JsonObject argument, String method) throws AuthenticationException, IOException {
-            JsonObject parsed = IOUtils.doPOST(serverAddress.concat(method), argument.getAsString(), "application/json", JsonObject.class);
+            JsonObject parsed = IOUtils.doPOST(SERVER_ADDRESS.concat(method), argument.getAsString(), "application/json", JsonObject.class);
             if (parsed.has("error")) {
                 throw new AuthenticationException(
                         parsed.get("error").getAsString()
@@ -43,27 +46,16 @@ public enum AuthController implements IAuthController {
         @Override
         public JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
             try {
-                StringWriter stringWriter = new StringWriter();
-                JsonWriter jsonWriter = new JsonWriter(stringWriter);
-                jsonWriter.beginObject()
-                        .name("agent")
-                        .beginObject()
-                        .name("name")
-                        .value(name)
-                        .name("version")
-                        .value(version)
-                        .endObject()
-                        .name("username")
-                        .value(username)
-                        .name("password")
-                        .value(password)
-                        .name("clientToken")
-                        .value(clientToken)
-                        .name("requestUser")
-                        .value(requestUser)
-                        .endObject();
-                JsonObject argument = parser.parse(stringWriter.toString()).getAsJsonObject();
-                return did(argument, "authenticate");
+                JsonObject jsonObject = new JsonObject();
+                JsonObject agent = new JsonObject();
+                agent.addProperty("name",name);
+                agent.addProperty("version",version);
+                jsonObject.add("agent",agent);
+                jsonObject.addProperty("username",username);
+                jsonObject.addProperty("password",password);
+                jsonObject.addProperty("clientToken",clientToken);
+                jsonObject.addProperty("requestUser",requestUser);
+                return did(jsonObject, "authenticate");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
@@ -72,25 +64,15 @@ public enum AuthController implements IAuthController {
         @Override
         public JsonObject refresh(String accessToken, String clientToken, String id, String name, boolean requestUser) throws AuthenticationException {
             try {
-                StringWriter stringWriter = new StringWriter();
-                JsonWriter jsonWriter = new JsonWriter(stringWriter);
-                jsonWriter.beginObject()
-                        .name("accessToken")
-                        .value(accessToken)
-                        .name("clientToken")
-                        .value(clientToken)
-                        .name("selectedProfile")
-                        .beginObject()
-                        .name("id")
-                        .value(id)
-                        .name("name")
-                        .value(name)
-                        .endObject()
-                        .name("requestUser")
-                        .value(requestUser)
-                        .endObject();
-                JsonObject argument = parser.parse(stringWriter.toString()).getAsJsonObject();
-                return did(argument, "refresh");
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("accessToken",accessToken);
+                jsonObject.addProperty("clientToken",clientToken);
+                JsonObject selectedProfile = new JsonObject();
+                selectedProfile.addProperty("id",id);
+                selectedProfile.addProperty("name",name);
+                jsonObject.add("selectedProfile",selectedProfile);
+                jsonObject.addProperty("requestUser",requestUser);
+                return did(jsonObject, "refresh");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
@@ -99,16 +81,10 @@ public enum AuthController implements IAuthController {
         @Override
         public boolean validate(String accessToken, String clientToken) throws AuthenticationException {
             try {
-                StringWriter stringWriter = new StringWriter();
-                JsonWriter jsonWriter = new JsonWriter(stringWriter);
-                jsonWriter.beginObject()
-                        .name("accessToken")
-                        .value(accessToken)
-                        .name("clientToken")
-                        .value(clientToken)
-                        .endObject();
-                JsonObject argument = parser.parse(stringWriter.toString()).getAsJsonObject();
-                return did(argument, "validate").getAsString().isEmpty();
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("accessToken",accessToken);
+                jsonObject.addProperty("clientToken",clientToken);
+                return did(jsonObject, "validate").getAsString().isEmpty();
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
@@ -117,16 +93,11 @@ public enum AuthController implements IAuthController {
         @Override
         public void signout(String username, String password) throws AuthenticationException {
             try {
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("username",username);
+                jsonObject.addProperty("password",password);
                 StringWriter stringWriter = new StringWriter();
-                JsonWriter jsonWriter = new JsonWriter(stringWriter);
-                jsonWriter.beginObject()
-                        .name("username")
-                        .value(username)
-                        .name("password")
-                        .value(password)
-                        .endObject();
-                JsonObject argument = parser.parse(stringWriter.toString()).getAsJsonObject();
-                did(argument, "signout");
+                did(jsonObject, "signout");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
@@ -135,78 +106,18 @@ public enum AuthController implements IAuthController {
         @Override
         public void invalidate(String accessToken, String clientToken) throws AuthenticationException {
             try {
-                StringWriter stringWriter = new StringWriter();
-                JsonWriter jsonWriter = new JsonWriter(stringWriter);
-                jsonWriter.beginObject()
-                        .name("accessToken")
-                        .value(accessToken)
-                        .name("clientToken")
-                        .value(clientToken)
-                        .endObject();
-                JsonObject argument = parser.parse(stringWriter.toString()).getAsJsonObject();
-                did(argument, "invalidate");
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("accessToken",accessToken);
+                jsonObject.addProperty("clientToken",clientToken);
+                did(jsonObject, "invalidate");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
         }
-    },
-    AUTHLIB_AUTH_CONTROLLER("") {
-        @Override
-        public JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
-            return null;
-        }
-
-        @Override
-        public JsonObject refresh(String accessToken, String clientToken, String id, String name, boolean requestUser) throws AuthenticationException {
-            return null;
-        }
-
-        @Override
-        public boolean validate(String accessToken, String clientToken) throws AuthenticationException {
-            return false;
-        }
-
-        @Override
-        public void signout(String username, String password) throws AuthenticationException {
-
-        }
-
-        @Override
-        public void invalidate(String accessToken, String clientToken) throws AuthenticationException {
-
-        }
-    },
-    OFFLINE_AUTH_CONTROLLER("") {
-        @Override
-        public JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException {
-            return null;
-        }
-
-        @Override
-        public JsonObject refresh(String accessToken, String clientToken, String id, String name, boolean requestUser) throws AuthenticationException {
-            return null;
-        }
-
-        @Override
-        public boolean validate(String accessToken, String clientToken) throws AuthenticationException {
-            return false;
-        }
-
-        @Override
-        public void signout(String username, String password) throws AuthenticationException {
-
-        }
-
-        @Override
-        public void invalidate(String accessToken, String clientToken) throws AuthenticationException {
-
-        }
-    };
-
-    final JsonParser parser = new JsonParser();
-    final String serverAddress;
-
-    AuthController(String s) {
-        serverAddress = s;
     }
+
+    public final class AuthlibInjectorAuthController {
+
+    }
+    final JsonParser parser = new JsonParser();
 }

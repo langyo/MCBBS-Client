@@ -19,12 +19,7 @@ package net.mcbbs.client.main.client.game.launch;
 public class LauncherOffline implements Launcher {
 
     @Override
-    public ProcessBuilder generateLaunchCommand() {
-        return null;
-    }
-
-    @Override
-    public Process launch() {
+    public String generateLaunchCommand() {
         return null;
     }
 }

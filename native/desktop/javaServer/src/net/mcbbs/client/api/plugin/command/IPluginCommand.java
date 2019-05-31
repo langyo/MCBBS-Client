@@ -20,4 +20,5 @@ public interface IPluginCommand<T, R> {
     R execute(T arg);
     T argumentType();
     String usage();
+    IPluginCommand childCommand(String child);
 }

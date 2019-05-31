@@ -17,6 +17,7 @@
 package net.mcbbs.client.main.client.plugin.loading;
 
 import net.mcbbs.client.api.plugin.BoxedPlugin;
+import net.mcbbs.client.api.plugin.IPlugin;
 
 import java.util.jar.JarFile;
 
@@ -45,5 +46,10 @@ public class PluginLoaderVirtualRef extends PluginLoader {
     @Override
     public State getState() {
         return null;
+    }
+
+    @Override
+    public boolean isPluginLoaded(IPlugin plugin) {
+        return false;
     }
 }

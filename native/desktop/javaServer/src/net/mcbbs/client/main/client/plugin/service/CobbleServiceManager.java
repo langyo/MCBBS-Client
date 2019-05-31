@@ -54,7 +54,7 @@ public class CobbleServiceManager implements ServiceManager {
         return (T) areaCreated.stream()
                 .filter(area -> area.services.containsKey(serviceClass))
                 .findAny()
-                .orElseThrow(() -> new UnsupportedOperationException("Required an unknown service!"))
+                .orElseThrow(() -> new UnsupportedOperationException("Try requiring an unknown service!"))
                 .services
                 .get(serviceClass)
                 .getService();

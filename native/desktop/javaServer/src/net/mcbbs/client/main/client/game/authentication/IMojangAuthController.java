@@ -18,9 +18,31 @@ package net.mcbbs.client.main.client.game.authentication;
 
 import com.google.gson.JsonObject;
 
-public interface IAuthController {
+public interface IMojangAuthController {
+
+    /**
+     * Send authentication request to server.
+     * @param name Game name, force to 'Minecraft'
+     * @param version Yggdrasil version
+     * @param username Account
+     * @param password Password of account
+     * @param clientToken Token generated for distinguish client.
+     * @param requestUser give true;Otherwise,it will not appear in request.
+     * @return message used to
+     * @throws AuthenticationException If problem found or authentication failed.
+     */
     JsonObject authenticate(String name, int version, String username, String password, String clientToken, boolean requestUser) throws AuthenticationException;
 
+    /**
+     *
+     * @param accessToken Access token given by server.
+     * @param clientToken Token generated for distinguishing client.
+     * @param id
+     * @param name
+     * @param requestUser
+     * @return
+     * @throws AuthenticationException
+     */
     JsonObject refresh(String accessToken, String clientToken, String id, String name, boolean requestUser) throws AuthenticationException;
 
     boolean validate(String accessToken, String clientToken) throws AuthenticationException;

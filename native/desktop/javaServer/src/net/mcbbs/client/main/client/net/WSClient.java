@@ -14,7 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client;
+package net.mcbbs.client.main.client.net;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -34,6 +34,7 @@ public class WSClient extends WebSocketClient {
 
     @Override
     public void onMessage(String s) {
+
     }
 
     @Override

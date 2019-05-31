@@ -16,7 +16,14 @@
 
 package net.mcbbs.client.main.client.game.launch;
 
+import java.io.IOException;
+
 public interface Launcher {
-    ProcessBuilder generateLaunchCommand();
-    Process launch();
+    String generateLaunchCommand();
+    default ProcessBuilder buildProcess(){
+        return new ProcessBuilder("cmd","/c",generateLaunchCommand());
+    }
+    default Process launch() throws IOException {
+        return buildProcess().inheritIO().start();
+    }
 }

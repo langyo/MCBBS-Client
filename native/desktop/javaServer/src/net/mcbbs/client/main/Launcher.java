@@ -16,7 +16,8 @@
 
 package net.mcbbs.client.main;
 
-import net.mcbbs.client.main.client.WSClient;
+import net.mcbbs.client.main.client.net.WSClient;
+import net.mcbbs.client.main.client.game.Game;
 import net.mcbbs.client.main.client.plugin.loading.FileBasedPluginLoader;
 import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
 import org.java_websocket.client.WebSocketClient;
@@ -29,6 +30,7 @@ public class Launcher {
     public static void main(String[] args) {
         PluginLoader loader = new FileBasedPluginLoader();
         loader.loadPlugin("../../plugin");
+        Game.init();
         WebSocketClient wsclient = new WSClient();
         wsclient.connect();
     }

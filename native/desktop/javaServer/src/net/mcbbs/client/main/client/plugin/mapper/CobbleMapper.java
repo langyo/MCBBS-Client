@@ -95,7 +95,7 @@ public class CobbleMapper<I extends IPlugin, T> implements Mapper<T> {
 
     @Override
     public Mapper<T> unmapMethod(Method raw) {
-        method_mapping.remove(raw);
+        instance_mapping.remove(method_mapping.remove(raw));
         arg_mapping.remove(raw);
         return this;
     }

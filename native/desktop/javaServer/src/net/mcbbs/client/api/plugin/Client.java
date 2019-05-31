@@ -23,6 +23,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import net.mcbbs.client.api.plugin.command.ICommandManager;
 import net.mcbbs.client.api.plugin.event.Event;
 import net.mcbbs.client.api.plugin.mapper.MapperManager;
 import net.mcbbs.client.api.plugin.service.ServiceManager;
@@ -37,25 +38,34 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class Client {
+
     @Inject
     @Named("service_manager")
     private static ServiceManager smImpl;
+
     @Inject
     @Named("plugin_list")
     private static List<BoxedPlugin<? extends IPlugin>> plugins;
+
     @Inject
     @Named("mapper_factory")
     private static MapperManager mapper_factory;
+
     @Inject
     @Named("main_event_bus")
     private static EventBus main_event_bus;
+
     @Inject
     @Named("net_event_bus")
     private static EventBus net_event_bus;
+
     @Inject
     @Named("internal_event_bus")
     private static EventBus internal_event_bus;
 
+    @Inject
+    @Named("command_manager")
+    private static ICommandManager command_manager;
     private Client() {
     }
 
@@ -69,6 +79,10 @@ public abstract class Client {
 
     public static MapperManager getMapperFactory() {
         return mapper_factory;
+    }
+
+    public static ICommandManager getCommandManager() {
+        return command_manager;
     }
 
     public static final class EventBusController {

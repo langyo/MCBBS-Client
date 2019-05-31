@@ -8,7 +8,7 @@ import net.mcbbs.client.api.plugin.command.IPluginCommand;
 import java.util.Map;
 
 public class CobbleCommandManager implements ICommandManager {
-    Map<String,IPluginCommand> commandMap = Maps.newHashMap();
+    private final Map<String,IPluginCommand> commandMap = Maps.newHashMap();
     @Override
     public <T, R> void provide(IPlugin plugin, String commandName, IPluginCommand<T, R> command) {
         assert plugin!=null;
