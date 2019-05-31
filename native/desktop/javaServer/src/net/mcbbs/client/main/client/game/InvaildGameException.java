@@ -1,5 +1,5 @@
 /*
-   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,12 +14,11 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.launch;
+package net.mcbbs.client.main.client.game;
 
-public class LauncherOffline implements Launcher {
-
-    @Override
-    public String generateLaunchCommand() {
-        return null;
-    }
+public class InvaildGameException extends Exception {
+    public InvaildGameException(){}
+    public InvaildGameException(String msg){super(msg);}
+    public InvaildGameException(String msg,Throwable cause){super(msg,cause);}
+    public InvaildGameException(Throwable cause){super(cause);}
 }

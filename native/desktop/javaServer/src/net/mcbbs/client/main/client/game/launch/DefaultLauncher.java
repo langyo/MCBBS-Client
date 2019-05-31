@@ -1,5 +1,5 @@
 /*
-  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package net.mcbbs.client.main.client.game.launch;
 
-import java.io.IOException;
+import net.mcbbs.client.main.client.game.GameRoot;
 
-public class LauncherOnline implements Launcher {
+public class DefaultLauncher implements Launcher {
 
     @Override
-    public String generateLaunchCommand() {
+    public String generateLaunchCommand(GameRoot root) {
         return null;
     }
 }

@@ -17,6 +17,7 @@
 package net.mcbbs.client.main.client.game;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
 import java.nio.file.Path;
 
 public interface IGameRoot {
@@ -32,4 +33,8 @@ public interface IGameRoot {
     Path gameJar();
 
     Path configJson();
+
+    boolean checkLibrary() throws IOException;
+
+    boolean checkAssets() throws IOException;
 }

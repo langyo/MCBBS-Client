@@ -21,6 +21,7 @@ import com.google.common.collect.Maps;
 import org.shanerx.mojang.Mojang;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Map;
 
 public final class Game {
