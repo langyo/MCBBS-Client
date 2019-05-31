@@ -16,7 +16,8 @@
 
 package net.mcbbs.client.main.client.game.authentication;
 
-import java.util.UUID;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Entity class for logging-in information
@@ -25,9 +26,11 @@ import java.util.UUID;
  */
 public interface Account {
 
+    @Nonnull
     String account();
 
-    UUID uuid();
+    @Nonnull
+    String password();
 
     /**
      * Authenticate with info in Account.
@@ -35,5 +38,8 @@ public interface Account {
      * @return Authentication result.
      * @throws AuthenticationException when Authenticating failed.
      */
-    AuthenticationInfo authenticate() throws AuthenticationException;
+    Authentication signIn() throws AuthenticationException;
+
+    @Nullable
+    Authentication getAuthentication();
 }

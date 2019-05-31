@@ -16,18 +16,19 @@
 
 package net.mcbbs.client.main.client.game.authentication;
 
+import com.google.common.annotations.Beta;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonWriter;
+import net.mcbbs.client.main.client.game.authentication.yggdrasil.IAuthenticatorYggdrasil;
 import net.mcbbs.client.util.IOUtils;
 
 import java.io.IOException;
 import java.io.StringWriter;
-
+@Beta
 public enum AuthController {
     INSTANCE;
     public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = INSTANCE.new YggdrasilAuthentication();
-    public final class YggdrasilAuthentication implements IMojangAuthController{
+    public final class YggdrasilAuthentication implements IAuthenticatorYggdrasil {
         public static final String SERVER_ADDRESS = "authserver.mojang.com/";
         private JsonObject did(JsonObject argument, String method) throws AuthenticationException, IOException {
             JsonObject parsed = IOUtils.doPOST(SERVER_ADDRESS.concat(method), argument.getAsString(), "application/json", JsonObject.class);
@@ -114,10 +115,6 @@ public enum AuthController {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
         }
-    }
-
-    public final class AuthlibInjectorAuthController {
-
     }
     final JsonParser parser = new JsonParser();
 }

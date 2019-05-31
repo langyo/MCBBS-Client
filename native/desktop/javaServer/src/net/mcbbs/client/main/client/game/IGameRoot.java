@@ -20,12 +20,16 @@ import javax.annotation.Nullable;
 import java.nio.file.Path;
 
 public interface IGameRoot {
+
+    Game.Type gameType();
+
     Path assetsIndex();
 
     Path libraryIndex();
 
-    @Nullable
     Path nativeIndex();
 
     Path gameJar();
+
+    Path configJson();
 }

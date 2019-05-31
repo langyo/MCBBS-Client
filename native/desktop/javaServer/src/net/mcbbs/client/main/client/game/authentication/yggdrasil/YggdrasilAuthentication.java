@@ -14,8 +14,9 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client.main.client.game.authentication.yggdrasil;
 
-public interface IAuthlibInjectorAuthController {
+import net.mcbbs.client.main.client.game.authentication.Authentication;
 
+public class YggdrasilAuthentication implements Authentication {
 }

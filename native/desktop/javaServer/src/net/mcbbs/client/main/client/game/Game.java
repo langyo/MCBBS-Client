@@ -16,14 +16,39 @@
 
 package net.mcbbs.client.main.client.game;
 
+import com.google.common.annotations.Beta;
+import com.google.common.collect.Maps;
+import org.shanerx.mojang.Mojang;
+
+import java.util.Collections;
+import java.util.Map;
+
 public final class Game {
+    private static boolean INITIALIZED = false;
+    public static final Mojang MOJANG = new Mojang();
+
+    public enum Type{
+        VANILLA,
+        FORGE,
+        @Deprecated MODLOADER,
+        OPTIFINE,
+        @Beta FABRIC
+    }
 
     static{
         init();
     }
 
     public static void init(){
-
+        MOJANG.connect();
+        INITIALIZED=true;
     }
 
+    public static Map<String,String> servicesStatus(){
+        Map<String,String> result = Maps.newHashMap();
+        for(Mojang.ServiceType type: Mojang.ServiceType.values()){
+            result.put(type.toString(),MOJANG.getStatus(type).name().replaceAll("_",".").toLowerCase());
+        }
+        return Collections.unmodifiableMap(result);
+    }
 }

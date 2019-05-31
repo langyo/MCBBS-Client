@@ -1,5 +1,5 @@
 /*
-   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client.main.client.game.authentication.yggdrasil;
 
-public interface AuthenticationInfo {
+import net.mcbbs.client.main.client.game.authentication.Account;
 
+public class YggdrasilAccount implements Account {
 }
