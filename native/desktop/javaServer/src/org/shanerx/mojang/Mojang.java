@@ -18,16 +18,15 @@ package org.shanerx.mojang;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * <p>This class represents the connection with the Mojang API.
@@ -50,7 +49,7 @@ public class Mojang {
         JsonObject obj;
 
         try {
-            obj = (JsonObject) new JSONParser().parse(Unirest.get(url).asString().getBody());
+            obj = (JsonObject) new JsonParser().parse(Unirest.get(url).asString().getBody());
             String err = obj.get("error").getAsString();
             if (err != null) {
                 switch (err) {
@@ -60,7 +59,7 @@ public class Mojang {
                         throw new RuntimeException(err);
                 }
             }
-        } catch (ParseException | UnirestException e) {
+        } catch (UnirestException e) {
             throw new RuntimeException(e);
         }
 
@@ -71,9 +70,8 @@ public class Mojang {
         JsonArray arr;
 
         try {
-            arr = (JsonArray) new JSONParser().parse(Unirest.get(url).asString().getBody());
-
-        } catch (ParseException | UnirestException e) {
+            arr = (JsonArray) new JsonParser().parse(Unirest.get(url).asString().getBody());
+        } catch (UnirestException e) {
             throw new RuntimeException(e);
         }
 
@@ -157,10 +155,10 @@ public class Mojang {
     }
 
     /**
-     * Returns the {@link org.shanerx.mojang.PlayerProfile PlayerProfile} object which holds and represents the metadata for a certain account.
+     * Returns the {@link PlayerProfile PlayerProfile} object which holds and represents the metadata for a certain account.
      *
      * @param uuid the UUID of the player
-     * @return the {@link org.shanerx.mojang.PlayerProfile PlayerProfile} object}
+     * @return the {@link PlayerProfile PlayerProfile} object}
      */
     public PlayerProfile getPlayerProfile(String uuid) {
         JsonObject obj = getJSONObject("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid);
@@ -173,12 +171,7 @@ public class Mojang {
             String propValue = prop.get("value").getAsString();
             if (propName.equals("textures")) {
                 JsonObject tex;
-                try {
-                    tex = (JsonObject) new JSONParser().parse(new String(Base64.decodeBase64(propValue.getBytes())));
-                } catch (ParseException e2) {
-                    /* Don't blame me, I just follow the pattern from #getJSONObject */
-                    throw new RuntimeException(e2);
-                }
+                tex = (JsonObject) new JsonParser().parse(new String(Base64.decodeBase64(propValue.getBytes())));
                 PlayerProfile.TexturesProperty q = new PlayerProfile.TexturesProperty();
                 q.timestamp = tex.get("timestamp").getAsLong();
                 q.profileId = tex.get("profileId").getAsString();
@@ -282,7 +275,7 @@ public class Mojang {
 
         SalesStats stats = null;
         try {
-            JsonObject resp = (JsonObject) new JSONParser().parse(Unirest.post("https://api.mojang.com/orders/statistics").field("metricKeys", arr).asString().getBody());
+            JsonObject resp = (JsonObject) new JsonParser().parse(Unirest.post("https://api.mojang.com/orders/statistics").field("metricKeys", arr).asString().getBody());
             stats = new SalesStats(Integer.valueOf(resp.get("total").getAsString()), resp.get("last24h").getAsInt(), resp.get("saleVelocityPerSeconds").getAsInt());
         } catch (Exception e) {
             e.printStackTrace();

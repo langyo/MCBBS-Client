@@ -60,9 +60,9 @@ public final class CommandDispatcher {
                 });
                 TASKS.add(ct);
                 SERVICE.submit(ct);
+                break;
             case DATA:
                 break;
-            }
             default: {
                 break;
             }

@@ -33,12 +33,19 @@ public final class Game {
         init();
     }
 
+    /**
+     * Initialize basic information for launcher.
+     */
     public static void init() {
         if (INITIALIZED) throw new IllegalStateException("Has already initialized:n.m.c.m.client.game.Game");
         MOJANG.connect();
         INITIALIZED = true;
     }
 
+    /**
+     * List the status of all the mojang server.
+     * @return Map<ServerName:String,Ststus:[green:OK,yellow:issues,red:unreachable]>
+     */
     public static Map<String, String> servicesStatus() {
         Map<String, String> result = Maps.newHashMap();
         for (Mojang.ServiceType type : Mojang.ServiceType.values()) {
@@ -49,18 +56,29 @@ public final class Game {
 
     public enum Type {
         /**
-         * 原版(像草)
+         * 原版(香草)
+         * Vanilla version.
          */
         VANILLA,
         /**
-         * forge
+         * <strike>(锻造)</strike>
+         * Forge
          */
         FORGE,
+        /**
+         * <strike>(Mod加载器)</strike>
+         * ModLoader&ModLoaderMP
+         */
         @Deprecated MODLOADER,
         /**
-         * optifine(高清修复)
+         * 高清修复独立版
+         * OptiFine Independent version.
          */
         OPTIFINE,
+        /**
+         * <strike>(织物)</strike>
+         * Fabric(1.14新轻量级mod api,正在努力支持)
+         */
         @Beta FABRIC
     }
 }
