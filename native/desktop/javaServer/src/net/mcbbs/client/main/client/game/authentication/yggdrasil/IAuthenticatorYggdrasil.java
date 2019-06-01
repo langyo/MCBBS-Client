@@ -23,42 +23,42 @@ public interface IAuthenticatorYggdrasil {
 
     /**
      * Send authentication request to server.
-     * @param name Game name, force to 'Minecraft'
-     * @param version Yggdrasil version
-     * @param username Account
-     * @param password Password of account
+     *
+     * @param name        Game name, force to 'Minecraft'
+     * @param version     Yggdrasil version
+     * @param username    Account
+     * @param password    Password of account
      * @param clientToken Token generated for distinguish client.
      * @param requestUser give true;Otherwise,it will not appear in request.
-     * @return
+     * @return {
+     * "accessToken": "random access token",      // hexadecimal
+     * "clientToken": "client identifier",        // identical to the one received
+     * "availableProfiles": [                     // only present if the agent field was received
      * {
-     *     "accessToken": "random access token",      // hexadecimal
-     *     "clientToken": "client identifier",        // identical to the one received
-     *     "availableProfiles": [                     // only present if the agent field was received
-     *         {
-     *             "id": "profile identifier",        // hexadecimal
-     *             "name": "player name",
-     *             "legacy": true or false            // In practice, this field only appears in the response if true. Default to false.
-     *         }
-     *     ],
-     *     "selectedProfile": {                       // only present if the agent field was received
-     *         "id": "uuid without dashes",
-     *         "name": "player name",
-     *         "legacy": true or false
-     *     },
-     *     "user": {                                  // only present if requestUser was true in the request payload
-     *         "id": "user identifier",               // hexadecimal
-     *         "properties": [
-     *             {
-     *                 "name": "preferredLanguage",   // might not be present for all accounts
-     *                 "value": "en"                  // Java locale format (https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html#toString--)
-     *             },
-     *             {
-     *                 "name": "twitch_access_token", // only present if a twitch account is associated (see https://account.mojang.com/me/settings)
-     *                 "value": "twitch oauth token"  // OAuth 2.0 Token; alphanumerical; e.g. https://api.twitch.tv/kraken?oauth_token=[...]
-     *                                                // the Twitch API is documented here: https://github.com/justintv/Twitch-API
-     *             }
-     *         ]
-     *     }
+     * "id": "profile identifier",        // hexadecimal
+     * "name": "player name",
+     * "legacy": true or false            // In practice, this field only appears in the response if true. Default to false.
+     * }
+     * ],
+     * "selectedProfile": {                       // only present if the agent field was received
+     * "id": "uuid without dashes",
+     * "name": "player name",
+     * "legacy": true or false
+     * },
+     * "user": {                                  // only present if requestUser was true in the request payload
+     * "id": "user identifier",               // hexadecimal
+     * "properties": [
+     * {
+     * "name": "preferredLanguage",   // might not be present for all accounts
+     * "value": "en"                  // Java locale format (https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html#toString--)
+     * },
+     * {
+     * "name": "twitch_access_token", // only present if a twitch account is associated (see https://account.mojang.com/me/settings)
+     * "value": "twitch oauth token"  // OAuth 2.0 Token; alphanumerical; e.g. https://api.twitch.tv/kraken?oauth_token=[...]
+     * // the Twitch API is documented here: https://github.com/justintv/Twitch-API
+     * }
+     * ]
+     * }
      * }
      * @throws AuthenticationException If problem found or authentication failed.
      */
@@ -66,33 +66,33 @@ public interface IAuthenticatorYggdrasil {
 
     /**
      * Refresh user state.
+     *
      * @param accessToken Access token given by server.
      * @param clientToken Token generated for distinguishing client.
      * @param id
      * @param name
      * @param requestUser
-     * @return
+     * @return {
+     * "accessToken": "random access token",      // hexadecimal
+     * "clientToken": "client identifier",        // identical to the one received
+     * "selectedProfile": {
+     * "id": "profile identifier",            // hexadecimal
+     * "name": "player name"
+     * },
+     * "user": {                                  // only present if requestUser was true in the request payload
+     * "id": "user identifier",               // hexadecimal
+     * "properties": [
      * {
-     *     "accessToken": "random access token",      // hexadecimal
-     *     "clientToken": "client identifier",        // identical to the one received
-     *     "selectedProfile": {
-     *         "id": "profile identifier",            // hexadecimal
-     *         "name": "player name"
-     *     },
-     *     "user": {                                  // only present if requestUser was true in the request payload
-     *         "id": "user identifier",               // hexadecimal
-     *         "properties": [
-     *             {
-     *                 "name": "preferredLanguage",   // might not be present for all accounts
-     *                 "value": "en"                  // Java locale format (https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html#toString--)
-     *             },
-     *             {
-     *                 "name": "twitch_access_token", // only present if a twitch account is associated (see https://account.mojang.com/me/settings)
-     *                 "value": "twitch oauth token"  // OAuth 2.0 Token; alphanumerical; e.g. https://api.twitch.tv/kraken?oauth_token=[...]
-     *                                                // the Twitch API is documented here: https://github.com/justintv/Twitch-API
-     *             }
-     *         ]
-     *     }
+     * "name": "preferredLanguage",   // might not be present for all accounts
+     * "value": "en"                  // Java locale format (https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html#toString--)
+     * },
+     * {
+     * "name": "twitch_access_token", // only present if a twitch account is associated (see https://account.mojang.com/me/settings)
+     * "value": "twitch oauth token"  // OAuth 2.0 Token; alphanumerical; e.g. https://api.twitch.tv/kraken?oauth_token=[...]
+     * // the Twitch API is documented here: https://github.com/justintv/Twitch-API
+     * }
+     * ]
+     * }
      * }
      * @throws AuthenticationException If problem found or access token is not available.
      */
@@ -100,6 +100,7 @@ public interface IAuthenticatorYggdrasil {
 
     /**
      * Validate the access token.
+     *
      * @param accessToken Access token given by server.
      * @param clientToken Token generated for distinguishing client.
      * @return True if access_token is available;Otherwise,return false,should refresh or login again.
@@ -109,6 +110,7 @@ public interface IAuthenticatorYggdrasil {
 
     /**
      * Sign out from yggdrasil,will invalidate the access token.
+     *
      * @param username Username
      * @param password Password
      * @throws AuthenticationException If problem found or wrong password or/and username
@@ -117,6 +119,7 @@ public interface IAuthenticatorYggdrasil {
 
     /**
      * Invalidate access token.
+     *
      * @param accessToken Access token given by server.
      * @param clientToken Token generated for distinguishing client.
      * @throws AuthenticationException If problem found

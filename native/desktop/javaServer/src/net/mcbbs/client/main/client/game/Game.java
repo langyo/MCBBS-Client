@@ -25,32 +25,33 @@ import java.util.Map;
 import java.util.UUID;
 
 public final class Game {
-    private static boolean INITIALIZED = false;
     public static final Mojang MOJANG = new Mojang();
     public static final UUID CLIENT_TOKEN = UUID.randomUUID();
-    public enum Type{
+    private static boolean INITIALIZED = false;
+
+    static {
+        init();
+    }
+
+    public static void init() {
+        if (INITIALIZED) throw new IllegalStateException("Has already initialized:n.m.c.m.client.game.Game");
+        MOJANG.connect();
+        INITIALIZED = true;
+    }
+
+    public static Map<String, String> servicesStatus() {
+        Map<String, String> result = Maps.newHashMap();
+        for (Mojang.ServiceType type : Mojang.ServiceType.values()) {
+            result.put(type.toString(), MOJANG.getStatus(type).name().replaceAll("_", ".").toLowerCase());
+        }
+        return Collections.unmodifiableMap(result);
+    }
+
+    public enum Type {
         VANILLA,
         FORGE,
         @Deprecated MODLOADER,
         OPTIFINE,
         @Beta FABRIC
-    }
-
-    static{
-        init();
-    }
-
-    public static void init(){
-        if(INITIALIZED)throw new IllegalStateException("Has already initialized:n.m.c.m.client.game.Game");
-        MOJANG.connect();
-        INITIALIZED=true;
-    }
-
-    public static Map<String,String> servicesStatus(){
-        Map<String,String> result = Maps.newHashMap();
-        for(Mojang.ServiceType type: Mojang.ServiceType.values()){
-            result.put(type.toString(),MOJANG.getStatus(type).name().replaceAll("_",".").toLowerCase());
-        }
-        return Collections.unmodifiableMap(result);
     }
 }

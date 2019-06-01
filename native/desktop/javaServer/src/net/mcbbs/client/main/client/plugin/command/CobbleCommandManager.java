@@ -23,18 +23,26 @@ public class CobbleCommandManager implements ICommandManager {
         public IPluginCommand getCommand() {
             return command;
         }
-    }
-    private final class Scope {
 
+        public int hashCode(){
+            return name.hashCode()+command.hashCode();
+        }
+
+        public boolean equals(Object o){
+            if(o instanceof BoxedCommand){
+                return ((BoxedCommand) o).name.contentEquals(name)&&((BoxedCommand) o).command.equals(command);
+            }
+            return false;
+        }
     }
     @Override
     public <T, R> void provide(String pluginId, String commandName, IPluginCommand<T, R> command) {
-        assert ;
-        commandMap.put(commandName,command);
+        assert pluginId!=null&&commandName!=null&&command!=null;
+        commands.put(commandName,new BoxedCommand(commandName,command));
     }
 
     @Override
     public IPluginCommand<?, ?> require(String pluginId,String commandName) {
-        return commandMap.get(commandName);
+        return commands.get(pluginId).stream().filter(cmd->cmd.name.contentEquals(commandName)).findAny().orElseThrow(IllegalArgumentException::new).getCommand();
     }
 }

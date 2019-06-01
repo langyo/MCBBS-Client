@@ -20,11 +20,14 @@ import net.mcbbs.client.api.plugin.Client;
 
 public final class CommandDispatcher {
     public static final CommandDispatcher DISPATCHER = new CommandDispatcher();
-    private CommandDispatcher(){}
-    public final Command dispatch(Command command){
-        switch (command.getType()){
+
+    private CommandDispatcher() {
+    }
+
+    public final Command dispatch(Command command) {
+        switch (command.getType()) {
             case "execute":
-                Client.getCommandManager().require(command.getNamespace()).childCommand(command.getMethod()).execute()
+                Client.getCommandManager().require(command.getPkgName(),command.getNamespace()).childCommand(command.getMethod()).execute();
         }
     }
 }

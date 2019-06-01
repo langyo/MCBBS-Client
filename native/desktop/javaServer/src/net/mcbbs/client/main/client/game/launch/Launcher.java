@@ -22,9 +22,11 @@ import java.io.IOException;
 
 public interface Launcher {
     String generateLaunchCommand(GameRoot root);
-    default ProcessBuilder buildProcess(GameRoot root){
-        return new ProcessBuilder("cmd","/c",generateLaunchCommand(root));
+
+    default ProcessBuilder buildProcess(GameRoot root) {
+        return new ProcessBuilder("cmd", "/c", generateLaunchCommand(root));
     }
+
     default Process launch(GameRoot root) throws IOException {
         return buildProcess(root).inheritIO().start();
     }

@@ -106,7 +106,7 @@ public class FileBasedPluginLoader extends PluginLoader {
                         }
                         return null;
                     }).filter(Objects::nonNull);
-            plugin.forEach((meta,plug)->pluginBoxed.put(meta.id,new BoxedPlugin<>(plug,meta)));
+            plugin.forEach((meta, plug) -> pluginBoxed.put(meta.id, new BoxedPlugin<>(plug, meta)));
         } catch (IOException | ScriptException e) {
             e.printStackTrace();
             return;
@@ -122,7 +122,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         );
 
         state = State.COLLECTING_SERVICE;
-        PluginConstructionEvent.ServiceMapping mapping_event = new PluginConstructionEvent.ServiceMapping(getRef(),new CobbleServiceManager());
+        PluginConstructionEvent.ServiceMapping mapping_event = new PluginConstructionEvent.ServiceMapping(getRef(), new CobbleServiceManager());
 
         state = State.INJECTING_PLUGIN_API;
         injector = Guice.createInjector((Module) binder -> {
@@ -144,7 +144,7 @@ public class FileBasedPluginLoader extends PluginLoader {
 
     @Override
     public boolean isPluginLoaded(IPlugin plugin) {
-        return pluginBoxed.values().stream().map(BoxedPlugin::getPlugin).anyMatch(plug-> plug.equals(plugin));
+        return pluginBoxed.values().stream().map(BoxedPlugin::getPlugin).anyMatch(plug -> plug.equals(plugin));
     }
 
     public Injector getInjector() {

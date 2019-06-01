@@ -16,9 +16,19 @@
 
 package net.mcbbs.client.main.client.game;
 
-public class InvaildGameException extends Exception {
-    public InvaildGameException(){}
-    public InvaildGameException(String msg){super(msg);}
-    public InvaildGameException(String msg,Throwable cause){super(msg,cause);}
-    public InvaildGameException(Throwable cause){super(cause);}
+public class InvalidGameException extends Exception {
+    public InvalidGameException() {
+    }
+
+    public InvalidGameException(String msg) {
+        super(msg);
+    }
+
+    public InvalidGameException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public InvalidGameException(Throwable cause) {
+        super(cause);
+    }
 }

@@ -29,13 +29,15 @@ public class YggdrasilAccount implements Account {
     private String account;
     private String password;
     private YggdrasilAuthentication authentication;
-    public static YggdrasilAccount getAccount(String user,String pass){
-        assert user!=null&&pass!=null;
+
+    public static YggdrasilAccount getAccount(String user, String pass) {
+        assert user != null && pass != null;
         YggdrasilAccount account = new YggdrasilAccount();
-        account.account=user;
-        account.password=pass;
+        account.account = user;
+        account.password = pass;
         return account;
     }
+
     @Nonnull
     @Override
     public String account() {
@@ -56,9 +58,9 @@ public class YggdrasilAccount implements Account {
      */
     @Override
     public YggdrasilAuthentication signIn() throws AuthenticationException {
-        JsonObject object = AuthController.YGGDRASIL_AUTHENTICATION.authenticate("Minecraft",1,account,password, Game.CLIENT_TOKEN.toString(),true);
-        YggdrasilAuthentication auth = new YggdrasilAuthentication(this,object);
-        return (authentication=auth);
+        JsonObject object = AuthController.YGGDRASIL_AUTHENTICATION.authenticate("Minecraft", 1, account, password, Game.CLIENT_TOKEN.toString(), true);
+        YggdrasilAuthentication auth = new YggdrasilAuthentication(this, object);
+        return (authentication = auth);
     }
 
     @Nullable

@@ -41,6 +41,5 @@ public class CommandParser {
     }
     public String format(Command command) {
        return command.toString();
-   }
-
+    }
 }

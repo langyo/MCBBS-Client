@@ -16,13 +16,10 @@
 
 package net.mcbbs.client.main.client.command;
 
-import com.google.common.collect.Maps;
-
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
-public class Command implements ICommand{
+public class Command implements ICommand {
     private static final CommandParser DEFAULT_CPARSER = new CommandParser();
     private final String type;
     private final String pkgName;
@@ -58,7 +55,7 @@ public class Command implements ICommand{
         return args;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(type).append(" ").append(pkgName).append(" ").append(namespace).append(" ").append(method);
         for(String key:args){
