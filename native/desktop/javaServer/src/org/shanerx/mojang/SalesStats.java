@@ -22,60 +22,60 @@ package org.shanerx.mojang;
 @SuppressWarnings("unused")
 public class SalesStats {
 
-	private int total;
-	private int last24hrs;
-	private int salesPerSec;
-	
-	protected SalesStats(int total, int last24hrs, int salesPerSec) {
-		this.total = total;
-		this.last24hrs = last24hrs;
-		this.salesPerSec = salesPerSec;
-	}
+    private int total;
+    private int last24hrs;
+    private int salesPerSec;
 
-	/**
-	 * Gets the total amount of sales over time.
-	 *
-	 * @return all the sales made
-	 */
-	public int getTotal() {
-		return total;
-	}
+    protected SalesStats(int total, int last24hrs, int salesPerSec) {
+        this.total = total;
+        this.last24hrs = last24hrs;
+        this.salesPerSec = salesPerSec;
+    }
 
-	/**
-	 * Gets the sales made within the last 24 hours.
-	 *
-	 * @return the sales made today
-	 */
-	public int getLast24hrs() {
-		return last24hrs;
-	}
+    /**
+     * Gets the total amount of sales over time.
+     *
+     * @return all the sales made
+     */
+    public int getTotal() {
+        return total;
+    }
 
-	/**
-	 * Gets the sale rate, aka the average amount of sales in a second.
-	 *
-	 * @return the mean sale rate
-	 */
-	public int getSaleVelocityPerSeconds() {
-		return salesPerSec;
-	}
+    /**
+     * Gets the sales made within the last 24 hours.
+     *
+     * @return the sales made today
+     */
+    public int getLast24hrs() {
+        return last24hrs;
+    }
 
-	/**
-	 * This enum represents the possible options for the shop-API query.
-	 */
-	public enum Options {
-		ITEM_SOLD_MINECRAFT,
-		PREPAID_CARD_REDEEMED_MINECRAFT,
-		ITEM_SOLD_COBALT,
-		ITEM_SOLD_SCROLLS;
+    /**
+     * Gets the sale rate, aka the average amount of sales in a second.
+     *
+     * @return the mean sale rate
+     */
+    public int getSaleVelocityPerSeconds() {
+        return salesPerSec;
+    }
 
-		/**
-		 * Returns the string version of this enum, to be used when querying the API.
-		 *
-		 * @return the string
-		 */
-		@Override
-		public String toString() {
-			return name().toLowerCase();
-		}
-	}
+    /**
+     * This enum represents the possible options for the shop-API query.
+     */
+    public enum Options {
+        ITEM_SOLD_MINECRAFT,
+        PREPAID_CARD_REDEEMED_MINECRAFT,
+        ITEM_SOLD_COBALT,
+        ITEM_SOLD_SCROLLS;
+
+        /**
+         * Returns the string version of this enum, to be used when querying the API.
+         *
+         * @return the string
+         */
+        @Override
+        public String toString() {
+            return name().toLowerCase();
+        }
+    }
 }

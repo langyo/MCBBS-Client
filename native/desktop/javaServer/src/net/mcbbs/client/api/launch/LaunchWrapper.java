@@ -25,9 +25,9 @@ public abstract class LaunchWrapper implements Launcher {
     private final Launcher launcher;
     private final Class<? extends Tweaker> tweakClass;
 
-    public LaunchWrapper(@Nonnull Launcher launcher,Class<? extends Tweaker> tweakClass){
-        this.launcher=launcher;
-        this.tweakClass=tweakClass;
+    public LaunchWrapper(@Nonnull Launcher launcher, Class<? extends Tweaker> tweakClass) {
+        this.launcher = launcher;
+        this.tweakClass = tweakClass;
     }
 
     public abstract String wrapGenerateCommand(String command);

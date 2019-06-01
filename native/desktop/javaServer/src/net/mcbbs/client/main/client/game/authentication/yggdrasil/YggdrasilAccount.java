@@ -17,6 +17,33 @@
 package net.mcbbs.client.main.client.game.authentication.yggdrasil;
 
 import net.mcbbs.client.main.client.game.authentication.Account;
+import net.mcbbs.client.main.client.game.authentication.Authentication;
+import net.mcbbs.client.main.client.game.authentication.AuthenticationException;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class YggdrasilAccount implements Account {
+    @Nonnull
+    @Override
+    public String account() {
+        return null;
+    }
+
+    @Nonnull
+    @Override
+    public String password() {
+        return null;
+    }
+
+    @Override
+    public Authentication signIn() throws AuthenticationException {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Authentication getAuthentication() {
+        return null;
+    }
 }

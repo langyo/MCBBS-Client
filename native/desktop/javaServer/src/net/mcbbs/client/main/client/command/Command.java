@@ -20,7 +20,7 @@ import com.google.common.collect.Maps;
 
 import java.util.Map;
 
-public class Command implements ICommand{
+public class Command implements ICommand {
     private static final CommandParser DEFAULT_CPARSER = new CommandParser();
     private final String type;
     private final String pkgName;
@@ -28,12 +28,12 @@ public class Command implements ICommand{
     private final String method;
     private final Map<String, String> args;
 
-    public Command(String type, String pkgName, String namespace, String method, Map<String,String> args){
+    public Command(String type, String pkgName, String namespace, String method, Map<String, String> args) {
         this.type = type;
         this.pkgName = pkgName;
         this.namespace = namespace;
         this.method = method;
-        this.args = args==null? Maps.newHashMap():args;
+        this.args = args == null ? Maps.newHashMap() : args;
     }
 
     public String getType() {
@@ -56,10 +56,10 @@ public class Command implements ICommand{
         return args;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(type).append(" ").append(pkgName).append(" ").append(namespace).append(" ").append(method);
-        for(String key:args.keySet()){
+        for (String key : args.keySet()) {
             sb.append(" ").append("--").append(key).append("=").append(args.get(key));
         }
         return sb.toString();

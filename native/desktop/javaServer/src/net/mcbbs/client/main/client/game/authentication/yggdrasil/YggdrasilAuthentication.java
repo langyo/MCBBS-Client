@@ -16,7 +16,45 @@
 
 package net.mcbbs.client.main.client.game.authentication.yggdrasil;
 
+import net.mcbbs.client.main.client.game.authentication.Account;
 import net.mcbbs.client.main.client.game.authentication.Authentication;
 
+import java.util.Set;
+
 public class YggdrasilAuthentication implements Authentication {
+
+    @Override
+    public String accessToken() {
+        return null;
+    }
+
+    @Override
+    public String clientToken() {
+        return null;
+    }
+
+    @Override
+    public Set<UserProfile> profiles() {
+        return null;
+    }
+
+    @Override
+    public UserProfile selectedProfile() {
+        return null;
+    }
+
+    @Override
+    public void refresh() {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+    @Override
+    public Account getAccount() {
+        return null;
+    }
 }

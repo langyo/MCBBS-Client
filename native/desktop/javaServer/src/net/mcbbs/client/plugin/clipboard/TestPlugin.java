@@ -1,6 +1,5 @@
 package net.mcbbs.client.plugin.clipboard;
 
-import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.Plugin;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
@@ -42,7 +41,7 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
 
     @Plugin.SubscribeEvent(MappingEvent.Methods.class)
     public void onMappingMethod(MappingEvent.Methods event) throws NoSuchMethodException {
-        Util.INSTANCE=event.<TestPlugin, Util>registerMapper(TestPlugin.class, "testplugin_mapper", InvocationHandlerFactory.createDefault())
+        Util.INSTANCE = event.<TestPlugin, Util>registerMapper(TestPlugin.class, "testplugin_mapper", InvocationHandlerFactory.createDefault())
                 .mapMethod(Util.class.getDeclaredMethod("setClipboardContent", String.class), getClass().getDeclaredMethod("set", String.class), Function.identity(), this)
                 .mapMethod(Util.class.getDeclaredMethod("getClipboardContent"), getClass().getDeclaredMethod("get", String.class), Function.identity(), this)
                 .mapped(Util.class);
@@ -51,7 +50,7 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
     }
 
     @Plugin.SubscribeEvent(PluginConstructionEvent.ServiceMapping.class)
-    public void onServiceMapping(PluginConstructionEvent.ServiceMapping event){
+    public void onServiceMapping(PluginConstructionEvent.ServiceMapping event) {
         event.provides(this, TestPlugin.class, this);
     }
 
@@ -78,12 +77,15 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
     public static final class Util {
         private static Util INSTANCE = new Util();
         private static boolean initialized = false;
-        private static void init(Util INSTANCE){
-            Util.INSTANCE=INSTANCE;
+
+        private static void init(Util INSTANCE) {
+            Util.INSTANCE = INSTANCE;
         }
-        public static final Util get(){
+
+        public static final Util get() {
             return INSTANCE;
         }
+
         public String setClipboardContent(String str) {
             return "";
         }

@@ -24,12 +24,16 @@ import net.mcbbs.client.util.IOUtils;
 
 import java.io.IOException;
 import java.io.StringWriter;
+
 @Beta
 public enum AuthController {
     INSTANCE;
     public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = INSTANCE.new YggdrasilAuthentication();
+    final JsonParser parser = new JsonParser();
+
     public final class YggdrasilAuthentication implements IAuthenticatorYggdrasil {
         public static final String SERVER_ADDRESS = "authserver.mojang.com/";
+
         private JsonObject did(JsonObject argument, String method) throws AuthenticationException, IOException {
             JsonObject parsed = IOUtils.doPOST(SERVER_ADDRESS.concat(method), argument.getAsString(), "application/json", JsonObject.class);
             if (parsed.has("error")) {
@@ -49,13 +53,13 @@ public enum AuthController {
             try {
                 JsonObject jsonObject = new JsonObject();
                 JsonObject agent = new JsonObject();
-                agent.addProperty("name",name);
-                agent.addProperty("version",version);
-                jsonObject.add("agent",agent);
-                jsonObject.addProperty("username",username);
-                jsonObject.addProperty("password",password);
-                jsonObject.addProperty("clientToken",clientToken);
-                jsonObject.addProperty("requestUser",requestUser);
+                agent.addProperty("name", name);
+                agent.addProperty("version", version);
+                jsonObject.add("agent", agent);
+                jsonObject.addProperty("username", username);
+                jsonObject.addProperty("password", password);
+                jsonObject.addProperty("clientToken", clientToken);
+                jsonObject.addProperty("requestUser", requestUser);
                 return did(jsonObject, "authenticate");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
@@ -66,13 +70,13 @@ public enum AuthController {
         public JsonObject refresh(String accessToken, String clientToken, String id, String name, boolean requestUser) throws AuthenticationException {
             try {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("accessToken",accessToken);
-                jsonObject.addProperty("clientToken",clientToken);
+                jsonObject.addProperty("accessToken", accessToken);
+                jsonObject.addProperty("clientToken", clientToken);
                 JsonObject selectedProfile = new JsonObject();
-                selectedProfile.addProperty("id",id);
-                selectedProfile.addProperty("name",name);
-                jsonObject.add("selectedProfile",selectedProfile);
-                jsonObject.addProperty("requestUser",requestUser);
+                selectedProfile.addProperty("id", id);
+                selectedProfile.addProperty("name", name);
+                jsonObject.add("selectedProfile", selectedProfile);
+                jsonObject.addProperty("requestUser", requestUser);
                 return did(jsonObject, "refresh");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
@@ -83,8 +87,8 @@ public enum AuthController {
         public boolean validate(String accessToken, String clientToken) throws AuthenticationException {
             try {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("accessToken",accessToken);
-                jsonObject.addProperty("clientToken",clientToken);
+                jsonObject.addProperty("accessToken", accessToken);
+                jsonObject.addProperty("clientToken", clientToken);
                 return did(jsonObject, "validate").getAsString().isEmpty();
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
@@ -95,8 +99,8 @@ public enum AuthController {
         public void signout(String username, String password) throws AuthenticationException {
             try {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("username",username);
-                jsonObject.addProperty("password",password);
+                jsonObject.addProperty("username", username);
+                jsonObject.addProperty("password", password);
                 StringWriter stringWriter = new StringWriter();
                 did(jsonObject, "signout");
             } catch (IOException e) {
@@ -108,13 +112,12 @@ public enum AuthController {
         public void invalidate(String accessToken, String clientToken) throws AuthenticationException {
             try {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("accessToken",accessToken);
-                jsonObject.addProperty("clientToken",clientToken);
+                jsonObject.addProperty("accessToken", accessToken);
+                jsonObject.addProperty("clientToken", clientToken);
                 did(jsonObject, "invalidate");
             } catch (IOException e) {
                 throw new AuthenticationException("IOException:".concat(e.getMessage()), e);
             }
         }
     }
-    final JsonParser parser = new JsonParser();
 }

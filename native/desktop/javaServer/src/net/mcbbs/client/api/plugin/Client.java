@@ -66,6 +66,7 @@ public abstract class Client {
     @Inject
     @Named("command_manager")
     private static ICommandManager command_manager;
+
     private Client() {
     }
 

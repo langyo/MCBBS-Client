@@ -19,12 +19,11 @@ package net.mcbbs.client.main.client.command;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
-import java.util.Timer;
 
 public class CommandParser {
-    public Command parse(String command){
-        String[] strings = command.split(" ",5);
-        switch(strings[0]){
+    public Command parse(String command) {
+        String[] strings = command.split(" ", 5);
+        switch (strings[0]) {
             case "execute":
                 String[] options = strings[4].replaceAll("--", " ").split(" ");
                 Map<String, String> param = Maps.newHashMap();
@@ -34,20 +33,23 @@ public class CommandParser {
                     param.put(buf[0], buf[1]);
                 }
                 return new Command(strings[0], strings[1], strings[2], strings[3], param);
-             default:
-                 return null;
+            default:
+                return null;
         }
-   }
-   public CommandResult parseResult(String result){
-       String[] strings = result.split(" ",5);
-       if(!strings[0].contentEquals("data"))throw new IllegalArgumentException("result start with a non data type");
+    }
 
-   }
-   public String format(Command command) {
-       return command.toString();
-   }
-   public String format(CommandResult result) {
+    public CommandResult parseResult(String result) {
+        String[] strings = result.split(" ", 5);
+        if (!strings[0].contentEquals("data")) throw new IllegalArgumentException("result start with a non data type");
+
+    }
+
+    public String format(Command command) {
+        return command.toString();
+    }
+
+    public String format(CommandResult result) {
         return result.toString();
-   }
+    }
 
 }

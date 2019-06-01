@@ -16,7 +16,6 @@
 
 package net.mcbbs.client.main.client.game;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 

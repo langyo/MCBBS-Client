@@ -20,7 +20,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import javax.annotation.Nonnull;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,18 +31,19 @@ public class GameRoot implements IGameRoot {
     private final Path libraryIndex;
     private final Path nativeIndex;
     private final Path gameJar;
-    protected GameRoot(@Nonnull Path configJson) throws IOException,InvaildGameException {
-        this.configJson=configJson;
+
+    protected GameRoot(@Nonnull Path configJson) throws IOException, InvalidGameException {
+        this.configJson = configJson;
         JsonParser jsonParser = new JsonParser();
         JsonObject parsed = jsonParser.parse(Files.newBufferedReader(configJson)).getAsJsonObject();
-        if(parsed.has("inheritsFrom")||!parsed.get("mainClass").getAsString().contentEquals("net.minecraft.client.main.Main")){
+        if (parsed.has("inheritsFrom") || !parsed.get("mainClass").getAsString().contentEquals("net.minecraft.client.main.Main")) {
             String id = parsed.get("id").getAsString();
-            if(id.contains("fabric"))gameType = Game.Type.FABRIC;
-            else if(id.contains("forge"))gameType = Game.Type.FORGE;
-            else if(id.contains("optifine"))gameType = Game.Type.OPTIFINE;
-            //else if(id.contains("modloader"))gameType = Game.Type.MODLOADER;
-            else throw new InvaildGameException("Unable to identity game type:".concat(id));
-        }else gameType = Game.Type.VANILLA;
+            if (id.contains("fabric")) gameType = Game.Type.FABRIC;
+            else if (id.contains("forge")) gameType = Game.Type.FORGE;
+            else if (id.contains("optifine")) gameType = Game.Type.OPTIFINE;
+                //else if(id.contains("modloader"))gameType = Game.Type.MODLOADER;
+            else throw new InvalidGameException("Unable to identity game type:".concat(id));
+        } else gameType = Game.Type.VANILLA;
 
         assetsIndex = null;
         libraryIndex = null;
