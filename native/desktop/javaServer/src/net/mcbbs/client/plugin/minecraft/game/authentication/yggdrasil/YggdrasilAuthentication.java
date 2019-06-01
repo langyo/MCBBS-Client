@@ -14,7 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication.yggdrasil;
+package net.mcbbs.client.plugin.minecraft.game.authentication.yggdrasil;
 
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
@@ -22,10 +22,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mcbbs.client.Constants;
-import net.mcbbs.client.main.client.game.Game;
-import net.mcbbs.client.main.client.game.authentication.AuthController;
-import net.mcbbs.client.main.client.game.authentication.Authentication;
-import net.mcbbs.client.main.client.game.authentication.AuthenticationException;
+import net.mcbbs.client.plugin.minecraft.game.Game;
+import net.mcbbs.client.plugin.minecraft.game.authentication.AuthController;
+import net.mcbbs.client.plugin.minecraft.game.authentication.Authentication;
+import net.mcbbs.client.plugin.minecraft.game.authentication.AuthenticationException;
 
 import java.util.Iterator;
 import java.util.Map;

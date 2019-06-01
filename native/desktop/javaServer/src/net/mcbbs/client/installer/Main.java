@@ -26,13 +26,13 @@ import java.io.IOException;
 @Deprecated
 public class Main extends Application {
     public static final Main INSTANCE = new Main();
-    public final Scene INSTALL;
-    public final Scene WELCOME;
-    public final Scene EXIT_DIALOG;
-    public final Scene LICENSE;
-    public Stage PRIMARY_STAGE;
+    private final Scene INSTALL;
+    private final Scene WELCOME;
+    private final Scene EXIT_DIALOG;
+    private final Scene LICENSE;
+    private Stage PRIMARY_STAGE;
 
-    public Main() {
+    private Main() {
         Scene VAR;
         try {
             VAR = new Scene(FXMLLoader.load(getClass().getResource("assets/mcbbsclient/installer/fxml/WelcomePage.fxml")), 600, 400);
@@ -87,13 +87,13 @@ public class Main extends Application {
      *                     primary stages and will not be embedded in the browser.
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         PRIMARY_STAGE = primaryStage;
         PRIMARY_STAGE.setScene(WELCOME);
         PRIMARY_STAGE.show();
     }
 
-    public void changeScene(Scene scene) {
+    void changeScene(Scene scene) {
         PRIMARY_STAGE.close();
         PRIMARY_STAGE.setScene(scene);
         PRIMARY_STAGE.show();

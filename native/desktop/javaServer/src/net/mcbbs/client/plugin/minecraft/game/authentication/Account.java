@@ -14,7 +14,7 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client.plugin.minecraft.game.authentication;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

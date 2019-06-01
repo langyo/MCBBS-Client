@@ -14,21 +14,21 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game;
+package net.mcbbs.client.plugin.minecraft.game.authentication;
 
-public class InvalidGameException extends Exception {
-    public InvalidGameException() {
+public class AuthenticationException extends Exception {
+    public AuthenticationException() {
     }
 
-    public InvalidGameException(String msg) {
-        super(msg);
+    public AuthenticationException(String message) {
+        super(message);
     }
 
-    public InvalidGameException(String msg, Throwable cause) {
-        super(msg, cause);
+    public AuthenticationException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public InvalidGameException(Throwable cause) {
+    public AuthenticationException(Throwable cause) {
         super(cause);
     }
 }

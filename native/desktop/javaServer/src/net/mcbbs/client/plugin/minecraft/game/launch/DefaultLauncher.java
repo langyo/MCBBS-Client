@@ -1,5 +1,5 @@
 /*
-  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,8 +14,14 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game;
+package net.mcbbs.client.plugin.minecraft.game.launch;
 
-public class GameRepo {
+import net.mcbbs.client.plugin.minecraft.game.GameRoot;
 
+public class DefaultLauncher implements Launcher {
+
+    @Override
+    public String generateLaunchCommand(GameRoot root) {
+        return null;
+    }
 }

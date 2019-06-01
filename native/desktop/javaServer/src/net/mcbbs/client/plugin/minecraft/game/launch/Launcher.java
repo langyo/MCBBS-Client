@@ -1,5 +1,5 @@
 /*
-   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,33 +14,20 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game;
+package net.mcbbs.client.plugin.minecraft.game.launch;
+
+import net.mcbbs.client.plugin.minecraft.game.GameRoot;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
-/**
- * 游戏的主要路径(?)
- */
-public interface IGameRoot {
-    /**
-     * 获得游戏类型
-     * @see Game.Type
-     * @return
-     */
-    Game.Type gameType();
+public interface Launcher {
+    String generateLaunchCommand(GameRoot root);
 
-    Path assetsIndex();
+    default ProcessBuilder buildProcess(GameRoot root) {
+        return new ProcessBuilder("cmd", "/c", generateLaunchCommand(root));
+    }
 
-    Path libraryIndex();
-
-    Path nativeIndex();
-
-    Path gameJar();
-
-    Path configJson();
-
-    boolean checkLibrary() throws IOException;
-
-    boolean checkAssets() throws IOException;
+    default Process launch(GameRoot root) throws IOException {
+        return buildProcess(root).inheritIO().start();
+    }
 }

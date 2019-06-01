@@ -14,20 +14,8 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.launch;
+package net.mcbbs.client.plugin.minecraft.game;
 
-import net.mcbbs.client.main.client.game.GameRoot;
+public class GameRepo {
 
-import java.io.IOException;
-
-public interface Launcher {
-    String generateLaunchCommand(GameRoot root);
-
-    default ProcessBuilder buildProcess(GameRoot root) {
-        return new ProcessBuilder("cmd", "/c", generateLaunchCommand(root));
-    }
-
-    default Process launch(GameRoot root) throws IOException {
-        return buildProcess(root).inheritIO().start();
-    }
 }

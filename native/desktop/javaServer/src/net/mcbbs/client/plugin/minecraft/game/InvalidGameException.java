@@ -1,5 +1,5 @@
 /*
-   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,14 +14,21 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.launch;
+package net.mcbbs.client.plugin.minecraft.game;
 
-import net.mcbbs.client.main.client.game.GameRoot;
+public class InvalidGameException extends Exception {
+    public InvalidGameException() {
+    }
 
-public class DefaultLauncher implements Launcher {
+    public InvalidGameException(String msg) {
+        super(msg);
+    }
 
-    @Override
-    public String generateLaunchCommand(GameRoot root) {
-        return null;
+    public InvalidGameException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public InvalidGameException(Throwable cause) {
+        super(cause);
     }
 }

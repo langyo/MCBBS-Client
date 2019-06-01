@@ -17,7 +17,6 @@
 package net.mcbbs.client.main.client.command;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mcbbs.client.api.plugin.command.CommandResult;
@@ -25,13 +24,9 @@ import net.mcbbs.client.main.client.command.task.CommandTask;
 import net.mcbbs.client.main.client.net.WSClient;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-
-import static net.mcbbs.client.Constants.DEFAULT_PARSER;
 
 public final class CommandDispatcher {
     public static final ExecutorService SERVICE = Executors.newFixedThreadPool(16);

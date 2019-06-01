@@ -1,5 +1,5 @@
 /*
-  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,21 +14,33 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.game.authentication;
+package net.mcbbs.client.plugin.minecraft.game;
 
-public class AuthenticationException extends Exception {
-    public AuthenticationException() {
-    }
+import java.io.IOException;
+import java.nio.file.Path;
 
-    public AuthenticationException(String message) {
-        super(message);
-    }
+/**
+ * 游戏的主要路径(?)
+ */
+public interface IGameRoot {
+    /**
+     * 获得游戏类型
+     * @see Game.Type
+     * @return
+     */
+    Game.Type gameType();
 
-    public AuthenticationException(String message, Throwable cause) {
-        super(message, cause);
-    }
+    Path assetsIndex();
 
-    public AuthenticationException(Throwable cause) {
-        super(cause);
-    }
+    Path libraryIndex();
+
+    Path nativeIndex();
+
+    Path gameJar();
+
+    Path configJson();
+
+    boolean checkLibrary() throws IOException;
+
+    boolean checkAssets() throws IOException;
 }
