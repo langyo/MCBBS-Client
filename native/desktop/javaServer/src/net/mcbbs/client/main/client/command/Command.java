@@ -16,10 +16,13 @@
 
 package net.mcbbs.client.main.client.command;
 
+import com.google.gson.JsonObject;
+import net.mcbbs.client.Constants;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
+import static net.mcbbs.client.Constants.*;
 public class Command {
     private static final CommandParser DEFAULT_CPARSER = new CommandParser();
     private final CommandType type;
@@ -71,6 +74,9 @@ public class Command {
         return DEFAULT_CPARSER.format(this);
     }
 
+    public JsonObject asGJson(){
+        return DEFAULT_PARSER.parse(asJson()).getAsJsonObject();
+    }
     public UUID getTaskId() {
         return taskId;
     }

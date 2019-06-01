@@ -16,25 +16,29 @@
 
 package net.mcbbs.client.main.client.net;
 
+import net.mcbbs.client.main.client.command.CommandDispatcher;
+import net.mcbbs.client.main.client.command.CommandParser;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 
 public class WSClient extends WebSocketClient {
-
-    public WSClient() {
+    public static final WSClient INSTANCE = new WSClient();
+    public CommandParser parser = new CommandParser();
+    private WSClient() {
         super(URI.create("localhost:2033"));
+        connect();
     }
 
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
-
+        System.out.println("Connection established:"+serverHandshake.getHttpStatus()+","+serverHandshake.getHttpStatusMessage());
     }
 
     @Override
     public void onMessage(String s) {
-
+        CommandDispatcher.DISPATCHER.dispatchAsync(parser.parse(s));
     }
 
     @Override

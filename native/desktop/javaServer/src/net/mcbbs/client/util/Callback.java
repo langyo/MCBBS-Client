@@ -1,5 +1,5 @@
 /*
-   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -14,14 +14,8 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.api.plugin.command;
+package net.mcbbs.client.util;
 
-public interface IPluginCommand<T, R> {
-    CommandResult<R> execute(T arg);
-
-    Class<T> argumentType();
-
-    String usage();
-
-    IPluginCommand childCommand(String child);
+public interface Callback<T> {
+    void callback(T arg);
 }

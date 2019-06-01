@@ -32,8 +32,7 @@ public class Launcher {
         PluginLoader loader = new FileBasedPluginLoader();
         loader.loadPlugin("../../plugin");
         Game.init();
-        WebSocketClient wsclient = new WSClient();
-        wsclient.connect();
+        WSClient.INSTANCE.connect();
     }
 
     public static PluginLoader getLoader() {

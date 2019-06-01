@@ -17,16 +17,18 @@
 package net.mcbbs.client.api.plugin.command;
 
 import com.google.common.collect.Lists;
+import net.mcbbs.client.main.client.command.Command;
 
 import java.util.List;
 
 public class CommandResult<R> {
     private final CommandResultType type;
     private final List<? extends R> result;
-
-    public CommandResult(CommandResultType type, R... result){
+    private final Command command;
+    public CommandResult(Command command,CommandResultType type, R... result){
         this.type = type;
         this.result = Lists.newArrayList(result);
+        this.command = command;
     }
 
     public CommandResultType getType() {
@@ -35,5 +37,9 @@ public class CommandResult<R> {
 
     public List<? extends R> getResult() {
         return result;
+    }
+
+    public Command getCommand() {
+        return command;
     }
 }

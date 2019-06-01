@@ -16,7 +16,10 @@
 
 package net.mcbbs.client.main.client.command;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.mcbbs.client.main.client.command.task.CommandTask;
+import net.mcbbs.client.main.client.net.WSClient;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,7 +34,16 @@ public final class CommandDispatcher {
     public final void dispatchAsync(Command command) {
         switch (command.getType()) {
             case EXECUTE:
-                service.submit(new CommandTask(command));
+                service.submit(new CommandTask(command).callback(arg-> {
+                    JsonObject jsonObject = arg.getCommand().asGJson();
+                    JsonArray array = jsonObject.getAsJsonArray("args");
+                    for(Object thing:arg.getResult()){
+                        array.add(thing.toString());
+                    }
+                    jsonObject.remove("args");
+                    jsonObject.add("args",array);
+                    WSClient.INSTANCE.send(jsonObject.toString());
+                }));
             case DATA:
 
                 break;

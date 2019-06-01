@@ -16,13 +16,19 @@
 
 package net.mcbbs.client.main.client.command.task;
 
+import com.google.common.collect.Sets;
 import net.mcbbs.client.api.plugin.Client;
+import net.mcbbs.client.api.plugin.command.CommandResult;
 import net.mcbbs.client.main.client.command.Command;
+import net.mcbbs.client.util.Callback;
 
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-public class CommandTask extends FutureTask {
+public class CommandTask extends FutureTask<CommandResult> {
     private final Command command;
+    private final Set<Callback<CommandResult>> callbacks = Sets.newHashSet();
     public CommandTask(Command cmd){
         super(()-> Client.getCommandManager().require(cmd.getPkgName(),cmd.getNamespace()).childCommand(cmd.getMethod()).execute(cmd.getArgs()));
         this.command = cmd;
@@ -30,5 +36,20 @@ public class CommandTask extends FutureTask {
 
     public Command getCommand() {
         return command;
+    }
+
+    public CommandTask callback(Callback<CommandResult> callback){
+        callbacks.add(callback);
+        return this;
+    }
+    public void run(){
+        super.run();
+        callbacks.forEach(cb-> {
+            try {
+                cb.callback(get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
