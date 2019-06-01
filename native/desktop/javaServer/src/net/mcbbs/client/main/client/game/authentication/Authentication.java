@@ -16,19 +16,13 @@
 
 package net.mcbbs.client.main.client.game.authentication;
 
+import com.google.gson.JsonObject;
+
 import java.util.Map;
 import java.util.Set;
 
-public interface Authentication {
-    interface UserProfile{
-        String id();
-        String name();
-        boolean legacy();
-    }
-    interface User{
-        String id();
-        Map<String,String> properties();
-    }
+public interface Authentication<T extends Account> {
+
     /**
      * {
      *     "accessToken": "random access token",      // hexadecimal
@@ -74,5 +68,19 @@ public interface Authentication {
 
     void destroy();
 
-    Account getAccount();
+    T getAccount();
+
+    User getUser();
+
+    interface UserProfile{
+        String id();
+        String name();
+        boolean legacy();
+    }
+
+    interface User{
+        String id();
+        Map<String,String> properties();
+        String getProperty(String key);
+    }
 }

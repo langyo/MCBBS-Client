@@ -25,10 +25,9 @@ import net.mcbbs.client.util.IOUtils;
 import java.io.IOException;
 import java.io.StringWriter;
 @Beta
-public enum AuthController {
-    INSTANCE;
-    public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = INSTANCE.new YggdrasilAuthentication();
-    public final class YggdrasilAuthentication implements IAuthenticatorYggdrasil {
+public class AuthController {
+    public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = new YggdrasilAuthentication();
+    public static final class YggdrasilAuthentication implements IAuthenticatorYggdrasil {
         public static final String SERVER_ADDRESS = "authserver.mojang.com/";
         private JsonObject did(JsonObject argument, String method) throws AuthenticationException, IOException {
             JsonObject parsed = IOUtils.doPOST(SERVER_ADDRESS.concat(method), argument.getAsString(), "application/json", JsonObject.class);
@@ -117,4 +116,5 @@ public enum AuthController {
         }
     }
     final JsonParser parser = new JsonParser();
+    private AuthController() throws NoSuchMethodException {throw new NoSuchMethodException();}
 }
