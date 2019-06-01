@@ -48,9 +48,11 @@ public class CommandTask extends FutureTask<CommandResult> {
         callbacks.add(callback);
         return this;
     }
-    public void run(){
+
+    @Override
+    public void run() {
         super.run();
-        callbacks.forEach(cb-> {
+        callbacks.forEach(cb -> {
             try {
                 Map<String,Object> map = Maps.newHashMap();
                 map.put("result",get());

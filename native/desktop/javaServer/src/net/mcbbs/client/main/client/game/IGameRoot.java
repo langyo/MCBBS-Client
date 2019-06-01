@@ -19,8 +19,15 @@ package net.mcbbs.client.main.client.game;
 import java.io.IOException;
 import java.nio.file.Path;
 
+/**
+ * 游戏的主要路径(?)
+ */
 public interface IGameRoot {
-
+    /**
+     * 获得游戏类型
+     * @see Game.Type
+     * @return
+     */
     Game.Type gameType();
 
     Path assetsIndex();

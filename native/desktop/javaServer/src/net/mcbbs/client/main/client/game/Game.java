@@ -48,9 +48,18 @@ public final class Game {
     }
 
     public enum Type {
+        /**
+         * 原版(像草)
+         */
         VANILLA,
+        /**
+         * forge
+         */
         FORGE,
         @Deprecated MODLOADER,
+        /**
+         * optifine(高清修复)
+         */
         OPTIFINE,
         @Beta FABRIC
     }

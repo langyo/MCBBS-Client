@@ -28,8 +28,9 @@ public class PluginMetadata {
     public final List<String> collaborators;
 
     public PluginMetadata(PluginLoader invoker, String id, String version, String name, String description, String url, String updateUrl, String serverUrl, String author, String... collaborators) {
-        if (invoker == null)
+        if (invoker == null) {
             throw new UnsupportedOperationException("Cannot instantiate PluginMetadata outside the package!");
+        }
         this.id = id;
         this.version = version;
         this.name = name;

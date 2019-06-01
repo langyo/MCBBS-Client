@@ -55,7 +55,7 @@ public interface Authentication<T extends Account> {
      *
      * @throws AuthenticationException If problem found or authentication failed.
      */
-    String accessToken();
+    String accessToken() throws AuthenticationException;
 
     String clientToken();
 

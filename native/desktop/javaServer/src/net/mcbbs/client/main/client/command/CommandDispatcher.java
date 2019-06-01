@@ -54,17 +54,18 @@ public final class CommandDispatcher {
                         array.add(thing.toString());
                     }
                     jsonObject.remove("args");
-                    jsonObject.add("args",array);
+                    jsonObject.add("args", array);
                     WSClient.INSTANCE.send(jsonObject.toString());
                     TASKS.stream().filter(task->task.getTaskId().equals(taskid)).findAny().ifPresent(TASKS::remove);
                 });
                 TASKS.add(ct);
                 SERVICE.submit(ct);
             case DATA:
-
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
     }
 

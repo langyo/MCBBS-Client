@@ -22,6 +22,9 @@ import net.mcbbs.client.util.InvocationHandlerFactory;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+/**
+ * @author
+ */
 public interface MapperManager extends Cloneable {
     @Nonnull
     String id();
