@@ -16,38 +16,31 @@
 
 package net.mcbbs.client.main.client.command;
 
-import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import net.mcbbs.client.Constants;
 
-import java.util.Map;
-import java.util.Timer;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class CommandParser {
     public Command parse(String command){
-        String[] strings = command.split(" ",5);
-        switch(strings[0]){
-            case "execute":
-                String[] options = strings[4].replaceAll("--", " ").split(" ");
-                Map<String, String> param = Maps.newHashMap();
-                String[] buf;
-                for (String option : options) {
-                    buf = option.split("=", 2);
-                    param.put(buf[0], buf[1]);
-                }
-                return new Command(strings[0], strings[1], strings[2], strings[3], param);
-             default:
-                 return null;
-        }
-   }
-   public CommandResult parseResult(String result){
-       String[] strings = result.split(" ",5);
-       if(!strings[0].contentEquals("data"))throw new IllegalArgumentException("result start with a non data type");
-
-   }
-   public String format(Command command) {
+        JsonParser jp = Constants.DEFAULT_PARSER;
+        JsonObject cmd = jp.parse(command).getAsJsonObject();
+        return new Command(
+                cmd.get("type").getAsString()
+                ,cmd.get("module").getAsString(),
+                cmd.get("namespace").getAsString(),
+                cmd.get("method").getAsString(),
+                StreamSupport
+                        .stream(cmd.getAsJsonArray("args").spliterator(),false)
+                        .map(JsonElement::getAsString)
+                        .collect(Collectors.toList())
+        );
+    }
+    public String format(Command command) {
        return command.toString();
-   }
-   public String format(CommandResult result) {
-        return result.toString();
    }
 
 }

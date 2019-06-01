@@ -18,6 +18,8 @@ package net.mcbbs.client.main.client.command;
 
 import com.google.common.collect.Maps;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class Command implements ICommand{
@@ -26,14 +28,14 @@ public class Command implements ICommand{
     private final String pkgName;
     private final String namespace;
     private final String method;
-    private final Map<String, String> args;
+    private final List<String> args;
 
-    public Command(String type, String pkgName, String namespace, String method, Map<String,String> args){
+    public Command(String type, String pkgName, String namespace, String method, List<String> args){
         this.type = type;
         this.pkgName = pkgName;
         this.namespace = namespace;
         this.method = method;
-        this.args = args==null? Maps.newHashMap():args;
+        this.args = args==null? Collections.emptyList() :args;
     }
 
     public String getType() {
@@ -52,16 +54,20 @@ public class Command implements ICommand{
         return method;
     }
 
-    public Map<String, String> getArgs() {
+    public List<String> getArgs() {
         return args;
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(type).append(" ").append(pkgName).append(" ").append(namespace).append(" ").append(method);
-        for(String key:args.keySet()){
-            sb.append(" ").append("--").append(key).append("=").append(args.get(key));
+        for(String key:args){
+            sb.append(" ").append(key);
         }
         return sb.toString();
+    }
+
+    public String asJson(){
+        return DEFAULT_CPARSER.format(this);
     }
 }

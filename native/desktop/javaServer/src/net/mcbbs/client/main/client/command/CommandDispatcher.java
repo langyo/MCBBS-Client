@@ -21,7 +21,7 @@ import net.mcbbs.client.api.plugin.Client;
 public final class CommandDispatcher {
     public static final CommandDispatcher DISPATCHER = new CommandDispatcher();
     private CommandDispatcher(){}
-    public final CommandResult dispatch(Command command){
+    public final Command dispatch(Command command){
         switch (command.getType()){
             case "execute":
                 Client.getCommandManager().require(command.getNamespace()).childCommand(command.getMethod()).execute()
