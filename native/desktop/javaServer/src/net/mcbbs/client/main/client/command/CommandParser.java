@@ -20,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.mcbbs.client.Constants;
+import net.mcbbs.client.util.TypeUtils;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -29,14 +30,15 @@ public class CommandParser {
         JsonParser jp = Constants.DEFAULT_PARSER;
         JsonObject cmd = jp.parse(command).getAsJsonObject();
         return new Command(
-                cmd.get("type").getAsString()
-                ,cmd.get("module").getAsString(),
+                CommandType.valueOf(cmd.get("type").getAsString().toUpperCase()),
+                cmd.get("module").getAsString(),
                 cmd.get("namespace").getAsString(),
                 cmd.get("method").getAsString(),
                 StreamSupport
                         .stream(cmd.getAsJsonArray("args").spliterator(),false)
                         .map(JsonElement::getAsString)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                TypeUtils.UUID.parseUUID(cmd.get("id").getAsString())
         );
     }
     public String format(Command command) {

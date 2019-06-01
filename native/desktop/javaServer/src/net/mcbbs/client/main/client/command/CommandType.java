@@ -16,27 +16,11 @@
 
 package net.mcbbs.client.main.client.command;
 
-import net.mcbbs.client.main.client.command.task.CommandTask;
+public enum CommandType {
+    EXECUTE,DATA;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-public final class CommandDispatcher {
-    public static ExecutorService service = Executors.newFixedThreadPool(16);
-    public static final CommandDispatcher DISPATCHER = new CommandDispatcher();
-
-    private CommandDispatcher() {
-    }
-
-    public final void dispatchAsync(Command command) {
-        switch (command.getType()) {
-            case EXECUTE:
-                service.submit(new CommandTask(command));
-            case DATA:
-
-                break;
-            default:
-                break;
-        }
+    @Override
+    public String toString() {
+        return name().toLowerCase();
     }
 }

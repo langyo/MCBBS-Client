@@ -1,5 +1,5 @@
 /*
-   Copyright 2019 langyo<langyo.china@gmail.com> and contributors
+  Copyright 2019 langyo<langyo.china@gmail.com> and contributors
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -16,12 +16,24 @@
 
 package net.mcbbs.client.api.plugin.command;
 
-public interface IPluginCommand<T, R extends String> {
-    CommandResult<R> execute(T arg);
+import com.google.common.collect.Lists;
 
-    Class<T> argumentType();
+import java.util.List;
 
-    String usage();
+public class CommandResult<R> {
+    private final CommandResultType type;
+    private final List<? extends R> result;
 
-    IPluginCommand childCommand(String child);
+    public CommandResult(CommandResultType type, R... result){
+        this.type = type;
+        this.result = Lists.newArrayList(result);
+    }
+
+    public CommandResultType getType() {
+        return type;
+    }
+
+    public List<? extends R> getResult() {
+        return result;
+    }
 }

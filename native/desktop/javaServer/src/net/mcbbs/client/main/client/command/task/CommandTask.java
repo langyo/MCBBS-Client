@@ -14,7 +14,21 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.main.client.command;
+package net.mcbbs.client.main.client.command.task;
 
-public interface ICommand {
+import net.mcbbs.client.api.plugin.Client;
+import net.mcbbs.client.main.client.command.Command;
+
+import java.util.concurrent.FutureTask;
+
+public class CommandTask extends FutureTask {
+    private final Command command;
+    public CommandTask(Command cmd){
+        super(()-> Client.getCommandManager().require(cmd.getPkgName(),cmd.getNamespace()).childCommand(cmd.getMethod()).execute(cmd.getArgs()));
+        this.command = cmd;
+    }
+
+    public Command getCommand() {
+        return command;
+    }
 }

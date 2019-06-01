@@ -18,24 +18,27 @@ package net.mcbbs.client.main.client.command;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
-public class Command implements ICommand {
+public class Command {
     private static final CommandParser DEFAULT_CPARSER = new CommandParser();
-    private final String type;
+    private final CommandType type;
     private final String pkgName;
     private final String namespace;
     private final String method;
     private final List<String> args;
+    private final UUID taskId;
 
-    public Command(String type, String pkgName, String namespace, String method, List<String> args){
+    public Command(CommandType type, String pkgName, String namespace, String method, List<String> args, UUID taskId){
         this.type = type;
         this.pkgName = pkgName;
         this.namespace = namespace;
         this.method = method;
         this.args = args==null? Collections.emptyList() :args;
+        this.taskId = taskId;
     }
 
-    public String getType() {
+    public CommandType getType() {
         return type;
     }
 
@@ -66,5 +69,9 @@ public class Command implements ICommand {
 
     public String asJson(){
         return DEFAULT_CPARSER.format(this);
+    }
+
+    public UUID getTaskId() {
+        return taskId;
     }
 }
