@@ -19,7 +19,8 @@ package net.mcbbs.client.main.client.game.authentication;
 import java.util.Map;
 import java.util.Set;
 
-public interface Authentication {
+public interface Authentication<T extends Account> {
+
     /**
      * {
      * "accessToken": "random access token",      // hexadecimal
@@ -66,7 +67,9 @@ public interface Authentication {
 
     void destroy();
 
-    Account getAccount();
+    T getAccount();
+
+    User getUser();
 
     interface UserProfile {
         String id();
@@ -80,5 +83,7 @@ public interface Authentication {
         String id();
 
         Map<String, String> properties();
+
+        String getProperty(String key);
     }
 }

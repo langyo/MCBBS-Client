@@ -26,12 +26,15 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 @Beta
-public enum AuthController {
-    INSTANCE;
-    public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = INSTANCE.new YggdrasilAuthentication();
+public final class AuthController {
+    public static final YggdrasilAuthentication YGGDRASIL_AUTHENTICATION = new YggdrasilAuthentication();
     final JsonParser parser = new JsonParser();
 
-    public final class YggdrasilAuthentication implements IAuthenticatorYggdrasil {
+    private AuthController() throws NoSuchMethodException {
+        throw new NoSuchMethodException();
+    }
+
+    public static final class YggdrasilAuthentication implements IAuthenticatorYggdrasil {
         public static final String SERVER_ADDRESS = "authserver.mojang.com/";
 
         private JsonObject did(JsonObject argument, String method) throws AuthenticationException, IOException {

@@ -20,7 +20,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.commons.codec.binary.Base64;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 

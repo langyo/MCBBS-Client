@@ -22,9 +22,11 @@ import org.shanerx.mojang.Mojang;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.UUID;
 
 public final class Game {
     public static final Mojang MOJANG = new Mojang();
+    public static final UUID CLIENT_TOKEN = UUID.randomUUID();
     private static boolean INITIALIZED = false;
 
     static {
@@ -32,6 +34,7 @@ public final class Game {
     }
 
     public static void init() {
+        if (INITIALIZED) throw new IllegalStateException("Has already initialized:n.m.c.m.client.game.Game");
         MOJANG.connect();
         INITIALIZED = true;
     }

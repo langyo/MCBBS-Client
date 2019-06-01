@@ -16,34 +16,56 @@
 
 package net.mcbbs.client.main.client.game.authentication.yggdrasil;
 
+import com.google.gson.JsonObject;
+import net.mcbbs.client.main.client.game.Game;
 import net.mcbbs.client.main.client.game.authentication.Account;
-import net.mcbbs.client.main.client.game.authentication.Authentication;
+import net.mcbbs.client.main.client.game.authentication.AuthController;
 import net.mcbbs.client.main.client.game.authentication.AuthenticationException;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class YggdrasilAccount implements Account {
+    private String account;
+    private String password;
+    private YggdrasilAuthentication authentication;
+
+    public static YggdrasilAccount getAccount(String user, String pass) {
+        assert user != null && pass != null;
+        YggdrasilAccount account = new YggdrasilAccount();
+        account.account = user;
+        account.password = pass;
+        return account;
+    }
+
     @Nonnull
     @Override
     public String account() {
-        return null;
+        return account;
     }
 
     @Nonnull
     @Override
     public String password() {
-        return null;
+        return password;
     }
 
+    /**
+     * Authenticate with info in Account.
+     *
+     * @return Authentication result.
+     * @throws AuthenticationException when Authenticating failed.
+     */
     @Override
-    public Authentication signIn() throws AuthenticationException {
-        return null;
+    public YggdrasilAuthentication signIn() throws AuthenticationException {
+        JsonObject object = AuthController.YGGDRASIL_AUTHENTICATION.authenticate("Minecraft", 1, account, password, Game.CLIENT_TOKEN.toString(), true);
+        YggdrasilAuthentication auth = new YggdrasilAuthentication(this, object);
+        return (authentication = auth);
     }
 
     @Nullable
     @Override
-    public Authentication getAuthentication() {
-        return null;
+    public YggdrasilAuthentication getAuthentication() {
+        return authentication;
     }
 }
