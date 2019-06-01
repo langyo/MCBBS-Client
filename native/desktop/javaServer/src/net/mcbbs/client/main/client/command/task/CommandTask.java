@@ -29,8 +29,9 @@ import java.util.concurrent.FutureTask;
 public class CommandTask extends FutureTask<CommandResult> {
     private final Command command;
     private final Set<Callback<CommandResult>> callbacks = Sets.newHashSet();
-    public CommandTask(Command cmd){
-        super(()-> Client.getCommandManager().require(cmd.getPkgName(),cmd.getNamespace()).childCommand(cmd.getMethod()).execute(cmd.getArgs()));
+
+    public CommandTask(Command cmd) {
+        super(() -> Client.getCommandManager().require(cmd.getPkgName(), cmd.getNamespace()).childCommand(cmd.getMethod()).execute(cmd.getArgs()));
         this.command = cmd;
     }
 
@@ -38,13 +39,15 @@ public class CommandTask extends FutureTask<CommandResult> {
         return command;
     }
 
-    public CommandTask callback(Callback<CommandResult> callback){
+    public CommandTask callback(Callback<CommandResult> callback) {
         callbacks.add(callback);
         return this;
     }
-    public void run(){
+
+    @Override
+    public void run() {
         super.run();
-        callbacks.forEach(cb-> {
+        callbacks.forEach(cb -> {
             try {
                 cb.callback(get());
             } catch (InterruptedException | ExecutionException e) {

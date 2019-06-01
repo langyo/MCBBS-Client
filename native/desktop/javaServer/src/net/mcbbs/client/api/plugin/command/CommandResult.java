@@ -21,20 +21,41 @@ import net.mcbbs.client.main.client.command.Command;
 
 import java.util.List;
 
+/**
+ * 执行结果与原因结合和类
+ *
+ * @param <R> 命令执行结果的参数类型
+ * @author yinyangshi InitAuther97
+ */
 public class CommandResult<R> {
     private final CommandResultType type;
     private final List<? extends R> result;
     private final Command command;
-    public CommandResult(Command command,CommandResultType type, R... result){
+
+    /**
+     *
+     * @param command 执行的命令
+     * @param type 命令结果类型
+     * @param result 命令返回的结果参数
+     */
+    public CommandResult(Command command, CommandResultType type, R... result) {
         this.type = type;
         this.result = Lists.newArrayList(result);
         this.command = command;
     }
 
+    /**
+     * 获得命令结果Type
+     * @return the type of the command
+     */
     public CommandResultType getType() {
         return type;
     }
 
+    /**
+     * 获得命令结果的返回值
+     * @return the list of the result, not the copy.
+     */
     public List<? extends R> getResult() {
         return result;
     }

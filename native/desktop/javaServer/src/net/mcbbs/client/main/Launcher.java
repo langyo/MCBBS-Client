@@ -20,7 +20,6 @@ import net.mcbbs.client.main.client.game.Game;
 import net.mcbbs.client.main.client.net.WSClient;
 import net.mcbbs.client.main.client.plugin.loading.FileBasedPluginLoader;
 import net.mcbbs.client.main.client.plugin.loading.PluginLoader;
-import org.java_websocket.client.WebSocketClient;
 
 /**
  * @author yinyangshi InitAuther97

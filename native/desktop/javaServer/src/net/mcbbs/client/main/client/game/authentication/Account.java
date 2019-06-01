@@ -25,10 +25,17 @@ import javax.annotation.Nullable;
  * @author InitAuther97
  */
 public interface Account {
-
+    /**
+     * 获得账号
+     * @return the account
+     */
     @Nonnull
     String account();
 
+    /**
+     * 获得账号的密码
+     * @return the string of the password
+     */
     @Nonnull
     String password();
 

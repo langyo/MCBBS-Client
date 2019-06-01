@@ -25,30 +25,33 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public final class CommandDispatcher {
-    public static ExecutorService service = Executors.newFixedThreadPool(16);
     public static final CommandDispatcher DISPATCHER = new CommandDispatcher();
+    public static ExecutorService service = Executors.newFixedThreadPool(16);
 
     private CommandDispatcher() {
     }
 
     public final void dispatchAsync(Command command) {
         switch (command.getType()) {
-            case EXECUTE:
-                service.submit(new CommandTask(command).callback(arg-> {
+            case EXECUTE: {
+                service.submit(new CommandTask(command).callback(arg -> {
                     JsonObject jsonObject = arg.getCommand().asGJson();
                     JsonArray array = jsonObject.getAsJsonArray("args");
-                    for(Object thing:arg.getResult()){
+                    for (Object thing : arg.getResult()) {
                         array.add(thing.toString());
                     }
                     jsonObject.remove("args");
-                    jsonObject.add("args",array);
+                    jsonObject.add("args", array);
                     WSClient.INSTANCE.send(jsonObject.toString());
                 }));
-            case DATA:
+            }
+            case DATA: {
 
                 break;
-            default:
+            }
+            default: {
                 break;
+            }
         }
     }
 }

@@ -17,5 +17,21 @@
 package net.mcbbs.client.api.plugin.command;
 
 public enum CommandResultType {
-    SUCCESS,FAIL,DENY,IGNORE
+    /**
+     * 成功执行命令
+     */
+    SUCCESS,
+
+    /**
+     * 命令执行失败
+     */
+    FAIL,
+    /**
+     * 命令被拒绝执行
+     */
+    DENY,
+    /**
+     * 该命令被无视了
+     */
+    IGNORE
 }
