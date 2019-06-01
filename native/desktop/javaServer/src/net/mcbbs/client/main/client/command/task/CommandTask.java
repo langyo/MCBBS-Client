@@ -16,29 +16,35 @@
 
 package net.mcbbs.client.main.client.command.task;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.mcbbs.client.api.plugin.Client;
 import net.mcbbs.client.api.plugin.command.CommandResult;
 import net.mcbbs.client.main.client.command.Command;
 import net.mcbbs.client.util.Callback;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 public class CommandTask extends FutureTask<CommandResult> {
     private final Command command;
-    private final Set<Callback<CommandResult>> callbacks = Sets.newHashSet();
-    public CommandTask(Command cmd){
+    private final Set<Callback<Map<String,Object>>> callbacks = Sets.newHashSet();
+    private final UUID taskId;
+
+    public CommandTask(Command cmd, UUID taskId){
         super(()-> Client.getCommandManager().require(cmd.getPkgName(),cmd.getNamespace()).childCommand(cmd.getMethod()).execute(cmd.getArgs()));
         this.command = cmd;
+        this.taskId=taskId;
     }
 
     public Command getCommand() {
         return command;
     }
 
-    public CommandTask callback(Callback<CommandResult> callback){
+    public CommandTask callback(Callback<Map<String,Object>> callback){
         callbacks.add(callback);
         return this;
     }
@@ -46,10 +52,17 @@ public class CommandTask extends FutureTask<CommandResult> {
         super.run();
         callbacks.forEach(cb-> {
             try {
-                cb.callback(get());
+                Map<String,Object> map = Maps.newHashMap();
+                map.put("result",get());
+                map.put("taskId",taskId);
+                cb.callback(map);
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         });
+    }
+
+    public UUID getTaskId() {
+        return taskId;
     }
 }

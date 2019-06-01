@@ -30,15 +30,12 @@ public class Command {
     private final String namespace;
     private final String method;
     private final List<String> args;
-    private final UUID taskId;
-
     public Command(CommandType type, String pkgName, String namespace, String method, List<String> args, UUID taskId){
         this.type = type;
         this.pkgName = pkgName;
         this.namespace = namespace;
         this.method = method;
         this.args = args==null? Collections.emptyList() :args;
-        this.taskId = taskId;
     }
 
     public CommandType getType() {
@@ -76,8 +73,5 @@ public class Command {
 
     public JsonObject asGJson(){
         return DEFAULT_PARSER.parse(asJson()).getAsJsonObject();
-    }
-    public UUID getTaskId() {
-        return taskId;
     }
 }

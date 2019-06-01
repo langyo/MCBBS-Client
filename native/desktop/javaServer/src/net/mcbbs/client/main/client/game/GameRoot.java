@@ -18,6 +18,8 @@ package net.mcbbs.client.main.client.game;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.mcbbs.client.main.client.command.CommandDispatcher;
+import net.mcbbs.client.main.client.net.WSClient;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -44,7 +46,7 @@ public class GameRoot implements IGameRoot {
                 //else if(id.contains("modloader"))gameType = Game.Type.MODLOADER;
             else throw new InvalidGameException("Unable to identity game type:".concat(id));
         } else gameType = Game.Type.VANILLA;
-
+        CommandDispatcher.DISPATCHER.send();
         assetsIndex = null;
         libraryIndex = null;
         nativeIndex = null;
