@@ -23,37 +23,20 @@
 
 前端部分依赖 React 库与 Material-UI 库进行构造，并使用 Reflux 库进行数据库与界面的数据交换。这需要依赖 Node.js 环境对页面进行预先转译。
 
-后端部分的桌面端依赖 Electron 、 Node 与 Java，移动端依赖 Ionic。
+后端部分的桌面端主要依赖 Electron 与 Node，移动端主要依赖 Ionic 与 Crodova。
 
 ~~Electron 是电子，Ionic 是离子，这些库的取名真好玩啊。~~
 
 ## 版本说明
 
-此分支的版本为 **0.3**。
+当前版本为 **0.4**，开发代号为 **工作台** 。
 
-此分支的开发代号为 **沙子** 。
+## 我想参与开发……
 
-## 安装
+请切换至 dev 分支，查看该分支的 README 进行开发~
 
-> 请先安装 Git 与 Node 环境！
+请勿直接向 master 分支推送代码！
 
-```
-git clone https://github.com/langyo/MCBBS-Client.git
-npm run autoinstall
-```
+如何切换到 dev 分支？看截图！
 
-## 源码结构说明
-
-* /native - 平台相关部分代码。
-  * /desktop - 以 electron 为核心开发的部分。
-    * /server - 与桌面端配套的 Node 本地服务端部分。
-    * /javaServer - 与桌面端配套的 Java 本地服务端部分。
-  * /mobile - 以 ionic 为核心开发的部分。
-* /src - 平台无关部分代码。
-* /docs - 客户端的网站前端，含下载页与开发者文档等。
-* /demos - 用于实验客户端各种功能的杂项文件夹。
-  * /algorithms - 用于测试算法。
-  * /components - 用于测试界面元素。
-  * /sockets - 用于测试 Socket 连接。
-  * /utils - 无法准确分类的测试。
-  * /views - 用于测试界面中完整的页面组件。
+![白痴级别操作](https://miao.su/images/2019/06/05/TIM20190605180521b9020.png)
