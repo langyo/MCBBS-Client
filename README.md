@@ -13,7 +13,7 @@
 <img src="https://badges.depfu.com/badges/dbdc735d3c1f776180e36eb3fbc572fd/overview.svg">
 </div>
 
-正在全速开发中，请耐心等待……
+欢迎进入开发者分支，请仔细阅读 README 后再进行开发。
 
 [Gitbook wiki 主页](https://mcbbs-client-developer.gitbook.io/mcbbs-client-dev/)
 
@@ -23,24 +23,62 @@
 
 前端部分依赖 React 库与 Material-UI 库进行构造，并使用 Reflux 库进行数据库与界面的数据交换。这需要依赖 Node.js 环境对页面进行预先转译。
 
-后端部分的桌面端依赖 Electron 、 Node 与 Java，移动端依赖 Ionic。
+后端部分的桌面端主要依赖 Electron 与 Node，移动端主要依赖 Ionic 与 Crodova。
 
 ~~Electron 是电子，Ionic 是离子，这些库的取名真好玩啊。~~
 
 ## 版本说明
 
-此分支的版本为 **0.3**。
+此分支的版本为 **0.4**。
 
-此分支的开发代号为 **沙子** 。
+此分支的开发代号为 **工作台** 。
 
 ## 安装
 
 > 请先安装 Git 与 Node 环境！
 
-```
-git clone https://github.com/langyo/MCBBS-Client.git
-npm run autoinstall
-```
+> 强烈建议使用 VSCode 进行开发！不论您使用什么语言，这个 IDE 都值得您使用！
+
+> 对于 C++ 与 C# 开发者，建议额外使用 Visual Studio；对于 Java 开发者，建议额外使用 IDEA。
+
+```git clone https://github.com/langyo/MCBBS-Client.git```
+
+然后，进入自己需要参与开发的分支：
+
+```git checkout <分支名>```
+
+您可以选择进入的分支如下：
+
+- native-desktop-h5
+  桌面端的 H5 部分，提供对底层 Electron 桥接的壳子网页。
+- native-desktop-node
+  桌面端的 Node 部分，提供对 Node 本地服务端的支持，并由此桥接到其它语言编写的插件客户端。
+- native-desktop-java
+  桌面端的 Java 部分，提供对 Java 插件的支持。
+- native-desktop-cs
+  桌面端的 C# 部分，提供对 C# 插件的支持。
+- native-desktop-cpp
+  桌面端的 C++ 部分，提供对 C++ 插件的支持。
+- native-mobile-h5
+  移动端的 H5 部分，提供对底层 Ionic 桥接的壳子网页。
+- native-mobile-crodova
+  移动端的 crodova 部分，用于 Ionic 基底的开发，以及对 Crodova 插件的支持。
+- src-resourceManager
+  平台无关代码（JavaScript）的资源管理器部分，主管以 Reflux 控制的前端资源控制，包括数据驱动和触发器。
+- src-viewManager
+  平台无关代码（JavaScript）的视图管理器部分，主管以 JSX 编写的界面进行控制。
+- src-moduleManager
+  平台无关代码（JavaScript）的模块管理器部分，主管对 WebSocket 连接中具体指令执行函数的注册与模块信息注册。
+- res-live2d
+  用于放置 Live2D 资源，主要用于贮存客户端使用的 Live2D 虚拟形象模型
+- res-vr
+  用于放置 VR 资源，主要用于贮存客户端前端使用的动态背景全景图/方块图
+- website
+  客户端的前端宣传网站，一般不与其它分支合并
+- dev
+  开发分支，所有当前的开发成果请向这里合并
+- master
+  根分支，请勿动它
 
 ## 源码结构说明
 
