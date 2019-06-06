@@ -1,98 +1,13 @@
-﻿# --- 全局生效部分 ---
+﻿# ------
+# src 分支
+# ------
 
 # Node.js
 
 package-lock.json
-node_modules/
+node_modules
 
 # yarn
 
 yarn-error.log
 yarn.lock
-
-# --- 针对 scripts 的部分 ---
-
-src/node_modules/
-
-# --- 针对 native/desktop 的部分 ---
-
-native/desktop/node_modules/
-native/desktop/scripts/
-
-native/desktop/public/bundle.js
-
-native/desktop/.idea
-native/desktop/dist
-native/desktop/scripts
-native/desktop/dist/*
-native/desktop/*/.DS_Store
-native/desktop/.DS_Store
-native/desktop/npm-debug.log
-native/desktop/*.swp
-native/desktop/local.json
-native/desktop/mock/data_origin
-native/desktop/mock/data1
-native/desktop/mock/data2
-native/desktop/mock/dist
-native/desktop/mock/test_less
-native/desktop/mock/release
-
-# desktop 打包文件
-
-native/desktop/packaged/
-
-# --- 针对 native/mobile 的部分 ---
-
-native/mobile/*~
-native/mobile/*.sw[mnpcod]
-native/mobile/*.log
-native/mobile/*.tmp
-native/mobile/*.tmp.*
-native/mobile/log.txt
-native/mobile/*.sublime-project
-native/mobile/*.sublime-workspace
-native/mobile/.vscode/
-native/mobile/npm-debug.log*
-
-native/mobile/.idea/
-native/mobile/.ionic/
-native/mobile/.sourcemaps/
-native/mobile/.sass-cache/
-native/mobile/.tmp/
-native/mobile/.versions/
-native/mobile/coverage/
-native/mobile/www/
-native/mobile/tmp/
-native/mobile/temp/
-native/mobile/platforms/
-native/mobile/plugins/
-native/mobile/plugins/android.json
-native/mobile/plugins/ios.json
-native/mobile/$RECYCLE.BIN/
-
-native/mobile/node_modules/
-native/mobile/scripts/
-
-native/mobile/.DS_Store
-native/mobile/Thumbs.db
-native/mobile/UserInterfaceState.xcuserstate
-
-# --- 针对 native/javaDesktopServer ---
-
-# idea & gradle project configuration
-.idea
-.gradle
-gradlew
-gradlew.bat
-gradle
-build
-*.jar
-*.iml
-
-*.class
-
-gradle_cache
-
-# --- 针对 native/nodeServer ---
-
-native/desktop/server/public/bundle.js
