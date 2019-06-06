@@ -1,7 +1,7 @@
 # MCBBS-Client \(MCBBS 客户端\)
 
 <div align="center">
-## 平台无关代码分支
+<h2>平台无关代码分支</h2>
 </div>
 
 <div align="center">
