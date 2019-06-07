@@ -1,11 +1,11 @@
-README.md merge = ours
-.gitignore merge = ours
+README.md merge=ours
+.gitignore merge=ours
 
-install.cmd merge = ours
-install.sh merge = ours
+install.cmd merge=ours
+install.sh merge=ours
 
-build.cmd merge = ours
-build.sh merge = ours
+build.cmd merge=ours
+build.sh merge=ours
 
-launch.cmd merge = ours
-launch.sh merge = ours
+launch.cmd merge=ours
+launch.sh merge=ours
