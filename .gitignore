@@ -1,16 +1,6 @@
 ﻿# ------
-# src 分支
+# 公共
 # ------
-
-# Node.js
-
-package-lock.json
-node_modules
-
-# yarn
-
-yarn-error.log
-yarn.lock
 
 # 生成的编译后文件（不论向哪里写）
 
