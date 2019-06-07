@@ -1,10 +1,6 @@
 # MCBBS-Client \(MCBBS 客户端\)
 
 <div align="center">
-<h2>平台无关代码分支</h2>
-</div>
-
-<div align="center">
 <a href="http://miao.su/image/HdIbf">
 <img src="http://miao.su/images/2018/12/24/447a2b32e7ec7bd5fb486.md.png" width="200" height="200">
 </a>
@@ -17,9 +13,13 @@
 <img src="https://badges.depfu.com/badges/dbdc735d3c1f776180e36eb3fbc572fd/overview.svg">
 </div>
 
+<div align="center">
+<h2>平台无关代码分支</h2>
+</div>
+
 欢迎来到平台无关代码分支！这大概是整个客户端最核心的部分之一了，因为它负责了客户端前端部分的所有内容！
 
-代码结构如下：
+## 代码结构
 
 - forumWorker
   用于分析来自论坛的页面，并模拟用户操作。它不能单独工作，需要对接到本地后端的网络通信模块才能正常工作。
@@ -39,3 +39,27 @@
   用于管理其对外以 WebSocket 通讯时所用的模块。这同时包含自身 HTML5 端所创建的模块，以及对方 Node 本地服务端乃至整个客户端的所有可用模块。
 
   它同时主管对 WebSocket 连接中具体指令执行函数的注册与模块信息注册。
+
+## 调试方法
+
+> 请先确保您已经安装了 Node.js 环境！
+
+进入代码文件夹：
+
+```cd src```
+
+安装依赖：
+
+```npm i```
+
+或```cnpm i```（如果您安装了 cnpm）
+
+或```yarn```（如果您安装了 yarn）
+
+启动增量编译与本地服务器:
+
+```npm run watch```
+
+然后就可以打开以下的网址进行调试了：
+
+[http://127.0.0.1:9232](http://127.0.0.1:9232)
