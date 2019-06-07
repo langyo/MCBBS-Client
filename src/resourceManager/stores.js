@@ -76,7 +76,7 @@ export default {
         mainPage: mainPagePage,
         newThread: newThreadPage,
         notices: noticesPage,
-        recentNews: recentNews,
+        recentNews: recentNewsPage,
         register: registerPage,
         reply: replyPage,
         report: reportPage,

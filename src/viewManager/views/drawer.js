@@ -57,8 +57,8 @@ const styles = theme => ({
   },
   menuButton: {
     position: "absolute",
-    top: theme.spacing.unit * 2,
-    left: theme.spacing.unit * 2,
+    top: theme.spacing(2),
+    left: theme.spacing(2),
     zIndex: 1150
   }
 });
@@ -163,7 +163,7 @@ class SwipeableTemporaryDrawer extends Reflux.Component {
                     button
                     selected={this.state.tag === n.key}
                   >
-                    {n.icon}
+                    <ListItemIcon>{n.icon}</ListItemIcon>
                     <ListItemText
                       primary={<Typography noWrap>{n.title}</Typography>}
                       secondary={n.subTitle}
@@ -180,70 +180,70 @@ class SwipeableTemporaryDrawer extends Reflux.Component {
               })}
               <ListSubheader disableSticky>快速通道</ListSubheader>
               <ListItem button selected={this.state.tag === "mainPage"}>
-                <HomeIcon />
+                <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="主页" />
               </ListItem>
               <ListItem selected={this.state.tag === "forums"} button>
-                <ListIcon />
+                <ListItemIcon><ListIcon /></ListItemIcon>
                 <ListItemText primary="所有板块" />
               </ListItem>
               <ListItem button>
-                <SignInIcon />
+                <ListItemIcon><SignInIcon /></ListItemIcon>
                 <ListItemText primary="签到" secondary={"您今日还未签到！"} />
               </ListItem>
               <ListItem button>
-                <StarIcon />
+                <ListItemIcon><StarIcon /></ListItemIcon>
                 <ListItemText primary="收藏" />
               </ListItem>
               <ListItem button>
-                <TaskIcon />
+                <ListItemIcon><TaskIcon /></ListItemIcon>
                 <ListItemText primary="任务" />
               </ListItem>
               <ListSubheader disableSticky>通知</ListSubheader>
               <ListItem button>
-                <SendIcon />
+                <ListItemIcon><SendIcon /></ListItemIcon>
                 <ListItemText primary="消息" secondary={"没有新消息"} />
               </ListItem>
               <ListItem button>
-                <NoticeIcon />
+                <ListItemIcon><NoticeIcon /></ListItemIcon>
                 <ListItemText primary="我的帖子" secondary={"没有新通知"} />
               </ListItem>
               <ListItem button>
-                <SettingIcon />
+                <ListItemIcon><SettingIcon /></ListItemIcon>
                 <ListItemText primary="系统提醒" secondary={"没有新通知"} />
               </ListItem>
               <ListItem button>
-                <FaceIcon />
+                <ListItemIcon><FaceIcon /></ListItemIcon>
                 <ListItemText primary="坛友互动" secondary={"没有新通知"} />
               </ListItem>
               <ListSubheader disableSticky>个性化</ListSubheader>
               <ListItem button>
-                <SettingIcon />
+                <ListItemIcon><SettingIcon /></ListItemIcon>
                 <ListItemText primary="本体设置" />
               </ListItem>
               <ListItem button onClick={() => Actions.view.dialog.toggleTo('colorChoser')}>
-                <PaintIcon />
+                <ListItemIcon><PaintIcon /></ListItemIcon>
                 <ListItemText primary="主题" />
               </ListItem>
               <ListItem button onClick={() => Actions.view.dialog.toggleTo('about')}>
-                <InfoIcon />
+                <ListItemIcon><InfoIcon /></ListItemIcon>
                 <ListItemText primary="关于" />
               </ListItem>
               <ListItem button onClick={() => Actions.view.dialog.toggleTo('language')}>
-                <EarthIcon />
+                <ListItemIcon><EarthIcon /></ListItemIcon>
                 <ListItemText primary="语言 / Language" />
               </ListItem>
               <ListSubheader disableSticky>调试区</ListSubheader>
               <ListItem button>
-                <StoreIcon />
+                <ListItemIcon><StoreIcon /></ListItemIcon>
                 <ListItemText primary="插件中心" />
               </ListItem>
               <ListItem button>
-                <SettingIcon />
+                <ListItemIcon><SettingIcon /></ListItemIcon>
                 <ListItemText primary="开发者控制" />
               </ListItem>
               <ListItem button>
-                <DatabaseIcon />
+                <ListItemIcon><DatabaseIcon /></ListItemIcon>
                 <ListItemText primary="数据库调试" />
               </ListItem>
             </List>
