@@ -10,7 +10,7 @@
     "watch": "concurrently \"npm run watch:code\" \"npm run watch:server\"",
     "watch:code": "watchify viewManager/mainViewRender.js -t babelify -o dist/bundle.js --release --verbose",
     "watch:server": "http-server -p 9232",
-    "build": "browserify viewManager/mainViewRender.js -o dist/bundle.js && concurrently \"npm run build:desktop\" \"npm run build:mobile\"",
+    "build": "browserify viewManager/mainViewRender.js -o dist/bundle.js -t babelify && concurrently \"npm run build:desktop\" \"npm run build:mobile\"",
     "build:desktop": "uglifyjs dist/bundle.js -m -o ../native-desktop-electron/public/bundle.js",
     "build:mobile": "uglifyjs dist/bundle.js -m -o ../native-mobile-cordova/public/bundle.js",
     "test": "jest --watch"
@@ -57,7 +57,9 @@
         {
           "modules": "commonjs",
           "targets": {
-            "node": "current"
+            "node": "current",
+            "chrome": "53",
+            "ie": "11"
           }
         }
       ],
