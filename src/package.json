@@ -1,0 +1,79 @@
+{
+  "name": "mcbbs-client-scripts",
+  "version": "0.3.1",
+  "description": "MCBBS 客户端",
+  "author": "langyo",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/langyo/MCBBS-Client",
+  "scripts": {
+    "watch": "concurrently \"npm run watch:code\" \"npm run watch:server\"",
+    "watch:code": "watchify viewManager/mainViewRender.js -t babelify -o dist/bundle.js --release --verbose",
+    "watch:server": "http-server -p 9232",
+    "build": "browserify viewManager/mainViewRender.js -o dist/bundle.js -t babelify && concurrently \"npm run build:desktop\" \"npm run build:mobile\"",
+    "build:desktop": "uglifyjs dist/bundle.js -m -o ../native-desktop-electron/public/bundle.js",
+    "build:mobile": "uglifyjs dist/bundle.js -m -o ../native-mobile-cordova/public/bundle.js",
+    "test": "jest --watch"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@material-ui/core": "^4.0.0",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "classnames": "^2.2.6",
+    "concurrently": "^4.1.0",
+    "firebase": "^6.0.4",
+    "http-server": "^0.11.1",
+    "jest": "^24.8.0",
+    "jsdom": "^15.1.1",
+    "lowdb": "^1.0.0",
+    "mdi-material-ui": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^5.0.0",
+    "react-swipeable-views": "^0.13.0",
+    "react-swipeable-views-utils": "^0.13.0",
+    "reflux": "^6.4.1",
+    "regenerator-runtime": "^0.13.1",
+    "shortid": "^2.2.14",
+    "three": "^0.105.1",
+    "uglify-js": "^3.6.0",
+    "watchify": "^3.11.1"
+  },
+  "devDependencies": {
+    "babelify": "^10.0.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": "commonjs",
+          "targets": {
+            "node": "current",
+            "chrome": "53",
+            "ie": "11"
+          }
+        }
+      ],
+      [
+        "@babel/preset-react"
+      ],
+      [
+        "@babel/preset-typescript"
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ]
+  }
+}

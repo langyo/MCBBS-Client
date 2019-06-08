@@ -19,15 +19,15 @@ import { Icon } from "@material-ui/core";
 const styles = theme => ({
     root: {
         position: 'absolute',
-        right: theme.spacing.unit * 3,
-        bottom: theme.spacing.unit * 3
+        right: theme.spacing(1),
+        bottom: theme.spacing(1)
     },
     fab: {
-        margin: theme.spacing.unit,
-        paddingRight: theme.spacing.unit * 8
+        margin: theme.spacing(1),
+        paddingRight: theme.spacing(8)
     },
     extendedIcon: {
-        marginRight: theme.spacing.unit
+        marginRight: theme.spacing(1)
     },
     extendedButton: {
         transform: "translateX(-64px)"

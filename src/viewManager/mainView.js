@@ -10,7 +10,7 @@ import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/
 import Drawer from "./views/drawer";
 import WindowManager from "./views/windowManager";
 import Background from "./views/background";
-import Secretary from "./views/secretary";
+// import Secretary from "./views/secretary";
 import FabView from "./views/fab";
 
 import Forum from "./pages/forums";
@@ -56,8 +56,8 @@ class MainView extends Reflux.Component {
           <BrowserRouter>
             <Drawer />
             <WindowManager />
-            <Background />
-            <Secretary />
+            {/* <Background /> */}
+            {/* <Secretary /> */}
             <FabView />
 
             <Switch>
