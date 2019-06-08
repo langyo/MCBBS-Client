@@ -1,7 +1,7 @@
 {
   "name": "mcbbs-client-scripts",
-  "version": "0.3.1",
-  "description": "MCBBS 客户端",
+  "version": "0.4.0",
+  "description": "我的世界中文论坛客户端通用程序部分",
   "author": "langyo",
   "main": "index.js",
   "license": "Apache-2.0",

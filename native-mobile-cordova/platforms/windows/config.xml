@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="net.mcbbs.app.mobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <name>我的世界中文论坛</name>
+    <description>
+        我的世界中文论坛手机客户端
+    </description>
+    <author email="langyo.china@gmail.com" href="https://github.com/langyo">
+        langyo
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+</widget>

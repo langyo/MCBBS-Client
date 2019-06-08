@@ -1,0 +1,53 @@
+{
+  "name": "mcbbs-client-electron",
+  "version": "0.4.0",
+  "description": "我的世界中文论坛桌面客户端",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ./index.js",
+    "package": "electron-packager ./ MCBBS-Client --all --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
+    "package:windows": "electron-packager ./ MCBBS-Client --platform=win32 --overwrite --out=./packaged/ --icon=./public/img/logo.ico",
+    "package:mac": "electron-builder build --mac --config electron-builder.json --publish never",
+    "test": "jest --watch"
+  },
+  "author": "langyo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/langyo/MCBBS-Client/issues"
+  },
+  "homepage": "https://github.com/langyo/MCBBS-Client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langyo/MCBBS-Client.git"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "electron": "^5.0.1",
+    "electron-builder": "^20.40.2",
+    "electron-packager": "^13.0.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": "commonjs",
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      [
+        "@babel/preset-react"
+      ],
+      [
+        "@babel/preset-typescript"
+      ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ]
+  }
+}
