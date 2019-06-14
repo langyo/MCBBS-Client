@@ -31,6 +31,7 @@ if %errorlevel% NEQ 0 goto bye
 git push
 if %errorlevel% NEQ 0 goto bye
 
+git checkout %work%
 echo Done.0 error(s),0 warning(s)
 goto bye
 
