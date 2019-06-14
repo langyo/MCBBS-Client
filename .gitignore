@@ -83,7 +83,6 @@ native/mobile/UserInterfaceState.xcuserstate
 .idea
 .gradle
 gradlew
-gradlew.bat
 gradle
 build
 *.jar
