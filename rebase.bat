@@ -8,7 +8,7 @@ git checkout %target%
 if %errorlevel% NEQ 0 goto bye
 
 @rem update target branch
-git pull
+git fetch
 if %errorlevel% NEQ 0 goto bye
 
 @rem change to working branch
