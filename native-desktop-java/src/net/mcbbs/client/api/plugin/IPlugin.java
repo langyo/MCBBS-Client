@@ -16,8 +16,10 @@
 
 package net.mcbbs.client.api.plugin;
 
+import net.mcbbs.client.api.plugin.meta.PluginMetadata;
+
 public interface IPlugin {
-    void onEnabled();
+    void onEnabled(PluginMetadata key);
 
     void onDisabled();
 }

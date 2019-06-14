@@ -16,5 +16,29 @@
 
 package net.mcbbs.client.api.plugin.event;
 
-public class CommandEvent {
+import net.mcbbs.client.api.plugin.command.ICommandManager;
+import net.mcbbs.client.api.plugin.command.IPluginCommand;
+import net.mcbbs.client.main.client.plugin.loading.PluginLoaderVirtualRef;
+
+import javax.annotation.Nonnull;
+
+public class CommandEvent implements Event {
+    private final ICommandManager manager;
+
+    public CommandEvent(@Nonnull PluginLoaderVirtualRef ref, ICommandManager manager){
+        this.manager = manager;
+    }
+    @Override
+    public PluginLoaderVirtualRef source() {
+        return null;
+    }
+
+    @Override
+    public ICommandManager data() {
+        return manager;
+    }
+
+    public<T,R> void provide(String pluginId, String name, IPluginCommand<T,R> command){
+        manager.provide(pluginId,name,command);
+    }
 }

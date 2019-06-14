@@ -90,9 +90,10 @@ public class FileBasedPluginLoader extends PluginLoader {
     @Override
     public void loadPlugin(String baseLocation) {
         Stream<IPlugin> pluginStream;
+        Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
         try {
             Stream<File> files = Files.walk(Paths.get(baseLocation)).map(Path::toFile);
-            Map<PluginMetadata, IPlugin> plugin = Maps.newHashMap();
+
             initializeNashorn();
 
             state = State.LOADING_FILE;
@@ -113,7 +114,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         }
 
         state = State.CONSTRUCTION_PLUGIN;
-        pluginStream.forEach(IPlugin::onEnabled);
+        pluginStream.forEach(plg -> plg.onEnabled(plugin.entrySet().stream().filter(value->value.getValue().equals(plg)).findAny().orElseThrow(InternalError::new).getKey()));
 
         state = State.COLLECTING_MAPPING;
         MappingEvent.Methods event = Client.EventBusController.post(
@@ -129,7 +130,7 @@ public class FileBasedPluginLoader extends PluginLoader {
             binder.bind(ServiceManager.class).annotatedWith(Names.named("service_manager")).toInstance(mapping_event.data());
             binder.bind(List.class).annotatedWith(Names.named("plugin_list")).toInstance(new ArrayList<>(pluginBoxed.values()));
             binder.bind(ICommandManager.class).annotatedWith(Names.named("command_manager")).to(CobbleCommandManager.class).in(Scopes.SINGLETON);
-            binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newFixedThreadPool(5)));
+            binder.bind(EventBus.class).annotatedWith(Names.named("internal_event_bus")).toInstance(new AsyncEventBus(Executors.newSingleThreadExecutor()));
             binder.bind(EventBus.class).annotatedWith(Names.named("net_event_bus")).toInstance(new AsyncEventBus(Executors.newCachedThreadPool()));
             binder.bind(EventBus.class).annotatedWith(Names.named("main_event_bus")).toInstance(new EventBus());
             binder.bind(MapperManager.class).annotatedWith(Names.named("mapper_manager")).toInstance(event.data());
@@ -163,7 +164,7 @@ public class FileBasedPluginLoader extends PluginLoader {
         PluginMetadata meta;
         if (ucl.getResource("plugin.js") != null) {
             Bindings bindings = js_engine.createBindings();
-            js_engine.eval(new InputStreamReader(file.getInputStream(file.getJarEntry("config.js"))), bindings);
+            js_engine.eval(new InputStreamReader(ucl.getResourceAsStream("plugin.js")), bindings);
             meta = PluginMetadata.deserializeFrom(this, bindings);
             mainClassLocation = (String) bindings.get("plugin");
         } else if (ucl.getResource("plugin.yml") != null) {

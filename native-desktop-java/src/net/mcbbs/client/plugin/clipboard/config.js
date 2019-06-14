@@ -3,7 +3,7 @@ setId("clipboard");
 setVersion("1.0");
 setDescription("A simple plugin to get Clipboard content");
 setAuthor("langyo");
-setCollaborators(["InitAuther97"]);
+setCollaborators([]);
 setUrl("https://www.github.com/langyo/MCBBS-Client");
 setServerUrl(url);
 setUpdateUrl(url);

@@ -4,6 +4,7 @@ import net.mcbbs.client.api.plugin.IPlugin;
 import net.mcbbs.client.api.plugin.Plugin;
 import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
 import net.mcbbs.client.api.plugin.event.construction.PluginConstructionEvent;
+import net.mcbbs.client.api.plugin.meta.PluginMetadata;
 import net.mcbbs.client.api.plugin.service.Service;
 import net.mcbbs.client.util.InvocationHandlerFactory;
 
@@ -56,7 +57,7 @@ public class TestPlugin implements IPlugin, Service<Object, String> {
 
 
     @Override
-    public void onEnabled() {
+    public void onEnabled(PluginMetadata key) {
         //Client.getPlugin("clipboard").getCommand()
     }
 

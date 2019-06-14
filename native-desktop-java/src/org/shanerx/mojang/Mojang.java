@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*
+ * Changed by InitAuther97[InitAuther97@github.com]
+ * Used gson instead of fastjson.
+ */
 package org.shanerx.mojang;
 
 import com.google.gson.JsonArray;

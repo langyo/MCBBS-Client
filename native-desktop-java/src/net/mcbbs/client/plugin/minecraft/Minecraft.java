@@ -14,7 +14,38 @@
   limitations under the License.
  */
 
-package net.mcbbs.client.plugin.minecraft.game;
+package net.mcbbs.client.plugin.minecraft;
 
-public class Minecraft {
+import net.mcbbs.client.api.plugin.IPlugin;
+import net.mcbbs.client.api.plugin.Plugin;
+import net.mcbbs.client.api.plugin.event.CommandEvent;
+import net.mcbbs.client.api.plugin.event.construction.MappingEvent;
+import net.mcbbs.client.api.plugin.event.construction.PluginConstructionEvent;
+import net.mcbbs.client.api.plugin.meta.PluginMetadata;
+
+public class Minecraft implements IPlugin {
+    String modid;
+    @Override
+    public void onEnabled(PluginMetadata key) {
+        modid = key.id;
+    }
+
+    @Override
+    public void onDisabled() {
+
+    }
+
+    @Plugin.SubscribeEvent(MappingEvent.Methods.class)
+    public void onMappingMethod(MappingEvent.Methods event) throws NoSuchMethodException {
+    }
+
+    @Plugin.SubscribeEvent(PluginConstructionEvent.ServiceMapping.class)
+    public void onServiceMapping(PluginConstructionEvent.ServiceMapping event) {
+
+    }
+
+    @Plugin.SubscribeEvent(CommandEvent.class)
+    public void onRegisterCommand(CommandEvent event){
+        event.provide(modid,"minecraft",null);
+    }
 }
