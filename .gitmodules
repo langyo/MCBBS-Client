@@ -1,0 +1,18 @@
+[submodule "src"]
+	path = src
+	url = https://github.com/mcbbs-developer/core
+[submodule "native-desktop-electron"]
+	path = native-desktop-electron
+	url = https://github.com/mcbbs-developer/native-desktop-electron
+[submodule "native-desktop-node"]
+	path = native-desktop-node
+	url = https://github.com/mcbbs-developer/native-desktop-node
+[submodule "native-desktop-java"]
+	path = native-desktop-java
+	url = https://github.com/mcbbs-developer/native-desktop-java
+[submodule "native-desktop-cs"]
+	path = native-desktop-cs
+	url = https://github.com/mcbbs-developer/native-desktop-cs
+[submodule "native-mobile-cordova"]
+	path = native-mobile-cordova
+	url = https://github.com/mcbbs-developer/native-mobile-cordova
