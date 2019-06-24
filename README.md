@@ -5,19 +5,12 @@
 <img src="http://miao.su/images/2018/12/24/447a2b32e7ec7bd5fb486.md.png" width="200" height="200">
 </a>
 </div>
-<br />
-<div align="center">
-<a href="https://travis-ci.com/langyo/MCBBS-Client">
-<img src="https://travis-ci.com/langyo/MCBBS-Client.svg?branch=master">
-</a>
-<img src="https://badges.depfu.com/badges/dbdc735d3c1f776180e36eb3fbc572fd/overview.svg">
-</div>
 
 <div align="center">
-<h3>主仓库</h3>
+<h3>根仓库</h3>
 </div>
 
-欢迎使用 MCBBS 客户端，这里是 MCBBS 客户端的源代码仓库。
+欢迎使用 MCBBS 客户端，这里是 MCBBS 客户端的源代码总仓库。
 
 [论坛首页](http://www.mcbbs.net)
 
