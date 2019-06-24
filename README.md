@@ -19,7 +19,9 @@
 
 欢迎使用 MCBBS 客户端，这里是 MCBBS 客户端的源代码仓库。
 
-[Wiki 正在重新建设，请耐心等待，原 Wiki 已不可用](https://mcbbs-client-developer.gitbook.io/mcbbs-client-dev/)
+[论坛首页](http://www.mcbbs.net)
+
+[项目展示首页](https://app.langyo.xyz)
 
 ## 此客户端的开发模式
 
@@ -61,9 +63,16 @@
 
 ```git submodule init```
 
+如果您已经克隆过该仓库，但需要进行子模块同步，请执行：
+
+```
+git pull
+git submodule sync
+```
+
 协作者权限与小组成员身份以邀请制发放。
 
-## 源码结构说明
+## 子仓库说明
 
 > 需要注意的是，在各个子模块下将只存在其所负责的子项目，这有助于开发者专注于其正在开发的那部分模块。
 >
