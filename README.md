@@ -14,15 +14,15 @@
 
 [论坛首页](http://www.mcbbs.net)
 
-[项目展示首页](https://app.langyo.xyz)
+[项目展示首页(暂时无效)](https://app.langyo.xyz)
 
 ## 此客户端的开发模式
 
-此客户端使用混合开发模式，本体为 HTML5 应用，并依托于本地平台。
+此客户端使用混合开发模式，本体为 HTML5 应用，并依托于本地平台提供的混合开发框架。
 
 前端部分依赖 React 库与 Material-UI 库进行构造，并使用 Reflux 库进行数据库与界面的数据交换。这需要依赖 Node.js 环境对页面进行预先转译。
 
-后端部分的桌面端主要依赖 Electron，移动端主要依赖 Crodova。
+后端部分的桌面端依赖 Electron，移动端依赖 Crodova。
 
 ## 版本说明
 
